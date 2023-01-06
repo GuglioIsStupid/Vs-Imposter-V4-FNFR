@@ -1,90 +1,42 @@
 highscores = {
     [0] = {
-        ["easy"] = {
-            scores = {0}, accuracys = {0}
-        },
-        ["normal"] = {
-            scores = {0}, accuracys = {0}
-        },
         ["hard"] = {
-            scores = {0}, accuracys = {0}
+            scores = {0,0,0,0,0,0,0,0,0}, accuracys = {0,0,0,0,0,0,0,0,0}
         }
-    },             -- Tutorial
+    },
     [1] = {
-        ["easy"] = {
-            scores = {0, 0, 0}, accuracys = {0, 0, 0}
-        },
-        ["normal"] = {
-            scores = {0, 0, 0}, accuracys = {0, 0, 0}
-        },
         ["hard"] = {
-            scores = {0, 0, 0}, accuracys = {0, 0, 0}
+            scores = {0,0,0,0,0,0,0,0,0}, accuracys = {0,0,0,0,0,0,0,0,0}
         }
     }, -- Week 1
     [2] = {
-        ["easy"] = {
-            scores = {0, 0, 0}, accuracys = {0, 0, 0}
-        },
-        ["normal"] = {
-            scores = {0, 0, 0}, accuracys = {0, 0, 0}
-        },
         ["hard"] = {
-            scores = {0, 0, 0}, accuracys = {0, 0, 0}
+            scores = {0,0,0,0,0,0,0,0,0}, accuracys = {0,0,0,0,0,0,0,0,0}
         }
     }, -- Week 2
     [3] = {
-        ["easy"] = {
-            scores = {0, 0, 0}, accuracys = {0, 0, 0}
-        },
-        ["normal"] = {
-            scores = {0, 0, 0}, accuracys = {0, 0, 0}
-        },
         ["hard"] = {
-            scores = {0, 0, 0}, accuracys = {0, 0, 0}
+            scores = {0,0,0,0,0,0,0,0,0}, accuracys = {0,0,0,0,0,0,0,0,0}
         }
     }, -- Week 3
     [4] = {
-        ["easy"] = {
-            scores = {0, 0, 0}, accuracys = {0, 0, 0}
-        },
-        ["normal"] = {
-            scores = {0, 0, 0}, accuracys = {0, 0, 0}
-        },
         ["hard"] = {
-            scores = {0, 0, 0}, accuracys = {0, 0, 0}
+            scores = {0,0,0,0,0,0,0,0,0}, accuracys = {0,0,0,0,0,0,0,0,0}
         }
     }, -- Week 4
     [5] = {
-        ["easy"] = {
-            scores = {0, 0, 0}, accuracys = {0, 0, 0}
-        },
-        ["normal"] = {
-            scores = {0, 0, 0}, accuracys = {0, 0, 0}
-        },
         ["hard"] = {
-            scores = {0, 0, 0}, accuracys = {0, 0, 0}
+            scores = {0,0,0,0,0,0,0,0,0}, accuracys = {0,0,0,0,0,0,0,0,0}
         }
     }, -- Week 5
     [6] = {
-        ["easy"] = {
-            scores = {0, 0, 0}, accuracys = {0, 0, 0}
-        },
-        ["normal"] = {
-            scores = {0, 0, 0}, accuracys = {0, 0, 0}
-        },
         ["hard"] = {
-            scores = {0, 0, 0}, accuracys = {0, 0, 0}
+            scores = {0,0,0,0,0,0,0,0,0}, accuracys = {0,0,0,0,0,0,0,0,0}
         }
     }, -- Week 6
     [7] = {
-        ["easy"] = {
-            scores = {0, 0, 0}, accuracys = {0, 0, 0}
-        },
-        ["normal"] = {
-            scores = {0, 0, 0}, accuracys = {0, 0, 0}
-        },
         ["hard"] = {
-            scores = {0, 0, 0}, accuracys = {0, 0, 0}
+            scores = {0,0,0,0,0,0,0,0,0}, accuracys = {0,0,0,0,0,0,0,0,0}
         }
     }, -- Week 7
     version = 3
@@ -249,80 +201,38 @@ if love.filesystem.getInfo("highscores") then
                 }
             },             -- Tutorial
             [1] = {
-                ["easy"] = {
-                    scores = {0, 0, 0}, accuracys = {0, 0, 0}
-                },
-                ["normal"] = {
-                    scores = {0, 0, 0}, accuracys = {0, 0, 0}
-                },
                 ["hard"] = {
-                    scores = {0, 0, 0}, accuracys = {0, 0, 0}
+                    scores = {0,0,0,0,0,0,0,0,0}, accuracys = {0,0,0,0,0,0,0,0,0}
                 }
             }, -- Week 1
             [2] = {
-                ["easy"] = {
-                    scores = {0, 0, 0}, accuracys = {0, 0, 0}
-                },
-                ["normal"] = {
-                    scores = {0, 0, 0}, accuracys = {0, 0, 0}
-                },
                 ["hard"] = {
-                    scores = {0, 0, 0}, accuracys = {0, 0, 0}
+                    scores = {0,0,0,0,0,0,0,0,0}, accuracys = {0,0,0,0,0,0,0,0,0}
                 }
             }, -- Week 2
             [3] = {
-                ["easy"] = {
-                    scores = {0, 0, 0}, accuracys = {0, 0, 0}
-                },
-                ["normal"] = {
-                    scores = {0, 0, 0}, accuracys = {0, 0, 0}
-                },
                 ["hard"] = {
-                    scores = {0, 0, 0}, accuracys = {0, 0, 0}
+                    scores = {0,0,0,0,0,0,0,0,0}, accuracys = {0,0,0,0,0,0,0,0,0}
                 }
             }, -- Week 3
             [4] = {
-                ["easy"] = {
-                    scores = {0, 0, 0}, accuracys = {0, 0, 0}
-                },
-                ["normal"] = {
-                    scores = {0, 0, 0}, accuracys = {0, 0, 0}
-                },
                 ["hard"] = {
-                    scores = {0, 0, 0}, accuracys = {0, 0, 0}
+                    scores = {0,0,0,0,0,0,0,0,0}, accuracys = {0,0,0,0,0,0,0,0,0}
                 }
             }, -- Week 4
             [5] = {
-                ["easy"] = {
-                    scores = {0, 0, 0}, accuracys = {0, 0, 0}
-                },
-                ["normal"] = {
-                    scores = {0, 0, 0}, accuracys = {0, 0, 0}
-                },
                 ["hard"] = {
-                    scores = {0, 0, 0}, accuracys = {0, 0, 0}
+                    scores = {0,0,0,0,0,0,0,0,0}, accuracys = {0,0,0,0,0,0,0,0,0}
                 }
             }, -- Week 5
             [6] = {
-                ["easy"] = {
-                    scores = {0, 0, 0}, accuracys = {0, 0, 0}
-                },
-                ["normal"] = {
-                    scores = {0, 0, 0}, accuracys = {0, 0, 0}
-                },
                 ["hard"] = {
-                    scores = {0, 0, 0}, accuracys = {0, 0, 0}
+                    scores = {0,0,0,0,0,0,0,0,0}, accuracys = {0,0,0,0,0,0,0,0,0}
                 }
             }, -- Week 6
             [7] = {
-                ["easy"] = {
-                    scores = {0, 0, 0}, accuracys = {0, 0, 0}
-                },
-                ["normal"] = {
-                    scores = {0, 0, 0}, accuracys = {0, 0, 0}
-                },
                 ["hard"] = {
-                    scores = {0, 0, 0}, accuracys = {0, 0, 0}
+                    scores = {0,0,0,0,0,0,0,0,0}, accuracys = {0,0,0,0,0,0,0,0,0}
                 }
             }, -- Week 7
             version = 3
