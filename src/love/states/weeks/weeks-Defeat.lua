@@ -1138,13 +1138,13 @@ return {
 			end
 		else
 			if not boyfriend:isAnimated() and boyfriend:getAnimName() ~= "idle" then 
-				weeks:safeAnimate(boyfriend, "idle", true, 1)
+				weeks:safeAnimate(boyfriend, "idle", false, 1)
 			end
 			if not enemy:isAnimated() and enemy:getAnimName() ~= "idle" then
-				weeks:safeAnimate(enemy, "idle", true, 2)
+				weeks:safeAnimate(enemy, "idle", false, 2)
 			end
 			if not blackold:isAnimated() and blackold:getAnimName() ~= "idle" then
-				weeks:safeAnimate(blackold, "idle", true, 2)
+				weeks:safeAnimate(blackold, "idle", false, 2)
 			end
 		end
 
@@ -1664,7 +1664,7 @@ return {
 
 							boyfriendArrow:animate("confirm", false)
 
-							self:safeAnimate(boyfriend, curAnim, true, 3)
+							self:safeAnimate(boyfriend, curAnim, false, 3)
 
 							--health[1] = health[1] + 1
 						end
@@ -1680,7 +1680,7 @@ return {
 							boyfriendArrow:animate("confirm", false)
 
 							if boyfriendNote[1]:getAnimName() == "hold" or boyfriendNote[1]:getAnimName() == "end" then
-								self:safeAnimate(boyfriend, curAnim, true, 2)
+								self:safeAnimate(boyfriend, curAnim, false, 2)
 							else
 								self:safeAnimate(boyfriend, curAnim, false, 2)
 								score = score + 350
