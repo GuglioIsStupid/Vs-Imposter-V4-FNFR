@@ -1126,6 +1126,13 @@ return {
 					pauseMenuSelection = pauseMenuSelection - 1
 				end
 			end
+		else
+			if not boyfriend:isAnimated() and boyfriend:getAnimName() ~= "idle" then 
+				weeks:safeAnimate(boyfriend, "idle", false, 1)
+			end
+			if not enemy:isAnimated() and enemy:getAnimName() ~= "idle" then
+				weeks:safeAnimate(enemy, "idle", false, 2)
+			end
 		end
 
 		status.setLoading(true)
@@ -1381,9 +1388,9 @@ return {
 
 							if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
 								if useAltAnims then
-									self:safeAnimate(enemy, curAnim .. " alt", true, 2)
+									self:safeAnimate(enemy, curAnim .. " alt", false, 2)
 								else
-									self:safeAnimate(enemy, curAnim, true, 2) 
+									self:safeAnimate(enemy, curAnim, false, 2) 
 								end
 							else
 								if useAltAnims then
@@ -1638,7 +1645,7 @@ return {
 
 							boyfriendArrow:animate("confirm", false)
 
-							self:safeAnimate(boyfriend, curAnim, true, 3)
+							self:safeAnimate(boyfriend, curAnim, false, 3)
 
 							--health[1] = health[1] + 1
 						end
@@ -1654,7 +1661,7 @@ return {
 							boyfriendArrow:animate("confirm", false)
 
 							if boyfriendNote[1]:getAnimName() == "hold" or boyfriendNote[1]:getAnimName() == "end" then
-								self:safeAnimate(boyfriend, curAnim, true, 2)
+								self:safeAnimate(boyfriend, curAnim, false, 2)
 							else
 								self:safeAnimate(boyfriend, curAnim, false, 2)
 								score = score + 350
@@ -1914,8 +1921,14 @@ return {
 			if not pixel then
 				if judgements[1] then
 					for i = 1, #judgements do
-						graphics.setColor(1, 1, 1, judgements[i].transparency)
-						judgements[i].img:draw()
+						if judgements[i] then
+							graphics.setColor(1, 1, 1, judgements[i].transparency)
+							judgements[i].img:draw()
+
+							if judgements[i].transparency <= 0 then
+								table.remove(judgements, i)
+							end
+						end
 					end
 				end
 				if combo >= 5 then
@@ -1930,8 +1943,14 @@ return {
 			else
 				if judgements[1] then
 					for i = 1, #judgements do
-						graphics.setColor(1, 1, 1, judgements[i].transparency)
-						judgements[i].img:udraw(6,6)
+						if judgements[i] then
+							graphics.setColor(1, 1, 1, judgements[i].transparency)
+							judgements[i].img:draw()
+
+							if judgements[i].transparency <= 0 then
+								table.remove(judgements, i)
+							end
+						end
 					end
 				end
 				if combo >= 5 then
@@ -2200,6 +2219,10 @@ return {
 			love.graphics.translate(lovesize.getWidth() / 2, lovesize.getHeight() / 2)
 			love.graphics.scale(0.7, 0.7)
 			love.graphics.scale(uiScale.sizeX, uiScale.sizeY)
+			graphics.setColor(enemy.colours[1]/255, enemy.colours[2]/255, enemy.colours[3]/255)
+			love.graphics.rectangle("fill", -500, 350+downscrollOffset, 1000, 25)
+			graphics.setColor(boyfriend.colours[1]/255, boyfriend.colours[2]/255, boyfriend.colours[3]/255)
+			love.graphics.rectangle("fill", 500, 350+downscrollOffset, -health[1] * 10, 25)
 			graphics.setColor(0, 0, 0)
 			love.graphics.setLineWidth(10)
 			love.graphics.rectangle("line", -500, 350+downscrollOffset, 1000, 25)
