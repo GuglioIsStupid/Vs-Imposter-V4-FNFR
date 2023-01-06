@@ -44,7 +44,6 @@ highscores = {
 achievementProgress = {
     ["death"] = 0,
 }
-gamejoltLogin = {}
 
 settings = {}
 
@@ -162,24 +161,6 @@ else
     local file = love.filesystem.newFile("achivements")
     file:open("w")
     file:write(lume.serialize({achievementProgress = achievementProgress}))
-    file:close()
-end
-
-if love.filesystem.getInfo("gamejoltLogin") then
-    local file = love.filesystem.read("gamejoltLogin")
-    local data = lume.deserialize(file)
-    gamejoltLogin["useGamejolt"] = data["useGamejolt"]
-    if gamejoltLogin["useGamejolt"] then
-        gamejoltLogin["username"] = data["username"]
-        gamejoltLogin["token"] = data["token"]
-        
-        gamejolt.authUser(gamejoltLogin["username"], gamejoltLogin["token"])
-    end
-else
-    local file = love.filesystem.newFile("gamejoltLogin")
-    file:open("w")
-    file:write(lume.serialize({gamejoltLogin = gamejoltLogin}))
-    notLoggedIn = true
     file:close()
 end
 

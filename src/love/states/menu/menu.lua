@@ -52,11 +52,7 @@ return {
 
 		logo:animate("bumpin", false)
 		girlfriendTitle:animate("danceRight", false)
-
-		if love.system.getOS() == "OS X" and gamejoltLogin["useGamejolt"] then
-			gamejolt.giveTrophy(175141)
-		end
-
+		
 		whiteRectangles = {}
 		for i = 1, 15 do
 			table.insert(whiteRectangles, graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/whiteRectangle"))))

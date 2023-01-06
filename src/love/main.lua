@@ -126,20 +126,12 @@ function love.load()
 	Gamestate = require "lib.gamestate"
 	Timer = require "lib.timer"
 	lume = require "lib.lume"
-	gamejolt = require "lib.gamejolt"
 	json = require "lib.json"
 	Object = require "lib.classic"
 	waveAudio = require "lib.wave"
 	moonshine = require "lib.moonshine"
 
 	e = require "modules.e"   -- wtf is e 
-
-	if love.filesystem.getInfo("gamejolt/id.key") then
-		_ID = e.d(love.filesystem.read("gamejolt/id.key"))
-	end
-	if love.filesystem.getInfo("gamejolt/token.key") then
-		_TOKEN = e.d(love.filesystem.read("gamejolt/token.key"))
-	end
 
 	status = require "modules.status"
 	audio = require "modules.audio"
@@ -212,12 +204,6 @@ function love.load()
 	menuSettings = require "states.menu.menuSettings"
 	menuCredits = require "states.menu.menuCredits"
 	intro = require "states.menu.intro" -- unused for now (Im too lazy)
-
-	gjlogin = require "states.gjlogin"
-
-	if _ID and _TOKEN then
-		gamejolt.init(_ID, _TOKEN)
-	end
 
 	-- Load weeks
 	weeks = require "states.weeks.weeks"
@@ -413,11 +399,7 @@ function love.load()
 	if curOS == "Web" then
 		Gamestate.switch(clickStart)
 	else
-		if notLoggedIn then 
-			Gamestate.switch(gjlogin)
-		else
-			Gamestate.switch(menu)
-		end
+		Gamestate.switch(menu)
 	end
 end
 function love.graphics.setColorF(R,G,B,A)
