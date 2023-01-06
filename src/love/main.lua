@@ -132,7 +132,7 @@ function love.load()
 	waveAudio = require "lib.wave"
 	moonshine = require "lib.moonshine"
 
-	e = require "modules.e"
+	e = require "modules.e"   -- wtf is e 
 
 	if love.filesystem.getInfo("gamejolt/id.key") then
 		_ID = e.d(love.filesystem.read("gamejolt/id.key"))
@@ -260,13 +260,7 @@ function love.load()
 	-- Load week data
 	weekData = {
 		require "weeks.defeat",
-		require "weeks.week1",
-		require "weeks.week2",
-		require "weeks.week3",
-		require "weeks.week4",
-		require "weeks.week5",
-		require "weeks.week6",
-		require "weeks.week7",
+		require "weeks.yellow",
 	}
 	weekDesc = { -- Add your week description here
 		"LEARN TO FUNK",
