@@ -1020,7 +1020,7 @@ return {
 	-- Gross countdown script
 	setupCountdown = function(self)
 		lastReportedPlaytime = 0
-		musicTime = (240 / bpm) * -1000
+		musicTime = (240 / bpm) * -1500
 
 		musicThres = 0
 		musicPos = 0
@@ -1349,7 +1349,6 @@ return {
 	updateUI = function(self, dt)
 		enemyIcon.x = 425 - health[1] * 10
 		boyfriendIcon.x = 585 - health[1] * 10
-		if countingDown then return end
 		if extraCamZoom.sizeX > 1 then
 			extraCamZoom.sizeX = extraCamZoom.sizeX - 0.01
 			extraCamZoom.sizeY = extraCamZoom.sizeY - 0.01
