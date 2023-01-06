@@ -1925,8 +1925,14 @@ return {
 			if not pixel then
 				if judgements[1] then
 					for i = 1, #judgements do
-						graphics.setColor(1, 1, 1, judgements[i].transparency)
-						judgements[i].img:draw()
+						if judgements[i] then
+							graphics.setColor(1, 1, 1, judgements[i].transparency)
+							judgements[i].img:draw()
+
+							if judgements[i].transparency <= 0 then
+								table.remove(judgements, i)
+							end
+						end
 					end
 				end
 				if combo >= 5 then
@@ -1941,8 +1947,14 @@ return {
 			else
 				if judgements[1] then
 					for i = 1, #judgements do
-						graphics.setColor(1, 1, 1, judgements[i].transparency)
-						judgements[i].img:udraw(6,6)
+						if judgements[i] then
+							graphics.setColor(1, 1, 1, judgements[i].transparency)
+							judgements[i].img:draw()
+
+							if judgements[i].transparency <= 0 then
+								table.remove(judgements, i)
+							end
+						end
 					end
 				end
 				if combo >= 5 then
