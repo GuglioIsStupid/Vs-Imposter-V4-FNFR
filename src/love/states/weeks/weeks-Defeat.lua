@@ -1136,6 +1136,16 @@ return {
 					pauseMenuSelection = pauseMenuSelection - 1
 				end
 			end
+		else
+			if not boyfriend:isAnimated() and boyfriend:getAnimName() ~= "idle" then 
+				weeks:safeAnimate(boyfriend, "idle", true, 1)
+			end
+			if not enemy:isAnimated() and enemy:getAnimName() ~= "idle" then
+				weeks:safeAnimate(enemy, "idle", true, 2)
+			end
+			if not blackold:isAnimated() and blackold:getAnimName() ~= "idle" then
+				weeks:safeAnimate(blackold, "idle", true, 2)
+			end
 		end
 
 		status.setLoading(true)
@@ -1350,8 +1360,8 @@ return {
 	end,
 
 	updateUI = function(self, dt)
-		enemyIcon.x = 425 - health[1] * 10
-		boyfriendIcon.x = 585 - health[1] * 10
+		enemyIcon.x = 425 - 50 * 10
+		boyfriendIcon.x = 585 - 50 * 10
 		if countingDown then return end
 		if extraCamZoom.sizeX > 1 then
 			extraCamZoom.sizeX = extraCamZoom.sizeX - 0.01
@@ -1393,11 +1403,11 @@ return {
 
 							if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
 								if useAltAnims then
-									self:safeAnimate(enemy, curAnim .. " alt", true, 2)
-									self:safeAnimate(blackold, curAnim .. " alt", true, 2)
+									self:safeAnimate(enemy, curAnim .. " alt", false, 2)
+									self:safeAnimate(blackold, curAnim .. " alt", false, 2)
 								else
-									self:safeAnimate(enemy, curAnim, true, 2) 
-									self:safeAnimate(blackold, curAnim, true, 2)
+									self:safeAnimate(enemy, curAnim, false, 2) 
+									self:safeAnimate(blackold, curAnim, false, 2)
 								end
 							else
 								if useAltAnims then
@@ -2218,14 +2228,6 @@ return {
 			love.graphics.translate(lovesize.getWidth() / 2, lovesize.getHeight() / 2)
 			love.graphics.scale(0.7, 0.7)
 			love.graphics.scale(uiScale.sizeX, uiScale.sizeY)
-			graphics.setColor(enemy.colours[1]/255, enemy.colours[2]/255, enemy.colours[3]/255)
-			love.graphics.rectangle("fill", -500, 350+downscrollOffset, 1000, 25)
-			graphics.setColor(boyfriend.colours[1]/255, boyfriend.colours[2]/255, boyfriend.colours[3]/255)
-			love.graphics.rectangle("fill", 500, 350+downscrollOffset, -health[1] * 10, 25)
-			graphics.setColor(0, 0, 0)
-			love.graphics.setLineWidth(10)
-			love.graphics.rectangle("line", -500, 350+downscrollOffset, 1000, 25)
-			love.graphics.setLineWidth(1)
 			graphics.setColor(1, 1, 1)
 
 			boyfriendIcon:draw()

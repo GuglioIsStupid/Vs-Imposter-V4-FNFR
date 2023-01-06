@@ -1128,6 +1128,13 @@ return {
 					pauseMenuSelection = pauseMenuSelection - 1
 				end
 			end
+		else
+			if not boyfriend:isAnimated() and boyfriend:getAnimName() ~= "idle" then 
+				weeks:safeAnimate(boyfriend, "idle", true, 1)
+			end
+			if not enemy:isAnimated() and enemy:getAnimName() ~= "idle" then
+				weeks:safeAnimate(enemy, "idle", true, 2)
+			end
 		end
 
 		status.setLoading(true)
@@ -1383,9 +1390,9 @@ return {
 
 							if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
 								if useAltAnims then
-									self:safeAnimate(enemy, curAnim .. " alt", true, 2)
+									self:safeAnimate(enemy, curAnim .. " alt", false, 2)
 								else
-									self:safeAnimate(enemy, curAnim, true, 2) 
+									self:safeAnimate(enemy, curAnim, false, 2) 
 								end
 							else
 								if useAltAnims then

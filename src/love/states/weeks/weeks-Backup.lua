@@ -1126,6 +1126,13 @@ return {
 					pauseMenuSelection = pauseMenuSelection - 1
 				end
 			end
+		else
+			if not boyfriend:isAnimated() and boyfriend:getAnimName() ~= "idle" then 
+				weeks:safeAnimate(boyfriend, "idle", true, 1)
+			end
+			if not enemy:isAnimated() and enemy:getAnimName() ~= "idle" then
+				weeks:safeAnimate(enemy, "idle", true, 2)
+			end
 		end
 
 		status.setLoading(true)
@@ -2200,6 +2207,10 @@ return {
 			love.graphics.translate(lovesize.getWidth() / 2, lovesize.getHeight() / 2)
 			love.graphics.scale(0.7, 0.7)
 			love.graphics.scale(uiScale.sizeX, uiScale.sizeY)
+			graphics.setColor(enemy.colours[1]/255, enemy.colours[2]/255, enemy.colours[3]/255)
+			love.graphics.rectangle("fill", -500, 350+downscrollOffset, 1000, 25)
+			graphics.setColor(boyfriend.colours[1]/255, boyfriend.colours[2]/255, boyfriend.colours[3]/255)
+			love.graphics.rectangle("fill", 500, 350+downscrollOffset, -health[1] * 10, 25)
 			graphics.setColor(0, 0, 0)
 			love.graphics.setLineWidth(10)
 			love.graphics.rectangle("line", -500, 350+downscrollOffset, 1000, 25)
