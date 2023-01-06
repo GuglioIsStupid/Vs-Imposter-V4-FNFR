@@ -1340,6 +1340,8 @@ return {
 	end,
 
 	updateUI = function(self, dt)
+		enemyIcon.x = 425 - health[1] * 10
+		boyfriendIcon.x = 585 - health[1] * 10
 		if countingDown then return end
 		if extraCamZoom.sizeX > 1 then
 			extraCamZoom.sizeX = extraCamZoom.sizeX - 0.01

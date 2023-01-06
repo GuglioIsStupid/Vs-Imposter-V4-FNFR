@@ -5,17 +5,24 @@ return {
 		pauseColor = {129, 100, 223}
 		weeksDefeat:enter()
 
+        blackold = love.filesystem.load("sprites/characters/blackold.lua")()
+
         redGradient = graphics.newImage(love.graphics.newImage(graphics.imagePath("defeat/iluminao omaga")))
 
 		week = 1
 
 		song = songNum
 
-        enemy = Character.daddydearest()
+        enemy = love.filesystem.load("sprites/characters/black.lua")()
 
 		weeksDefeat:setIcon("enemy", "daddy dearest")
 
+        enemy.x = -350
+        blackold.x = -350
+
 		self:load()
+
+        curEnemy = "black"
 	end,
 
 	load = function(self)
@@ -33,7 +40,7 @@ return {
 		weeksDefeat:initUI()
 
 		weeksDefeat:generateNotes("songs/defeat/defeat-hard.json")
-		--weeksDefeat:generateEvents("songs/defeat/events.json")
+		weeksDefeat:generateEventsOld("songs/defeat/events.json")
 	end,
 
 	update = function(self, dt)
@@ -48,6 +55,11 @@ return {
 				weeksDefeat:setIcon("enemy", "daddy dearest")
 			end
 		end
+
+        if musicTime >= 87590.625 and musicTime <= 87640 and enemy ~= blackoldPreload then 
+            enemy.colours = {255, 255, 255}
+            curEnemy = "blackold"
+        end
 
 		if not (countingDown or graphics.isFading()) and not (inst:getDuration() > musicTime/1000) and not paused then
 			status.setLoading(true)
@@ -73,7 +85,11 @@ return {
 
             redGradient:draw()
             boyfriend:draw()
-            enemy:draw()
+            if curEnemy == "black" then
+                enemy:draw()
+            elseif curEnemy == "blackold" then
+                blackold:draw()
+            end
             redGradient:draw()
 
 			weeksDefeat:drawRating(0.9)
@@ -88,5 +104,8 @@ return {
 
 	leave = function(self)
 		weeksDefeat:leave()
+
+        enemy = nil
+        redGradient = nil
 	end
 }

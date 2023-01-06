@@ -1338,6 +1338,8 @@ return {
 	end,
 
 	updateUI = function(self, dt)
+		enemyIcon.x = 425 - health[1] * 10
+		boyfriendIcon.x = 585 - health[1] * 10
 		if countingDown then return end
 		if extraCamZoom.sizeX > 1 then
 			extraCamZoom.sizeX = extraCamZoom.sizeX - 0.01
@@ -1731,8 +1733,6 @@ return {
 					boyfriendIcon:animate("boyfriend losing", false)
 				end
 
-				enemyIcon.x = 425 - health[1] * 10
-				boyfriendIcon.x = 585 - health[1] * 10
 
 				if not countingDown then
 					if musicThres ~= oldMusicThres and math.fmod(absMusicTime, 60000 / bpm) < 100 then
@@ -2200,10 +2200,6 @@ return {
 			love.graphics.translate(lovesize.getWidth() / 2, lovesize.getHeight() / 2)
 			love.graphics.scale(0.7, 0.7)
 			love.graphics.scale(uiScale.sizeX, uiScale.sizeY)
-			graphics.setColor(enemy.colours[1]/255, enemy.colours[2]/255, enemy.colours[3]/255)
-			love.graphics.rectangle("fill", -500, 350+downscrollOffset, 1000, 25)
-			graphics.setColor(boyfriend.colours[1]/255, boyfriend.colours[2]/255, boyfriend.colours[3]/255)
-			love.graphics.rectangle("fill", 500, 350+downscrollOffset, -health[1] * 10, 25)
 			graphics.setColor(0, 0, 0)
 			love.graphics.setLineWidth(10)
 			love.graphics.rectangle("line", -500, 350+downscrollOffset, 1000, 25)

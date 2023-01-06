@@ -111,6 +111,15 @@ local eventFuncs = {
 			
 		end
 	end,
+	["Change Character"] = function(who, option)
+		if who == "0" then -- Boyfriend
+
+		elseif who == "1" then -- Enemy
+			if option == "blackold" then
+			end
+		end
+	end,
+
 }
 
 missCounter = 0
@@ -347,6 +356,7 @@ return {
 		combo = 0
 
 		enemy:animate("idle")
+		blackold:animate("idle")
 		boyfriend:animate("idle")
 		
 
@@ -1300,6 +1310,7 @@ return {
 
 			girlfriend:update(dt)
 			enemy:update(dt)
+			blackold:update(dt)
 			boyfriend:update(dt)
 			if picoSpeaker then picoSpeaker:update(dt) end
 			leftArrowSplash:update(dt)
@@ -1321,6 +1332,7 @@ return {
 							self:safeAnimate(enemy, "idle", false, 2)
 						end
 					else self:safeAnimate(enemy, "idle", false, 2) end
+					self:safeAnimate(blackold, "idle", false, 2)
 				end
 				if spriteTimers[3] == 0 then
 					self:safeAnimate(boyfriend, "idle", false, 3)
@@ -1338,6 +1350,8 @@ return {
 	end,
 
 	updateUI = function(self, dt)
+		enemyIcon.x = 425 - health[1] * 10
+		boyfriendIcon.x = 585 - health[1] * 10
 		if countingDown then return end
 		if extraCamZoom.sizeX > 1 then
 			extraCamZoom.sizeX = extraCamZoom.sizeX - 0.01
@@ -1380,14 +1394,18 @@ return {
 							if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
 								if useAltAnims then
 									self:safeAnimate(enemy, curAnim .. " alt", true, 2)
+									self:safeAnimate(blackold, curAnim .. " alt", true, 2)
 								else
 									self:safeAnimate(enemy, curAnim, true, 2) 
+									self:safeAnimate(blackold, curAnim, true, 2)
 								end
 							else
 								if useAltAnims then
 									self:safeAnimate(enemy, curAnim .. " alt", false, 2)
+									self:safeAnimate(blackold, curAnim .. " alt", false, 2)
 								else
 									self:safeAnimate(enemy, curAnim, false, 2)
+									self:safeAnimate(blackold, curAnim, false, 2)
 								end
 							end
 
