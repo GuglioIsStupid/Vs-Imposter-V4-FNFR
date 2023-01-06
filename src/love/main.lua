@@ -239,7 +239,7 @@ function love.load()
 
 	-- Load week data
 	weekData = {
-		require "weeks.tutorial",
+		require "weeks.defeat",
 		require "weeks.week1",
 		require "weeks.week2",
 		require "weeks.week3",
@@ -260,9 +260,9 @@ function love.load()
 	}
 	weekMeta = { -- Add/remove weeks here
 		{
-			"Tutorial",
+			"Defeat",
 			{
-				"Tutorial"
+				"Defeat"
 			}
 		},
 		{

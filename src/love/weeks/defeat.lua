@@ -3,7 +3,7 @@ local difficulty
 return {
 	enter = function(self, from, songNum, songAppend)
 		pauseColor = {129, 100, 223}
-		weeks:enter()
+		weeksDefeat:enter()
 		stages["stage"]:enter()
 
 		week = 1
@@ -11,89 +11,58 @@ return {
 		song = songNum
 		difficulty = songAppend
 
-		weeks:setIcon("enemy", "daddy dearest")
+		weeksDefeat:setIcon("enemy", "daddy dearest")
 
 		self:load()
 	end,
 
 	load = function(self)
-		weeks:load()
+		weeksDefeat:load()
 		stages["stage"]:load()
 
-		if song == 3 then
-			inst = waveAudio:newSource("songs/week1/dadbattle/inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/week1/dadbattle/voices.ogg", "stream")
-		elseif song == 2 then
-			inst = waveAudio:newSource("songs/week1/fresh/inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/week1/fresh/voices.ogg", "stream")
-		else
-			inst = waveAudio:newSource("songs/week1/bopeebo/inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/week1/bopeebo/voices.ogg", "stream")
-		end
+		inst = waveAudio:newSource("songs/week1/bopeebo/inst.ogg", "stream")
+		voices = waveAudio:newSource("songs/week1/bopeebo/voices.ogg", "stream")
 
 		self:initUI()
 
-		weeks:setupCountdown()
+		weeksDefeat:setupCountdown()
 	end,
 
 	initUI = function(self)
-		weeks:initUI()
+		weeksDefeat:initUI()
 
-		if song == 3 then
-			weeks:generateNotes("songs/week1/dadbattle/" .. difficulty .. ".json")
-		elseif song == 2 then
-			weeks:generateNotes("songs/week1/fresh/" .. difficulty .. ".json")
-			weeks:generateEventsOld("songs/week1/fresh/events.json")
-		else
-			weeks:generateNotes("songs/week1/bopeebo/" .. difficulty .. ".json")
-			weeks:generateEventsOld("songs/week1/bopeebo/events.json")
-		end
+		weeksDefeat:generateNotes("songs/week1/bopeebo/" .. difficulty .. ".json")
+		--weeksDefeat:generateEvents("songs/week1/bopeebo/events.json")
 	end,
 
 	update = function(self, dt)
-		weeks:update(dt)
+		weeksDefeat:update(dt)
 		stages["stage"]:update(dt)
 
 		if health[1] >= 80 then
 			if enemyIcon:getAnimName() == "daddy dearest" then
-				weeks:setIcon("enemy", "daddy dearest losing")
+				weeksDefeat:setIcon("enemy", "daddy dearest losing")
 			end
 		else
 			if enemyIcon:getAnimName() == "daddy dearest losing" then
-				weeks:setIcon("enemy", "daddy dearest")
+				weeksDefeat:setIcon("enemy", "daddy dearest")
 			end
 		end
 
 		if not (countingDown or graphics.isFading()) and not (inst:getDuration() > musicTime/1000) and not paused then
-			if storyMode and song < 3 then
-				if score > highscores[weekNum-1][difficulty].scores[song] then
-					highscores[weekNum-1][difficulty].scores[song] = score
-					saveHighscores()
+			status.setLoading(true)
+
+			graphics.fadeOut(
+				0.5,
+				function()
+					Gamestate.switch(menu)
+
+					status.setLoading(false)
 				end
-				newAccuracy = convertedAcc:gsub("%%", "")
-				if tonumber(newAccuracy) > highscores[weekNum-1][difficulty].accuracys[song] then
-					print("New accuracy: " .. newAccuracy)
-					highscores[weekNum-1][difficulty].accuracys[song] = tonumber(newAccuracy)
-					saveHighscores()
-				end
-				song = song + 1
-
-				self:load()
-			else
-				status.setLoading(true)
-
-				graphics.fadeOut(
-					0.5,
-					function()
-						Gamestate.switch(menu)
-
-						status.setLoading(false)
-					end
-				)
-			end
+			)
 		end
 
-		weeks:updateUI(dt)
+		weeksDefeat:updateUI(dt)
 	end,
 
 	draw = function(self)
@@ -103,18 +72,18 @@ return {
 			love.graphics.scale(cam.sizeX, cam.sizeY)
 
 			stages["stage"]:draw()
-			weeks:drawRating(0.9)
+			weeksDefeat:drawRating(0.9)
 		love.graphics.pop()
 		
-		weeks:drawTimeLeftBar()
-		weeks:drawHealthBar()
+		weeksDefeat:drawTimeLeftBar()
+		weeksDefeat:drawHealthBar()
 		if not paused then
-			weeks:drawUI()
+			weeksDefeat:drawUI()
 		end
 	end,
 
 	leave = function(self)
 		stages["stage"]:leave()
-		weeks:leave()
+		weeksDefeat:leave()
 	end
 }
