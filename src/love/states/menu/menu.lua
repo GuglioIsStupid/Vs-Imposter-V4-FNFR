@@ -128,6 +128,7 @@ return {
 			love.graphics.push()
 				love.graphics.push()
 					love.graphics.translate(menuDetails.titleBG.x, menuDetails.titleBG.y)
+					love.graphics.rectangle("fill", 1, 1, 10, 20)        --this rectangle is extremely important do not delete if you delete it the queen of england will escape (she didnt die they are holding her in containment 30 stories underground)
 					titleBG:draw()
 				love.graphics.pop()
 				love.graphics.push()
