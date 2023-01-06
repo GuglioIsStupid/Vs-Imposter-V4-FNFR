@@ -171,12 +171,6 @@ if love.filesystem.getInfo("highscores") then
         print("hi")
         highscores = {
             [0] = {
-                ["easy"] = {
-                    scores = {0}, accuracys = {0}
-                },
-                ["normal"] = {
-                    scores = {0}, accuracys = {0}
-                },
                 ["hard"] = {
                     scores = {0}, accuracys = {0}
                 }
@@ -222,20 +216,8 @@ if love.filesystem.getInfo("highscores") then
     end
     
     for i = 0, #data.highscores do
-        for j = 1, #data.highscores[i]["easy"].scores do
-            highscores[i]["easy"].scores[j] = data.highscores[i]["easy"].scores[j]
-        end
-        for j = 1, #data.highscores[i]["normal"].scores do
-            highscores[i]["normal"].scores[j] = data.highscores[i]["normal"].scores[j] 
-        end
         for j = 1, #data.highscores[i]["hard"].scores do
             highscores[i]["hard"].scores[j] = data.highscores[i]["hard"].scores[j]
-        end
-        for j = 1, #data.highscores[i]["easy"].accuracys do
-            highscores[i]["easy"].accuracys[j] = data.highscores[i]["easy"].accuracys[j]
-        end
-        for j = 1, #data.highscores[i]["normal"].accuracys do
-            highscores[i]["normal"].accuracys[j] = data.highscores[i]["normal"].accuracys[j] 
         end
         for j = 1, #data.highscores[i]["hard"].accuracys do
             highscores[i]["hard"].accuracys[j] = data.highscores[i]["hard"].accuracys[j]

@@ -26,8 +26,8 @@ return {
         graphics.fadeIn(0.3)
 
         difficultyStrs = {
-            "easy",
-            "normal",
+            "hard",
+            "hard",
             "hard"
         }
         songBefore = ""
