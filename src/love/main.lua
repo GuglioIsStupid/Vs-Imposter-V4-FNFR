@@ -39,6 +39,26 @@ function uitextf(text,x,y,limit,align,r,sx,sy,ox,oy,kx,ky,alpha)
 	graphics.setColor(1,1,1, alpha or 1)
     love.graphics.printf(text,x,y,limit,align,r,sx,sy,ox,oy,kx,ky)
 end
+function weekUIText(text,x,y,limit,align,r,sx,sy,ox,oy,kx,ky,alpha)
+	local x = x or 0
+	local y = y or 0
+	local r = r or 0
+	local limit = limit or 750
+	local align = align or "left"
+	local sx = sx or 1
+	local sy = sy or 1
+	local ox = ox or 0
+	local oy = oy or 0
+	local kx = kx or 0
+	local ky = ky or 0
+	graphics.setColor(0,0,0, alpha or 1)
+	love.graphics.printf(text,x-2,y,limit,align,r,sx,sy,ox,oy,kx,ky)
+	love.graphics.printf(text,x+2,y,limit,align,r,sx,sy,ox,oy,kx,ky)
+	love.graphics.printf(text,x,y-2,limit,align,r,sx,sy,ox,oy,kx,ky)
+	love.graphics.printf(text,x,y+2,limit,align,r,sx,sy,ox,oy,kx,ky)
+	graphics.setColor(1,1,1, alpha or 1)
+    love.graphics.printf({{enemy.colours[1]/255, enemy.colours[2]/255, enemy.colours[3]/255}, text},x,y,limit,align,r,sx,sy,ox,oy,kx,ky)
+end
 function uitext(text,x,y,r,sx,sy,ox,oy,kx,ky,alpha)
 	local x = x or 0
 	local y = y or 0

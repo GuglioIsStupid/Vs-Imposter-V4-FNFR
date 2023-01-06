@@ -1340,6 +1340,7 @@ return {
 	end,
 
 	updateUI = function(self, dt)
+		if countingDown then return end
 		if extraCamZoom.sizeX > 1 then
 			extraCamZoom.sizeX = extraCamZoom.sizeX - 0.01
 			extraCamZoom.sizeY = extraCamZoom.sizeY - 0.01
@@ -2242,15 +2243,15 @@ return {
 			end -- Marvellous 
 			if noteCounter + missCounter <= 0 then
 				if (math.floor((altScore / (noteCounter + missCounter)) / 3.5)) >= 100 then
-					uitextf("Score: " .. score .. " | Misses: " .. missCounter .. " | Accuracy: 0% | Rating: ???", -600, 400+downscrollOffset, 1200, "center")
+					weekUIText("Score: " .. score .. " | Misses: " .. missCounter .. " | Accuracy: 0% | Rating: ???", -600, 400+downscrollOffset, 1200, "center")
 				else
-					uitextf("Score: " .. score .. " | Misses: " .. missCounter .. " | Accuracy: 0% | Rating: ???", -600, 400+downscrollOffset, 1200, "center")
+					weekUIText("Score: " .. score .. " | Misses: " .. missCounter .. " | Accuracy: 0% | Rating: ???", -600, 400+downscrollOffset, 1200, "center")
 				end
 			else
 				if (math.floor((altScore / (noteCounter + missCounter)) / 3.5)) >= 100 then
-				uitextf("Score: " .. score .. " | Misses: " .. missCounter .. " | Accuracy: 100% | Rating: PERFECT!!!", -600, 400+downscrollOffset, 1200, "center")
+					weekUIText("Score: " .. score .. " | Misses: " .. missCounter .. " | Accuracy: 100% | Rating: PERFECT!!!", -600, 400+downscrollOffset, 1200, "center")
 				else
-					uitextf("Score: " .. score .. " | Misses: " .. missCounter .. " | Accuracy: " .. convertedAcc .. " | Rating: " .. ratingText, -600, 400+downscrollOffset, 1200, "center")
+					weekUIText("Score: " .. score .. " | Misses: " .. missCounter .. " | Accuracy: " .. convertedAcc .. " | Rating: " .. ratingText, -600, 400+downscrollOffset, 1200, "center")
 				end
 			end
 

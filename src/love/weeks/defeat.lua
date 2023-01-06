@@ -4,12 +4,14 @@ return {
 	enter = function(self, from, songNum, songAppend)
 		pauseColor = {129, 100, 223}
 		weeksDefeat:enter()
-		stages["stage"]:enter()
+
+        redGradient = graphics.newImage(love.graphics.newImage(graphics.imagePath("defeat/iluminao omaga")))
 
 		week = 1
 
 		song = songNum
-		difficulty = songAppend
+
+        enemy = Character.daddydearest()
 
 		weeksDefeat:setIcon("enemy", "daddy dearest")
 
@@ -18,10 +20,9 @@ return {
 
 	load = function(self)
 		weeksDefeat:load()
-		stages["stage"]:load()
 
-		inst = waveAudio:newSource("songs/week1/bopeebo/inst.ogg", "stream")
-		voices = waveAudio:newSource("songs/week1/bopeebo/voices.ogg", "stream")
+		inst = waveAudio:newSource("songs/defeat/Inst.ogg", "stream")
+		voices = waveAudio:newSource("songs/defeat/Voices.ogg", "stream")
 
 		self:initUI()
 
@@ -31,13 +32,12 @@ return {
 	initUI = function(self)
 		weeksDefeat:initUI()
 
-		weeksDefeat:generateNotes("songs/week1/bopeebo/" .. difficulty .. ".json")
-		--weeksDefeat:generateEvents("songs/week1/bopeebo/events.json")
+		weeksDefeat:generateNotes("songs/defeat/defeat-hard.json")
+		--weeksDefeat:generateEvents("songs/defeat/events.json")
 	end,
 
 	update = function(self, dt)
 		weeksDefeat:update(dt)
-		stages["stage"]:update(dt)
 
 		if health[1] >= 80 then
 			if enemyIcon:getAnimName() == "daddy dearest" then
@@ -71,7 +71,11 @@ return {
 			love.graphics.scale(extraCamZoom.sizeX, extraCamZoom.sizeY)
 			love.graphics.scale(cam.sizeX, cam.sizeY)
 
-			stages["stage"]:draw()
+            redGradient:draw()
+            boyfriend:draw()
+            enemy:draw()
+            redGradient:draw()
+
 			weeksDefeat:drawRating(0.9)
 		love.graphics.pop()
 		
@@ -83,7 +87,6 @@ return {
 	end,
 
 	leave = function(self)
-		stages["stage"]:leave()
 		weeksDefeat:leave()
 	end
 }
