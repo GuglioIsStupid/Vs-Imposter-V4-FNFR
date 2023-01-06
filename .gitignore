@@ -41,3 +41,5 @@ art/*.xml
 
 # Hides our GJ keys lol!!!!!!!
 *.key
+
+.vscode
