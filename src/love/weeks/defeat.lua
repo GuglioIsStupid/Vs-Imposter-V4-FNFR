@@ -1,4 +1,4 @@
-local difficulty
+local lolAlpha
 
 return {
 	enter = function(self, from, songNum, songAppend)
@@ -8,7 +8,9 @@ return {
         blackold = love.filesystem.load("sprites/characters/blackold.lua")()
 
         redGradient = graphics.newImage(love.graphics.newImage(graphics.imagePath("defeat/iluminao omaga")))
-
+        deadBG = graphics.newImage(love.graphics.newImage(graphics.imagePath("defeat/deadbg")))
+        deadFG = graphics.newImage(love.graphics.newImage(graphics.imagePath("defeat/deadfg")))
+        lolThing = graphics.newImage(love.graphics.newImage(graphics.imagePath("defeat/lol thing")))
 		week = 1
 
 		song = songNum
@@ -22,7 +24,16 @@ return {
 
 		self:load()
 
+        deadBG.sizeX, deadBG.sizeY = 0.25, 0.25
+        deadFG.sizeX, deadFG.sizeY = 0.2, 0.2
+
+
+        deadBG.y = 170
+        deadFG.y = 350
+
         curEnemy = "black"
+        enemy.colours = {255, 0, 0}
+        lolAlpha = {0}
 	end,
 
 	load = function(self)
@@ -56,10 +67,21 @@ return {
 			end
 		end
 
-        if musicTime >= 87590.625 and musicTime <= 87640 and enemy ~= blackoldPreload then 
-            enemy.colours = {255, 255, 255}
-            curEnemy = "blackold"
+        if musicTime >= 20400 and musicTime <= 20450 then 
+            if lolTimer then 
+                Timer.cancel(lolTimer)
+            end
+            lolTimer = Timer.tween(0.2, lolAlpha, {1}, "in-out-cubic")
         end
+
+        if musicTime >= 87590.625 and musicTime <= 87640 then 
+            curEnemy = "blackold"
+            lolAlpha = {0}
+        end
+        if musicTime >= 106800 and musicTime <= 106850 then 
+            curEnemy = "black"
+        end
+
 
 		if not (countingDown or graphics.isFading()) and not (inst:getDuration() > musicTime/1000) and not paused then
 			status.setLoading(true)
@@ -84,12 +106,19 @@ return {
 			love.graphics.scale(cam.sizeX, cam.sizeY)
 
             redGradient:draw()
+            graphics.setColor(1,1,1, lolAlpha[1])
+            lolThing:draw()
+            deadBG:draw()
+            graphics.setColor(1,1,1, 1)
             boyfriend:draw()
             if curEnemy == "black" then
                 enemy:draw()
             elseif curEnemy == "blackold" then
                 blackold:draw()
             end
+            graphics.setColor(1,1,1, lolAlpha[1])
+            deadFG:draw()
+            graphics.setColor(1,1,1, 1)
             redGradient:draw()
 
 			weeksDefeat:drawRating(0.9)
