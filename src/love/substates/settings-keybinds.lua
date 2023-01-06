@@ -10,7 +10,7 @@ local curInput = inputList[i]
 return {
     enter = function(self)
         images = {
-            notes = love.graphics.newImage(graphics.imagePath(noteskins[settings.noteSkins])),
+            notes = love.graphics.newImage(graphics.imagePath("notes/"..noteskins[settings.noteSkins])),
         } 
         sprites = {
             leftArrow = love.filesystem.load("sprites/notes/" .. noteskins[settings.noteSkins] .. "/left-arrow.lua"),
