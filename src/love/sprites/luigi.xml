@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="luigi.png">
+<SubTexture name="luigi idle0000" x="0" y="0" width="1024" height="1024" frameX="0" frameY="0" frameWidth="1024" frameHeight="1024" />
+<SubTexture name="luigi idle0001" x="1024" y="0" width="1024" height="907" frameX="0" frameY="-117" frameWidth="1024" frameHeight="1024" />
+<SubTexture name="luigi idle0002" x="0" y="1024" width="1024" height="634" frameX="0" frameY="-390" frameWidth="1024" frameHeight="1024" />
+<SubTexture name="luigi idle0003" x="1024" y="1024" width="1024" height="315" frameX="0" frameY="-709" frameWidth="1024" frameHeight="1024" />
+<SubTexture name="luigi idle0004" x="0" y="1024" width="1024" height="634" frameX="0" frameY="-390" frameWidth="1024" frameHeight="1024" />
+<SubTexture name="luigi idle0005" x="1024" y="0" width="1024" height="907" frameX="0" frameY="-117" frameWidth="1024" frameHeight="1024" />
+<SubTexture name="luigi idle0006" x="0" y="0" width="1024" height="1024" frameX="0" frameY="0" frameWidth="1024" frameHeight="1024" />
+</TextureAtlas>

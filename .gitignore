@@ -1,0 +1,43 @@
+# macOS
+*.DS_Store
+
+# Build
+build/*
+
+# Dependencies
+resources/macos/love.app/*
+resources/switch/love.elf
+resources/win32/love/*
+resources/win64/love/*
+
+!resources/win64/love/discord-rpc.dll
+!resources/win32/love/discord-rpc.dll
+
+# Legacy Switch dependencies
+resources/switch-old/LOVEPotion.elf
+resources/switch-old/romfs/*
+
+# Tools
+tools/funkin-json/*
+tools/funkin-json-sniff/*
+tools/funkin-xml/*
+tools/funkin-xna/*
+tools/funkin-json-ignore-psych-events/*
+tools/funkin-json-special/* 
+
+!tools/funkin-json/funkin-json.py
+!tools/funkin-json-sniff/funkin-json-sniff.py
+!tools/funkin-xml/funkin-xml.py
+!tools/funkin-xna/funkin-xna.py
+!tools/funkin-json-ignore-psych-events/funkin-json.py
+!tools/funkin-json-special/funkin-json.py
+
+# misc files in art folder
+art/*.png
+art/*.xml
+
+# STOP UPLOADING SHORTCUTS CH
+*.lnk
+
+# Hides our GJ keys lol!!!!!!!
+*.key
