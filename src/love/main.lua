@@ -266,11 +266,13 @@ function love.load()
 			}
 		},
 		{
-			"Week 1",
+			"Yellow",
 			{
-				"Bopeebo",
-				"Fresh",
-				"Dadbattle"
+				"Mando",
+				"Dlow",
+				"Oversight",
+				"Danger",
+				"Double Kill"
 			}
 		},
 		{
