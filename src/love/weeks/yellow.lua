@@ -19,51 +19,43 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 local difficulty
 
-local sky, city, cityWindows, behindTrain, street
-local winColors, winColor
+local stageBack, stageFront, curtains
 
 return {
 	enter = function(self, from, songNum, songAppend)
-		pauseColor = {131, 19, 73}
+		pauseColor = {129, 100, 223}
 		weeks:enter()
-		stages["city"]:enter()
+		stages["stage"]:enter()
 
-		phillyGlowSize = {height = 1, width = 1}
-		phillyGlow = false
-
-		week = 3
+		week = 1
 
 		song = songNum
 		difficulty = songAppend
 
-		gradient = graphics.newImage(love.graphics.newImage(graphics.imagePath("week3/gradient")))
-		gradient.sizeX = 800
-		gradient.x, gradient.y = -450, -140
-
-		cam.sizeX, cam.sizeY = 1, 1
-		camScale.x, camScale.y = 1, 1
-
-		weeks:setIcon("enemy", "pico")
-
-		phillyChoice = 1
+		weeks:setIcon("enemy", "daddy dearest")
 
 		self:load()
 	end,
 
 	load = function(self)
 		weeks:load()
-		stages["city"]:load()
+		stages["stage"]:load()
 
-		if song == 3 then
-			inst = waveAudio:newSource("songs/week3/blammed/inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/week3/blammed/voices.ogg", "stream")
+		if song == 5 then
+			inst = waveAudio:newSource("songs/double-kill/inst.ogg", "stream")
+			voices = waveAudio:newSource("songs/double-kill/voices.ogg", "stream")
+		elseif song == 4 then
+			inst = waveAudio:newSource("songs/danger/inst.ogg", "stream")
+			voices = waveAudio:newSource("songs/danger/voices.ogg", "stream")
+		elseif song == 3 then
+			inst = waveAudio:newSource("songs/oversight/inst.ogg", "stream")
+			voices = waveAudio:newSource("songs/oversight/voices.ogg", "stream")
 		elseif song == 2 then
-			inst = waveAudio:newSource("songs/week3/philly-nice/inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/week3/philly-nice/voices.ogg", "stream")
+			inst = waveAudio:newSource("songs/dlow/inst.ogg", "stream")
+			voices = waveAudio:newSource("songs/dlow/voices.ogg", "stream")
 		else
-			inst = waveAudio:newSource("songs/week3/pico/inst.ogg", "stream")
-			inst = waveAudio:newSource("songs/week3/pico/inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/week3/pico/voices.ogg", "stream")
+			inst = waveAudio:newSource("songs/mando/inst.ogg", "stream")
+			voices = waveAudio:newSource("songs/mando/voices.ogg", "stream")
 		end
 
 		self:initUI()
@@ -74,34 +66,40 @@ return {
 	initUI = function(self)
 		weeks:initUI()
 
-		if song == 3 then
-			weeks:generateNotes("songs/week3/blammed/" .. difficulty .. ".json")
-			weeks:generateEvents("songs/week3/blammed/events.json")
+		if song == 5 then
+			weeks:generateNotes("songs/double-kill/double-kill-hard.json")
+		elseif song == 4 then
+			weeks:generateNotes("songs/danger/danger-hard.json")
+		elseif song == 3 then
+			weeks:generateNotes("songs/oversight/oversight-hard.json")
 		elseif song == 2 then
-			weeks:generateNotes("songs/week3/philly-nice/" .. difficulty .. ".json")
-			weeks:generateEventsOld("songs/week3/philly-nice/events.json")
+			weeks:generateNotes("songs/dlow/dlow-hard.json")
 		else
-			weeks:generateNotes("songs/week3/pico/" .. difficulty .. ".json")
+			weeks:generateNotes("songs/mando/mando-hard.json")
 		end
 	end,
 
 	update = function(self, dt)
 		weeks:update(dt)
-		stages["city"]:update(dt)	
+		stages["stage"]:update(dt)
+
+		if song == 1 and musicThres ~= oldMusicThres and math.fmod(absMusicTime + 500, 480000 / bpm) < 100 then
+			weeks:safeAnimate(girlfriend, "cheer", false, 1)
+			weeks:changeNoteTransparency()
+		end
 
 		if health[1] >= 80 then
-			if enemyIcon:getAnimName() == "pico" then
-				weeks:setIcon("enemy", "pico losing")
+			if enemyIcon:getAnimName() == "daddy dearest" then
+				weeks:setIcon("enemy", "daddy dearest losing")
 			end
 		else
-			if enemyIcon:getAnimName() == "pico losing" then
-				weeks:setIcon("enemy", "pico")
+			if enemyIcon:getAnimName() == "daddy dearest losing" then
+				weeks:setIcon("enemy", "daddy dearest")
 			end
 		end
 
 		if not (countingDown or graphics.isFading()) and not (inst:getDuration() > musicTime/1000) and not paused then
-			print(inst:getDuration(), musicTime/1000)
-			if storyMode and song < 3 then
+			if storyMode and song < 5 then
 				if score > highscores[weekNum-1][difficulty].scores[song] then
 					highscores[weekNum-1][difficulty].scores[song] = score
 					saveHighscores()
@@ -129,9 +127,6 @@ return {
 			end
 		end
 
-		-- as gradient.sizeY gets smaller, change the offset of the gradient
-		gradient.y = -140 - (gradient.sizeY - 1) * 180
-
 		weeks:updateUI(dt)
 	end,
 
@@ -140,22 +135,20 @@ return {
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
 			love.graphics.scale(extraCamZoom.sizeX, extraCamZoom.sizeY)
 			love.graphics.scale(cam.sizeX, cam.sizeY)
-			love.graphics.scale(camZoom.sizeX, camZoom.sizeY)
 
-			stages["city"]:draw()
-			
+			stages["stage"]:draw()
 			weeks:drawRating(0.9)
 		love.graphics.pop()
+		
 		weeks:drawTimeLeftBar()
 		weeks:drawHealthBar()
 		if not paused then
-
 			weeks:drawUI()
 		end
 	end,
 
 	leave = function(self)
-		stages["city"]:leave()
+		stages["stage"]:leave()
 		weeks:leave()
 	end
 }
