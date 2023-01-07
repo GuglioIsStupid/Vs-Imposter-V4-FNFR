@@ -347,11 +347,25 @@ return {
 	end,
 
 	leave = function(self)
-        titleBG = nil
         story = nil
         freeplay = nil
-        options = nil
         credits = nil
+        gallery = nil
+
+        options = nil
+        inntersloth = nil
+        shop = nil
+
+        starBG = nil
+		startFG = nil
+
+        redSussy = nil
+        greenSussy = nil
+
+        images = nil
+
+        logo = nil
+        
 		Timer.clear()
 	end
 }

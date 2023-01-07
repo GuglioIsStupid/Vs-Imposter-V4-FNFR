@@ -155,6 +155,8 @@ return {
 
 	leave = function(self)
 		logo = nil
+		starBG = nil
+		startFG = nil
 
 		Timer.clear()
 	end

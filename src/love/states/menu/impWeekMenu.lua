@@ -59,8 +59,6 @@ return {
             circleTable[i].y = 0
         end
 
-        print(#circleTable)
-
         currentWeek = ""
 
         cam.sizeX, cam.sizeY = 0.9, 0.9
@@ -387,6 +385,32 @@ return {
     end,
 
     leave = function(self)
+        cirlce = nil
+        line = nil
+        border = nil
+        ship = nil
+        leftIcon = nil
+        rightIcon = nil
         
+        circleTable = {}
+        lineTable = {}
+        weekTable = {}
+        
+        currentWeek = ""
+        
+        starBG = nil
+        starFG = nil
+
+        menuBack = nil
+
+        finaleAura = nil
+
+        images = nil
+        sprites = nil
+
+        allWeeks = nil
+
+        weekTranslation = nil
+        deadWeekTranslation = nil
     end
 }
