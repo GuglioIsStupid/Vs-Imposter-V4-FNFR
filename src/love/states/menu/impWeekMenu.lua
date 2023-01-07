@@ -31,6 +31,13 @@ return {
         line = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/line")))
         menuBack = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/menuBack")))
 
+        starBG = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/starBG")))
+		startFG = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/starFG")))
+
+		starBG.translation = {x = 0, y = 0}
+		startFG.translation = {x = 0, y = 0}
+
+
         lineTable = {}
         circleTable = {}
 
@@ -210,10 +217,45 @@ return {
                 deadWeekTranslation.x = -1140
             end
         end
+
+        starBG.translation.x = starBG.translation.x - 12.5 * dt
+			if starBG.translation.x < -1102 then
+				starBG.translation.x = 0
+			end
+
+			startFG.translation.x = startFG.translation.x - 25 * dt
+			if startFG.translation.x < -1216 then
+				startFG.translation.x = 0
+            end
+			starBG.translation.x = starBG.translation.x - 12.5 * dt
+			if starBG.translation.x < -1102 then
+				starBG.translation.x = 0
+			end
+
+			startFG.translation.x = startFG.translation.x - 25 * dt
+			if startFG.translation.x < -1216 then
+				startFG.translation.x = 0
+			end
     end,
 
     draw = function(self)
         love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
+        love.graphics.push()
+
+				love.graphics.translate(starBG.translation.x, starBG.translation.y)
+				for i = 1, 3 do
+					starBG.x = (i - 1) * 1102
+					starBG:draw()
+				end
+			love.graphics.pop()
+			love.graphics.push()
+
+				love.graphics.translate(startFG.translation.x, startFG.translation.y)
+				for i = 1, 3 do
+					startFG.x = (i - 1) * 1216
+					startFG:draw()
+				end
+			love.graphics.pop()
         love.graphics.push()
             love.graphics.translate(25, 50)
             love.graphics.scale(0.75, 0.75)

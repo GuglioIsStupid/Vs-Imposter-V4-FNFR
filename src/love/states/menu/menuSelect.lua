@@ -16,8 +16,9 @@ return {
         
 		menuButton = 1
 		songNum = 0
-        selectBG = graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/selectBG")))
-        selectBGOverlay = graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/selectBGOverlay")))
+
+        starBG = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/starBG")))
+		startFG = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/starFG")))
 
         options = love.filesystem.load("sprites/menu/menuButtons.lua")()
         story = love.filesystem.load("sprites/menu/menuButtons.lua")()
@@ -40,30 +41,8 @@ return {
         --Timer.tween(1, credits, {y = 250}, "out-expo")
         --Timer.tween(0.88, cam, {y = 35, sizeX = 1.1, sizeY = 1.1}, "out-quad")
 
-        function loopbgfloat()
-            Timer.tween(
-                3,
-                menuDetails.selectBG,
-                {
-                    y = menuDetails.selectBG.y + 6
-                },
-                "in-out-quad",
-                function()
-                    Timer.tween(
-                        3,
-                        menuDetails.selectBG,
-                        {
-                            y = menuDetails.selectBG.y - 6
-                        },
-                        "in-out-quad",
-                        function()
-                            loopbgfloat()
-                        end
-                    )
-                end
-            )
-        end
-        loopbgfloat()
+        starBG.translation = {x = 0, y = 0}
+		startFG.translation = {x = 0, y = 0}
 
         function changeSelect()
             if menuButton == 1 then
@@ -193,6 +172,25 @@ return {
 				Gamestate.switch(menu)
 			end
 		end
+
+        starBG.translation.x = starBG.translation.x - 12.5 * dt
+			if starBG.translation.x < -1102 then
+				starBG.translation.x = 0
+			end
+
+			startFG.translation.x = startFG.translation.x - 25 * dt
+			if startFG.translation.x < -1216 then
+				startFG.translation.x = 0
+            end
+			starBG.translation.x = starBG.translation.x - 12.5 * dt
+			if starBG.translation.x < -1102 then
+				starBG.translation.x = 0
+			end
+
+			startFG.translation.x = startFG.translation.x - 25 * dt
+			if startFG.translation.x < -1216 then
+				startFG.translation.x = 0
+			end
 	end,
 
 	draw = function(self)
@@ -200,13 +198,21 @@ return {
             love.graphics.setFont(uiFont)
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
             love.graphics.push()
-                love.graphics.translate(menuDetails.selectBG.x, menuDetails.selectBG.y)
-                selectBG:draw()
-            love.graphics.pop()
-            love.graphics.push()
-                love.graphics.translate(menuDetails.selectBGOverlay.x, menuDetails.selectBGOverlay.y)
-                selectBGOverlay:draw()
-            love.graphics.pop()
+
+				love.graphics.translate(starBG.translation.x, starBG.translation.y)
+				for i = 1, 3 do
+					starBG.x = (i - 1) * 1102
+					starBG:draw()
+				end
+			love.graphics.pop()
+			love.graphics.push()
+
+				love.graphics.translate(startFG.translation.x, startFG.translation.y)
+				for i = 1, 3 do
+					startFG.x = (i - 1) * 1216
+					startFG:draw()
+				end
+			love.graphics.pop()
             love.graphics.push()
                 graphics.setColor(0,0,0)
                 love.graphics.translate(menuDetails.selectUIElements.x, menuDetails.selectUIElements.y)

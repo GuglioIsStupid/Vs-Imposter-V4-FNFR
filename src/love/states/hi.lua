@@ -13,5 +13,11 @@ return {
 
     draw = function(self)
         love.graphics.draw(video, 0, 0)
+    end,
+
+    leave = function(self)
+        video:stop()
+        video:release()
+        collectgarbage()
     end
 }
