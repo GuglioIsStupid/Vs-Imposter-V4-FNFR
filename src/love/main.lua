@@ -203,6 +203,7 @@ function love.load()
 	menuChooseFreeplay = require "states.menu.menuChooseFreeplay"
 	menuSettings = require "states.menu.menuSettings"
 	menuCredits = require "states.menu.menuCredits"
+	impWeekMenu = require "states.menu.impWeekMenu"
 	intro = require "states.menu.intro" -- unused for now (Im too lazy)
 
 	-- Load weeks
@@ -440,6 +441,10 @@ function love.keypressed(key)
 	else
 		volumeKeyPressed(key)
 		Gamestate.keypressed(key)
+	end
+
+	if key == "kp8" then -- just so like i can test the week menu without making it harder for others lolo
+		Gamestate.switch(impWeekMenu)
 	end
 end
 
