@@ -103,7 +103,6 @@ todo list                yes im putting the todo list here everyone start using 
 
 
 {clothing hanger
-fix highscore shit in yellow (im disabling it for now because im too stupid to understand how it works)
 kill myself (after port is done)
 
 
