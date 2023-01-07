@@ -207,6 +207,9 @@ function love.load()
 	impWeekMenu = require "states.menu.impWeekMenu"
 	intro = require "states.menu.intro" -- unused for now (Im too lazy)
 
+	shop = require "states.hi"
+	credits = require "states.hi"
+
 	-- Load weeks
 	weeks = require "states.weeks.weeks"
 	weeksDefeat = require "states.weeks.weeks-Defeat"
