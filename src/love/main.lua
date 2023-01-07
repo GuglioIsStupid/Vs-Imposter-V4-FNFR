@@ -98,6 +98,7 @@ function uitextflarge(text,x,y,limit,align,hovered,r,sx,sy,ox,oy,kx,ky)
 	if not hovered then graphics.setColor(1,1,1) else graphics.setColor(0,0,0) end
 	love.graphics.printf(text,x,y,limit,align,r,sx,sy,ox,oy,kx,ky)
 end
+
 volFade = 0
 
 function math.round(num)
@@ -399,6 +400,9 @@ function love.load()
 	pauseFont = love.graphics.newFont("fonts/Dosis-SemiBold.ttf", 96)
 	weekFont = love.graphics.newFont("fonts/Dosis-SemiBold.ttf", 84)
 	weekFontSmall = love.graphics.newFont("fonts/Dosis-SemiBold.ttf", 54)
+	
+	susFontSmall = love.graphics.newFont("fonts/AmaticSC-Regular.ttf", 32)
+	susFont = love.graphics.newFont("fonts/AmaticSC-Bold.ttf", 32)
 
 	weekNum = 1
 	songDifficulty = 2
@@ -470,10 +474,6 @@ function love.keypressed(key)
 	else
 		volumeKeyPressed(key)
 		Gamestate.keypressed(key)
-	end
-
-	if key == "kp8" then -- just so like i can test the week menu without making it harder for others lolo
-		Gamestate.switch(impWeekMenu)
 	end
 end
 

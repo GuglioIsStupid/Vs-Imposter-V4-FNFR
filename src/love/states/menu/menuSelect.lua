@@ -98,7 +98,7 @@ return {
                 graphics.fadeOut(
                     0.3,
                     function()
-                        Gamestate.switch(menuWeek)
+                        Gamestate.switch(impWeekMenu)
                         status.setLoading(false)
                     end
                 )

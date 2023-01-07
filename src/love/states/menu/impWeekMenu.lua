@@ -8,6 +8,22 @@ return {
 
         allWeeks = {}
 
+        images = {
+            icons = love.graphics.newImage(graphics.imagePath("icons"))
+        }
+        sprites = {
+            icons = love.filesystem.load("sprites/icons.lua"),
+        }
+
+        leftIcon = sprites.icons()
+        rightIcon = sprites.icons()
+
+        leftIcon.x = -100
+        leftIcon.y = -245
+
+        rightIcon.x = 200
+        rightIcon.y = -245
+
         border = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/border")))
         circle = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/circle")))
         --circleRED = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/circleRED"))) -- unused img (i think)
@@ -22,6 +38,9 @@ return {
         deadWeekTranslation = {x = 0, y = 0}
         
         ship = love.filesystem.load("sprites/impmenu/ship.lua")()
+
+        ship.sizeX, ship.sizeY = 0.75, 0.75
+        ship.x, ship.y = 25, 50
 
         for _ = 1, 33 do
             table.insert(lineTable, line)
@@ -42,10 +61,21 @@ return {
         if input:pressed("up") or input:pressed("down") or input:pressed("left") or input:pressed("right") then
             audio.playSound(selectSound) 
         end
+
+        if input:pressed("left") then
+            ship:animate("left")
+        elseif input:pressed("right") then
+            ship:animate("right")
+        elseif input:pressed("up") then
+            ship:animate("up")
+        elseif input:pressed("down") then
+            ship:animate("down")
+        end
+
         if input:pressed("confirm") then 
-            audio.playSound(confirmSound)
             --Gamestate.switch(impWeeks[currentWeek], )
             if currentWeek ~= "" then 
+                audio.playSound(confirmSound)
                 graphics.fadeOut(
                     0.5,
                     function()
@@ -62,6 +92,7 @@ return {
         if translationTween then 
             Timer.cancel(translationTween)
         end
+
         translationTween = Timer.tween(0.1, weekTranslation, {x = deadWeekTranslation.x, y = deadWeekTranslation.y})
         if currentWeek == "" then 
             if input:pressed("up") then 
@@ -75,6 +106,8 @@ return {
                 deadWeekTranslation.x = -380
             end
         elseif currentWeek == "WEEK 1" then 
+            leftIcon:animate("red")
+            rightIcon:animate("red losing")
             if input:pressed("left") then
                 currentWeek = ""
                 deadWeekTranslation.x = 0
@@ -83,6 +116,8 @@ return {
                 deadWeekTranslation.x = -760
             end
         elseif currentWeek == "WEEK 2" then
+            leftIcon:animate("green")
+            rightIcon:animate("green losing")
             if input:pressed("left") then
                 currentWeek = "WEEK 1"
                 deadWeekTranslation.x = -380
@@ -97,6 +132,8 @@ return {
                 deadWeekTranslation.y = -380
             end
         elseif currentWeek == "WEEK 3" then
+            leftIcon:animate("yellow")
+            rightIcon:animate("yellow losing")
             if input:pressed("left") then
                 currentWeek = "WEEK 2"
                 deadWeekTranslation.x = -760
@@ -108,6 +145,8 @@ return {
                 deadWeekTranslation.y = -380
             end
         elseif currentWeek == "WEEK 5" then
+            leftIcon:animate("maroon")
+            rightIcon:animate("maroon losing")
             if input:pressed("up") then
                 currentWeek = ""
                 deadWeekTranslation.y = 0
@@ -116,6 +155,8 @@ return {
                 deadWeekTranslation.x = 380
             end
         elseif currentWeek == "WEEK 6" then
+            leftIcon:animate("grey")
+            rightIcon:animate("grey losing")
             if input:pressed("right") then
                 currentWeek = "WEEK 5"
                 deadWeekTranslation.x = 0
@@ -124,31 +165,43 @@ return {
                 deadWeekTranslation.x = 760
             end  
         elseif currentWeek == "WEEK 7" then
+            leftIcon:animate("pink")
+            rightIcon:animate("pink losing")
             if input:pressed("right") then
                 currentWeek = "WEEK 6"
                 deadWeekTranslation.x = 380
             end
         elseif currentWeek == "WEEK J" then
+            leftIcon:animate("balls")
+            rightIcon:animate("balls losing")
             if input:pressed("down") then
                 currentWeek = ""
                 deadWeekTranslation.y = 0
             end
         elseif currentWeek == "BOO!" then
+            leftIcon:animate("fella")
+            rightIcon:animate("fella losing")
             if input:pressed("down") then
                 currentWeek = "WEEK 2"
                 deadWeekTranslation.y = 0
             end
         elseif currentWeek == "TOMONGUS" then
+            leftIcon:animate("tomongus")
+            rightIcon:animate("tomongus losing")
             if input:pressed("up") then
                 currentWeek = "WEEK 2"
                 deadWeekTranslation.y = 0
             end
         elseif currentWeek == "HENRY" then
+            leftIcon:animate("henry")
+            rightIcon:animate("henry losing")
             if input:pressed("up") then
                 currentWeek = "WEEK 3"
                 deadWeekTranslation.y = 0
             end
         elseif currentWeek == "..." then
+            leftIcon:animate("black")
+            rightIcon:animate("black losing")
             if input:pressed("left") then
                 currentWeek = "WEEK 3"
                 deadWeekTranslation.x = -1140
@@ -158,11 +211,10 @@ return {
 
     draw = function(self)
         love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
-        
         love.graphics.push()
             love.graphics.translate(25, 50)
             love.graphics.scale(0.75, 0.75)
-            love.graphics.print(currentWeek .. "\n" .. impWeekMeta[currentWeek][1], 100, 100)
+            
             love.graphics.translate(weekTranslation.x, weekTranslation.y)
 
             for i = 1, #lineTable do
@@ -260,9 +312,27 @@ return {
 
         border:draw()
 
+        ship:draw()
+
+        love.graphics.setFont(susFont)
+        uitextf(currentWeek .. "\n" .. impWeekMeta[currentWeek][1], -300, -300, 350, "center", 0, 2, 2)
         for i = 1, #impWeekMeta[currentWeek][2] do
-            love.graphics.print(impWeekMeta[currentWeek][2][i], 100, 200 + (i * 20))
+            if currentWeek == "WEEK 3" then
+                uitextf(impWeekMeta[currentWeek][2][i], 200, -325 + (i * 30), 350, "center", 0, 1.25, 1.25)
+            elseif currentWeek == "WEEK J" or currentWeek == "HENRY" or currentWeek == "WEEK 2" then
+                uitextf(impWeekMeta[currentWeek][2][i], 200, -325 + (i * 34), 350, "center", 0, 1.25, 1.25)
+            elseif currentWeek == "BOO!" then
+                uitextf(impWeekMeta[currentWeek][2][i], 200, -300 + (i * 40), 350, "center", 0, 1.25, 1.25)
+            else
+                uitextf(impWeekMeta[currentWeek][2][i], 200, -325 + (i * 40), 350, "center", 0, 1.25, 1.25)
+            end
         end
+
+        if currentWeek ~= "" then 
+            leftIcon:draw()
+            rightIcon:draw()
+        end
+        love.graphics.setFont(font)
         
         -- every week is seperated by 3 lines
         -- 1 week is 1 circle
