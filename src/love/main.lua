@@ -553,7 +553,6 @@ end
 
 function love.draw()
 	love.graphics.setFont(font)
-	if Gamestate.current() == menu then love.graphics.draw(spongebirth, 0, 0) end
 	graphics.screenBase(lovesize.getWidth(), lovesize.getHeight())
 	lovesize.begin()
 		graphics.setColor(1, 1, 1) -- Fade effect on
