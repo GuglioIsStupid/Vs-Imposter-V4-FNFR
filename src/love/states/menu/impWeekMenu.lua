@@ -55,6 +55,9 @@ return {
         print(#circleTable)
 
         currentWeek = ""
+
+        cam.sizeX, cam.sizeY = 0.9, 0.9
+		camScale.x, camScale.y = 0.9, 0.9
     end,
 
     update = function(self, dt)

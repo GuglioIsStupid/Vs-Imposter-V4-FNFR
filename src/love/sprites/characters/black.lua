@@ -57,10 +57,10 @@ return graphics.newSprite(
 		--Start is the first frame, stop is the last frame, speed is the speed of the animation, offsetX and offsetY are the offset of the animation
 		--Get the offset by using the ingame offset editor and pressing 7
 		["idle"] = {start = 8, stop = 32, speed = 24, offsetX = 0, offsetY = 0},
-		["left"] = {start = 33, stop = 38, speed = 24, offsetX = 0, offsetY = 0},
-		["right"] = {start = 39, stop = 44, speed = 24, offsetX = 0, offsetY = 0},
-		["up"] = {start = 45, stop = 50, speed = 24, offsetX = 0, offsetY = 0},
-		["down"] = {start = 1, stop = 7, speed = 24, offsetX = 0, offsetY = 0}
+		["left"] = {start = 33, stop = 38, speed = 24, offsetX = 0, offsetY = -40},
+		["right"] = {start = 39, stop = 44, speed = 24, offsetX = -149, offsetY = -30},
+		["up"] = {start = 45, stop = 50, speed = 24, offsetX = 88, offsetY = 0},
+		["down"] = {start = 1, stop = 7, speed = 24, offsetX = 88, offsetY = 50}
 	},
 	"idle", -- set to default animation
 	false -- If the sprite repeats

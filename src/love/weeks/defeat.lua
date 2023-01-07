@@ -17,7 +17,7 @@ return {
 
         enemy = love.filesystem.load("sprites/characters/black.lua")()
 
-		weeksDefeat:setIcon("enemy", "daddy dearest")
+		weeksDefeat:setIcon("enemy", "black")
 
         enemy.x = -350
         blackold.x = -350
@@ -58,12 +58,12 @@ return {
 		weeksDefeat:update(dt)
 
 		if health[1] >= 80 then
-			if enemyIcon:getAnimName() == "daddy dearest" then
-				weeksDefeat:setIcon("enemy", "daddy dearest losing")
+			if enemyIcon:getAnimName() == "black" then
+				weeksDefeat:setIcon("enemy", "black losing")
 			end
 		else
-			if enemyIcon:getAnimName() == "daddy dearest losing" then
-				weeksDefeat:setIcon("enemy", "daddy dearest")
+			if enemyIcon:getAnimName() == "black losing" then
+				weeksDefeat:setIcon("enemy", "black")
 			end
 		end
 
