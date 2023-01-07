@@ -42,6 +42,23 @@ return {
         if input:pressed("up") or input:pressed("down") or input:pressed("left") or input:pressed("right") then
             audio.playSound(selectSound) 
         end
+        if input:pressed("confirm") then 
+            audio.playSound(confirmSound)
+            --Gamestate.switch(impWeeks[currentWeek], )
+            if currentWeek ~= "" then 
+                graphics.fadeOut(
+                    0.5,
+                    function()
+                        music[1]:stop()
+                        songAppend = "hard"
+                        storyMode = true
+                        songNum = 1
+                        Gamestate.switch(impWeeks[currentWeek], songNum, songAppend, currentWeek)
+                        status.setLoading(false)
+                    end
+                )
+            end
+        end
         if translationTween then 
             Timer.cancel(translationTween)
         end

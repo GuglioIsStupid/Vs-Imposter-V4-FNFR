@@ -340,6 +340,20 @@ function love.load()
 		["HENRY"] = {"BATTLING THE BOYFRIEND", {"TITULAR", "GREATEST PLAN", "REINFORCEMENTS", "ARMED"}},
 		["..."] = {"DEFEAT", {""}}
 	}
+	impWeeks = {
+		[""] = require "states.hi",
+		["WEEK 1"] = require "states.hi",
+		["WEEK 2"] = require "states.hi",
+		["WEEK 3"] = require "weeks.yellow",
+		["WEEK 5"] = require "states.hi",
+		["WEEK 6"] = require "states.hi",
+		["WEEK 7"] = require "states.hi",
+		["WEEK J"] = require "states.hi",
+		["BOO!"] = require "states.hi",
+		["TOMONGUS"] = require "states.hi",
+		["HENRY"] = require "states.hi",
+		["..."] = require "weeks.defeat"
+	}
 
 	noteskins = {
 		"arrows",
