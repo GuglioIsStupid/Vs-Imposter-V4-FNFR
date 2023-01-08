@@ -33,6 +33,7 @@ return {
 		difficulty = songAppend
 
 		weeksYellow:setIcon("enemy", "yellow")
+		curEnemy = "white"
 
 		self:load()
 	end,
