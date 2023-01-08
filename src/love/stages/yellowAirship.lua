@@ -20,29 +20,19 @@ return {
         stageImages[3].sizeY, stageImages[3].sizeX = 0.5, 0.5
 
         if song == 5 then
-            enemy = love.filesystem.load("sprites/yellowWeek/yellow.lua")()
-
+            enemy = love.filesystem.load("sprites/characters/black.lua")()
         elseif song == 4 then
             enemy = love.filesystem.load("sprites/yellowWeek/yellow.lua")()
-
         elseif song == 3 then
             enemy = love.filesystem.load("sprites/yellowWeek/yellow.lua")()
-
         elseif song == 2 then
             enemy = love.filesystem.load("sprites/yellowWeek/yellow.lua")()
-
         else
             enemy = love.filesystem.load("sprites/yellowWeek/yellow.lua")()
-
         end
 
-
-
-        enemy = love.filesystem.load("sprites/yellowWeek/yellow.lua")()
         whiteAwkward = love.filesystem.load("sprites/yellowWeek/white_awkward.lua")()
-        enemyTwo = love.filesystem.load("sprites/yellowWeek/yellow.lua")()
-
-
+        enemyTwo = love.filesystem.load("sprites/characters/white.lua")()
 
         girlfriend.x, girlfriend.y = -200, -445
         enemy.x, enemy.y = -300, 75
@@ -75,8 +65,10 @@ return {
             stageImages[7]:draw()
             whiteAwkward:draw()
             girlfriend:draw()
-			enemy:draw()
+
             enemyTwo:draw()
+			enemy:draw()
+            
 			boyfriend:draw()
 		love.graphics.pop()
 		love.graphics.push()
