@@ -185,6 +185,7 @@ function love.load()
 		["school"] = require "stages.school",
 		["evilSchool"] = require "stages.evil-school",
 		["tank"] = require "stages.tank",
+		["yellowAirship"] = require "stages.yellowAirship"
 	}
 
 	mods = {
