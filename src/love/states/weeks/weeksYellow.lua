@@ -1337,7 +1337,7 @@ return {
 
 		if not enemy:isAnimated() then 
 			if enemy:getAnimName() == "idle" then
-				enemy:animate("idle", true)
+				enemy:animate("idle", false)
 			end
 		end
 	end,
