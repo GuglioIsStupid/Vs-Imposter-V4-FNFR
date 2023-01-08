@@ -1347,6 +1347,12 @@ return {
 				enemy:animate("idle", false)
 			end
 		end
+
+		if not enemyTwo:isAnimated() then 
+			if enemyTwo:getAnimName() == "idle" then
+				enemyTwo:animate("idle", false)
+			end
+		end
 	end,
 
 	updateUI = function(self, dt)
