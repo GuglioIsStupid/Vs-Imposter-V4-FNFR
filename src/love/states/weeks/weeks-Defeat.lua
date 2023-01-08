@@ -373,7 +373,6 @@ return {
 		enemyNotes = {}
 		boyfriendNotes = {}
 		picoNotes = {}
-		health[1] = 50
 		score = 0
 		missCounter = 0
 		altScore = 0
@@ -951,6 +950,7 @@ return {
 			end
 		end
 	end,
+	
 	generatePicoNotes = function(self, chartP)
 		chartP = json.decode(love.filesystem.read(chartP))
 		chartP = chartP["song"]
@@ -1362,6 +1362,12 @@ return {
 	updateUI = function(self, dt)
 		enemyIcon.x = 425 - 50 * 10
 		boyfriendIcon.x = 585 - 50 * 10
+
+		if missCounter > missMax then 
+			if not settings.practiceMode then
+				Gamestate.push(gameOver)
+			end
+		end
 		if extraCamZoom.sizeX > 1 then
 			extraCamZoom.sizeX = extraCamZoom.sizeX - 0.01
 			extraCamZoom.sizeY = extraCamZoom.sizeY - 0.01
@@ -1429,14 +1435,6 @@ return {
 									if inst then voices:setVolume(0) end
 
 									notMissed[noteNum] = false
-									if not settings.noMiss then
-										if boyfriendNote[1]:getAnimName() ~= "hold" and boyfriendNote[1]:getAnimName() ~= "end" then
-											if health[2] then Timer.cancel(health[2]) end
-											health[2] = Timer.tween((60 / bpm) / 4, health, {[1] = health[1] - 2}, "linear")
-										end
-									else
-										health[1] = 0
-									end
 									if boyfriendNote[1]:getAnimName() ~= "hold" and boyfriendNote[1]:getAnimName() ~= "end" then
 										missCounter = missCounter + 1
 									end
@@ -1601,17 +1599,6 @@ return {
 											self:safeAnimate(boyfriend, curAnim, false, 3)
 											doingAnim = false
 
-											if not settings.noMiss then
-												if boyfriendNote[1]:getAnimName() ~= "hold" or boyfriendNote[1]:getAnimName() ~= "end" then
-													if health[2] then Timer.cancel(health[2]) end
-													health[2] = Timer.tween((60 / bpm) / 4, health, {[1] = health[1] + 1}, "linear")
-												end
-											else
-												health[1] = 0
-											end
-
-											if health[2] then Timer.cancel(health[2]) end
-											health[2] = Timer.tween((60 / bpm) / 4, health, {[1] = health[1] + 1}, "linear")
 											if boyfriendNote[1]:getAnimName() ~= "hold" or boyfriendNote[1]:getAnimName() ~= "end" then
 												noteCounter = noteCounter + 1
 											end
@@ -1642,12 +1629,6 @@ return {
 
 										score = score - 10
 										combo = 0
-										if not settings.noMiss then
-											if health[2] then Timer.cancel(health[2]) end
-											health[2] = Timer.tween((60 / bpm) / 4, health, {[1] = health[1] - 2}, "linear")
-										else
-											health[1] = 0
-										end
 										missCounter = missCounter + 1
 									end
 								end
@@ -1664,8 +1645,6 @@ return {
 							boyfriendArrow:animate("confirm", false)
 
 							self:safeAnimate(boyfriend, curAnim, false, 3)
-
-							--health[1] = health[1] + 1
 						end
 
 						if input:released(curInput) then
@@ -1744,22 +1723,6 @@ return {
 						end
 					end
 				end
-
-				if health[1] > 100 then
-					health[1] = 100
-				elseif health[1] > 20 and boyfriendIcon:getAnimName() == "boyfriend losing" then
-					boyfriendIcon:animate("boyfriend", false)
-				elseif health[1] <= 0 then -- Game over
-					health[1] = 0
-					if not settings.practiceMode then
-						Gamestate.push(gameOver)
-					end
-				elseif health[1] <= 20 and boyfriendIcon:getAnimName() == "boyfriend" then
-					boyfriendIcon:animate("boyfriend losing", false)
-				end
-
-				enemyIcon.x = 425 - health[1] * 10
-				boyfriendIcon.x = 585 - health[1] * 10
 
 				if not countingDown then
 					if musicThres ~= oldMusicThres and math.fmod(absMusicTime, 60000 / bpm) < 100 then
@@ -2272,15 +2235,15 @@ return {
 			end -- Marvellous 
 			if noteCounter + missCounter <= 0 then
 				if (math.floor((altScore / (noteCounter + missCounter)) / 3.5)) >= 100 then
-					weekUIText("Score: " .. score .. " | Misses: " .. missCounter .. " | Accuracy: 0% | Rating: ???", -600, 400+downscrollOffset, 1200, "center")
+					weekUIText("Score: " .. score .. " | Combo Breaks: " .. missCounter .. " / " .. missMax .. " | Accuracy: 0% | Rating: ???", -600, 400+downscrollOffset, 1200, "center")
 				else
-					weekUIText("Score: " .. score .. " | Misses: " .. missCounter .. " | Accuracy: 0% | Rating: ???", -600, 400+downscrollOffset, 1200, "center")
+					weekUIText("Score: " .. score .. " |  Combo Breaks: " .. missCounter .. " / " .. missMax .. " | Accuracy: 0% | Rating: ???", -600, 400+downscrollOffset, 1200, "center")
 				end
 			else
 				if (math.floor((altScore / (noteCounter + missCounter)) / 3.5)) >= 100 then
-					weekUIText("Score: " .. score .. " | Misses: " .. missCounter .. " | Accuracy: 100% | Rating: PERFECT!!!", -600, 400+downscrollOffset, 1200, "center")
+					weekUIText("Score: " .. score .. " |  Combo Breaks: " .. missCounter .. " / " .. missMax .. " | Accuracy: 100% | Rating: PERFECT!!!", -600, 400+downscrollOffset, 1200, "center")
 				else
-					weekUIText("Score: " .. score .. " | Misses: " .. missCounter .. " | Accuracy: " .. convertedAcc .. " | Rating: " .. ratingText, -600, 400+downscrollOffset, 1200, "center")
+					weekUIText("Score: " .. score .. " |  Combo Breaks: " .. missCounter .. " / " .. missMax .. " | Accuracy: " .. convertedAcc .. " | Rating: " .. ratingText, -600, 400+downscrollOffset, 1200, "center")
 				end
 			end
 

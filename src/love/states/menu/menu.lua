@@ -36,22 +36,18 @@ return {
 			{[1] = 1},
 			"out-quad"
 		)
-		titleBG = graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/titleBG")))
 		changingMenu = false
-		logo = sprite(-800, -450)
+		logo = sprite(-390, -420)
 		logo:setFrames(paths.getSparrowFrames("logoBumpin"))
    		logo:addAnimByPrefix("bump", "logo bumpin", 24)
-		
-		girlfriendTitle = sprite(-25, -275)
-		girlfriendTitle:setFrames(paths.getSparrowFrames("menu/girlfriend-title"))
-		girlfriendTitle:addAnimByIndices("danceLeft", "gfDance",
-                    {30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}, 24)
 
-		girlfriendTitle:addAnimByIndices("danceRight", "gfDance", {
-					15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29}, 24)
+		starBG = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/starBG")))
+		startFG = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/starFG")))
+
+		starBG.translation = {x = 0, y = 0}
+		startFG.translation = {x = 0, y = 0}
 
 		logo:animate("bumpin", false)
-		girlfriendTitle:animate("danceRight", false)
 		
 		whiteRectangles = {}
 		for i = 1, 15 do
@@ -70,21 +66,11 @@ return {
 		updatePres("Press Enter", "In the Menu")
 	end,
 	onBeat = function(self, n)
-		danceRight = not danceRight
-		if girlfriendTitle then 
-			if n % 2 == 0 then
-				girlfriendTitle:animate("danceRight", false)
-			else
-				girlfriendTitle:animate("danceLeft", false)
-			end 
-		end
-
 		--if logo then logo:animate("anim", false) end
 		if logo then logo:animate("bump", false) end
 	end,
 
 	update = function(self, dt)
-		girlfriendTitle:update(dt)
 		logo:update(dt)
 
 		music[1]:updateBeat()
@@ -115,18 +101,38 @@ return {
 				backFunc()
 			end
 		end
+
+		starBG.translation.x = starBG.translation.x - 12.5 * dt
+			if starBG.translation.x < -1102 then
+				starBG.translation.x = 0
+			end
+
+			startFG.translation.x = startFG.translation.x - 25 * dt
+			if startFG.translation.x < -1216 then
+				startFG.translation.x = 0
+			end
 	end,
 
 	draw = function(self)
 		love.graphics.push()
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
-
 			love.graphics.push()
-				love.graphics.push()
-					love.graphics.translate(menuDetails.titleBG.x, menuDetails.titleBG.y)
-					love.graphics.rectangle("fill", 1, 1, 10, 20)        --this rectangle is extremely important do not delete if you delete it the queen of england will escape (she didnt die they are holding her in containment 30 stories underground)
-					titleBG:draw()
-				love.graphics.pop()
+
+				love.graphics.translate(starBG.translation.x, starBG.translation.y)
+				for i = 1, 3 do
+					starBG.x = (i - 1) * 1102
+					starBG:draw()
+				end
+			love.graphics.pop()
+			love.graphics.push()
+
+				love.graphics.translate(startFG.translation.x, startFG.translation.y)
+				for i = 1, 3 do
+					startFG.x = (i - 1) * 1216
+					startFG:draw()
+				end
+			love.graphics.pop()
+			love.graphics.push()
 				love.graphics.push()
 					love.graphics.scale(0.9, 0.9)
 					love.graphics.translate(menuDetails.titleLogo.x, menuDetails.titleLogo.y)
@@ -134,8 +140,6 @@ return {
 				love.graphics.pop()
 				love.graphics.push()
 					love.graphics.scale(0.9, 0.9)
-					--love.graphics.translate(menuDetails.girlfriendTitle.x, menuDetails.girlfriendTitle.y)
-					girlfriendTitle:draw()
 				love.graphics.pop()
 				love.graphics.push()
 					graphics.setColor(0, 0, 0, 0.9)
@@ -150,8 +154,9 @@ return {
 	end,
 
 	leave = function(self)
-		--girlfriendTitle = nil
 		logo = nil
+		starBG = nil
+		startFG = nil
 
 		Timer.clear()
 	end

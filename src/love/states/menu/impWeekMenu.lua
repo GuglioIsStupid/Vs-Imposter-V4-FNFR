@@ -31,6 +31,13 @@ return {
         line = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/line")))
         menuBack = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/menuBack")))
 
+        starBG = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/starBG")))
+		startFG = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/starFG")))
+
+		starBG.translation = {x = 0, y = 0}
+		startFG.translation = {x = 0, y = 0}
+
+
         lineTable = {}
         circleTable = {}
 
@@ -52,8 +59,6 @@ return {
             circleTable[i].y = 0
         end
 
-        print(#circleTable)
-
         currentWeek = ""
 
         cam.sizeX, cam.sizeY = 0.9, 0.9
@@ -61,159 +66,196 @@ return {
     end,
 
     update = function(self, dt)
-        if input:pressed("up") or input:pressed("down") or input:pressed("left") or input:pressed("right") then
-            audio.playSound(selectSound) 
-        end
-
-        if input:pressed("left") then
-            ship:animate("left")
-        elseif input:pressed("right") then
-            ship:animate("right")
-        elseif input:pressed("up") then
-            ship:animate("up")
-        elseif input:pressed("down") then
-            ship:animate("down")
-        end
-
-        if input:pressed("confirm") then 
-            --Gamestate.switch(impWeeks[currentWeek], )
-            if currentWeek ~= "" then 
-                audio.playSound(confirmSound)
-                graphics.fadeOut(
-                    0.5,
-                    function()
-                        music[1]:stop()
-                        songAppend = "hard"
-                        storyMode = true
-                        songNum = 1
-                        Gamestate.switch(impWeeks[currentWeek], songNum, songAppend, currentWeek)
-                        status.setLoading(false)
-                    end
-                )
+        if not graphics.isFading() then
+            if input:pressed("up") or input:pressed("down") or input:pressed("left") or input:pressed("right") then
+                audio.playSound(selectSound) 
             end
-        end
-        if translationTween then 
-            Timer.cancel(translationTween)
-        end
 
-        translationTween = Timer.tween(0.1, weekTranslation, {x = deadWeekTranslation.x, y = deadWeekTranslation.y})
-        if currentWeek == "" then 
-            if input:pressed("up") then 
-                currentWeek = "WEEK J"
-                deadWeekTranslation.y = 380
-            elseif input:pressed("down") then
-                currentWeek = "WEEK 5"
-                deadWeekTranslation.y = -380
-            elseif input:pressed("right") then
-                currentWeek = "WEEK 1"
-                deadWeekTranslation.x = -380
-            end
-        elseif currentWeek == "WEEK 1" then 
-            leftIcon:animate("red")
-            rightIcon:animate("red losing")
             if input:pressed("left") then
-                currentWeek = ""
-                deadWeekTranslation.x = 0
+                ship:animate("left")
             elseif input:pressed("right") then
-                currentWeek = "WEEK 2"
-                deadWeekTranslation.x = -760
-            end
-        elseif currentWeek == "WEEK 2" then
-            leftIcon:animate("green")
-            rightIcon:animate("green losing")
-            if input:pressed("left") then
-                currentWeek = "WEEK 1"
-                deadWeekTranslation.x = -380
-            elseif input:pressed("right") then
-                currentWeek = "WEEK 3"
-                deadWeekTranslation.x = -1140
+                ship:animate("right")
             elseif input:pressed("up") then
-                currentWeek = "BOO!"
-                deadWeekTranslation.y = 380
+                ship:animate("up")
             elseif input:pressed("down") then
-                currentWeek = "TOMONGUS"
-                deadWeekTranslation.y = -380
+                ship:animate("down")
             end
-        elseif currentWeek == "WEEK 3" then
-            leftIcon:animate("yellow")
-            rightIcon:animate("yellow losing")
-            if input:pressed("left") then
-                currentWeek = "WEEK 2"
-                deadWeekTranslation.x = -760
-            elseif input:pressed("right") then
-                currentWeek = "..."
-                deadWeekTranslation.x = -1520
-            elseif input:pressed("down") then
-                currentWeek = "HENRY"
-                deadWeekTranslation.y = -380
+
+            if input:pressed("confirm") then 
+                --Gamestate.switch(impWeeks[currentWeek], )
+                if currentWeek ~= "" then 
+                    audio.playSound(confirmSound)
+                    graphics.fadeOut(
+                        0.5,
+                        function()
+                            music[1]:stop()
+                            songAppend = "hard"
+                            storyMode = true
+                            songNum = 1
+                            Gamestate.switch(impWeeks[currentWeek], songNum, songAppend, currentWeek)
+                            status.setLoading(false)
+                        end
+                    )
+                end
             end
-        elseif currentWeek == "WEEK 5" then
-            leftIcon:animate("maroon")
-            rightIcon:animate("maroon losing")
-            if input:pressed("up") then
-                currentWeek = ""
-                deadWeekTranslation.y = 0
-            elseif input:pressed("left") then
-                currentWeek = "WEEK 6"
-                deadWeekTranslation.x = 380
+            if translationTween then 
+                Timer.cancel(translationTween)
             end
-        elseif currentWeek == "WEEK 6" then
-            leftIcon:animate("grey")
-            rightIcon:animate("grey losing")
-            if input:pressed("right") then
-                currentWeek = "WEEK 5"
-                deadWeekTranslation.x = 0
-            elseif input:pressed("left") then
-                currentWeek = "WEEK 7"
-                deadWeekTranslation.x = 760
-            end  
-        elseif currentWeek == "WEEK 7" then
-            leftIcon:animate("pink")
-            rightIcon:animate("pink losing")
-            if input:pressed("right") then
-                currentWeek = "WEEK 6"
-                deadWeekTranslation.x = 380
-            end
-        elseif currentWeek == "WEEK J" then
-            leftIcon:animate("balls")
-            rightIcon:animate("balls losing")
-            if input:pressed("down") then
-                currentWeek = ""
-                deadWeekTranslation.y = 0
-            end
-        elseif currentWeek == "BOO!" then
-            leftIcon:animate("fella")
-            rightIcon:animate("fella losing")
-            if input:pressed("down") then
-                currentWeek = "WEEK 2"
-                deadWeekTranslation.y = 0
-            end
-        elseif currentWeek == "TOMONGUS" then
-            leftIcon:animate("tomongus")
-            rightIcon:animate("tomongus losing")
-            if input:pressed("up") then
-                currentWeek = "WEEK 2"
-                deadWeekTranslation.y = 0
-            end
-        elseif currentWeek == "HENRY" then
-            leftIcon:animate("henry")
-            rightIcon:animate("henry losing")
-            if input:pressed("up") then
-                currentWeek = "WEEK 3"
-                deadWeekTranslation.y = 0
-            end
-        elseif currentWeek == "..." then
-            leftIcon:animate("black")
-            rightIcon:animate("black losing")
-            if input:pressed("left") then
-                currentWeek = "WEEK 3"
-                deadWeekTranslation.x = -1140
+
+            translationTween = Timer.tween(0.1, weekTranslation, {x = deadWeekTranslation.x, y = deadWeekTranslation.y})
+            if currentWeek == "" then 
+                if input:pressed("up") then 
+                    currentWeek = "WEEK J"
+                    deadWeekTranslation.y = 380
+                elseif input:pressed("down") then
+                    currentWeek = "WEEK 5"
+                    deadWeekTranslation.y = -380
+                elseif input:pressed("right") then
+                    currentWeek = "WEEK 1"
+                    deadWeekTranslation.x = -380
+                end
+            elseif currentWeek == "WEEK 1" then 
+                leftIcon:animate("red")
+                rightIcon:animate("red losing")
+                if input:pressed("left") then
+                    currentWeek = ""
+                    deadWeekTranslation.x = 0
+                elseif input:pressed("right") then
+                    currentWeek = "WEEK 2"
+                    deadWeekTranslation.x = -760
+                end
+            elseif currentWeek == "WEEK 2" then
+                leftIcon:animate("green")
+                rightIcon:animate("green losing")
+                if input:pressed("left") then
+                    currentWeek = "WEEK 1"
+                    deadWeekTranslation.x = -380
+                elseif input:pressed("right") then
+                    currentWeek = "WEEK 3"
+                    deadWeekTranslation.x = -1140
+                elseif input:pressed("up") then
+                    currentWeek = "BOO!"
+                    deadWeekTranslation.y = 380
+                elseif input:pressed("down") then
+                    currentWeek = "TOMONGUS"
+                    deadWeekTranslation.y = -380
+                end
+            elseif currentWeek == "WEEK 3" then
+                leftIcon:animate("yellow")
+                rightIcon:animate("yellow losing")
+                if input:pressed("left") then
+                    currentWeek = "WEEK 2"
+                    deadWeekTranslation.x = -760
+                elseif input:pressed("right") then
+                    currentWeek = "..."
+                    deadWeekTranslation.x = -1520
+                elseif input:pressed("down") then
+                    currentWeek = "HENRY"
+                    deadWeekTranslation.y = -380
+                end
+            elseif currentWeek == "WEEK 5" then
+                leftIcon:animate("maroon")
+                rightIcon:animate("maroon losing")
+                if input:pressed("up") then
+                    currentWeek = ""
+                    deadWeekTranslation.y = 0
+                elseif input:pressed("left") then
+                    currentWeek = "WEEK 6"
+                    deadWeekTranslation.x = 380
+                end
+            elseif currentWeek == "WEEK 6" then
+                leftIcon:animate("grey")
+                rightIcon:animate("grey losing")
+                if input:pressed("right") then
+                    currentWeek = "WEEK 5"
+                    deadWeekTranslation.x = 0
+                elseif input:pressed("left") then
+                    currentWeek = "WEEK 7"
+                    deadWeekTranslation.x = 760
+                end  
+            elseif currentWeek == "WEEK 7" then
+                leftIcon:animate("pink")
+                rightIcon:animate("pink losing")
+                if input:pressed("right") then
+                    currentWeek = "WEEK 6"
+                    deadWeekTranslation.x = 380
+                end
+            elseif currentWeek == "WEEK J" then
+                leftIcon:animate("balls")
+                rightIcon:animate("balls losing")
+                if input:pressed("down") then
+                    currentWeek = ""
+                    deadWeekTranslation.y = 0
+                end
+            elseif currentWeek == "BOO!" then
+                leftIcon:animate("fella")
+                rightIcon:animate("fella losing")
+                if input:pressed("down") then
+                    currentWeek = "WEEK 2"
+                    deadWeekTranslation.y = 0
+                end
+            elseif currentWeek == "TOMONGUS" then
+                leftIcon:animate("tomongus")
+                rightIcon:animate("tomongus losing")
+                if input:pressed("up") then
+                    currentWeek = "WEEK 2"
+                    deadWeekTranslation.y = 0
+                end
+            elseif currentWeek == "HENRY" then
+                leftIcon:animate("henry")
+                rightIcon:animate("henry losing")
+                if input:pressed("up") then
+                    currentWeek = "WEEK 3"
+                    deadWeekTranslation.y = 0
+                end
+            elseif currentWeek == "..." then
+                leftIcon:animate("black")
+                rightIcon:animate("black losing")
+                if input:pressed("left") then
+                    currentWeek = "WEEK 3"
+                    deadWeekTranslation.x = -1140
+                end
             end
         end
+
+        starBG.translation.x = starBG.translation.x - 12.5 * dt
+			if starBG.translation.x < -1102 then
+				starBG.translation.x = 0
+			end
+
+			startFG.translation.x = startFG.translation.x - 25 * dt
+			if startFG.translation.x < -1216 then
+				startFG.translation.x = 0
+            end
+			starBG.translation.x = starBG.translation.x - 12.5 * dt
+			if starBG.translation.x < -1102 then
+				starBG.translation.x = 0
+			end
+
+			startFG.translation.x = startFG.translation.x - 25 * dt
+			if startFG.translation.x < -1216 then
+				startFG.translation.x = 0
+			end
     end,
 
     draw = function(self)
         love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
+        love.graphics.push()
+
+				love.graphics.translate(starBG.translation.x, starBG.translation.y)
+				for i = 1, 3 do
+					starBG.x = (i - 1) * 1102
+					starBG:draw()
+				end
+			love.graphics.pop()
+			love.graphics.push()
+
+				love.graphics.translate(startFG.translation.x, startFG.translation.y)
+				for i = 1, 3 do
+					startFG.x = (i - 1) * 1216
+					startFG:draw()
+				end
+			love.graphics.pop()
         love.graphics.push()
             love.graphics.translate(25, 50)
             love.graphics.scale(0.75, 0.75)
@@ -345,6 +387,32 @@ return {
     end,
 
     leave = function(self)
+        cirlce = nil
+        line = nil
+        border = nil
+        ship = nil
+        leftIcon = nil
+        rightIcon = nil
         
+        circleTable = {}
+        lineTable = {}
+        weekTable = {}
+        
+        currentWeek = ""
+        
+        starBG = nil
+        starFG = nil
+
+        menuBack = nil
+
+        finaleAura = nil
+
+        images = nil
+        sprites = nil
+
+        allWeeks = nil
+
+        weekTranslation = nil
+        deadWeekTranslation = nil
     end
 }
