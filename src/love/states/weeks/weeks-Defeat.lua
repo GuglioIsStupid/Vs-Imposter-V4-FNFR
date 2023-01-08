@@ -1459,8 +1459,6 @@ return {
 										self:safeAnimate(boyfriend, "miss " .. curAnim, false, 3)
 									end
 
-									self:safeAnimate(boyfriend, "miss " .. curAnim, false, 3)
-
 									if girlfriend:isAnimName("sad") then if combo >= 5 then self:safeAnimate(girlfriend, "sad", true, 1) end end
 
 									hitSick = false
