@@ -1318,7 +1318,7 @@ return {
 				end
 				if spriteTimers[2] == 0 then
 					if enemy:getAnimName() ~= "idle" and not enemy:isAnimated() then
-						self:safeAnimate(enemy, "idle", true, 2)
+						self:safeAnimate(enemy, "idle", false, 2)
 					end
 				end
 				if spriteTimers[3] == 0 then
@@ -1337,7 +1337,7 @@ return {
 
 		if not enemy:isAnimated() then 
 			if enemy:getAnimName() == "idle" then
-				enemy:animate("idle", true)
+				enemy:animate("idle", false)
 			end
 		end
 	end,
@@ -1346,8 +1346,8 @@ return {
 		enemyIcon.x = 425 - health[1] * 10
 		boyfriendIcon.x = 585 - health[1] * 10
 		if extraCamZoom.sizeX > 1 then
-			extraCamZoom.sizeX = extraCamZoom.sizeX - 0.01
-			extraCamZoom.sizeY = extraCamZoom.sizeY - 0.01
+			extraCamZoom.sizeX = extraCamZoom.sizeX - 1 * dt
+			extraCamZoom.sizeY = extraCamZoom.sizeY - 1 * dt
 		end
 		if not paused then
 			if not doingDialogue and not inCutscene then

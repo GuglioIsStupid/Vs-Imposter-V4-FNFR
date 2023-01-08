@@ -1385,8 +1385,8 @@ return {
 			end
 		end
 		if extraCamZoom.sizeX > 1 then
-			extraCamZoom.sizeX = extraCamZoom.sizeX - 0.01
-			extraCamZoom.sizeY = extraCamZoom.sizeY - 0.01
+			extraCamZoom.sizeX = extraCamZoom.sizeX - 1 * dt
+			extraCamZoom.sizeY = extraCamZoom.sizeY - 1 * dt
 		end
 		if not paused then
 			if not doingDialogue and not inCutscene then
