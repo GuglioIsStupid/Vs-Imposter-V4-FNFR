@@ -24,7 +24,7 @@ local stageBack, stageFront, curtains
 return {
 	enter = function(self, from, songNum, songAppend)
 		pauseColor = {129, 100, 223}
-		weeks:enter()
+		weeksYellow:enter()
 		stages["yellowAirship"]:enter()
 
 		week = 1
@@ -32,13 +32,13 @@ return {
 		song = songNum
 		difficulty = songAppend
 
-		weeks:setIcon("enemy", "daddy dearest")
+		weeksYellow:setIcon("enemy", "daddy dearest")
 
 		self:load()
 	end,
 
 	load = function(self)
-		weeks:load()
+		weeksYellow:load()
 		stages["stage"]:load()
 
 		if song == 5 then
@@ -60,36 +60,36 @@ return {
 
 		self:initUI()
 
-		weeks:setupCountdown()
+		weeksYellow:setupCountdown()
 	end,
 
 	initUI = function(self)
-		weeks:initUI()
+		weeksYellow:initUI()
 
 		if song == 5 then
-			weeks:generateNotes("songs/double-kill/double-kill-hard.json")
+			weeksYellow:generateNotes("songs/double-kill/double-kill-hard.json")
 		elseif song == 4 then
-			weeks:generateNotes("songs/danger/danger-hard.json")
+			weeksYellow:generateNotes("songs/danger/danger-hard.json")
 		elseif song == 3 then
-			weeks:generateNotes("songs/oversight/oversight-hard.json")
+			weeksYellow:generateNotes("songs/oversight/oversight-hard.json")
 		elseif song == 2 then
-			weeks:generateNotes("songs/dlow/dlow-hard.json")
+			weeksYellow:generateNotes("songs/dlow/dlow-hard.json")
 		else
-			weeks:generateNotes("songs/mando/mando-hard.json")
+			weeksYellow:generateNotes("songs/mando/mando-hard.json")
 		end
 	end,
 
 	update = function(self, dt)
-		weeks:update(dt)
+		weeksYellow:update(dt)
 		stages["stage"]:update(dt)
 
 		if health[1] >= 80 then
 			if enemyIcon:getAnimName() == "daddy dearest" then
-				weeks:setIcon("enemy", "daddy dearest losing")
+				weeksYellow:setIcon("enemy", "daddy dearest losing")
 			end
 		else
 			if enemyIcon:getAnimName() == "daddy dearest losing" then
-				weeks:setIcon("enemy", "daddy dearest")
+				weeksYellow:setIcon("enemy", "daddy dearest")
 			end
 		end
 
@@ -122,7 +122,7 @@ return {
 			end
 		end
 
-		weeks:updateUI(dt)
+		weeksYellow:updateUI(dt)
 	end,
 
 	draw = function(self)
@@ -132,18 +132,18 @@ return {
 			love.graphics.scale(cam.sizeX, cam.sizeY)
 
 			stages["yellowAirship"]:draw()
-			weeks:drawRating(0.9)
+			weeksYellow:drawRating(0.9)
 		love.graphics.pop()
 		
-		weeks:drawTimeLeftBar()
-		weeks:drawHealthBar()
+		weeksYellow:drawTimeLeftBar()
+		weeksYellow:drawHealthBar()
 		if not paused then
-			weeks:drawUI()
+			weeksYellow:drawUI()
 		end
 	end,
 
 	leave = function(self)
 		stages["yellowAirship"]:leave()
-		weeks:leave()
+		weeksYellow:leave()
 	end
 }
