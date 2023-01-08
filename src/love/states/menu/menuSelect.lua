@@ -150,33 +150,40 @@ return {
 
         function confirmFunc()
             audio.playSound(confirmSound)
-            redSussy:animate("select", false)
-            greenSussy:animate("select", false)
-            Timer.after(0.25, function()
-                Timer.tween(1.2, redSussy, {y = 600}, "out-quad")
-                Timer.tween(1.2, greenSussy, {y = 600}, "out-quad")
-            end)
             
-            graphics.fadeOut(1.2, function()
-                status.setLoading(true)
-                if currentSelect == "StoryMode" then
-                    Gamestate.switch(impWeekMenu)
-                elseif currentSelect == "Freeplay" then
-                    Gamestate.switch(menuFreeplay)
-                elseif currentSelect == "Credits" then
-                    Gamestate.switch(menuCredits)
-                elseif currentSelect == "Gallery" then
-                    love.system.openURL("https://www.vsimpostor.com")
-                elseif currentSelect == "Options" then
-                    Gamestate.switch(menuSettings)
-                elseif currentSelect == "Innersloth" then
-                    love.system.openURL("https://www.innersloth.com")
-                elseif currentSelect == "Shop" then
-                    Gamestate.switch(shop)
-                end
-
-                status.setLoading(false)
-            end)
+            if currentSelect ~= "Innersloth" and currentSelect ~= "Gallery" then
+                redSussy:animate("select", false)
+                greenSussy:animate("select", false)
+                Timer.after(0.25, function()
+                    Timer.tween(1.2, redSussy, {y = 600}, "out-quad")
+                    Timer.tween(1.2, greenSussy, {y = 600}, "out-quad")
+                end)
+                graphics.fadeOut(1.2, function()
+                    status.setLoading(true)
+                    if currentSelect == "StoryMode" then
+                        Gamestate.switch(impWeekMenu)
+                    elseif currentSelect == "Freeplay" then
+                        Gamestate.switch(menuFreeplay)
+                    elseif currentSelect == "Credits" then
+                        Gamestate.switch(menuCredits)
+                    elseif currentSelect == "Gallery" then
+                        love.system.openURL("https://www.vsimpostor.com")
+                    elseif currentSelect == "Options" then
+                        Gamestate.switch(menuSettings)
+                    elseif currentSelect == "Innersloth" then
+                        love.system.openURL("https://www.innersloth.com")
+                    elseif currentSelect == "Shop" then
+                        Gamestate.switch(shop)
+                    end
+    
+                    status.setLoading(false)
+                end)
+            elseif currentSelect == "Gallery" then
+                love.system.openURL("https://www.vsimpostor.com")
+            elseif currentSelect == "Innersloth" then
+                love.system.openURL("https://www.innersloth.com")
+            end
+            
             
         end
 
@@ -203,7 +210,6 @@ return {
         greenSussy:update(dt)
 
         if not graphics.isFading() then
-
             if currentSelect == "StoryMode" then
                 if input:pressed("left") then 
                     currentSelect = "Freeplay"
