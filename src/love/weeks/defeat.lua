@@ -11,6 +11,7 @@ return {
         deadBG = graphics.newImage(love.graphics.newImage(graphics.imagePath("defeat/deadbg")))
         deadFG = graphics.newImage(love.graphics.newImage(graphics.imagePath("defeat/deadfg")))
         lolThing = graphics.newImage(love.graphics.newImage(graphics.imagePath("defeat/lol thing")))
+		defeat = love.filesystem.load("sprites/defeat/defeat.lua")()
 		week = 1
 
 		song = songNum
@@ -56,6 +57,13 @@ return {
 
 	update = function(self, dt)
 		weeksDefeat:update(dt)
+		defeat:update(dt)
+
+		if musicThres ~= oldMusicThres and math.fmod(absMusicTime, 240000 / bpm) < 100 then
+			if curEnemy == "black" then
+				defeat:animate("anim", false)
+			end
+		end
 
 		if health[1] >= 80 then
 			if enemyIcon:getAnimName() == "black" then
@@ -79,7 +87,7 @@ return {
             lolAlpha = {0}
 			whyDoesItSpeedUpHere = true
         end
-        if musicTime >= 106800 and musicTime <= 106850 then 
+        if musicTime >= 107993.75 and musicTime <= 108043.75 then
             curEnemy = "black"
         end
 
@@ -106,7 +114,7 @@ return {
 			love.graphics.scale(extraCamZoom.sizeX, extraCamZoom.sizeY)
 			love.graphics.scale(cam.sizeX, cam.sizeY)
 
-            redGradient:draw()
+            defeat:draw()
             graphics.setColor(1,1,1, lolAlpha[1])
             lolThing:draw()
             deadBG:draw()
@@ -120,7 +128,9 @@ return {
             graphics.setColor(1,1,1, lolAlpha[1])
             deadFG:draw()
             graphics.setColor(1,1,1, 1)
-            redGradient:draw()
+			if curEnemy == "black" then
+            	redGradient:draw()
+			end
 
 			weeksDefeat:drawRating(0.9)
 		love.graphics.pop()
