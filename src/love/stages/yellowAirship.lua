@@ -28,7 +28,7 @@ return {
         elseif song == 3 then
             enemy = love.filesystem.load("sprites/yellowWeek/yellow.lua")()
 
-        elseis song == 2 then
+        elseif song == 2 then
             enemy = love.filesystem.load("sprites/yellowWeek/yellow.lua")()
 
         else
@@ -76,6 +76,7 @@ return {
             whiteAwkward:draw()
             girlfriend:draw()
 			enemy:draw()
+            enemyTwo:draw()
 			boyfriend:draw()
 		love.graphics.pop()
 		love.graphics.push()
