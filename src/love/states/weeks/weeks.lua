@@ -1328,7 +1328,7 @@ return {
 				end
 				if spriteTimers[2] == 0 then
 					if enemy:getAnimName() ~= "idle" and not enemy:isAnimated() then
-						self:safeAnimate(enemy, "idle", true, 2)
+						self:safeAnimate(enemy, "idle", false, 2)
 					end
 				end
 				if spriteTimers[3] == 0 then
