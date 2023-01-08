@@ -202,85 +202,88 @@ return {
         redSussy:update(dt)
         greenSussy:update(dt)
 
-        if currentSelect == "StoryMode" then
-            if input:pressed("left") then 
-                currentSelect = "Freeplay"
-            elseif input:pressed("right") then
-                currentSelect = "Freeplay"
-            elseif input:pressed("up") then
-                currentSelect = "Options"
-            elseif input:pressed("down") then
-                currentSelect = "Gallery"
-            end
-        elseif currentSelect == "Freeplay" then
-            if input:pressed("left") then 
-                currentSelect = "StoryMode"
-            elseif input:pressed("right") then
-                currentSelect = "StoryMode"
-            elseif input:pressed("up") then
-                currentSelect = "Credits"
-            elseif input:pressed("down") then
-                currentSelect = "Credits"
-            end
-        elseif currentSelect == "Credits" then
-            if input:pressed("left") then 
-                currentSelect = "Gallery"
-            elseif input:pressed("right") then
-                currentSelect = "Gallery"
-            elseif input:pressed("up") then
-                currentSelect = "Freeplay"
-            elseif input:pressed("down") then
-                currentSelect = "Innersloth"
-            end
-        elseif currentSelect == "Gallery" then
-            if input:pressed("left") then 
-                currentSelect = "Credits"
-            elseif input:pressed("right") then
-                currentSelect = "Credits"
-            elseif input:pressed("up") then
-                currentSelect = "StoryMode"
-            elseif input:pressed("down") then
-                currentSelect = "Options"
-            end
-        elseif currentSelect == "Options" then
-            if input:pressed("left") then 
-                currentSelect = "Innersloth"
-            elseif input:pressed("right") then
-                currentSelect = "Shop"
-            elseif input:pressed("up") then
-                currentSelect = "Gallery"
-            elseif input:pressed("down") then
-                currentSelect = "StoryMode"
-            end
-        elseif currentSelect == "Innersloth" then
-            if input:pressed("left") then 
-                currentSelect = "Shop"
-            elseif input:pressed("right") then
-                currentSelect = "Shop"
-            elseif input:pressed("up") then
-                currentSelect = "Credits"
-            elseif input:pressed("down") then
-                currentSelect = "Freeplay"
-            end
-        elseif currentSelect == "Shop" then
-            if input:pressed("left") then 
-                currentSelect = "Options"
-            elseif input:pressed("right") then
-                currentSelect = "Innersloth"
-            elseif input:pressed("up") then
-                currentSelect = "Gallery"
-            elseif input:pressed("down") then
-                currentSelect = "StoryMode"
-            end
-        end
+        if not graphics.isFading() then
 
-        if input:pressed("confirm") then
-            confirmFunc()
-        end
+            if currentSelect == "StoryMode" then
+                if input:pressed("left") then 
+                    currentSelect = "Freeplay"
+                elseif input:pressed("right") then
+                    currentSelect = "Freeplay"
+                elseif input:pressed("up") then
+                    currentSelect = "Options"
+                elseif input:pressed("down") then
+                    currentSelect = "Gallery"
+                end
+            elseif currentSelect == "Freeplay" then
+                if input:pressed("left") then 
+                    currentSelect = "StoryMode"
+                elseif input:pressed("right") then
+                    currentSelect = "StoryMode"
+                elseif input:pressed("up") then
+                    currentSelect = "Credits"
+                elseif input:pressed("down") then
+                    currentSelect = "Credits"
+                end
+            elseif currentSelect == "Credits" then
+                if input:pressed("left") then 
+                    currentSelect = "Gallery"
+                elseif input:pressed("right") then
+                    currentSelect = "Gallery"
+                elseif input:pressed("up") then
+                    currentSelect = "Freeplay"
+                elseif input:pressed("down") then
+                    currentSelect = "Innersloth"
+                end
+            elseif currentSelect == "Gallery" then
+                if input:pressed("left") then 
+                    currentSelect = "Credits"
+                elseif input:pressed("right") then
+                    currentSelect = "Credits"
+                elseif input:pressed("up") then
+                    currentSelect = "StoryMode"
+                elseif input:pressed("down") then
+                    currentSelect = "Options"
+                end
+            elseif currentSelect == "Options" then
+                if input:pressed("left") then 
+                    currentSelect = "Innersloth"
+                elseif input:pressed("right") then
+                    currentSelect = "Shop"
+                elseif input:pressed("up") then
+                    currentSelect = "Gallery"
+                elseif input:pressed("down") then
+                    currentSelect = "StoryMode"
+                end
+            elseif currentSelect == "Innersloth" then
+                if input:pressed("left") then 
+                    currentSelect = "Shop"
+                elseif input:pressed("right") then
+                    currentSelect = "Shop"
+                elseif input:pressed("up") then
+                    currentSelect = "Credits"
+                elseif input:pressed("down") then
+                    currentSelect = "Freeplay"
+                end
+            elseif currentSelect == "Shop" then
+                if input:pressed("left") then 
+                    currentSelect = "Options"
+                elseif input:pressed("right") then
+                    currentSelect = "Innersloth"
+                elseif input:pressed("up") then
+                    currentSelect = "Gallery"
+                elseif input:pressed("down") then
+                    currentSelect = "StoryMode"
+                end
+            end
 
-        if input:pressed("left") or input:pressed("right") or input:pressed("up") or input:pressed("down") then
-            changeSelect()
-            audio.playSound(selectSound)
+            if input:pressed("confirm") then
+                confirmFunc()
+            end
+
+            if input:pressed("left") or input:pressed("right") or input:pressed("up") or input:pressed("down") then
+                changeSelect()
+                audio.playSound(selectSound)
+            end
         end
 
         starBG.translation.x = starBG.translation.x - 12.5 * dt

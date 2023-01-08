@@ -207,6 +207,8 @@ function love.load()
 	impWeekMenu = require "states.menu.impWeekMenu"
 	intro = require "states.menu.intro" -- unused for now (Im too lazy)
 
+	chooseMissCount = require "states.misc.chooseMissCount"
+
 	shop = require "states.hi"
 	credits = require "states.hi"
 
@@ -356,8 +358,10 @@ function love.load()
 		["BOO!"] = require "states.hi",
 		["TOMONGUS"] = require "states.hi",
 		["HENRY"] = require "states.hi",
-		["..."] = require "weeks.defeat"
+		["..."] = chooseMissCount
 	}
+
+	defeatWeekLololol = require "weeks.defeat"
 
 	noteskins = {
 		"arrows",
@@ -397,6 +401,7 @@ function love.load()
 
 	-- Variables
 	font = love.graphics.newFont("fonts/vcr.ttf", 24)
+	FUCKINGLARGEASSFONT = love.graphics.newFont("fonts/vcr.ttf", 96)
 	FNFFont = love.graphics.newFont("fonts/fnFont.ttf", 24)
 	credFont = love.graphics.newFont("fonts/fnFont.ttf", 32)   -- guglio is a bitch
 	uiFont = love.graphics.newFont("fonts/Dosis-SemiBold.ttf", 32)
