@@ -25,7 +25,7 @@ return {
 	enter = function(self, from, songNum, songAppend)
 		pauseColor = {129, 100, 223}
 		weeks:enter()
-		stages["stage"]:enter()
+		stages["yellowAirship"]:enter()
 
 		week = 1
 
@@ -131,7 +131,7 @@ return {
 			love.graphics.scale(extraCamZoom.sizeX, extraCamZoom.sizeY)
 			love.graphics.scale(cam.sizeX, cam.sizeY)
 
-			stages["stage"]:draw()
+			stages["yellowAirship"]:draw()
 			weeks:drawRating(0.9)
 		love.graphics.pop()
 		
@@ -143,7 +143,7 @@ return {
 	end,
 
 	leave = function(self)
-		stages["stage"]:leave()
+		stages["yellowAirship"]:leave()
 		weeks:leave()
 	end
 }

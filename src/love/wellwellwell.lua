@@ -73,7 +73,7 @@ return [[
 todo list                yes im putting the todo list here everyone start using it
 
 {anyone
-
+set up cameras for ch and guglio
 
 
 
@@ -83,7 +83,7 @@ todo list                yes im putting the todo list here everyone start using 
 
 
 {guglio
-
+have sex with ch
 
 
 
@@ -93,7 +93,7 @@ todo list                yes im putting the todo list here everyone start using 
 
 
 {getsaa
-
+record guglio and ch
 
 
 
@@ -104,12 +104,19 @@ todo list                yes im putting the todo list here everyone start using 
 
 {clothing hanger
 kill myself (after port is done)
-
-
-
+get fucked by guglio
+stop just adding jokes to the code and actually make progress
 
 
 
 }
 
+{old sock     (has a cameras)
+wtf why are you here
+tell us where he got vs coke
+
+
+
+}
     ]]
+

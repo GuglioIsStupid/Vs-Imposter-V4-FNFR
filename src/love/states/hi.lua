@@ -20,4 +20,7 @@ return {
         video:release()
         collectgarbage()
     end
+
+
+    --i understand
 }
