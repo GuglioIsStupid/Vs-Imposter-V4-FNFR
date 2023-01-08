@@ -1420,7 +1420,10 @@ return {
 									end
 									if boyfriendNote[1]:getAnimName() ~= "hold" and boyfriendNote[1]:getAnimName() ~= "end" then
 										missCounter = missCounter + 1
+										self:safeAnimate(boyfriend, "miss " .. curAnim, false, 3)
 									end
+
+									self:safeAnimate(boyfriend, "miss " .. curAnim, false, 3)
 
 									table.remove(boyfriendNote, 1)
 
