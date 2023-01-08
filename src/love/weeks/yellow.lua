@@ -53,6 +53,9 @@ return {
 		elseif song == 2 then
 			inst = waveAudio:newSource("songs/dlow/inst.ogg", "stream")
 			voices = waveAudio:newSource("songs/dlow/voices.ogg", "stream")
+		elseif song == 50 then
+			inst = "https://www.youtube.com/watch?v=p3wVSfHumRA"
+			voices = inst
 		else
 			inst = waveAudio:newSource("songs/mando/inst.ogg", "stream")
 			voices = waveAudio:newSource("songs/mando/voices.ogg", "stream")

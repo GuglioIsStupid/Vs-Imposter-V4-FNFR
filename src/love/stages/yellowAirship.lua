@@ -8,24 +8,45 @@ return {
             graphics.newImage(love.graphics.newImage(graphics.imagePath("yellowWeek/airship/newAirship/backDlowFloor"))),
             graphics.newImage(love.graphics.newImage(graphics.imagePath("yellowWeek/airship/newAirship/DlowFloor"))),
             graphics.newImage(love.graphics.newImage(graphics.imagePath("yellowWeek/airship/newAirship/yellow"))),
-            }
-            stageImages[1].x, stageImages[1].y = 10, 117
-            stageImages[2].x, stageImages[2].y = 2, 92
-            stageImages[3].x, stageImages[3].y = 3, -78
-            stageImages[4].x, stageImages[4].y = 13, -15
-            stageImages[5].x, stageImages[5].y = -46, 323
-            stageImages[6].x, stageImages[6].y = -215, 243
-            stageImages[7].x, stageImages[7].y = 0, 188
+        }
+        stageImages[1].x, stageImages[1].y = 10, 117
+        stageImages[2].x, stageImages[2].y = 2, 92
+        stageImages[3].x, stageImages[3].y = 3, -4
+        stageImages[4].x, stageImages[4].y = 13, -15
+        stageImages[5].x, stageImages[5].y = -46, 323
+        stageImages[6].x, stageImages[6].y = -215, 243
+        stageImages[7].x, stageImages[7].y = 0, 188
+
+        stageImages[3].sizeY, stageImages[3].sizeX = 0.5, 0.5
+
+        if song == 5 then
+            enemy = love.filesystem.load("sprites/yellowWeek/yellow.lua")()
+
+        elseif song == 4 then
+            enemy = love.filesystem.load("sprites/yellowWeek/yellow.lua")()
+
+        elseif song == 3 then
+            enemy = love.filesystem.load("sprites/yellowWeek/yellow.lua")()
+
+        elseis song == 2 then
+            enemy = love.filesystem.load("sprites/yellowWeek/yellow.lua")()
+
+        else
+            enemy = love.filesystem.load("sprites/yellowWeek/yellow.lua")()
+
+        end
+
 
 
         enemy = love.filesystem.load("sprites/yellowWeek/yellow.lua")()
         whiteAwkward = love.filesystem.load("sprites/yellowWeek/white_awkward.lua")()
+        enemyTwo = love.filesystem.load("sprites/yellowWeek/yellow.lua")()
 
-        weeksYellow:setIcon("enemy", "yellow")
+
 
         girlfriend.x, girlfriend.y = -200, -445
-        enemy.x, enemy.y = 0, 188
-        boyfriend.x, boyfriend.y = 175, -110
+        enemy.x, enemy.y = -300, 75
+        boyfriend.x, boyfriend.y = 290, -110
     end,
 
     load = function()
@@ -33,19 +54,19 @@ return {
     end,
 
     update = function(self, dt)
-
+        whiteAwkward:update()
     end,
 
     draw = function()
         love.graphics.push()
-			love.graphics.translate(cam.x * 0.9, cam.y * 0.9)
+			love.graphics.translate(cam.x * 0.8, cam.y * 0.8)
             stageImages[1]:draw()
             stageImages[2]:draw()
-            stageImages[3]:draw()
 
 		love.graphics.pop()
 		love.graphics.push()
 			love.graphics.translate(cam.x, cam.y)
+            stageImages[3]:draw()
             stageImages[4]:draw()
             stageImages[5]:draw()
             stageImages[6]:draw()
