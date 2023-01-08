@@ -583,6 +583,8 @@ return {
 				local noteType = sectionNotes[j][2]
 				local noteTime = sectionNotes[j][1]
 
+				sectionNotes[j][3] = tonumber(sectionNotes[j][3]) or 0
+
 				--print(noteTime, noteType, mustHitSection, altAnim, eventBpm, #chart["notes"][i]["sectionNotes"])
 
 				if j == 1 then
