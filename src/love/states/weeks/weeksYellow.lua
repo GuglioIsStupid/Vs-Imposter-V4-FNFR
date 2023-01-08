@@ -1137,6 +1137,9 @@ return {
 			if not enemy:isAnimated() and enemy:getAnimName() ~= "idle" then
 				weeks:safeAnimate(enemy, "idle", false, 2)
 			end
+			if not enemyTwo:isAnimated() and enemyTwo:getAnimName() ~= "idle" then
+				weeks:safeAnimate(enemyTwo, "idle", false, 2)
+			end
 		end
 
 		status.setLoading(true)
@@ -1301,6 +1304,7 @@ return {
 
 			girlfriend:update(dt)
 			enemy:update(dt)
+			enemyTwo:update(dt)
 			boyfriend:update(dt)
 			if picoSpeaker then picoSpeaker:update(dt) end
 			leftArrowSplash:update(dt)
@@ -1319,6 +1323,9 @@ return {
 				if spriteTimers[2] == 0 then
 					if enemy:getAnimName() ~= "idle" and not enemy:isAnimated() then
 						self:safeAnimate(enemy, "idle", false, 2)
+					end
+					if enemyTwo:getAnimName() ~= "idle" and not enemyTwo:isAnimated() then
+						self:safeAnimate(enemyTwo, "idle", false, 2)
 					end
 				end
 				if spriteTimers[3] == 0 then
@@ -1383,19 +1390,56 @@ return {
 
 							enemyArrow:animate("confirm", false)
 
-							if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
-								if useAltAnims then
-									self:safeAnimate(enemy, curAnim .. " alt", false, 2)
+
+							if curEnemy == "white" then
+								if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
+									if useAltAnims then
+										self:safeAnimate(enemy, curAnim .. " alt", false, 2)
+									else
+										self:safeAnimate(enemy, curAnim, false, 2) 
+									end
 								else
-									self:safeAnimate(enemy, curAnim, false, 2) 
+									if useAltAnims then
+										self:safeAnimate(enemy, curAnim .. " alt", false, 2)
+									else
+										self:safeAnimate(enemy, curAnim, false, 2)
+									end
 								end
-							else
-								if useAltAnims then
-									self:safeAnimate(enemy, curAnim .. " alt", false, 2)
+							elseif curEnemy == "black" then
+								if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
+									if useAltAnims then
+										self:safeAnimate(enemyTwo, curAnim .. " alt", false, 2)
+									else
+										self:safeAnimate(enemyTwo, curAnim, false, 2) 
+									end
 								else
-									self:safeAnimate(enemy, curAnim, false, 2)
+									if useAltAnims then
+										self:safeAnimate(enemyTwo, curAnim .. " alt", false, 2)
+									else
+										self:safeAnimate(enemyTwo, curAnim, false, 2)
+									end
+								end
+							elseif curEnemy == "both" then
+								if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
+									if useAltAnims then
+										self:safeAnimate(enemy, curAnim .. " alt", false, 2)
+										self:safeAnimate(enemyTwo, curAnim .. " alt", false, 2)
+									else
+										self:safeAnimate(enemy, curAnim, false, 2) 
+										self:safeAnimate(enemyTwo, curAnim, false, 2) 
+									end
+								else
+									if useAltAnims then
+										self:safeAnimate(enemy, curAnim .. " alt", false, 2)
+										self:safeAnimate(enemyTwo, curAnim .. " alt", false, 2)
+									else
+										self:safeAnimate(enemy, curAnim, false, 2)
+										self:safeAnimate(enemyTwo, curAnim, false, 2)
+									end
 								end
 							end
+
+								
 
 							table.remove(enemyNote, 1)
 						end

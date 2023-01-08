@@ -46,6 +46,8 @@ return {
 
         girlfriend.x, girlfriend.y = -200, -445
         enemy.x, enemy.y = -300, 75
+
+        enemyTwo.x, enemyTwo.y = -150, 75
         boyfriend.x, boyfriend.y = 290, -110
     end,
 
