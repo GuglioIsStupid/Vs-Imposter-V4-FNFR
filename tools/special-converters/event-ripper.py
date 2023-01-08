@@ -24,7 +24,7 @@ for i in range(1, len(sys.argv)):
                     k[2] = k[2].replace(" ", "")
                     lua += (
                         'if musicTime >= ' + str(j['sectionNotes'][0][0]) + ' and musicTime < ' + str(j['sectionNotes'][0][0]+25) + ' then \n'
-                        '\t' + k[2] + '()\n'
+                        '\t' + k[2] + '(' + k[3] + ')\n'
                         'end\n'
                     )
 
