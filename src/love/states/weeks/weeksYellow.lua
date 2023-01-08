@@ -1416,6 +1416,10 @@ return {
 										missCounter = missCounter + 1
 									end
 
+									if boyfriendNote[1]:getAnimName() ~= "hold" and boyfriendNote[1]:getAnimName() ~= "end" then
+										self:safeAnimate(boyfriend, "miss " .. curAnim, false, 3)
+									end
+
 									table.remove(boyfriendNote, 1)
 
 									if girlfriend:isAnimName("sad") then if combo >= 5 then self:safeAnimate(girlfriend, "sad", true, 1) end end

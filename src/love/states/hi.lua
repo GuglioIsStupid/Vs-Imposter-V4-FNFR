@@ -3,6 +3,8 @@ return {
         graphics.fadeIn(0.5)
         video = love.graphics.newVideo("videos/dietznuts.ogv")
         video:play()
+
+        print("huh")
     end,
 
     update = function(self, dt)
