@@ -119,6 +119,9 @@ local eventFuncs = {
 			end
 		end
 	end,
+	["flash"] = function(time)
+		weeksDefeat:doFlashTimed(time)
+	end,
 
 }
 
@@ -1337,12 +1340,12 @@ return {
 					if picoSpeaker then picoSpeaker:setAnimSpeed(14.4 / (60 / bpm) * girlfriendSpeedMultiplier) end
 				end
 				if spriteTimers[2] == 0 then
-					if enemy:getAnimName() == "good" then 
-						if not enemy:isAnimated() then
-							self:safeAnimate(enemy, "idle", false, 2)
-						end
-					else self:safeAnimate(enemy, "idle", false, 2) end
-					self:safeAnimate(blackold, "idle", false, 2)
+					if enemy:getAnimName() ~= "idle" and not enemy:isAnimated() then
+						self:safeAnimate(enemy, "idle", true, 2)
+					end
+					if blackold:getAnimName() ~= "idle" and not blackold:isAnimated() then
+						self:safeAnimate(blackold, "idle", true, 2)
+					end
 				end
 				if spriteTimers[3] == 0 then
 					self:safeAnimate(boyfriend, "idle", false, 3)
@@ -1355,6 +1358,17 @@ return {
 				if spriteTimer > 0 then
 					spriteTimers[i] = spriteTimer - 1
 				end
+			end
+		end
+
+		if not enemy:isAnimated() then 
+			if enemy:getAnimName() == "idle" then
+				enemy:animate("idle", true)
+			end
+		end
+		if not blackold:isAnimated() then 
+			if blackold:getAnimName() == "idle" then
+				blackold:animate("idle", true)
 			end
 		end
 	end,
@@ -1450,6 +1464,8 @@ return {
 									hitSick = false
 
 									combo = 0
+
+									table.remove(boyfriendNote, 1)
 								end
 							end
 						end
@@ -1751,6 +1767,11 @@ return {
 	doFlash = function(self)
 		if not settings.noFlash then
 			Timer.tween((60/bpm)/4, flash, {alpha = 1}, "linear", function() Timer.tween((60/bpm), flash, {alpha = 0}, "linear") end)
+		end
+	end,
+	doFlashTimed = function(self)
+		if not settings.noFlash then
+			Timer.tween((60/bpm)/16, flash, {alpha = 1}, "linear", function() Timer.tween(1, flash, {alpha = 0}, "linear") end)
 		end
 	end,
 

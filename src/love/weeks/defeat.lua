@@ -77,6 +77,7 @@ return {
         if musicTime >= 87590.625 and musicTime <= 87640 then 
             curEnemy = "blackold"
             lolAlpha = {0}
+			whyDoesItSpeedUpHere = true
         end
         if musicTime >= 106800 and musicTime <= 106850 then 
             curEnemy = "black"

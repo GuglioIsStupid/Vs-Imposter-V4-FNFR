@@ -44,6 +44,7 @@ return {
 			debugStr = "Vanilla Engine v" .. __VERSION__ ..
 			"\nCurrent Version (Git) " .. __GIT_VERSION__ ..
 			"\nFPS: " .. tostring(love.timer.getFPS()) ..
+			"\nDelta Time: " .. tostring(love.timer.getDelta()) ..
 			"\nLUA MEM USAGE (KB): " .. tostring(math.floor(collectgarbage("count"))) ..
 			"\nGRAPHICS MEM USAGE (MB): " .. tostring(math.floor(love.graphics.getStats().texturememory / 1048576)) ..
 
