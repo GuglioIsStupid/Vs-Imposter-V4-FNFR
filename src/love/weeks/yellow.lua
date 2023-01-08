@@ -32,7 +32,7 @@ return {
 		song = songNum
 		difficulty = songAppend
 
-		weeksYellow:setIcon("enemy", "daddy dearest")
+		weeksYellow:setIcon("enemy", "yellow")
 
 		self:load()
 	end,
@@ -84,12 +84,12 @@ return {
 		stages["stage"]:update(dt)
 
 		if health[1] >= 80 then
-			if enemyIcon:getAnimName() == "daddy dearest" then
-				weeksYellow:setIcon("enemy", "daddy dearest losing")
+			if enemyIcon:getAnimName() == "yellow" then
+				weeksYellow:setIcon("enemy", "yellow losing")
 			end
 		else
-			if enemyIcon:getAnimName() == "daddy dearest losing" then
-				weeksYellow:setIcon("enemy", "daddy dearest")
+			if enemyIcon:getAnimName() == "yellow losing" then
+				weeksYellow:setIcon("enemy", "yellow")
 			end
 		end
 

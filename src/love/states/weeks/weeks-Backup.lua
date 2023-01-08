@@ -1325,11 +1325,9 @@ return {
 					if picoSpeaker then picoSpeaker:setAnimSpeed(14.4 / (60 / bpm) * girlfriendSpeedMultiplier) end
 				end
 				if spriteTimers[2] == 0 then
-					if enemy:getAnimName() == "good" then 
-						if not enemy:isAnimated() then
-							self:safeAnimate(enemy, "idle", false, 2)
-						end
-					else self:safeAnimate(enemy, "idle", false, 2) end
+					if enemy:getAnimName() ~= "idle" and not enemy:isAnimated() then
+						self:safeAnimate(enemy, "idle", true, 2)
+					end
 				end
 				if spriteTimers[3] == 0 then
 					self:safeAnimate(boyfriend, "idle", false, 3)
@@ -1342,6 +1340,12 @@ return {
 				if spriteTimer > 0 then
 					spriteTimers[i] = spriteTimer - 1
 				end
+			end
+		end
+
+		if not enemy:isAnimated() then 
+			if enemy:getAnimName() == "idle" then
+				enemy:animate("idle", true)
 			end
 		end
 	end,

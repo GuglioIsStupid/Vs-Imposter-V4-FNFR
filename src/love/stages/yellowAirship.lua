@@ -21,6 +21,8 @@ return {
         enemy = love.filesystem.load("sprites/yellowWeek/yellow.lua")()
         whiteAwkward = love.filesystem.load("sprites/yellowWeek/white_awkward.lua")()
 
+        weeksYellow:setIcon("enemy", "yellow")
+
         girlfriend.x, girlfriend.y = -200, -445
         enemy.x, enemy.y = 0, 188
         boyfriend.x, boyfriend.y = 175, -110
