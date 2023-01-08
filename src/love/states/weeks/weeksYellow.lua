@@ -1473,7 +1473,7 @@ return {
 
 							if #boyfriendNote > 0 then
 								if boyfriendNote[1] and boyfriendNote[1]:getAnimName() == "on" then
-									if (math.abs(boyfriendNote[1].y - musicTime) < 100) then
+									if (math.abs(boyfriendNote[1].y - musicTime) < 132.5) then
 										notePos = math.abs(boyfriendNote[1].y - musicTime)
 										local ratingAnim
 
@@ -1481,25 +1481,25 @@ return {
 
 										voices:setVolume(1)
 
-										if notePos <= 15 then -- "Sick Plus" Note: Just for a cooler looking rating. Does not give anything special
+										if notePos <= 20 then -- "Sick Plus" Note: Just for a cooler looking rating. Does not give anything special
                                             score = score + 350
 											addJudgements("sickPlus")
                                             altScore = altScore + 100.00
                                             sicks = sicks + 1
                                             hitSick = true
-                                        elseif notePos <= 35 then -- "Sick"
+                                        elseif notePos <= 40 then -- "Sick"
                                             score = score + 350
 											addJudgements("sick")
                                             altScore = altScore + 100.00
                                             sicks = sicks + 1
                                             hitSick = true
-                                        elseif notePos <= 50 then -- "Good"
+                                        elseif notePos <= 70 then -- "Good"
                                             score = score + 200
 											addJudgements("good")
                                             altScore = altScore + 66.66
                                             goods = goods + 1
                                             hitSick = false
-                                        elseif notePos <= 80 then -- "Bad"
+                                        elseif notePos <= 107.5 then -- "Bad"
                                             score = score + 100
 											addJudgements("bad")
                                             altScore = altScore + 33.33
