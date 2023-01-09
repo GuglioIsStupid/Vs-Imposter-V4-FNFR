@@ -90,7 +90,13 @@ return {
 
 	update = function(self, dt)
 		weeksYellow:update(dt)
-		stages["stage"]:update(dt)
+		if song == 5 then
+			stages["cargo"]:update(dt)
+		elseif song == 4 then
+			stages["blackChase"]:update(dt)
+		else
+			stages["yellowAirship"]:update(dt)
+		end
 
 		if health[1] >= 80 then
 			if enemyIcon:getAnimName() == "yellow" then
