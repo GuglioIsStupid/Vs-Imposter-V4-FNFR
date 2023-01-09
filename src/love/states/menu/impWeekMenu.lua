@@ -71,6 +71,10 @@ return {
                 audio.playSound(selectSound) 
             end
 
+            if input:pressed("gameBack") then 
+                Gamestate.switch(menuSelect)
+            end
+
             if input:pressed("left") then
                 ship:animate("left")
             elseif input:pressed("right") then
