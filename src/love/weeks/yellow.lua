@@ -293,7 +293,13 @@ return {
 			love.graphics.scale(extraCamZoom.sizeX, extraCamZoom.sizeY)
 			love.graphics.scale(cam.sizeX, cam.sizeY)
 
-			stages["yellowAirship"]:draw()
+			if song == 5 then
+				stages["cargo"]:draw()
+			elseif song == 4 then
+				stages["blackChase"]:draw()
+			else
+				stages["yellowAirship"]:draw()
+			end
 			weeksYellow:drawRating(0.9)
 		love.graphics.pop()
 		

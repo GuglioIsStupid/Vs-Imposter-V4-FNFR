@@ -108,7 +108,7 @@ return {
 			end
 
 			startFG.translation.x = startFG.translation.x - 25 * dt
-			if startFG.translation.x < -1216 then
+			if startFG.translation.x < -1116 then
 				startFG.translation.x = 0
 			end
 	end,
@@ -128,7 +128,7 @@ return {
 
 				love.graphics.translate(startFG.translation.x, startFG.translation.y)
 				for i = 1, 3 do
-					startFG.x = (i - 1) * 1216
+					startFG.x = (i - 1) * 1116
 					startFG:draw()
 				end
 			love.graphics.pop()
