@@ -122,40 +122,10 @@ return {
 				love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
 				love.graphics.push()
 
-<<<<<<< HEAD
 					love.graphics.translate(starBG.translation.x, starBG.translation.y)
 					for i = 1, 3 do
 						starBG.x = (i - 1) * 1102
 						starBG:draw()
-=======
-				love.graphics.translate(starBG.translation.x, starBG.translation.y)
-				for i = 1, 3 do
-					starBG.x = (i - 1) * 1102
-					starBG:draw()
-				end
-			love.graphics.pop()
-			love.graphics.push()
-
-				love.graphics.translate(startFG.translation.x, startFG.translation.y)
-				for i = 1, 3 do
-					startFG.x = (i - 1) * 1116
-					startFG:draw()
-				end
-			love.graphics.pop()
-			love.graphics.push()
-				love.graphics.push()
-					love.graphics.scale(0.9, 0.9)
-					love.graphics.translate(menuDetails.titleLogo.x, menuDetails.titleLogo.y)
-					logo:draw()
-				love.graphics.pop()
-				love.graphics.push()
-					love.graphics.scale(0.9, 0.9)
-				love.graphics.pop()
-				love.graphics.push()
-					graphics.setColor(0, 0, 0, 0.9)
-					for i = 1, 15 do
-						whiteRectangles[i]:draw()
->>>>>>> 75ea8970272b9bdc45a55fef99f9f7be96235b86
 					end
 				love.graphics.pop()
 				love.graphics.push()
