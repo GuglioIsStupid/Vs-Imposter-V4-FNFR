@@ -81,6 +81,16 @@ return {
 					elseif key == "s" then
 						girlfriend.y = girlfriend.y + 1
 					end
+				elseif curChanging == "enemy" then 
+					if key == "a" then
+						enemy.x = enemy.x - 1
+					elseif key == "d" then
+						enemy.x = enemy.x + 1
+					elseif key == "w" then
+						enemy.y = enemy.y - 1
+					elseif key == "s" then
+						enemy.y = enemy.y + 1
+					end
 				end
 			end
 		end
@@ -114,15 +124,19 @@ return {
 					elseif curChanging == "boyfriend" then
 						curChanging = "girlfriend"
 					elseif curChanging == "girlfriend" then
+						curChanging = "enemy"
+					elseif curChanging == "enemy" then
 						curChanging = "stage"
 					end
 				elseif input:pressed("left") then 
 					if curChanging == "stage" then 
-						curChanging = "girlfriend"
+						curChanging = "enemy"
 					elseif curChanging == "boyfriend" then
 						curChanging = "stage"
 					elseif curChanging == "girlfriend" then
 						curChanging = "boyfriend"
+					elseif curChanging == "enemy" then
+						curChanging = "girlfriend"
 					end
 				end
 			else
@@ -227,6 +241,13 @@ return {
 						"\nY:" .. girlfriend.y ..
 						"\nSizeX:" .. girlfriend.sizeX ..
 						"\nSizeY:" .. girlfriend.sizeY, 0, 40
+					)
+				elseif curChanging == "enemy" then
+					love.graphics.print("Enemy", 0, 0)
+					love.graphics.print("X: " .. enemy.x ..
+						"\nY:" .. enemy.y ..
+						"\nSizeX:" .. enemy.sizeX ..
+						"\nSizeY:" .. enemy.sizeY, 0, 40
 					)
 				end
                 for i = 1, #menus[menuID] do

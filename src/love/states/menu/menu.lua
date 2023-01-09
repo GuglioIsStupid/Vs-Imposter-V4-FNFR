@@ -22,6 +22,8 @@ end
 
 return {
 	enter = function(self, previous)
+		effect = moonshine(moonshine.effects.steam)
+		effect.steam.time = 0
 		if not music[1]:isPlaying() then
 			music[1]:play()
 		end
@@ -71,6 +73,7 @@ return {
 	end,
 
 	update = function(self, dt)
+		effect.steam.time = love.timer.getTime()
 		logo:update(dt)
 
 		music[1]:updateBeat()
@@ -114,43 +117,45 @@ return {
 	end,
 
 	draw = function(self)
-		love.graphics.push()
-			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
+		effect(function()
 			love.graphics.push()
+				love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
+				love.graphics.push()
 
-				love.graphics.translate(starBG.translation.x, starBG.translation.y)
-				for i = 1, 3 do
-					starBG.x = (i - 1) * 1102
-					starBG:draw()
-				end
-			love.graphics.pop()
-			love.graphics.push()
-
-				love.graphics.translate(startFG.translation.x, startFG.translation.y)
-				for i = 1, 3 do
-					startFG.x = (i - 1) * 1116
-					startFG:draw()
-				end
-			love.graphics.pop()
-			love.graphics.push()
-				love.graphics.push()
-					love.graphics.scale(0.9, 0.9)
-					love.graphics.translate(menuDetails.titleLogo.x, menuDetails.titleLogo.y)
-					logo:draw()
-				love.graphics.pop()
-				love.graphics.push()
-					love.graphics.scale(0.9, 0.9)
-				love.graphics.pop()
-				love.graphics.push()
-					graphics.setColor(0, 0, 0, 0.9)
-					for i = 1, 15 do
-						whiteRectangles[i]:draw()
+					love.graphics.translate(starBG.translation.x, starBG.translation.y)
+					for i = 1, 3 do
+						starBG.x = (i - 1) * 1102
+						starBG:draw()
 					end
-					graphics.setColor(1, 1, 1)
 				love.graphics.pop()
-			love.graphics.pop()
+				love.graphics.push()
 
-		love.graphics.pop()
+					love.graphics.translate(startFG.translation.x, startFG.translation.y)
+					for i = 1, 3 do
+						startFG.x = (i - 1) * 1216
+						startFG:draw()
+					end
+				love.graphics.pop()
+				love.graphics.push()
+					love.graphics.push()
+						love.graphics.scale(0.9, 0.9)
+						love.graphics.translate(menuDetails.titleLogo.x, menuDetails.titleLogo.y)
+						logo:draw()
+					love.graphics.pop()
+					love.graphics.push()
+						love.graphics.scale(0.9, 0.9)
+					love.graphics.pop()
+					love.graphics.push()
+						graphics.setColor(0, 0, 0, 0.9)
+						for i = 1, 15 do
+							whiteRectangles[i]:draw()
+						end
+						graphics.setColor(1, 1, 1)
+					love.graphics.pop()
+				love.graphics.pop()
+
+			love.graphics.pop()
+		end)
 	end,
 
 	leave = function(self)
