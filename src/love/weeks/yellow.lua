@@ -33,6 +33,7 @@ return {
 		difficulty = songAppend
 
 		weeksYellow:setIcon("enemy", "yellow")
+		curEnemy = "white"
 
 		self:load()
 	end,
@@ -42,9 +43,13 @@ return {
 		stages["stage"]:load()
 
 		if song == 5 then
+			stages["blackChase"]:leave()
+			stages["cargo"]:enter()                                                                                    -- i wanna fucking quit
 			inst = waveAudio:newSource("songs/double-kill/inst.ogg", "stream")
 			voices = waveAudio:newSource("songs/double-kill/voices.ogg", "stream")
 		elseif song == 4 then
+			stages["yellowAirship"]:leave()
+			stages["blackChase"]:enter()
 			inst = waveAudio:newSource("songs/danger/inst.ogg", "stream")
 			voices = waveAudio:newSource("songs/danger/voices.ogg", "stream")
 		elseif song == 3 then
@@ -288,7 +293,13 @@ return {
 			love.graphics.scale(extraCamZoom.sizeX, extraCamZoom.sizeY)
 			love.graphics.scale(cam.sizeX, cam.sizeY)
 
-			stages["yellowAirship"]:draw()
+			if song == 5 then
+				stages["cargo"]:draw()
+			elseif song == 4 then
+				stages["blackChase"]:draw()
+			else
+				stages["yellowAirship"]:draw()
+			end
 			weeksYellow:drawRating(0.9)
 		love.graphics.pop()
 		
