@@ -252,7 +252,7 @@ return {
 				return sheet
 			end,
 
-			animate = function(self, animName, loopAnim)
+			animate = function(self, animName, loopAnim, func)
 				if self:isAnimName(animName) then
 					anim.name = animName
 					anim.start = anims[animName].start
@@ -260,13 +260,16 @@ return {
 					anim.speed = anims[animName].speed
 					anim.offsetX = anims[animName].offsetX
 					anim.offsetY = anims[animName].offsetY
+					anim.func = func
 
 					frame = anim.start
 					isLooped = loopAnim
 
 					isAnimated = true
+
+					-- do the func when the animation is done
 				else
-					print("Error: " .. animName .. " is not a valid animation name.")
+					print("Error: Animation: " .. animName .. " does not exist")
 				end
 			end,
 			getAnims = function(self)
@@ -300,17 +303,20 @@ return {
 			end,
 
 			update = function(self, dt)
-				if not paused then
-					if isAnimated then
-						frame = frame + anim.speed * dt
+				if isAnimated then
+					frame = frame + anim.speed * dt
+				end
+				
+				if isAnimated and frame > anim.stop then
+					if anim.func then
+						anim.func()
+						anim.func = nil
+						print("did the function for "..anim.name)
 					end
-
-					if isAnimated and frame > anim.stop then
-						if isLooped then
-							frame = anim.start
-						else
-							isAnimated = false
-						end
+					if isLooped then
+						frame = anim.start
+					else
+						isAnimated = false
 					end
 				end
 			end,
