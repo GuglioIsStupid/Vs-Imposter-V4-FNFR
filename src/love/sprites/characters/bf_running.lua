@@ -208,21 +208,63 @@ return graphics.newSprite(
 		{x = 3557, y = 2115, width = 375, height = 359, offsetX = -6, offsetY = -3, offsetWidth = 383, offsetHeight = 369}, -- 197: up0018
 		{x = 3557, y = 2115, width = 375, height = 359, offsetX = -6, offsetY = -3, offsetWidth = 383, offsetHeight = 369}, -- 198: up0019
 		{x = 0, y = 2495, width = 377, height = 356, offsetX = -5, offsetY = -7, offsetWidth = 383, offsetHeight = 369}, -- 199: up0020
-		{x = 0, y = 2495, width = 377, height = 356, offsetX = -5, offsetY = -7, offsetWidth = 383, offsetHeight = 369} -- 200: up0021
+		{x = 0, y = 2495, width = 377, height = 356, offsetX = -5, offsetY = -7, offsetWidth = 383, offsetHeight = 369}, -- 200: up0021
+
+
+		{x = 2145, y = 0, width = 330, height = 311, offsetX = -13, offsetY = -29, offsetWidth = 346, offsetHeight = 354}, -- 201: idle0000
+		{x = 2145, y = 0, width = 330, height = 311, offsetX = -13, offsetY = -29, offsetWidth = 346, offsetHeight = 354}, -- 202: idle0001
+		{x = 2495, y = 0, width = 332, height = 309, offsetX = -14, offsetY = -27, offsetWidth = 346, offsetHeight = 354}, -- 203: idle0002
+		{x = 2495, y = 0, width = 332, height = 309, offsetX = -14, offsetY = -27, offsetWidth = 346, offsetHeight = 354}, -- 26: idle0003
+		{x = 2847, y = 0, width = 334, height = 316, offsetX = -10, offsetY = -7, offsetWidth = 346, offsetHeight = 354}, -- 27: idle0004
+		{x = 2847, y = 0, width = 334, height = 316, offsetX = -10, offsetY = -7, offsetWidth = 346, offsetHeight = 354}, -- 28: idle0005
+		{x = 3201, y = 0, width = 338, height = 314, offsetX = -5, offsetY = -3, offsetWidth = 346, offsetHeight = 354}, -- 29: idle0006
+		{x = 3201, y = 0, width = 338, height = 314, offsetX = -5, offsetY = -3, offsetWidth = 346, offsetHeight = 354}, -- 30: idle0007
+		{x = 3559, y = 0, width = 343, height = 317, offsetX = 0, offsetY = -4, offsetWidth = 346, offsetHeight = 354}, -- 31: idle0008
+		{x = 3559, y = 0, width = 343, height = 317, offsetX = 0, offsetY = -4, offsetWidth = 346, offsetHeight = 354}, -- 210: idle0009
+		{x = 0, y = 337, width = 333, height = 323, offsetX = -13, offsetY = -31, offsetWidth = 346, offsetHeight = 354}, -- 33: idle0010
+		{x = 0, y = 337, width = 333, height = 323, offsetX = -13, offsetY = -31, offsetWidth = 346, offsetHeight = 354}, -- 34: idle0011
+		{x = 353, y = 337, width = 334, height = 317, offsetX = -11, offsetY = -28, offsetWidth = 346, offsetHeight = 354}, -- 35: idle0012
+		{x = 353, y = 337, width = 334, height = 317, offsetX = -11, offsetY = -28, offsetWidth = 346, offsetHeight = 354}, -- 36: idle0013
+		{x = 707, y = 337, width = 325, height = 321, offsetX = -20, offsetY = -7, offsetWidth = 346, offsetHeight = 354}, -- 37: idle0014
+		{x = 707, y = 337, width = 325, height = 321, offsetX = -20, offsetY = -7, offsetWidth = 346, offsetHeight = 354}, -- 38: idle0015
+		{x = 1052, y = 337, width = 321, height = 326, offsetX = -23, offsetY = 0, offsetWidth = 346, offsetHeight = 354}, -- 39: idle0016
+		{x = 1052, y = 337, width = 321, height = 326, offsetX = -23, offsetY = 0, offsetWidth = 346, offsetHeight = 354}, -- 40: idle0017
+		{x = 1393, y = 337, width = 322, height = 335, offsetX = -20, offsetY = -2, offsetWidth = 346, offsetHeight = 354}, -- 41: idle0018
+		{x = 1393, y = 337, width = 322, height = 335, offsetX = -20, offsetY = -2, offsetWidth = 346, offsetHeight = 354}, -- 220: idle0019
+		{x = 2145, y = 0, width = 330, height = 311, offsetX = -13, offsetY = -29, offsetWidth = 346, offsetHeight = 354}, -- 23: idle0000
+		{x = 2145, y = 0, width = 330, height = 311, offsetX = -13, offsetY = -29, offsetWidth = 346, offsetHeight = 354}, -- 24: idle0001
+		{x = 2495, y = 0, width = 332, height = 309, offsetX = -14, offsetY = -27, offsetWidth = 346, offsetHeight = 354}, -- 25: idle0002
+		{x = 2495, y = 0, width = 332, height = 309, offsetX = -14, offsetY = -27, offsetWidth = 346, offsetHeight = 354}, -- 26: idle0003
+		{x = 2847, y = 0, width = 334, height = 316, offsetX = -10, offsetY = -7, offsetWidth = 346, offsetHeight = 354}, -- 27: idle0004
+		{x = 2847, y = 0, width = 334, height = 316, offsetX = -10, offsetY = -7, offsetWidth = 346, offsetHeight = 354}, -- 28: idle0005
+		{x = 3201, y = 0, width = 338, height = 314, offsetX = -5, offsetY = -3, offsetWidth = 346, offsetHeight = 354}, -- 29: idle0006
+		{x = 3201, y = 0, width = 338, height = 314, offsetX = -5, offsetY = -3, offsetWidth = 346, offsetHeight = 354}, -- 30: idle0007
+		{x = 3559, y = 0, width = 343, height = 317, offsetX = 0, offsetY = -4, offsetWidth = 346, offsetHeight = 354}, -- 31: idle0008
+		{x = 3559, y = 0, width = 343, height = 317, offsetX = 0, offsetY = -4, offsetWidth = 346, offsetHeight = 354}, -- 230: idle0009
+		{x = 0, y = 337, width = 333, height = 323, offsetX = -13, offsetY = -31, offsetWidth = 346, offsetHeight = 354}, -- 33: idle0010
+		{x = 0, y = 337, width = 333, height = 323, offsetX = -13, offsetY = -31, offsetWidth = 346, offsetHeight = 354}, -- 34: idle0011
+		{x = 353, y = 337, width = 334, height = 317, offsetX = -11, offsetY = -28, offsetWidth = 346, offsetHeight = 354}, -- 35: idle0012
+		{x = 353, y = 337, width = 334, height = 317, offsetX = -11, offsetY = -28, offsetWidth = 346, offsetHeight = 354}, -- 36: idle0013
+		{x = 707, y = 337, width = 325, height = 321, offsetX = -20, offsetY = -7, offsetWidth = 346, offsetHeight = 354}, -- 37: idle0014
+		{x = 707, y = 337, width = 325, height = 321, offsetX = -20, offsetY = -7, offsetWidth = 346, offsetHeight = 354}, -- 38: idle0015
+		{x = 1052, y = 337, width = 321, height = 326, offsetX = -23, offsetY = 0, offsetWidth = 346, offsetHeight = 354}, -- 39: idle0016
+		{x = 1052, y = 337, width = 321, height = 326, offsetX = -23, offsetY = 0, offsetWidth = 346, offsetHeight = 354}, -- 40: idle0017
+		{x = 1393, y = 337, width = 322, height = 335, offsetX = -20, offsetY = -2, offsetWidth = 346, offsetHeight = 354}, -- 41: idle0018
+		{x = 1393, y = 337, width = 322, height = 335, offsetX = -20, offsetY = -2, offsetWidth = 346, offsetHeight = 354} -- 240: idle0019
 	},
 	{
 		--To get the animations, look at the number and the name of the frame
 		--Start is the first frame, stop is the last frame, speed is the speed of the animation, offsetX and offsetY are the offset of the animation
 		--Get the offset by using the ingame offset editor and pressing 7
-		["down"] = {start = 1, stop = 22, speed = 24, offsetX = 0, offsetY = 0},
-		["idle"] = {start = 23, stop = 42, speed = 24, offsetX = 0, offsetY = 0},
-		["left"] = {start = 43, stop = 64, speed = 24, offsetX = 0, offsetY = 0},
-		["miss down"] = {start = 65, stop = 87, speed = 24, offsetX = 0, offsetY = 0},
-		["miss left"] = {start = 88, stop = 110, speed = 24, offsetX = 0, offsetY = 0},
-		["miss right"] = {start = 111, stop = 133, speed = 24, offsetX = 0, offsetY = 0},
-		["miss up"] = {start = 134, stop = 156, speed = 24, offsetX = 0, offsetY = 0},
+		["down"] = {start = 1, stop = 22, speed = 24, offsetX = -39, offsetY = -31},
+		["idle"] = {start = 201, stop = 240, speed = 24, offsetX = 0, offsetY = 0},
+		["left"] = {start = 43, stop = 64, speed = 24, offsetX = 9, offsetY = -2},
+		["miss down"] = {start = 65, stop = 87, speed = 24, offsetX = -36, offsetY = -26},
+		["miss left"] = {start = 88, stop = 110, speed = 24, offsetX = 5, offsetY = -12},
+		["miss right"] = {start = 111, stop = 133, speed = 24, offsetX = -36, offsetY = -10},
+		["miss up"] = {start = 134, stop = 156, speed = 24, offsetX = -18, offsetY = 5},
 		["right"] = {start = 157, stop = 178, speed = 24, offsetX = 0, offsetY = 0},
-		["up"] = {start = 179, stop = 200, speed = 24, offsetX = 0, offsetY = 0},
+		["up"] = {start = 179, stop = 200, speed = 24, offsetX = -4, offsetY = 9},
 
 	},
 	"idle", -- set to default animation

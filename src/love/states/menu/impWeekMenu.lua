@@ -5,6 +5,7 @@ currentWeek = ""
 return { 
     enter = function(self)
         graphics.fadeIn(0.5)
+        leavingMenu = false
 
         allWeeks = {}
 
@@ -72,6 +73,8 @@ return {
             end
 
             if input:pressed("gameBack") then 
+                leavingMenu = true
+                Timer.cancel(translationTween)
                 Gamestate.switch(menuSelect)
             end
 
@@ -105,8 +108,9 @@ return {
             if translationTween then 
                 Timer.cancel(translationTween)
             end
-
-            translationTween = Timer.tween(0.1, weekTranslation, {x = deadWeekTranslation.x, y = deadWeekTranslation.y})
+            if not leavingMenu then
+                translationTween = Timer.tween(0.1, weekTranslation, {x = deadWeekTranslation.x, y = deadWeekTranslation.y})
+            end
             if currentWeek == "" then 
                 if input:pressed("up") then 
                     currentWeek = "WEEK J"

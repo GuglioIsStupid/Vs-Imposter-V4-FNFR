@@ -218,7 +218,7 @@ return {
 			else
 				girlfriend = Character.girlfriend(0,0, false)
 			end
-			boyfriend = Character.boyfriend(0,0)
+			--boyfriend = Character.boyfriend(0,0)
 			rating = love.filesystem.load("sprites/rating.lua")()
 			rating.sizeX, rating.sizeY = 0.75, 0.75
 			numbers = {}
@@ -1261,12 +1261,12 @@ return {
 					end
 					if events[i].mustHitSection then
 						if curPlayer ~= "pixelboyfriend" then
-							camTimer = Timer.tween(1.25, cam, {x = -boyfriend.x - 75, y = -boyfriend.y - 25}, "out-quad")
+							camTimer = Timer.tween(1.25, cam, {x = -boyfriend.x - 75}, "out-quad")
 						else
-							camTimer = Timer.tween(1.25, cam, {x = -boyfriend.x + 100, y = -boyfriend.y + 75}, "out-quad")
+							camTimer = Timer.tween(1.25, cam, {x = 600}, "out-quad")
 						end
 					else
-						camTimer = Timer.tween(1.25, cam, {x = -enemy.x - 100, y = -enemy.y + 75}, "out-quad")
+						camTimer = Timer.tween(1.25, cam, {x = 500}, "out-quad")
 					end
 
 					if events[i].altAnim then
@@ -1605,7 +1605,14 @@ return {
 											1.25, 
 											judgements[#judgements].img, 
 											{
-												y = girlfriend.y - 100
+												y = girlfriend.y - 100											}, 
+											"out-expo"
+										)
+										Timer.tween(
+											50, 
+											judgements[#judgements].img, 
+											{
+												x = -1000
 											}, 
 											"out-expo"
 										)
@@ -1750,6 +1757,14 @@ return {
 									judgements[#judgements].img, 
 									{
 										y = girlfriend.y - 100
+									}, 
+									"out-expo"
+								)
+								Timer.tween(
+									50, 
+									judgements[#judgements].img, 
+									{
+										x = -1000
 									}, 
 									"out-expo"
 								)

@@ -84,12 +84,12 @@ return graphics.newSprite(
 		--To get the animations, look at the number and the name of the frame
 		--Start is the first frame, stop is the last frame, speed is the speed of the animation, offsetX and offsetY are the offset of the animation
 		--Get the offset by using the ingame offset editor and pressing 7
-		["down"] = {start = 1, stop = 5, speed = 24, offsetX = 0, offsetY = 0},
+		["down"] = {start = 1, stop = 5, speed = 24, offsetX = -169, offsetY = -28},
 		["idle"] = {start = 6, stop = 21, speed = 24, offsetX = 0, offsetY = 0},
-		["left"] = {start = 22, stop = 26, speed = 24, offsetX = 0, offsetY = 0},
-		["right"] = {start = 27, stop = 31, speed = 24, offsetX = 0, offsetY = 0},
-		["scream"] = {start = 32, stop = 68, speed = 24, offsetX = 0, offsetY = 0},
-		["up"] = {start = 69, stop = 73, speed = 24, offsetX = 0, offsetY = 0},
+		["left"] = {start = 22, stop = 26, speed = 24, offsetX = -35, offsetY = 0},
+		["right"] = {start = 27, stop = 31, speed = 24, offsetX = -33, offsetY = 33},
+		["aggressive shitting"] = {start = 32, stop = 68, speed = 24, offsetX = -41, offsetY = 228},
+		["up"] = {start = 69, stop = 73, speed = 24, offsetX = -52, offsetY = 44},
 	},
 	"idle", -- set to default animation
 	false -- If the sprite repeats

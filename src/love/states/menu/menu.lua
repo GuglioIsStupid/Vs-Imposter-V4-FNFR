@@ -117,7 +117,6 @@ return {
 	end,
 
 	draw = function(self)
-		effect(function()
 			love.graphics.push()
 				love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
 				love.graphics.push()
@@ -155,7 +154,6 @@ return {
 				love.graphics.pop()
 
 			love.graphics.pop()
-		end)
 	end,
 
 	leave = function(self)

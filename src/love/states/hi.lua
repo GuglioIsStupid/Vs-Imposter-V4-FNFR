@@ -1,7 +1,11 @@
 return {
     enter = function(self)
         graphics.fadeIn(0.5)
-        video = love.graphics.newVideo("videos/dietznuts.ogv")
+        if love.math.random(1,2) == 1 then
+            video = love.graphics.newVideo("videos/BREASTS.ogv")
+        else
+            video = love.graphics.newVideo("videos/dietznuts.ogv")
+        end
         video:play()
 
         print("huh")
@@ -18,7 +22,6 @@ return {
     end,
 
     leave = function(self)
-        video:stop()
         video:release()
         collectgarbage()
     end

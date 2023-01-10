@@ -7,7 +7,7 @@ return {
             graphics.newImage(love.graphics.newImage(graphics.imagePath("yellowWeek/airship/newAirship/window"))),
             graphics.newImage(love.graphics.newImage(graphics.imagePath("yellowWeek/airship/newAirship/backDlowFloor"))),
             graphics.newImage(love.graphics.newImage(graphics.imagePath("yellowWeek/airship/newAirship/DlowFloor"))),
-            graphics.newImage(love.graphics.newImage(graphics.imagePath("yellowWeek/airship/newAirship/yellow"))),
+            graphics.newImage(love.graphics.newImage(graphics.imagePath("yellowWeek/airship/newAirship/YELLOW"))),
         }
 
         stageImages[1].x, stageImages[1].y = 10, 117
@@ -25,6 +25,8 @@ return {
         enemyTwo = enemy
 
         whiteAwkward = love.filesystem.load("sprites/yellowWeek/white_awkward.lua")()
+
+        boyfriend = enemy
 
 
         girlfriend.x, girlfriend.y = -200, -445

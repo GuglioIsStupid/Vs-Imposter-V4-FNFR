@@ -6,46 +6,61 @@ return {
             graphics.newImage(love.graphics.newImage(graphics.imagePath("yellowWeek/airship/backClouds"))),
             graphics.newImage(love.graphics.newImage(graphics.imagePath("yellowWeek/airship/airship"))),
             graphics.newImage(love.graphics.newImage(graphics.imagePath("yellowWeek/airship/frontClouds"))),
-            graphics.newImage(love.graphics.newImage(graphics.imagePath("yellowWeek/airship/fgPlatform")))
+            graphics.newImage(love.graphics.newImage(graphics.imagePath("yellowWeek/airship/fgPlatform"))),
+            love.filesystem.load("sprites/characters/blacklegs.lua")(),
+            love.filesystem.load("sprites/characters/bf_legs.lua")(),
+            love.filesystem.load("sprites/yellowWeek/screamsky.lua")(),
         }
+        curEnemy = "both"
 
-        cam.sizeX, cam.sizeY = 0.7, 0.7
-        camScale.x, camScale.y = 0.7, 0.7
+        cam.sizeX, cam.sizeY = 0.3, 0.3
+        camScale.x, camScale.y = 0.3, 0.3
 
 
-        stageImages[4].sizeX, stageImages[4].sizeY = 0.7, 0.7
+        stageImages[4].sizeX, stageImages[4].sizeY = 0.9, 0.9
+        stageImages[1].sizeX, stageImages[1].sizeY = 1.5, 1.5
 
 
         stageImages[2].y = 57
         stageImages[3].y = 150
-        stageImages[4].x, stageImages[4].y = 1546, -35
+        stageImages[4].x, stageImages[4].y = 2029, -35
         stageImages[5].x, stageImages[5].y = 0, 415
 
+        stageImages[7].x, stageImages[7].y = -944, 438
+        stageImages[8].x, stageImages[8].y = 564, 460
+
+
         stageImages[6].translation = {x = 0, y = 0}
+        stageImages[2].translation = {x = 0, y = 0}
+        stageImages[3].translation = {x = 0, y = 0}
+        stageImages[5].translation = {x = 0, y = 0}
 
 
         stageImages[6].y = 619
 
         enemy = love.filesystem.load("sprites/characters/blackrun.lua")()
+        enemyTwo = love.filesystem.load("sprites/characters/blackalt.lua")()
+
         boyfriend = love.filesystem.load("sprites/characters/bf_running.lua")()
         girlfriend = love.filesystem.load("sprites/characters/gf_danger.lua")()
-        blackLegs = love.filesystem.load("sprites/characters/blacklegs.lua")()
-        bfLegs = love.filesystem.load("sprites/characters/bf_legs.lua")()
 
-        girlfriend.x, girlfriend.y = -146, -166
-        enemy.x, enemy.y = 0, 0
-        boyfriend.x, boyfriend.y = 641, 183
+        girlfriend.x, girlfriend.y = -88, 129
+        enemy.x, enemy.y = -877, 198
+        enemyTwo.x, enemyTwo.y = -866, 189
+        boyfriend.x, boyfriend.y = 616, 275
     end,
 
     load = function()
-
+        ohnoHeAngy = false
+        stageImages[9]:update(dt)
 
 
     end,
 
     update = function(self, dt)
-        blackLegs:update(dt)
-        bfLegs:update(dt)
+        stageImages[7]:update(dt)
+        stageImages[8]:update(dt)
+        stageImages[9]:update(dt)
 
         
         stageImages[6].translation.x = stageImages[6].translation.x - 4000 * dt
@@ -53,12 +68,27 @@ return {
             stageImages[6].translation.x = 0
         end
 
-        if not blackLegs:isAnimated() then
-            blackLegs:animate("run", false)  -- set to false since its just gonna animate them again after the first one (doing it like this so it isnt synced to bpm)
+        stageImages[2].translation.x = stageImages[2].translation.x - 50 * dt
+        if stageImages[2].translation.x < -4530 then
+            stageImages[2].translation.x = 0
         end
 
-        if not bfLegs:isAnimated() then
-            bfLegs:animate("run", false)
+        stageImages[3].translation.x = stageImages[3].translation.x - 150 * dt
+        if stageImages[3].translation.x < -4535 then
+            stageImages[3].translation.x = 0
+        end
+
+        stageImages[5].translation.x = stageImages[5].translation.x - 1500 * dt
+        if stageImages[5].translation.x < -8000 then
+            stageImages[5].translation.x = 0
+        end
+
+        if not stageImages[7]:isAnimated() then
+            stageImages[7]:animate("run", false)  -- set to false since its just gonna animate them again after the first one (doing it like this so it isnt synced to bpm)
+        end
+
+        if not stageImages[8]:isAnimated() then
+            stageImages[8]:animate("run", false)
         end
 
     end,
@@ -66,19 +96,40 @@ return {
     draw = function()
         love.graphics.push()
 			love.graphics.translate(cam.x * 0.9, cam.y * 0.9)
-
 			stageImages[1]:draw()
-			stageImages[2]:draw()
-            stageImages[3]:draw()
+            love.graphics.push()
+            love.graphics.translate(stageImages[2].translation.x, stageImages[2].translation.y)
+            for i = 1, 4 do 
+                stageImages[2].x = (i - 1) * 4530
+                stageImages[2]:draw()
+            end
+            love.graphics.pop()
+            love.graphics.push()
+            love.graphics.translate(stageImages[3].translation.x, stageImages[3].translation.y)
+            for i = 1, 4 do 
+                stageImages[3].x = (i - 1) * 4535
+                stageImages[3]:draw()
+            end
+            love.graphics.pop()
+            love.graphics.push()
+            love.graphics.translate(-cam.x * 0.2, -cam.y * 0.2)
             stageImages[4]:draw()
-            stageImages[5]:draw()
-            
+            love.graphics.pop()
+            love.graphics.push()
+            love.graphics.translate(stageImages[5].translation.x, stageImages[5].translation.y)
+            for i = 1, 4 do 
+                stageImages[5].x = (i - 1) * 8000
+                stageImages[5]:draw()
+            end
+            love.graphics.pop()
 		love.graphics.pop()
         love.graphics.push()
-
         love.graphics.pop()
 		love.graphics.push()
 			love.graphics.translate(cam.x, cam.y)
+            if stageImages[9]:isAnimated() then
+                stageImages[9]:draw()
+            end
             love.graphics.push()
             love.graphics.translate(stageImages[6].translation.x, stageImages[6].translation.y)
             for i = 1, 3 do 
@@ -86,17 +137,19 @@ return {
                 stageImages[6]:draw()
             end
             love.graphics.pop()
-
             girlfriend:draw()
-            blackLegs:draw()
-			enemy:draw()
-            bfLegs:draw()
+            stageImages[7]:draw()
+            if ohnoHeAngy and enemy:getAnimName() ~= "scream" then
+                enemyTwo:draw()
+            else
+                enemy:draw()
+            end            
+            stageImages[8]:draw()
 			boyfriend:draw()
 		love.graphics.pop()
         
 		love.graphics.push()
 			love.graphics.translate(cam.x * 1.1, cam.y * 1.1)
-
 		love.graphics.pop()
     end,
 

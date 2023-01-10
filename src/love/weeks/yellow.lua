@@ -45,25 +45,25 @@ return {
 		if song == 5 then
 			stages["blackChase"]:leave()
 			stages["cargo"]:enter()                                                                                    -- i wanna fucking quit
-			inst = waveAudio:newSource("songs/double-kill/inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/double-kill/voices.ogg", "stream")
+			inst = waveAudio:newSource("songs/double-kill/Inst.ogg", "stream")
+			voices = waveAudio:newSource("songs/double-kill/Voices.ogg", "stream")
 		elseif song == 4 then
 			stages["yellowAirship"]:leave()
 			stages["blackChase"]:enter()
-			inst = waveAudio:newSource("songs/danger/inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/danger/voices.ogg", "stream")
+			inst = waveAudio:newSource("songs/danger/Inst.ogg", "stream")
+			voices = waveAudio:newSource("songs/danger/Voices.ogg", "stream")
 		elseif song == 3 then
-			inst = waveAudio:newSource("songs/oversight/inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/oversight/voices.ogg", "stream")
+			inst = waveAudio:newSource("songs/oversight/Inst.ogg", "stream")
+			voices = waveAudio:newSource("songs/oversight/Voices.ogg", "stream")
 		elseif song == 2 then
-			inst = waveAudio:newSource("songs/dlow/inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/dlow/voices.ogg", "stream")
+			inst = waveAudio:newSource("songs/dlow/Inst.ogg", "stream")
+			voices = waveAudio:newSource("songs/dlow/Voices.ogg", "stream")
 		elseif song == 50 then
 			inst = "https://www.youtube.com/watch?v=p3wVSfHumRA"
 			voices = inst
 		else
-			inst = waveAudio:newSource("songs/mando/inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/mando/voices.ogg", "stream")
+			inst = waveAudio:newSource("songs/mando/Inst.ogg", "stream")
+			voices = waveAudio:newSource("songs/mando/Voices.ogg", "stream")
 		end
 
 		self:initUI()
@@ -286,7 +286,19 @@ return {
 			if musicTime >= 282379.220779221 and musicTime < 282404.220779221 then 
 				--DoubleKillEvents(kill)
 			end
-		end
+		elseif song == 4 then
+			if musicTime >= 52000 and musicTime < 52025 then 
+				stageImages[9]:animate("anim", false)
+				enemy:animate("scream", false)
+				ohnoHeAngy = true
+			end
+			if musicTime >= 54666.6666666667 and musicTime < 54691.6666666667 then
+				if gfTween then
+					Timer.cancel(gfTween)
+				end
+				gfTween = Timer.tween(4.5, girlfriend, {x = -2500}, "in-quad")
+				end
+			end
 		
 		
 
