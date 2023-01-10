@@ -295,7 +295,7 @@ return {
 				})
 			end
 			judgements[#judgements].img:animate(judgements[#judgements].rating, false)
-			judgements[#judgements].img.x = girlfriend.x
+			judgements[#judgements].img.x = -88
 			judgements[#judgements].img.y = girlfriend.y - 100
 			if not pixel then judgements[#judgements].img.sizeX, judgements[#judgements].img.sizeY = 0.75, 0.75 end
 		end
@@ -334,14 +334,14 @@ return {
 			}
 		}
 
-		rating.x = girlfriend.x
+		rating.x = -88
 		if not pixel then
 			for i = 1, 3 do
-				numbers[i].x = girlfriend.x - 100 + 50 * i
+				numbers[i].x = -88 - 100 + 50 * i
 			end
 		else
 			for i = 1, 3 do
-				numbers[i].x = girlfriend.x - 100 + 58 * i
+				numbers[i].x = -88 - 100 + 58 * i
 			end
 		end
 
@@ -1626,14 +1626,14 @@ return {
 										ratingTimers[5] = Timer.tween(2, numbers[3], {y = girlfriend.y + love.math.random(-10, 10)}, "out-elastic") -- 1's
 
 										if combo < 10 then
-										numbers[3].x = girlfriend.x
+										numbers[3].x = -88
 										elseif combo < 100 then
-											numbers[2].x = girlfriend.x - 25
-											numbers[3].x = girlfriend.x + 25
+											numbers[2].x = -88 - 25
+											numbers[3].x = -88 + 25
 										else
-											numbers[1].x = girlfriend.x - 50
-											numbers[2].x = girlfriend.x
-										numbers[3].x = girlfriend.x + 50
+											numbers[1].x = -88 - 50
+											numbers[2].x = -88
+										numbers[3].x = -88 + 50
 										end
 										if not settings.ghostTapping or success then
 											boyfriendArrow:animate("confirm", false)
@@ -1777,14 +1777,14 @@ return {
 								ratingTimers[5] = Timer.tween(2, numbers[3], {y = girlfriend.y + love.math.random(-10, 10)}, "out-elastic") -- 1's
 
 								if combo < 10 then
-									numbers[3].x = girlfriend.x
+									numbers[3].x = -88
 								elseif combo < 100 then
-									numbers[2].x = girlfriend.x - 25
-									numbers[3].x = girlfriend.x + 25
+									numbers[2].x = -88 - 25
+									numbers[3].x = -88 + 25
 								else
-									numbers[1].x = girlfriend.x - 50
-									numbers[2].x = girlfriend.x
-									numbers[3].x = girlfriend.x + 50
+									numbers[1].x = -88 - 50
+									numbers[2].x = -88
+									numbers[3].x = -88 + 50
 								end
 							end
 
