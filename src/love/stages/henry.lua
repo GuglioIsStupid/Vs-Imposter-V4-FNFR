@@ -22,11 +22,12 @@ return {
             enemyTwo = love.filesystem.load("sprites/characters/rhm.lua")()
         elseif song == 3 then
             enemy = love.filesystem.load("sprites/characters/HENRY_ASSS.lua")()
-            enemyTwo = love.filesystem.load("sprites/characters/blackrun.lua")()
+            enemyTwo = love.filesystem.load("sprites/characters/Ellie_Assets.lua")()
             boyfriend = Character.boyfriend(0,0)
         elseif song == 2 then
-            enemy = love.filesystem.load("sprites/characters/white.lua")()
+            enemy = love.filesystem.load("sprites/characters/charles.lua")()
             boyfriend = love.filesystem.load("sprites/characters/henry_i_phone.lua")()
+
         else
             enemy = love.filesystem.load("sprites/characters/HENRY_ASSS.lua")()
             boyfriend = Character.boyfriend(0,0)
