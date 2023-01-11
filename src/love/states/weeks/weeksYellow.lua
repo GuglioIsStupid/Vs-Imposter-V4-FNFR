@@ -2304,7 +2304,7 @@ return {
 			if accForRatingText >= 101 then
 				ratingText = "what"
 			elseif accForRatingText >= 100 then
-				ratingText = "PERFECT!!!"
+				ratingText = "PERFECT!!!"     -- :(    my extra ! is gone
 			elseif accForRatingText >= 90 then
 				ratingText = "Great!"
 			elseif accForRatingText >= 70 then

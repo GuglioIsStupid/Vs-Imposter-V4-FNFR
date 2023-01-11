@@ -181,6 +181,7 @@ function love.load()
 		["yellowAirship"] = require "stages.yellowAirship",
 		["blackChase"] = require "stages.blackChase",
 		["cargo"] = require "stages.cargo",
+		["henry"] = require "stages.henry",
 	}
 
 	mods = {
@@ -251,6 +252,7 @@ function love.load()
 	weekData = {
 		require "weeks.defeat",
 		require "weeks.yellow",
+		require "weeks.henry",
 	}
 	weekDesc = { -- Add your week description here
 		"LEARN TO FUNK",
@@ -280,11 +282,12 @@ function love.load()
 			}
 		},
 		{
-			"Week 2",
+			"Henry",
 			{
-				"Spookeez",
-				"South",
-				"Monster"
+				"Titular",
+				"Greatest Plan",
+				"Reinforcements",
+				"Armed"
 			}
 		},
 		{
@@ -354,7 +357,7 @@ function love.load()
 		["WEEK J"] = require "states.hi",
 		["BOO!"] = require "states.hi",
 		["TOMONGUS"] = require "states.hi",
-		["HENRY"] = require "states.hi",
+		["HENRY"] = require "weeks.henry",
 		["..."] = chooseMissCount
 	}
 
