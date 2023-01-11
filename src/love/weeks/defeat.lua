@@ -18,9 +18,12 @@ return {
 
         enemy = love.filesystem.load("sprites/characters/black.lua")()
 
+		bfScared = love.filesystem.load("sprites/characters/BF_Defeat_Scared.lua")()
+		bfOther = love.filesystem.load("sprites/characters/BF_Defeat_Nomal.lua")()
+
 		weeksDefeat:setIcon("enemy", "black")
 
-        enemy.x = -350
+        enemy.x = -375
         blackold.x = -350
 
 		self:load()
@@ -35,10 +38,18 @@ return {
         curEnemy = "black"
         enemy.colours = {255, 0, 0}
         lolAlpha = {0}
+
+		boyfriend.x, boyfriend.y = 225, 135
+
+		bfScared.x, bfScared.y = boyfriend.x, boyfriend.y
+		bfOther.x, bfOther.y = boyfriend.x, boyfriend.y
 	end,
 
 	load = function(self)
 		weeksDefeat:load()
+		curPlayer = "BF-Other"
+		curEnemy = "black"
+		lolAlpha = {0}
 
 		inst = waveAudio:newSource("songs/defeat/Inst.ogg", "stream")
 		voices = waveAudio:newSource("songs/defeat/Voices.ogg", "stream")
@@ -58,6 +69,8 @@ return {
 	update = function(self, dt)
 		weeksDefeat:update(dt)
 		defeat:update(dt)
+		bfOther:update(dt)
+		bfScared:update(dt)
 
 		if musicThres ~= oldMusicThres and math.fmod(absMusicTime, 240000 / bpm) < 100 then
 			if curEnemy == "black" then
@@ -82,14 +95,21 @@ return {
             lolTimer = Timer.tween(0.2, lolAlpha, {1}, "in-out-cubic")
         end
 
+
+		if musicTime >= 20400 and musicTime <= 20450 then
+			curPlayer = "BF-Scared"
+		end
         if musicTime >= 87590.625 and musicTime <= 87640 then 
             curEnemy = "blackold"
+			curPlayer = "BF"
             lolAlpha = {0}
 			whyDoesItSpeedUpHere = true
         end
         if musicTime >= 107993.75 and musicTime <= 108043.75 then
             curEnemy = "black"
+			curPlayer = "BF-Scared"
         end
+		
 
 
 		if not (countingDown or graphics.isFading()) and not (inst:getDuration() > musicTime/1000) and not paused then
@@ -119,7 +139,13 @@ return {
             lolThing:draw()
             deadBG:draw()
             graphics.setColor(1,1,1, 1)
-            boyfriend:draw()
+			if curPlayer == "BF" then 
+            	boyfriend:draw()
+			elseif curPlayer == "BF-Scared" then
+				bfScared:draw()
+			elseif curPlayer == "BF-Other" then
+				bfOther:draw()
+			end
             if curEnemy == "black" then
                 enemy:draw()
             elseif curEnemy == "blackold" then

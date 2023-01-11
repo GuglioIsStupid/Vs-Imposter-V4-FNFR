@@ -38,7 +38,6 @@ return {
 		starBG.translation = {x = 0, y = 0}
 		startFG.translation = {x = 0, y = 0}
 
-
         lineTable = {}
         circleTable = {}
 

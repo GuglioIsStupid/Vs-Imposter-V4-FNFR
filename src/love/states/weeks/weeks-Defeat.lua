@@ -228,7 +228,7 @@ return {
 			else
 				girlfriend = Character.girlfriend(0,0, false)
 			end
-			boyfriend = Character.boyfriend(0,0)
+			boyfriend = love.filesystem.load("sprites/characters/boyfriend.lua")()
 			rating = love.filesystem.load("sprites/rating.lua")()
 			rating.sizeX, rating.sizeY = 0.75, 0.75
 			numbers = {}
@@ -361,6 +361,8 @@ return {
 		enemy:animate("idle")
 		blackold:animate("idle")
 		boyfriend:animate("idle")
+		bfOther:animate("idle")
+		bfScared:animate("idle")
 		
 
 		graphics.fadeIn(0.5, function()
@@ -1145,6 +1147,12 @@ return {
 			if not boyfriend:isAnimated() and boyfriend:getAnimName() ~= "idle" then 
 				weeks:safeAnimate(boyfriend, "idle", false, 1)
 			end
+			if not bfOther:isAnimated() and bfOther:getAnimName() ~= "idle" then
+				weeks:safeAnimate(bfOther, "idle", false, 1)
+			end
+			if not bfScared:isAnimated() and bfScared:getAnimName() ~= "idle" then
+				weeks:safeAnimate(bfScared, "idle", false, 1)
+			end
 			if not enemy:isAnimated() and enemy:getAnimName() ~= "idle" then
 				weeks:safeAnimate(enemy, "idle", false, 2)
 			end
@@ -1271,23 +1279,9 @@ return {
 						Timer.cancel(camTimer)
 					end
 					if events[i].mustHitSection then
-						if curPlayer ~= "pixelboyfriend" then
-							camTimer = Timer.tween(1.25, cam, {x = -boyfriend.x - 75, y = -boyfriend.y - 25}, "out-quad")
-						else
-							camTimer = Timer.tween(1.25, cam, {x = -boyfriend.x + 100, y = -boyfriend.y + 75}, "out-quad")
-						end
+						camTimer = Timer.tween(1.25, cam, {x = -boyfriend.x + 100, y = -boyfriend.y + 75}, "out-quad")
 					else
-						if curEnemy == "pico" then
-							camTimer = Timer.tween(1.25, cam, {x = -enemy.x - 500, y = -enemy.y - 50}, "out-quad")
-						elseif curEnemy == "monsterchristmas" or curEnemy == "dearestduo" then
-							camTimer = Timer.tween(1.25, cam, {x = -enemy.x - 500, y = -enemy.y - 275}, "out-quad")
-						elseif curEnemy == "senpai" or curEnemy == "senpaiangry" or curEnemy == "spirit" then
-							Timer.tween(1.25, cam, {x = -enemy.x - 100, y = -enemy.y + 75}, "out-quad")
-						elseif curEnemy == "tankman" then
-							camTimer = Timer.tween(1.25, cam, {x = -enemy.x + 75, y = -enemy.y - 100}, "out-quad")
-						else
-							camTimer = Timer.tween(1.25, cam, {x = -enemy.x - 300, y = -enemy.y - 275}, "out-quad")
-						end
+						camTimer = Timer.tween(1.25, cam, {x = -enemy.x - 100, y = -enemy.y + 75}, "out-quad")
 					end
 
 					if events[i].altAnim then
@@ -1351,6 +1345,8 @@ return {
 				end
 				if spriteTimers[3] == 0 then
 					self:safeAnimate(boyfriend, "idle", false, 3)
+					self:safeAnimate(bfOther, "idle", false, 3)
+					self:safeAnimate(bfScared, "idle", false, 3)
 				end
 			end
 
@@ -1457,6 +1453,8 @@ return {
 
 									if boyfriendNote[1]:getAnimName() ~= "hold" and boyfriendNote[1]:getAnimName() ~= "end" then
 										self:safeAnimate(boyfriend, "miss " .. curAnim, false, 3)
+										self:safeAnimate(bfOther, curAnim, false, 3)
+										self:safeAnimate(bfScared, curAnim, false, 3)
 									end
 
 									if girlfriend:isAnimName("sad") then if combo >= 5 then self:safeAnimate(girlfriend, "sad", true, 1) end end
@@ -1617,6 +1615,8 @@ return {
 											boyfriendArrow:animate("confirm", false)
 
 											self:safeAnimate(boyfriend, curAnim, false, 3)
+											self:safeAnimate(bfOther, curAnim, false, 3)
+											self:safeAnimate(bfScared, curAnim, false, 3)
 											doingAnim = false
 
 											if boyfriendNote[1]:getAnimName() ~= "hold" or boyfriendNote[1]:getAnimName() ~= "end" then
@@ -1665,6 +1665,8 @@ return {
 							boyfriendArrow:animate("confirm", false)
 
 							self:safeAnimate(boyfriend, curAnim, false, 3)
+							self:safeAnimate(bfOther, curAnim, false, 3)
+							self:safeAnimate(bfScared, curAnim, false, 3)
 						end
 
 						if input:released(curInput) then
@@ -1679,8 +1681,12 @@ return {
 
 							if boyfriendNote[1]:getAnimName() == "hold" or boyfriendNote[1]:getAnimName() == "end" then
 								self:safeAnimate(boyfriend, curAnim, false, 2)
+								self:safeAnimate(bfOther, curAnim, false, 3)
+								self:safeAnimate(bfScared, curAnim, false, 3)
 							else
 								self:safeAnimate(boyfriend, curAnim, false, 2)
+								self:safeAnimate(bfOther, curAnim, false, 3)
+								self:safeAnimate(bfScared, curAnim, false, 3)
 								score = score + 350
 								addJudgements("sickPlus")
 								altScore = altScore + 100.00
