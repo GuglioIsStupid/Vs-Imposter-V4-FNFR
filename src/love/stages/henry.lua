@@ -17,15 +17,15 @@ return {
 
     load = function()
 
-        if songNum == 4 then
-            enemy = love.filesystem.load("characters/Reginald_Assets.lua")()
-            enemyTwo = love.filesystem.load("sprites/rhm.lua")()
-        elseif songNum == 3 then
-            enemy = love.filesystem.load("characters/HENRY_ASSS.lua")()
-            enemyTwo = love.filesystem.load("sprites/yellow.lua")()
+        if song == 4 then
+            enemy = love.filesystem.load("sprites/characters/Reginald_Assets.lua")()
+            enemyTwo = love.filesystem.load("sprites/characters/rhm.lua")()
+        elseif song == 3 then
+            enemy = love.filesystem.load("sprites/characters/HENRY_ASSS.lua")()
+            enemyTwo = love.filesystem.load("sprites/characters/blackrun.lua")()
             boyfriend = Character.boyfriend(0,0)
-        elseif songNum == 2 then
-            enemy = love.filesystem.load("sprites/characters/yellow")()
+        elseif song == 2 then
+            enemy = love.filesystem.load("sprites/characters/white.lua")()
             boyfriend = love.filesystem.load("sprites/characters/henry_i_phone.lua")()
         else
             enemy = love.filesystem.load("sprites/characters/HENRY_ASSS.lua")()
@@ -42,9 +42,12 @@ return {
 		love.graphics.push()
 			love.graphics.translate(cam.x, cam.y)
             stageImages[1]:draw()
+            if curEnemy == "black" then
+                enemyTwo:draw()
+            else
+                enemy:draw()
+            end
 
-            enemy:draw()
-            enemyTwo:draw()
             boyfriend:draw()
 		love.graphics.pop()
     end,
