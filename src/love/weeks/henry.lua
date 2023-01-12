@@ -24,7 +24,7 @@ local stageBack, stageFront, curtains
 return {
 	enter = function(self, from, songNum, songAppend)
 		pauseColor = {129, 100, 223}
-		weeksYellow:enter()
+		weeksHenry:enter()
 		stages["henry"]:enter()
 
 		week = 1
@@ -32,13 +32,13 @@ return {
 		song = songNum
 		difficulty = songAppend
 
-		weeksYellow:setIcon("enemy", "daddy dearest")
+		weeksHenry:setIcon("enemy", "daddy dearest")
 
 		self:load()
 	end,
 
 	load = function(self)
-		weeksYellow:load()
+		weeksHenry:load()
 		stages["henry"]:load()
 
 		if song == 4 then
@@ -57,39 +57,39 @@ return {
 
 		self:initUI()
 
-		weeksYellow:setupCountdown()
+		weeksHenry:setupCountdown()
 	end,
 
 	initUI = function(self)
-		weeksYellow:initUI()
+		weeksHenry:initUI()
 
 		if song == 4 then
-			weeksYellow:generateNotes("songs/armed/armed-hard.json")
+			weeksHenry:generateNotes("songs/armed/armed-hard.json")
 		elseif song == 3 then
-			weeksYellow:generateNotes("songs/reinforcements/reinforcements-hard.json")
+			weeksHenry:generateNotes("songs/reinforcements/reinforcements-hard.json")
 		elseif song == 2 then
-			weeksYellow:generateNotes("songs/greatest-plan/greatest-plan-hard.json")
+			weeksHenry:generateNotes("songs/greatest-plan/greatest-plan-hard.json")
 		else
-			weeksYellow:generateNotes("songs/titular/titular-hard.json")
+			weeksHenry:generateNotes("songs/titular/titular-hard.json")
 		end
 	end,
 
 	update = function(self, dt)
-		weeksYellow:update(dt)
+		weeksHenry:update(dt)
 		stages["henry"]:update(dt)
 
 		if song == 1 and musicThres ~= oldMusicThres and math.fmod(absMusicTime + 500, 480000 / bpm) < 100 then
-			weeksYellow:safeAnimate(girlfriend, "cheer", false, 1)
-			weeksYellow:changeNoteTransparency()
+			weeksHenry:safeAnimate(girlfriend, "cheer", false, 1)
+			weeksHenry:changeNoteTransparency()
 		end
 
 		if health[1] >= 80 then
 			if enemyIcon:getAnimName() == "daddy dearest" then
-				weeksYellow:setIcon("enemy", "daddy dearest losing")
+				weeksHenry:setIcon("enemy", "daddy dearest losing")
 			end
 		else
 			if enemyIcon:getAnimName() == "daddy dearest losing" then
-				weeksYellow:setIcon("enemy", "daddy dearest")
+				weeksHenry:setIcon("enemy", "daddy dearest")
 			end
 		end
 
@@ -271,7 +271,7 @@ return {
 			end
 		end
 
-		weeksYellow:updateUI(dt)
+		weeksHenry:updateUI(dt)
 	end,
 
 	draw = function(self)
@@ -281,18 +281,18 @@ return {
 			love.graphics.scale(cam.sizeX, cam.sizeY)
 
 			stages["henry"]:draw()
-			weeksYellow:drawRating(0.9)
+			weeksHenry:drawRating(0.9)
 		love.graphics.pop()
 		
-		weeksYellow:drawTimeLeftBar()
-		weeksYellow:drawHealthBar()
+		weeksHenry:drawTimeLeftBar()
+		weeksHenry:drawHealthBar()
 		if not paused then
-			weeksYellow:drawUI()
+			weeksHenry:drawUI()
 		end
 	end,
 
 	leave = function(self)
 		stages["henry"]:leave()
-		weeksYellow:leave()
+		weeksHenry:leave()
 	end
 }

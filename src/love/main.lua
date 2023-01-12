@@ -213,6 +213,7 @@ function love.load()
 	weeks = require "states.weeks.weeks"
 	weeksDefeat = require "states.weeks.weeks-Defeat"
 	weeksYellow = require "states.weeks.weeksYellow"
+	weeksHenry = require "states.weeks.weeksHenry"
 
 	-- Load substates
 	gameOver = require "substates.game-over"

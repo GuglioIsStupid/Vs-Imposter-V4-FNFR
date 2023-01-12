@@ -36,6 +36,8 @@ return {
 		curEnemy = "white"
 
 		self:load()
+
+		thefunnyjudgmentsgoleftabit = false
 	end,
 
 	load = function(self)
@@ -47,11 +49,14 @@ return {
 			stages["cargo"]:enter()                                                                                    -- i wanna fucking quit
 			inst = waveAudio:newSource("songs/double-kill/Inst.ogg", "stream")
 			voices = waveAudio:newSource("songs/double-kill/Voices.ogg", "stream")
+			thefunnyjudgmentsgoleftabit = false
+
 		elseif song == 4 then
 			stages["yellowAirship"]:leave()
 			stages["blackChase"]:enter()
 			inst = waveAudio:newSource("songs/danger/Inst.ogg", "stream")
 			voices = waveAudio:newSource("songs/danger/Voices.ogg", "stream")
+			thefunnyjudgmentsgoleftabit = true
 		elseif song == 3 then
 			inst = waveAudio:newSource("songs/oversight/Inst.ogg", "stream")
 			voices = waveAudio:newSource("songs/oversight/Voices.ogg", "stream")

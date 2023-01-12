@@ -1605,17 +1605,19 @@ return {
 											1.25, 
 											judgements[#judgements].img, 
 											{
-												y = girlfriend.y - 100											}, 
+												y = girlfriend.y - 100}, 
 											"out-expo"
 										)
-										Timer.tween(
-											50, 
-											judgements[#judgements].img, 
-											{
-												x = -1000
-											}, 
-											"out-expo"
-										)
+										if thefunnyjudgmentsgoleftabit then
+											Timer.tween(
+												50, 
+												judgements[#judgements].img, 
+												{
+													x = -1000
+												}, 
+												"out-expo"
+											)
+										end
 										--ratingTimers[2] = Timer.tween(2, rating, {y = girlfriend.y - 100}, "out-elastic")
 										if combo >= 100 then
 											ratingTimers[3] = Timer.tween(2, numbers[1], {y = girlfriend.y + love.math.random(-10, 10)}, "out-elastic") -- 100's
@@ -1760,14 +1762,16 @@ return {
 									}, 
 									"out-expo"
 								)
-								Timer.tween(
-									50, 
-									judgements[#judgements].img, 
-									{
-										x = -1000
-									}, 
-									"out-expo"
-								)
+								if thefunnyjudgmentsgoleftabit then
+									Timer.tween(
+										50, 
+										judgements[#judgements].img, 
+										{
+											x = -1000
+										}, 
+										"out-expo"
+									)
+								end
 								if combo >= 100 then
 									ratingTimers[3] = Timer.tween(2, numbers[1], {y = girlfriend.y + love.math.random(-10, 10)}, "out-elastic") -- 100's
 								end

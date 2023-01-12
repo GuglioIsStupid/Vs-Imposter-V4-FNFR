@@ -85,10 +85,10 @@ return graphics.newSprite(
 		--To get the animations, look at the number and the name of the frame
 		--Start is the first frame, stop is the last frame, speed is the speed of the animation, offsetX and offsetY are the offset of the animation
 		--Get the offset by using the ingame offset editor and pressing 7
-		["left"] = {start = 31, stop = 45, speed = 24, offsetX = 0, offsetY = 0},
-		["down"] = {start = 1, stop = 15, speed = 24, offsetX = 0, offsetY = 0},
-		["right"] = {start = 46, stop = 60, speed = 24, offsetX = 0, offsetY = 0},
-		["up"] = {start = 61, stop = 75, speed = 24, offsetX = 0, offsetY = 0},
+		["left"] = {start = 31, stop = 45, speed = 24, offsetX = 52, offsetY = -2},
+		["down"] = {start = 1, stop = 15, speed = 24, offsetX = -30, offsetY = -35},
+		["right"] = {start = 46, stop = 60, speed = 24, offsetX = -64, offsetY = -17},
+		["up"] = {start = 61, stop = 75, speed = 24, offsetX = -14, offsetY = 20},
 		["idle"] = {start = 16, stop = 30, speed = 24, offsetX = 0, offsetY = 0},
 	},
 	"idle", -- set to default animation
