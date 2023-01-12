@@ -14,16 +14,13 @@ return {
 
         girlfriend.x, girlfriend.y = 0, 0
         enemy.x, enemy.y = 0, 0
-        boyfriend.x, boyfriend.y = 0, 0
+        boyfriend.x, boyfriend.y = 300, 0
 
         myMassiveCock = {0, 0}
-
-
     end,
 
     load = function()
         myMassiveCock = {0}
-
     end,
 
     update = function(self, dt)

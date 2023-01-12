@@ -81,6 +81,7 @@ return {
 
 		if song == 5 then
 			weeksYellow:generateNotes("songs/double-kill/double-kill-hard.json")
+			weeksYellow:generateEventsOld("songs/double-kill/events.json")
 			weeksYellow:setIcon("enemy", "white")
 		elseif song == 4 then
 			weeksYellow:generateNotes("songs/danger/danger-hard.json")
@@ -150,148 +151,7 @@ return {
 			end
 		end
 
-		if song == 5 then
-
-			if musicTime >= 1200 and musicTime < 1225 then 
-				weeksYellow:doFlash()
-			end
-			if musicTime >= 10800 and musicTime < 10825 then 
-				curEnemy = "black"
-				weeksYellow:setIcon("enemy", "black")
-			end
-			if musicTime >= 20400 and musicTime < 20425 then 
-				curEnemy = "white"
-				weeksYellow:setIcon("enemy", "white")
-			end
-			if musicTime >= 25200 and musicTime < 25225 then 
-				curEnemy = "black"
-				weeksYellow:setIcon("enemy", "black")
-			end
-			if musicTime >= 39600 and musicTime < 39625 then 
-				curEnemy = "white"
-				weeksYellow:setIcon("enemy", "white")
-			end
-			if musicTime >= 49200 and musicTime < 49225 then 
-				curEnemy = "black"
-				weeksYellow:setIcon("enemy", "black")
-			end
-			if musicTime >= 58500 and musicTime < 58525 then 
-				curEnemy = "white"
-				weeksYellow:setIcon("enemy", "white")
-			end
-			if musicTime >= 58800 and musicTime < 58825 then 
-				curEnemy = "both"
-				weeksYellow:setIcon("enemy", "blackwhite")
-			end
-			if musicTime >= 76800 and musicTime < 76825 then 
-				curEnemy = "both"
-				weeksYellow:setIcon("enemy", "blackwhite")
-			end
-			if musicTime >= 79200 and musicTime < 79225 then 
-				curEnemy = "black"
-				weeksYellow:setIcon("enemy", "black")
-			end
-			if musicTime >= 80400 and musicTime < 80425 then 
-				curEnemy = "white"
-				weeksYellow:setIcon("enemy", "white")
-			end
-			if musicTime >= 81600 and musicTime < 81625 then 
-				curEnemy = "both"
-				weeksYellow:setIcon("enemy", "blackwhite")
-			end
-			if musicTime >= 82800 and musicTime < 82825 then 
-				curEnemy = "both"
-				weeksYellow:setIcon("enemy", "blackwhite")
-			end
-			if musicTime >= 84000 and musicTime < 84025 then 
-				curEnemy = "black"
-				weeksYellow:setIcon("enemy", "black")
-			end
-			if musicTime >= 85200 and musicTime < 85225 then 
-				curEnemy = "white"
-				weeksYellow:setIcon("enemy", "white")
-			end
-			if musicTime >= 86400 and musicTime < 86425 then 
-				curEnemy = "both"
-				weeksYellow:setIcon("enemy", "blackwhite")
-			end
-			if musicTime >= 86400 and musicTime < 86425 then 
-				curEnemy = "both"
-				weeksYellow:setIcon("enemy", "blackwhite")
-			end
-			if musicTime >= 97200 and musicTime < 97225 then 
-				curEnemy = "black"
-				weeksYellow:setIcon("enemy", "black")
-			end
-			if musicTime >= 106800 and musicTime < 106825 then 
-			--	DoubleKillEvents(darken)
-			end
-			if musicTime >= 116400 and musicTime < 116425 then 
-			--	DoubleKillEvents(airship)
-			end
-			if musicTime >= 126000 and musicTime < 126025 then 
-				--DoubleKillEvents(brighten)
-			end
-			if musicTime >= 126000 and musicTime < 126025 then 
-				--AddCameraZoom(0.1)
-			end
-			if musicTime >= 127200 and musicTime < 127225 then 
-				curEnemy = "white"
-				weeksYellow:setIcon("enemy", "white")
-			end
-			if musicTime >= 136800 and musicTime < 136825 then 
-				curEnemy = "black"
-				weeksYellow:setIcon("enemy", "black")
-			end
-			if musicTime >= 146400 and musicTime < 146425 then 
-				curEnemy = "both"
-				weeksYellow:setIcon("enemy", "blackwhite")
-			end
-			if musicTime >= 165600 and musicTime < 165625 then 
-				curEnemy = "black"
-				weeksYellow:setIcon("enemy", "black")
-			end
-			if musicTime >= 175470.12987013 and musicTime < 175495.12987013 then 
-				curEnemy = "white"
-				weeksYellow:setIcon("enemy", "white")
-			end
-			if musicTime >= 192924.675324675 and musicTime < 192949.675324675 then 
-				curEnemy = "black"
-				weeksYellow:setIcon("enemy", "black")
-			end
-			if musicTime >= 201651.948051948 and musicTime < 201676.948051948 then 
-				curEnemy = "white"
-				weeksYellow:setIcon("enemy", "white")
-			end
-			if musicTime >= 211470.12987013 and musicTime < 211495.12987013 then 
-				curEnemy = "black"
-				weeksYellow:setIcon("enemy", "black")
-			end
-			if musicTime >= 220197.402597402 and musicTime < 220222.402597402 then 
-				curEnemy = "white"
-				weeksYellow:setIcon("enemy", "white")
-			end
-			if musicTime >= 228924.675324675 and musicTime < 228949.675324675 then 
-				curEnemy = "both"
-				weeksYellow:setIcon("enemy", "blackwhite")
-			end
-			if musicTime >= 246447.402597402 and musicTime < 246472.402597402 then 
-				curEnemy = "black"
-				weeksYellow:setIcon("enemy", "black")
-			end
-			if musicTime >= 246447.402597402 and musicTime < 246472.402597402 then 
-				--DoubleKillEvents(gonnakill)
-			end
-			if musicTime >= 246447.402597402 and musicTime < 246472.402597402 then 
-				--OpponentTwo(readykill)
-			end
-			if musicTime >= 247470.12987013 and musicTime < 247495.12987013 then 
-				--DoubleKillEvents(readykill)
-			end
-			if musicTime >= 282379.220779221 and musicTime < 282404.220779221 then 
-				--DoubleKillEvents(kill)
-			end
-		elseif song == 4 then
+		if song == 4 then
 			if musicTime >= 52000 and musicTime < 52025 then 
 				stageImages[9]:animate("anim", false)
 				enemy:animate("scream", false)
@@ -302,11 +162,9 @@ return {
 					Timer.cancel(gfTween)
 				end
 				gfTween = Timer.tween(4.5, girlfriend, {x = -2500}, "in-quad")
-				end
 			end
-		
-		
-
+		end
+			
 		weeksYellow:updateUI(dt)
 	end,
 

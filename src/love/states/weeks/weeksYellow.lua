@@ -113,6 +113,17 @@ local eventFuncs = {
 			
 		end
 	end,
+
+	["Opponent Two"] = function(option)
+		if curEnemy == "white" then
+			curEnemy = "black"
+		else
+			curEnemy = "white"
+		end
+	end,
+	["Both Opponents"] = function()
+		curEnemy = "both"
+	end,
 }
 
 missCounter = 0
