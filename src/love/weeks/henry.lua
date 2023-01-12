@@ -78,11 +78,6 @@ return {
 		weeksHenry:update(dt)
 		stages["henry"]:update(dt)
 
-		if song == 1 and musicThres ~= oldMusicThres and math.fmod(absMusicTime + 500, 480000 / bpm) < 100 then
-			weeksHenry:safeAnimate(girlfriend, "cheer", false, 1)
-			weeksHenry:changeNoteTransparency()
-		end
-
 		if health[1] >= 80 then
 			if enemyIcon:getAnimName() == "daddy dearest" then
 				weeksHenry:setIcon("enemy", "daddy dearest losing")
