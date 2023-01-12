@@ -1,4 +1,5 @@
 local difficulty
+
 local stageBack, stageFront, curtains
 
 return {
