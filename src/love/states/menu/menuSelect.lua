@@ -44,10 +44,10 @@ return {
 
         logo.scale.x, logo.scale.y = 0.6, 0.6
 
-        greenSussy.sizeX, greenSussy.sizeY = 0.6, 0.6
-        redSussy.sizeX, redSussy.sizeY = 0.6, 0.6
+        greenSussy.sizeX, greenSussy.sizeY = 0.8, 0.8
+        redSussy.sizeX, redSussy.sizeY = 0.8, 0.8
 
-        greenSussy.x, greenSussy.y = -350, 175
+        greenSussy.x, greenSussy.y = -350, 300
         redSussy.x, redSussy.y = 350, 175
 
         story:animate("StoryMode", true)

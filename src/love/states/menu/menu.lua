@@ -22,8 +22,6 @@ end
 
 return {
 	enter = function(self, previous)
-		effect = moonshine(moonshine.effects.steam)
-		effect.steam.time = 0
 		if not music[1]:isPlaying() then
 			music[1]:play()
 		end
@@ -73,7 +71,6 @@ return {
 	end,
 
 	update = function(self, dt)
-		effect.steam.time = love.timer.getTime()
 		logo:update(dt)
 
 		music[1]:updateBeat()
