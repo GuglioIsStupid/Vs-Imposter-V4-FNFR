@@ -621,6 +621,7 @@ return {
 							table.insert(enemyNotes[id], sprite())
 							enemyNotes[id][c].x = x
 							enemyNotes[id][c].y = noteTime 
+							enemyNotes[id][c].who = sectionNotes[j][4] or "henry"
 							if settings.downscroll then
 								enemyNotes[id][c].sizeY = -1
 							end
@@ -636,6 +637,7 @@ return {
 									table.insert(enemyNotes[id], sprite())
 									enemyNotes[id][c].x = x
 									enemyNotes[id][c].y = (noteTime + k)
+									enemyNotes[id][c].who = sectionNotes[j][4] or "henry"
 
 									enemyNotes[id][c]:animate("hold", false)
 								end
@@ -645,6 +647,7 @@ return {
 								enemyNotes[id][c].offsetY = 10
 
 								enemyNotes[id][c]:animate("end", false)
+								enemyNotes[id][c].who = sectionNotes[j][4] or "henry"
 							end
 						elseif noteType >= 0 and noteType < 4 then
 							local id = noteType + 1
@@ -722,6 +725,7 @@ return {
 							table.insert(enemyNotes[id], sprite())
 							enemyNotes[id][c].x = x
 							enemyNotes[id][c].y = noteTime
+							enemyNotes[id][c].who = sectionNotes[j][4] or "henry"
 							if settings.downscroll then
 								enemyNotes[id][c].sizeY = -1
 							end
@@ -744,6 +748,7 @@ return {
 									else
 										enemyNotes[id][c]:animate("hold", false)
 									end
+									enemyNotes[id][c].who = sectionNotes[j][4] or "henry"
 								end
 
 								c = #enemyNotes[id]
@@ -751,6 +756,7 @@ return {
 								enemyNotes[id][c].offsetY = 10
 
 								enemyNotes[id][c]:animate("end", false)
+								enemyNotes[id][c].who = sectionNotes[j][4] or "henry"
 							end
 						end
 					end
@@ -1397,7 +1403,7 @@ return {
 							enemyArrow:animate("confirm", false)
 
 
-							if curEnemy == "white" then
+							if enemyNote[1].who == "henry" then
 								if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
 									if useAltAnims then
 										self:safeAnimate(enemy, curAnim .. " alt", false, 2)
@@ -1411,7 +1417,7 @@ return {
 										self:safeAnimate(enemy, curAnim, false, 2)
 									end
 								end
-							elseif curEnemy == "black" then
+							elseif enemyNote[1].who == "Opponent 2 Sing" then
 								if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
 									if useAltAnims then
 										self:safeAnimate(enemyTwo, curAnim .. " alt", false, 2)
@@ -1425,7 +1431,7 @@ return {
 										self:safeAnimate(enemyTwo, curAnim, false, 2)
 									end
 								end
-							elseif curEnemy == "both" then
+							elseif enemyNote[1].who == "Both Opponents Sing" then
 								if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
 									if useAltAnims then
 										self:safeAnimate(enemy, curAnim .. " alt", false, 2)
