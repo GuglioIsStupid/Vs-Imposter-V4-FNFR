@@ -214,6 +214,7 @@ function love.load()
 	weeksDefeat = require "states.weeks.weeks-Defeat"
 	weeksYellow = require "states.weeks.weeksYellow"
 	weeksHenry = require "states.weeks.weeksHenry"
+	weeksGreen = require "states.weeks.weeksGreen"
 
 	-- Load substates
 	gameOver = require "substates.game-over"
@@ -254,6 +255,7 @@ function love.load()
 		require "weeks.defeat",
 		require "weeks.yellow",
 		require "weeks.henry",
+		require "weeks.green"
 	}
 	weekDesc = { -- Add your week description here
 		"LEARN TO FUNK",
@@ -292,11 +294,12 @@ function love.load()
 			}
 		},
 		{
-			"Week 3",
+			"Green",
 			{
-				"Pico",
-				"Philly Nice",
-				"Blammed"
+				"Sussus Toogus",
+				"Lights Down",
+				"Reactor",
+				"Ejected"
 			}
 		},
 		{

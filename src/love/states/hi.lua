@@ -12,7 +12,7 @@ return {
     end,
 
     update = function(self, dt)
-        if input:pressed("gameBack") then
+        if input:pressed("gameBack") or not video:isPlaying() then
             Gamestate.switch(menu)
         end
     end,
