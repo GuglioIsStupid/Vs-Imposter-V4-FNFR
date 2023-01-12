@@ -6,31 +6,33 @@ return {
 	enter = function(self, from, songNum, songAppend)
 		pauseColor = {129, 100, 223}
 		weeks:enter()
-		stages["stage"]:enter()
 
 		week = 1
 
 		song = songNum
 		difficulty = songAppend
 
-		weeks:setIcon("enemy", "daddy dearest")
+		weeks:setIcon("enemy", "red impostor 1")
+
+        enemy = love.filesystem.load("sprites/characters/boyfriend.lua")()
+
+        flashAlpha = 0
 
 		self:load()
 	end,
 
 	load = function(self)
 		weeks:load()
-		stages["stage"]:load()
 
 		if song == 3 then
-			inst = waveAudio:newSource("songs/week1/dadbattle/inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/week1/dadbattle/voices.ogg", "stream")
+			inst = waveAudio:newSource("songs/meltdown/Inst.ogg", "stream")
+			voices = waveAudio:newSource("songs/meltdown/Voices.ogg", "stream")
 		elseif song == 2 then
-			inst = waveAudio:newSource("songs/week1/fresh/inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/week1/fresh/voices.ogg", "stream")
+			inst = waveAudio:newSource("songs/sabotage/Inst.ogg", "stream")
+			voices = waveAudio:newSource("songs/sabotage/Voices.ogg", "stream")
 		else
-			inst = waveAudio:newSource("songs/week1/bopeebo/inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/week1/bopeebo/voices.ogg", "stream")
+			inst = waveAudio:newSource("songs/sussus-moogus/Inst.ogg", "stream")
+			voices = waveAudio:newSource("songs/sussus-moogus/Voices.ogg", "stream")
 		end
 
 		self:initUI()
@@ -42,27 +44,30 @@ return {
 		weeks:initUI()
 
 		if song == 3 then
-			weeks:generateNotes("songs/week1/dadbattle/" .. difficulty .. ".json")
+			weeks:generateNotes("songs/meltdown/meltdown-hard.json")
+            weeks:generateEventsOld("songs/meltdown/events.json")
 		elseif song == 2 then
-			weeks:generateNotes("songs/week1/fresh/" .. difficulty .. ".json")
-			weeks:generateEventsOld("songs/week1/fresh/events.json")
+			weeks:generateNotes("songs/sabotage/sabotage-hard.json")
+            weeks:generateEventsOld("songs/sabotage/events.json")
 		else
-			weeks:generateNotes("songs/week1/bopeebo/" .. difficulty .. ".json")
-			weeks:generateEventsOld("songs/week1/bopeebo/events.json")
+			weeks:generateNotes("songs/sussus-moogus/sussus-moogus-hard.json")
+            weeks:generateEventsOld("songs/sussus-moogus/events.json")
 		end
 	end,
 
 	update = function(self, dt)
 		weeks:update(dt)
-		stages["stage"]:update(dt)
+
+        -- lerp flashAlpha to 0
+        flashAlpha = coolUtil.lerp(flashAlpha, 0, coolUtil.boundTo(0, dt * 5, 1))
 
 		if health[1] >= 80 then
-			if enemyIcon:getAnimName() == "daddy dearest" then
-				weeks:setIcon("enemy", "daddy dearest losing")
+			if enemyIcon:getAnimName() == "red impostor 1" then
+				weeks:setIcon("enemy", "red impostor 1 losing")
 			end
 		else
-			if enemyIcon:getAnimName() == "daddy dearest losing" then
-				weeks:setIcon("enemy", "daddy dearest")
+			if enemyIcon:getAnimName() == "red impostor 1 losing" then
+				weeks:setIcon("enemy", "red impostor 1")
 			end
 		end
 
@@ -104,10 +109,13 @@ return {
 			love.graphics.scale(extraCamZoom.sizeX, extraCamZoom.sizeY)
 			love.graphics.scale(cam.sizeX, cam.sizeY)
 
-			stages["stage"]:draw()
 			weeks:drawRating(0.9)
 		love.graphics.pop()
-		
+
+        graphics.setColor(1,0,0,flashAlpha)
+        love.graphics.rectangle("fill", 0, 0, graphics.getWidth(), graphics.getHeight())
+        graphics.setColor(1,1,1,1)
+
 		weeks:drawTimeLeftBar()
 		weeks:drawHealthBar()
 		if not paused then
@@ -116,7 +124,6 @@ return {
 	end,
 
 	leave = function(self)
-		stages["stage"]:leave()
 		weeks:leave()
 	end
 }

@@ -146,6 +146,7 @@ function love.load()
 	require "modules.camera"
 	require "modules.discord"
 	require "modules.errHandler"
+	coolUtil = require "modules.coolUtil"
 	cutscene = require "modules.cutscene"
 	input = require "input"
 
@@ -352,7 +353,7 @@ function love.load()
 	}
 	impWeeks = {
 		[""] = require "states.hi",
-		["WEEK 1"] = require "states.hi",
+		["WEEK 1"] = require "weeks.red",
 		["WEEK 2"] = require "states.hi",
 		["WEEK 3"] = require "weeks.yellow",
 		["WEEK 5"] = require "states.hi",
@@ -442,7 +443,8 @@ function love.load()
 	musicTime = 0
 	
 	health = {}
-	health[1] = 50
+	health[1] = 50 -- tweened one
+	health[2] = 50 -- normal one
 
 	if curOS == "Web" then
 		Gamestate.switch(clickStart)
