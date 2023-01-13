@@ -20,31 +20,39 @@ return {
 
 	load = function(self)
 		weeksGreen:load()
+		cutscenePlaying = false
 		if song == 4 then
-			stages["miraReactor"]:leave()
+			stages["miraFall"]:leave()
 			stages["miraFall"]:enter()
 			stages["miraFall"]:load()
 			inst = waveAudio:newSource("songs/ejected/Inst.ogg")
-			inst = waveAudio:newSource("songs/ejected/Voices.ogg")
+			voices = waveAudio:newSource("songs/ejected/Voices.ogg")
+			self:initUI()
+			weeksGreen:setupEjectCountdown()
 		elseif song == 3 then
 			stages["miraCaf"]:leave()
 			stages["miraReactor"]:enter()
 			stages["miraReactor"]:load()
 			inst = waveAudio:newSource("songs/reactor/Inst.ogg", "stream")
 			voices = waveAudio:newSource("songs/reactor/Voices.ogg", "stream")
+			self:initUI()
+			weeksGreen:setupCountdown()
 		elseif song == 2 then
 			stages["miraCaf"]:load()
 			inst = waveAudio:newSource("songs/lights-down/Inst.ogg", "stream")
 			voices = waveAudio:newSource("songs/lights-down/Voices.ogg", "stream")
+			self:initUI()
+			weeksGreen:setupCountdown()
 		else
 			stages["miraCaf"]:load()
+			countingDown = true
 			inst = waveAudio:newSource("songs/sussus-toogus/Inst.ogg", "stream")
 			voices = waveAudio:newSource("songs/sussus-toogus/Voices.ogg", "stream")
+			cutscene = love.graphics.newVideo("videos/mira1.ogv")
+			cutscene:play()
+			cutscenePlaying = true
+			self:initUI()
 		end
-
-		self:initUI()
-
-		weeksGreen:setupCountdown()
 	end,
 
 	initUI = function(self)
@@ -61,6 +69,10 @@ return {
 	end,
 
 	update = function(self, dt)
+		if not cutscene:isPlaying() and cutscenePlaying then
+			cutscenePlaying = false
+			weeksGreen:setupCountdown()
+		end
 		weeksGreen:update(dt)
 		if song == 4 then
 			stages["miraFall"]:update(dt)
@@ -126,12 +138,22 @@ return {
 			end
 			weeksGreen:drawRating(0.9)
 		love.graphics.pop()
-		
-		weeksGreen:drawTimeLeftBar()
-		weeksGreen:drawHealthBar()
-		if not paused then
-			weeksGreen:drawUI()
+
+
+		if song == 4 then
+			if not paused and video:isPlaying() then	
+				weeksGreen:drawTimeLeftBar()
+				weeksGreen:drawHealthBar()
+				weeksGreen:drawUI()
+			end
+		else
+			if not paused then	
+				weeksGreen:drawTimeLeftBar()
+				weeksGreen:drawHealthBar()
+				weeksGreen:drawUI()
+			end
 		end
+
 	end,
 
 	leave = function(self)
