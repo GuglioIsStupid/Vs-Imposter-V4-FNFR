@@ -183,6 +183,7 @@ function love.load()
 		["blackChase"] = require "stages.blackChase",
 		["cargo"] = require "stages.cargo",
 		["henry"] = require "stages.henry",
+		["polus1"] = require "stages.polus1"
 	}
 
 	mods = {
@@ -256,7 +257,8 @@ function love.load()
 		require "weeks.defeat",
 		require "weeks.yellow",
 		require "weeks.henry",
-		require "weeks.green"
+		require "weeks.green",
+		require "weeks.red"
 	}
 	weekDesc = { -- Add your week description here
 		"LEARN TO FUNK",
@@ -304,11 +306,11 @@ function love.load()
 			}
 		},
 		{
-			"Week 4",
+			"Red",
 			{
-				"Satin Panties",
-				"High",
-				"M.I.L.F"
+				"fuck1",
+				"fuck2",
+				"fuck3"
 			}
 		},
 		{
