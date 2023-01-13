@@ -65,7 +65,7 @@ return {
             love.graphics.setColor(1, 1, 1)
         end
         if video:isPlaying() then
-            love.graphics.draw(video, -650, -350)
+            love.graphics.draw(video, -750, -450, 0, 1.2, 1.2)
         end
     end,
 

@@ -1108,16 +1108,6 @@ return {
 	end,
 
 
-	--[[
-	doCutscene = function(self)
-		cutscenePlaying = true
-		cutscene = love.graphics.newVideo("videos/toogus.ogv")
-		cutscene:play()
-	end
-
-
-	--]]
-
 	setIcon = function(self, icon, name)
 		if icon == "boyfriend" then
 			if boyfriendIcon:isAnimName(name) then
@@ -1333,7 +1323,7 @@ return {
 					break
 				end
 			end
-			if song == 3 then
+			if song == 4 then
 				if musicThres ~= oldMusicThres and math.fmod(absMusicTime, 240000 / bpm) < 100 and not video:isPlaying() and musicTime > 1000 then
 					if uiScaleTimer then Timer.cancel(uiScaleTimer) end
 					if camScaleTimer then Timer.cancel(camScaleTimer) end
@@ -1462,7 +1452,8 @@ return {
 									notMissed[noteNum] = false
 									if not settings.noMiss then
 										if boyfriendNote[1]:getAnimName() ~= "hold" and boyfriendNote[1]:getAnimName() ~= "end" then
-											health[1] = health[1] - 2
+											if health[2] then Timer.cancel(health[2]) end
+											health[2] = Timer.tween((60 / bpm) / 4, health, {[1] = health[1] - 2}, "linear")
 										end
 									else
 										health[1] = 0
@@ -1634,13 +1625,15 @@ return {
 
 											if not settings.noMiss then
 												if boyfriendNote[1]:getAnimName() ~= "hold" or boyfriendNote[1]:getAnimName() ~= "end" then
-													health[1] = health[1] + 1
+													if health[2] then Timer.cancel(health[2]) end
+													health[2] = Timer.tween((60 / bpm) / 4, health, {[1] = health[1] + 1}, "linear")
 												end
 											else
 												health[1] = 0
 											end
 
-											health[1] = health[1] + 1
+											if health[2] then Timer.cancel(health[2]) end
+											health[2] = Timer.tween((60 / bpm) / 4, health, {[1] = health[1] + 1}, "linear")
 											if boyfriendNote[1]:getAnimName() ~= "hold" or boyfriendNote[1]:getAnimName() ~= "end" then
 												noteCounter = noteCounter + 1
 											end
@@ -1672,7 +1665,8 @@ return {
 										score = score - 10
 										combo = 0
 										if not settings.noMiss then
-											health[1] = health[1] - 1
+											if health[2] then Timer.cancel(health[2]) end
+											health[2] = Timer.tween((60 / bpm) / 4, health, {[1] = health[1] - 2}, "linear")
 										else
 											health[1] = 0
 										end
@@ -2169,59 +2163,61 @@ return {
 				love.graphics.pop()
 				
 				love.graphics.push()
-					love.graphics.translate(0, -musicPos)
+				if not inCutscene then
+						love.graphics.translate(0, -musicPos)
 
-					for j = #enemyNotes[i], 1, -1 do
-						if ((-400 + enemyNotes[i][j].y * 0.6 * speed) - musicPos <= 560) then
-							local animName = enemyNotes[i][j]:getAnimName()
+						for j = #enemyNotes[i], 1, -1 do
+							if ((-400 + enemyNotes[i][j].y * 0.6 * speed) - musicPos <= 560) then
+								local animName = enemyNotes[i][j]:getAnimName()
 
-							if animName == "hold" or animName == "end" then
-								graphics.setColor(1, 1, 1, 0.5)
-							end
-							if settings.middleScroll then
-								graphics.setColor(1, 1, 1, 0.5)
-							end
-							if pixel then
-								if enemyNotes[i][j]:getAnimName() == "hold" then
-									enemyNotes[i][j]:udraw(8, 8 * 1.7, enemyNotes[i][j].x + notesPos.enemy[i].x, -400 + enemyNotes[i][j].y * 0.6 * speed + notesPos.enemy[i].y)
-								else
-									enemyNotes[i][j]:udraw(8, enemyNotes[i][j].sizeY, enemyNotes[i][j].x + notesPos.enemy[i].x, -400 + enemyNotes[i][j].y * 0.6 * speed)
+								if animName == "hold" or animName == "end" then
+									graphics.setColor(1, 1, 1, 0.5)
 								end
-							else
-								if enemyNotes[i][j]:getAnimName() == "hold" then
-									enemyNotes[i][j]:udraw(1, 1 * 1.7, enemyNotes[i][j].x + notesPos.enemy[i].x, -400 + enemyNotes[i][j].y * 0.6 * speed + notesPos.enemy[i].y)
-								else
-									enemyNotes[i][j]:udraw(1, enemyNotes[i][j].sizeY, enemyNotes[i][j].x + notesPos.enemy[i].x, -400 + enemyNotes[i][j].y * 0.6 * speed + notesPos.enemy[i].y)
+								if settings.middleScroll then
+									graphics.setColor(1, 1, 1, 0.5)
 								end
-							end
-							graphics.setColor(1, 1, 1)
-						end
-					end
-					for j = #boyfriendNotes[i], 1, -1 do
-						if ((-400 + boyfriendNotes[i][j].y * 0.6 * speed) - musicPos <= 560) then
-							local animName = boyfriendNotes[i][j]:getAnimName()
-
-							if animName == "hold" or animName == "end" then
-								graphics.setColor(1, 1, 1, math.min(0.5, (500 + ((-400 + boyfriendNotes[i][j].y * 0.6 * speed) - musicPos)) / 150))
-							else
-								graphics.setColor(1, 1, 1, math.min(1, (500 + ((-400 + boyfriendNotes[i][j].y * 0.6 * speed) - musicPos)) / 75))
-							end
-							if pixel then
-								if boyfriendNotes[i][j]:getAnimName() == "hold" then
-									boyfriendNotes[i][j]:udraw(8, 8 * 1.7, boyfriendNotes[i][j].x + notesPos.boyfriend[i].x, -400 + boyfriendNotes[i][j].y * 0.6 * speed + notesPos.boyfriend[i].y)
+								if pixel then
+									if enemyNotes[i][j]:getAnimName() == "hold" then
+										enemyNotes[i][j]:udraw(8, 8 * 1.7, enemyNotes[i][j].x + notesPos.enemy[i].x, -400 + enemyNotes[i][j].y * 0.6 * speed + notesPos.enemy[i].y)
+									else
+										enemyNotes[i][j]:udraw(8, enemyNotes[i][j].sizeY, enemyNotes[i][j].x + notesPos.enemy[i].x, -400 + enemyNotes[i][j].y * 0.6 * speed)
+									end
 								else
-									boyfriendNotes[i][j]:udraw(8, boyfriendNotes[i][j].sizeY, boyfriendNotes[i][j].x + notesPos.boyfriend[i].x, -400 + boyfriendNotes[i][j].y * 0.6 * speed + notesPos.boyfriend[i].y)
+									if enemyNotes[i][j]:getAnimName() == "hold" then
+										enemyNotes[i][j]:udraw(1, 1 * 1.7, enemyNotes[i][j].x + notesPos.enemy[i].x, -400 + enemyNotes[i][j].y * 0.6 * speed + notesPos.enemy[i].y)
+									else
+										enemyNotes[i][j]:udraw(1, enemyNotes[i][j].sizeY, enemyNotes[i][j].x + notesPos.enemy[i].x, -400 + enemyNotes[i][j].y * 0.6 * speed + notesPos.enemy[i].y)
+									end
 								end
-							else
-								if boyfriendNotes[i][j]:getAnimName() == "hold" then
-									boyfriendNotes[i][j]:udraw(1, 1 * 1.7, boyfriendNotes[i][j].x + notesPos.boyfriend[i].x, -400 + boyfriendNotes[i][j].y * 0.6 * speed + notesPos.boyfriend[i].y)
-								else
-									boyfriendNotes[i][j]:udraw(1, boyfriendNotes[i][j].sizeY, boyfriendNotes[i][j].x + notesPos.boyfriend[i].x, -400 + boyfriendNotes[i][j].y * 0.6 * speed + notesPos.boyfriend[i].y)
-								end
+								graphics.setColor(1, 1, 1)
 							end
 						end
+						for j = #boyfriendNotes[i], 1, -1 do
+							if ((-400 + boyfriendNotes[i][j].y * 0.6 * speed) - musicPos <= 560) then
+								local animName = boyfriendNotes[i][j]:getAnimName()
+
+								if animName == "hold" or animName == "end" then
+									graphics.setColor(1, 1, 1, math.min(0.5, (500 + ((-400 + boyfriendNotes[i][j].y * 0.6 * speed) - musicPos)) / 150))
+								else
+									graphics.setColor(1, 1, 1, math.min(1, (500 + ((-400 + boyfriendNotes[i][j].y * 0.6 * speed) - musicPos)) / 75))
+								end
+								if pixel then
+									if boyfriendNotes[i][j]:getAnimName() == "hold" then
+										boyfriendNotes[i][j]:udraw(8, 8 * 1.7, boyfriendNotes[i][j].x + notesPos.boyfriend[i].x, -400 + boyfriendNotes[i][j].y * 0.6 * speed + notesPos.boyfriend[i].y)
+									else
+										boyfriendNotes[i][j]:udraw(8, boyfriendNotes[i][j].sizeY, boyfriendNotes[i][j].x + notesPos.boyfriend[i].x, -400 + boyfriendNotes[i][j].y * 0.6 * speed + notesPos.boyfriend[i].y)
+									end
+								else
+									if boyfriendNotes[i][j]:getAnimName() == "hold" then
+										boyfriendNotes[i][j]:udraw(1, 1 * 1.7, boyfriendNotes[i][j].x + notesPos.boyfriend[i].x, -400 + boyfriendNotes[i][j].y * 0.6 * speed + notesPos.boyfriend[i].y)
+									else
+										boyfriendNotes[i][j]:udraw(1, boyfriendNotes[i][j].sizeY, boyfriendNotes[i][j].x + notesPos.boyfriend[i].x, -400 + boyfriendNotes[i][j].y * 0.6 * speed + notesPos.boyfriend[i].y)
+									end
+								end
+							end
+						end
 					end
-					graphics.setColor(1, 1, 1)
+						graphics.setColor(1, 1, 1)
 				love.graphics.pop()
 			end
 			graphics.setColor(1, 1, 1, countdownFade[1])
