@@ -182,6 +182,9 @@ function love.load()
 		["blackChase"] = require "stages.blackChase",
 		["cargo"] = require "stages.cargo",
 		["henry"] = require "stages.henry",
+		["miraCaf"] = require "stages.miraCaf",
+		["miraReactor"] = require "stages.miraReactor",
+		["miraFall"] = require "stages.miraFall"
 	}
 
 	mods = {
@@ -353,7 +356,7 @@ function love.load()
 	impWeeks = {
 		[""] = require "states.hi",
 		["WEEK 1"] = require "states.hi",
-		["WEEK 2"] = require "states.hi",
+		["WEEK 2"] = require "weeks.green",
 		["WEEK 3"] = require "weeks.yellow",
 		["WEEK 5"] = require "states.hi",
 		["WEEK 6"] = require "states.hi",

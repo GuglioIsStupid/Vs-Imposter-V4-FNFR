@@ -1085,6 +1085,39 @@ return {
 		)
 	end,
 
+	setupEjectCountdown = function(self)
+		lastReportedPlaytime = 0
+		musicTime = (240 / bpm) * -1500
+		countdownFade[1] = 0
+
+
+		musicThres = 0
+		musicPos = 0
+
+		countingDown = false
+
+		previousFrameTime = love.timer.getTime() * 1000
+		musicTime = 0
+
+		voices:setVolume(settings.vocalsVol)
+		if inst then 
+			inst:setVolume(settings.instVol)
+			inst:play() 
+		end
+		voices:play()
+	end,
+
+
+	--[[
+	doCutscene = function(self)
+		cutscenePlaying = true
+		cutscene = love.graphics.newVideo("videos/toogus.ogv")
+		cutscene:play()
+	end
+
+
+	--]]
+
 	setIcon = function(self, icon, name)
 		if icon == "boyfriend" then
 			if boyfriendIcon:isAnimName(name) then
@@ -1300,13 +1333,22 @@ return {
 					break
 				end
 			end
+			if song == 3 then
+				if musicThres ~= oldMusicThres and math.fmod(absMusicTime, 240000 / bpm) < 100 and not video:isPlaying() and musicTime > 1000 then
+					if uiScaleTimer then Timer.cancel(uiScaleTimer) end
+					if camScaleTimer then Timer.cancel(camScaleTimer) end
+	
+					camScaleTimer = Timer.tween((60 / bpm) / 16, cam, {sizeX = camScale.x * 1.05, sizeY = camScale.y * 1.05}, "out-quad", function() camScaleTimer = Timer.tween((60 / bpm), cam, {sizeX = camScale.x, sizeY = camScale.y}, "out-quad") end)
+					uiScaleTimer = Timer.tween((60 / bpm) / 16, uiScale, {sizeX = uiScale.x * 1.05, sizeY = uiScale.y * 1.05}, "out-quad", function() uiScaleTimer = Timer.tween((60 / bpm), uiScale, {sizeX = uiScale.x, sizeY = uiScale.y}, "out-quad") end)
+				end
+			else
+				if musicThres ~= oldMusicThres and math.fmod(absMusicTime, 240000 / bpm) < 100 then
+					if uiScaleTimer then Timer.cancel(uiScaleTimer) end
+					if camScaleTimer then Timer.cancel(camScaleTimer) end
 
-			if musicThres ~= oldMusicThres and math.fmod(absMusicTime, 240000 / bpm) < 100 then
-				if uiScaleTimer then Timer.cancel(uiScaleTimer) end
-				if camScaleTimer then Timer.cancel(camScaleTimer) end
-
-				camScaleTimer = Timer.tween((60 / bpm) / 16, cam, {sizeX = camScale.x * 1.05, sizeY = camScale.y * 1.05}, "out-quad", function() camScaleTimer = Timer.tween((60 / bpm), cam, {sizeX = camScale.x, sizeY = camScale.y}, "out-quad") end)
-				uiScaleTimer = Timer.tween((60 / bpm) / 16, uiScale, {sizeX = uiScale.x * 1.05, sizeY = uiScale.y * 1.05}, "out-quad", function() uiScaleTimer = Timer.tween((60 / bpm), uiScale, {sizeX = uiScale.x, sizeY = uiScale.y}, "out-quad") end)
+					camScaleTimer = Timer.tween((60 / bpm) / 16, cam, {sizeX = camScale.x * 1.05, sizeY = camScale.y * 1.05}, "out-quad", function() camScaleTimer = Timer.tween((60 / bpm), cam, {sizeX = camScale.x, sizeY = camScale.y}, "out-quad") end)
+					uiScaleTimer = Timer.tween((60 / bpm) / 16, uiScale, {sizeX = uiScale.x * 1.05, sizeY = uiScale.y * 1.05}, "out-quad", function() uiScaleTimer = Timer.tween((60 / bpm), uiScale, {sizeX = uiScale.x, sizeY = uiScale.y}, "out-quad") end)
+				end
 			end
 
 			girlfriend:update(dt)
