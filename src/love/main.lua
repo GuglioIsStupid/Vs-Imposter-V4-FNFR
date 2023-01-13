@@ -357,7 +357,7 @@ function love.load()
 	impWeeks = {
 		[""] = require "states.hi",
 		["WEEK 1"] = require "weeks.red",
-		["WEEK 2"] = require "states.hi",
+		["WEEK 2"] = require "states.green",
 		["WEEK 3"] = require "weeks.yellow",
 		["WEEK 5"] = require "states.hi",
 		["WEEK 6"] = require "states.hi",
