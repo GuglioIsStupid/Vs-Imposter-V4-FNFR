@@ -6,6 +6,7 @@ return {
 	enter = function(self, from, songNum, songAppend)
 		pauseColor = {129, 100, 223}
 		weeks:enter()
+		stages["polus1"]:enter()
 
 		week = 1
 
@@ -23,6 +24,7 @@ return {
 
 	load = function(self)
 		weeks:load()
+		stages["polus1"]:load()
 
 		if song == 3 then
 			inst = waveAudio:newSource("songs/meltdown/Inst.ogg", "stream")
@@ -57,6 +59,7 @@ return {
 
 	update = function(self, dt)
 		weeks:update(dt)
+		stages["polus1"]:update(dt)
 
         -- lerp flashAlpha to 0
         flashAlpha = coolUtil.lerp(flashAlpha, 0, coolUtil.boundTo(0, dt * 5, 1))
@@ -109,6 +112,8 @@ return {
 			love.graphics.scale(extraCamZoom.sizeX, extraCamZoom.sizeY)
 			love.graphics.scale(cam.sizeX, cam.sizeY)
 
+			stages["polus1"]:draw()
+			
 			weeks:drawRating(0.9)
 		love.graphics.pop()
 

@@ -537,6 +537,9 @@ return {
 
 		for i = 1, #chart["notes"] do
 			bpm = chart["notes"][i]["bpm"]
+			if bpm == 0 or bpm == nil then
+				bpm = 120
+			end
 
 			if bpm then
 				break

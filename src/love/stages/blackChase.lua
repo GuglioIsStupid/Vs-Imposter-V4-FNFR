@@ -54,7 +54,6 @@ return {
         ohnoHeAngy = false
         stageImages[9]:update(dt)
 
-
     end,
 
     update = function(self, dt)
