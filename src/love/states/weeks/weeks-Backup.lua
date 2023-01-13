@@ -364,6 +364,7 @@ return {
 		boyfriendNotes = {}
 		picoNotes = {}
 		health[1] = 50
+		health[2] = 50
 		score = 0
 		missCounter = 0
 		altScore = 0
@@ -1351,8 +1352,8 @@ return {
 	end,
 
 	updateUI = function(self, dt)
-		enemyIcon.x = 425 - health[1] * 10
-		boyfriendIcon.x = 585 - health[1] * 10
+		enemyIcon.x = 425 - health[2] * 10
+		boyfriendIcon.x = 585 - health[2] * 10
 		if extraCamZoom.sizeX > 1 then
 			extraCamZoom.sizeX = extraCamZoom.sizeX - 1 * dt
 			extraCamZoom.sizeY = extraCamZoom.sizeY - 1 * dt
@@ -1418,11 +1419,10 @@ return {
 									notMissed[noteNum] = false
 									if not settings.noMiss then
 										if boyfriendNote[1]:getAnimName() ~= "hold" and boyfriendNote[1]:getAnimName() ~= "end" then
-											if health[2] then Timer.cancel(health[2]) end
-											health[2] = Timer.tween((60 / bpm) / 4, health, {[1] = health[1] - 2}, "linear")
+											health[2] = health[2] - 1
 										end
 									else
-										health[1] = 0
+										health[2] = 0
 									end
 									if boyfriendNote[1]:getAnimName() ~= "hold" and boyfriendNote[1]:getAnimName() ~= "end" then
 										missCounter = missCounter + 1
@@ -1593,15 +1593,13 @@ return {
 
 											if not settings.noMiss then
 												if boyfriendNote[1]:getAnimName() ~= "hold" or boyfriendNote[1]:getAnimName() ~= "end" then
-													if health[2] then Timer.cancel(health[2]) end
-													health[2] = Timer.tween((60 / bpm) / 4, health, {[1] = health[1] + 1}, "linear")
+													health[2] = health[2] - 2
 												end
 											else
-												health[1] = 0
+												health[2] = 0
 											end
 
-											if health[2] then Timer.cancel(health[2]) end
-											health[2] = Timer.tween((60 / bpm) / 4, health, {[1] = health[1] + 1}, "linear")
+											health[2] = health[2] + 1
 											if boyfriendNote[1]:getAnimName() ~= "hold" or boyfriendNote[1]:getAnimName() ~= "end" then
 												noteCounter = noteCounter + 1
 											end
@@ -1633,10 +1631,9 @@ return {
 										score = score - 10
 										combo = 0
 										if not settings.noMiss then
-											if health[2] then Timer.cancel(health[2]) end
-											health[2] = Timer.tween((60 / bpm) / 4, health, {[1] = health[1] - 2}, "linear")
+											health[2] = health[2] - 2
 										else
-											health[1] = 0
+											health[2] = 0
 										end
 										missCounter = missCounter + 1
 									end
@@ -1735,16 +1732,16 @@ return {
 					end
 				end
 
-				if health[1] > 100 then
-					health[1] = 100
-				elseif health[1] > 20 and boyfriendIcon:getAnimName() == "boyfriend losing" then
+				if health[2] > 100 then
+					health[2] = 100
+				elseif health[2] > 20 and boyfriendIcon:getAnimName() == "boyfriend losing" then
 					boyfriendIcon:animate("boyfriend", false)
-				elseif health[1] <= 0 then -- Game over
-					health[1] = 0
+				elseif health[2] <= 0 then -- Game over
+					health[2] = 0
 					if not settings.practiceMode then
 						Gamestate.push(gameOver)
 					end
-				elseif health[1] <= 20 and boyfriendIcon:getAnimName() == "boyfriend" then
+				elseif health[2] <= 20 and boyfriendIcon:getAnimName() == "boyfriend" then
 					boyfriendIcon:animate("boyfriend losing", false)
 				end
 
@@ -2230,7 +2227,7 @@ return {
 			graphics.setColor(enemy.colours[1]/255, enemy.colours[2]/255, enemy.colours[3]/255)
 			love.graphics.rectangle("fill", -500, 350+downscrollOffset, 1000, 25)
 			graphics.setColor(boyfriend.colours[1]/255, boyfriend.colours[2]/255, boyfriend.colours[3]/255)
-			love.graphics.rectangle("fill", 500, 350+downscrollOffset, -health[1] * 10, 25)
+			love.graphics.rectangle("fill", 500, 350+downscrollOffset, -health[2] * 10, 25)
 			graphics.setColor(0, 0, 0)
 			love.graphics.setLineWidth(10)
 			love.graphics.rectangle("line", -500, 350+downscrollOffset, 1000, 25)

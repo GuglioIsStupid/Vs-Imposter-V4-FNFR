@@ -1466,8 +1466,7 @@ return {
 									notMissed[noteNum] = false
 									if not settings.noMiss then
 										if boyfriendNote[1]:getAnimName() ~= "hold" and boyfriendNote[1]:getAnimName() ~= "end" then
-											if health[2] then Timer.cancel(health[2]) end
-											health[2] = Timer.tween((60 / bpm) / 4, health, {[1] = health[1] - 2}, "linear")
+											health[1] = health[1] - 2
 										end
 									else
 										health[1] = 0
@@ -1651,15 +1650,13 @@ return {
 
 											if not settings.noMiss then
 												if boyfriendNote[1]:getAnimName() ~= "hold" or boyfriendNote[1]:getAnimName() ~= "end" then
-													if health[2] then Timer.cancel(health[2]) end
-													health[2] = Timer.tween((60 / bpm) / 4, health, {[1] = health[1] + 1}, "linear")
+													health[1] = health[1] + 1
 												end
 											else
 												health[1] = 0
 											end
 
-											if health[2] then Timer.cancel(health[2]) end
-											health[2] = Timer.tween((60 / bpm) / 4, health, {[1] = health[1] + 1}, "linear")
+											health[1] = health[1] + 1
 											if boyfriendNote[1]:getAnimName() ~= "hold" or boyfriendNote[1]:getAnimName() ~= "end" then
 												noteCounter = noteCounter + 1
 											end
@@ -1691,8 +1688,7 @@ return {
 										score = score - 10
 										combo = 0
 										if not settings.noMiss then
-											if health[2] then Timer.cancel(health[2]) end
-											health[2] = Timer.tween((60 / bpm) / 4, health, {[1] = health[1] - 2}, "linear")
+											health[1] = health[1] - 2
 										else
 											health[1] = 0
 										end
