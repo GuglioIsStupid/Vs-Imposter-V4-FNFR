@@ -1279,25 +1279,21 @@ return {
 					if camTimer then
 						Timer.cancel(camTimer)
 					end
-					if events[i].mustHitSection then
-						if curPlayer ~= "pixelboyfriend" then
-							camTimer = Timer.tween(1.25, cam, {x = -boyfriend.x - 75, y = -boyfriend.y - 25}, "out-quad")
+
+					if not middleCam then
+						if events[i].mustHitSection then
+							if curPlayer ~= "pixelboyfriend" then
+								camTimer = Timer.tween(1.25, cam, {x = -boyfriend.x - 75}, "out-quad")
+							else
+								camTimer = Timer.tween(1.25, cam, {x = 300, y = -300}, "out-quad")
+							end
 						else
-							camTimer = Timer.tween(1.25, cam, {x = -boyfriend.x + 100, y = -boyfriend.y + 75}, "out-quad")
+							camTimer = Timer.tween(1.25, cam, {x = 500, y = -300}, "out-quad")
 						end
 					else
-						if curEnemy == "pico" then
-							camTimer = Timer.tween(1.25, cam, {x = -enemy.x - 500, y = -enemy.y - 50}, "out-quad")
-						elseif curEnemy == "monsterchristmas" or curEnemy == "dearestduo" then
-							camTimer = Timer.tween(1.25, cam, {x = -enemy.x - 500, y = -enemy.y - 275}, "out-quad")
-						elseif curEnemy == "senpai" or curEnemy == "senpaiangry" or curEnemy == "spirit" then
-							Timer.tween(1.25, cam, {x = -enemy.x - 100, y = -enemy.y + 75}, "out-quad")
-						elseif curEnemy == "tankman" then
-							camTimer = Timer.tween(1.25, cam, {x = -enemy.x + 75, y = -enemy.y - 100}, "out-quad")
-						else
-							camTimer = Timer.tween(1.25, cam, {x = -enemy.x - 300, y = -enemy.y - 275}, "out-quad")
-						end
+						camTimer = Timer.tween(1.25, cam, {x = 00, y = -300}, "out-quad")
 					end
+
 
 					if events[i].altAnim then
 						useAltAnims = true
@@ -1590,14 +1586,25 @@ return {
 											},
 											"linear"
 										)
-										Timer.tween(
-											1.25, 
-											judgements[#judgements].img, 
-											{
-												y = girlfriend.y - 100
-											}, 
-											"out-expo"
-										)
+										if song == 4 then
+											Timer.tween(
+												10, 
+												judgements[#judgements].img, 
+												{
+													y = girlfriend.y - 1000
+												}, 
+												"out-expo"
+											)
+										else
+											Timer.tween(
+												1.25, 
+												judgements[#judgements].img, 
+												{
+													y = girlfriend.y - 100
+												}, 
+												"out-expo"
+											)
+										end
 										--ratingTimers[2] = Timer.tween(2, rating, {y = girlfriend.y - 100}, "out-elastic")
 										if combo >= 100 then
 											ratingTimers[3] = Timer.tween(2, numbers[1], {y = girlfriend.y + love.math.random(-10, 10)}, "out-elastic") -- 100's
@@ -1734,14 +1741,25 @@ return {
 									},
 									"linear"
 								)
-								Timer.tween(
-									1.25, 
-									judgements[#judgements].img, 
-									{
-										y = girlfriend.y - 100
-									}, 
-									"out-expo"
-								)
+								if song == 4 then
+									Timer.tween(
+										10, 
+										judgements[#judgements].img, 
+										{
+											y = girlfriend.y - 1000
+										}, 
+										"out-expo"
+									)
+								else
+									Timer.tween(
+										1.25, 
+										judgements[#judgements].img, 
+										{
+											y = girlfriend.y - 100
+										}, 
+										"out-expo"
+									)
+								end
 								if combo >= 100 then
 									ratingTimers[3] = Timer.tween(2, numbers[1], {y = girlfriend.y + love.math.random(-10, 10)}, "out-elastic") -- 100's
 								end

@@ -37,7 +37,7 @@ return {
 			love.graphics.translate(cam.x, cam.y)
 
 
-             stageImages[1]:draw()
+            stageImages[1]:draw()
             stageImages[2]:draw()
             stageImages[3]:draw()
             girlfriend:draw()

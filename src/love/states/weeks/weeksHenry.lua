@@ -1403,7 +1403,7 @@ return {
 							enemyArrow:animate("confirm", false)
 
 
-							if enemyNote[1].who == "henry" then
+							if enemyNote[1].who == "Opponent 2 Sing" then
 								if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
 									if useAltAnims then
 										self:safeAnimate(enemy, curAnim .. " alt", false, 2)
@@ -1417,7 +1417,7 @@ return {
 										self:safeAnimate(enemy, curAnim, false, 2)
 									end
 								end
-							elseif enemyNote[1].who == "Opponent 2 Sing" then
+							elseif enemyNote[1].who == "henry" then
 								if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
 									if useAltAnims then
 										self:safeAnimate(enemyTwo, curAnim .. " alt", false, 2)

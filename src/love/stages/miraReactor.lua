@@ -31,8 +31,9 @@ return {
         enemy.x, enemy.y = -533, 415
         boyfriend.x, boyfriend.y = 493, 413
 
-        cam.sizeX, cam.sizeY = 0.7, 0.7
-        camScale.x, camScale.y = 0.7, 0.7
+        cam.sizeX, cam.sizeY = 0.9, 0.9
+        camScale.x, camScale.y = 0.9, 0.9
+        Timer.tween(1.25, cam, {x = 00, y = -300}, "out-quad")
 
     end,
 
