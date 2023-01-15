@@ -356,16 +356,16 @@ function love.load()
 		["..."] = {"DEFEAT", {""}}
 	}
 	impWeeks = {
-		[""] = require "states.hi",
+		[""] = require "weeks.orange",
 		["WEEK 1"] = require "weeks.red",
 		["WEEK 2"] = require "weeks.green",
 		["WEEK 3"] = require "weeks.yellow",
-		["WEEK 5"] = require "states.hi",
-		["WEEK 6"] = require "states.hi",
-		["WEEK 7"] = require "states.hi",
-		["WEEK J"] = require "states.hi",
-		["BOO!"] = require "states.hi",
-		["TOMONGUS"] = require "states.hi",
+		["WEEK 5"] = require "weeks.orange",
+		["WEEK 6"] = require "weeks.orange",
+		["WEEK 7"] = require "weeks.orange",
+		["WEEK J"] = require "weeks.orange",
+		["BOO!"] = require "weeks.orange",
+		["TOMONGUS"] = require "weeks.orange",
 		["HENRY"] = require "weeks.henry",
 		["..."] = chooseMissCount
 	}
