@@ -23,4 +23,5 @@ function love.conf(t)
 	t.console = true -- uncomment this to use the console (To use print functions)
 
 	t.window.title = "VS Impostor: V4 - FNFR" -- Custom window Title
+	--test
 end
