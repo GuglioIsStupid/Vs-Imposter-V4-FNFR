@@ -33,17 +33,32 @@ return {
             ["frontPlant"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("pink/front pot")))
         }
 
-        enemy = love.filesystem.load("sprites/characters/boyfriend.lua")()
+        enemy = love.filesystem.load("sprites/characters/white.lua")()
 
+
+        boyfriend.x, boyfriend.y = 276, 86
+        girlfriend.x, girlfriend.y = -330, -226
+        enemy.x, enemy.y = -432, 293
+
+        
         stageImages["backPlant"].x, stageImages["backPlant"].y = -859, 35
         stageImages["frontPlant"].x, stageImages["frontPlant"].y = -1488, 586
         stageImages["theThingIDFK"].x, stageImages["theThingIDFK"].y = 27, -188
         stageImages["rhm"].x, stageImages["rhm"].y = 1057, 474
-        stageImages["vines"].x, stageImages["vines"].y = 85, -559
+        stageImages["vines"].x, stageImages["vines"].y = 85, -451
         stageImages["blue"].x, stageImages["blue"].y = -1034, 394
-        stageImages["grey"].x, stageImages["grey"].y = -579, -174
+        stageImages["grey"].x, stageImages["grey"].y = -513, 2
+        stageImages["Sky"].x, stageImages["Sky"].y = -575, -462
 
-        
+        stageImages["rhm"].sizeX, stageImages["rhm"].sizeY = 0.8, 0.8
+        stageImages["blue"].sizeX, stageImages["blue"].sizeY = 0.8, 0.8
+
+        stageImages["rhm"]:animate("rhm", true)
+        stageImages["grey"]:animate("grey", true)
+        stageImages["blue"]:animate("blue", true)
+        stageImages["longus"]:animate("longus", true)
+        stageImages["vines"]:animate("anim", true)
+        stageImages["hearts"]:animate("anim", true)
 
 
     end,
@@ -53,7 +68,12 @@ return {
     end,
 
     update = function(self, dt)
-
+        stageImages["rhm"]:update(dt)
+        stageImages["grey"]:update(dt)
+        stageImages["blue"]:update(dt)
+        stageImages["vines"]:update(dt)
+        stageImages["longus"]:update(dt)
+        stageImages["hearts"]:update(dt)
     end,
 
     draw = function()
@@ -72,6 +92,7 @@ return {
             stageImages["backPlant"]:draw()
             stageImages["theThingIDFK"]:draw()
             stageImages["grey"]:draw()
+            stageImages["longus"]:draw()
             girlfriend:draw()
             enemy:draw()
             boyfriend:draw()
@@ -80,6 +101,9 @@ return {
             stageImages["blue"]:draw()
             stageImages["frontPlant"]:draw()
             stageImages["vines"]:draw()
+            love.graphics.pop()
+            love.graphics.push()
+            stageImages["hearts"]:draw()
             love.graphics.pop()
 		love.graphics.pop()
     end,
