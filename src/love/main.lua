@@ -186,7 +186,8 @@ function love.load()
 		["polus1"] = require "stages.polus1",
 		["miraCaf"] = require "stages.miraCaf",
 		["miraReactor"] = require "stages.miraReactor",
-		["miraFall"] = require "stages.miraFall"
+		["miraFall"] = require "stages.miraFall",
+		["pinkMira"] = require "stages.pinkMira"
 	}
 
 	mods = {
@@ -263,6 +264,7 @@ function love.load()
 		require "weeks.green",
 		require "weeks.red",
 		require "weeks.orange",
+		require "weeks.pink",
 	}
 	weekDesc = { -- Add your week description here
 		"LEARN TO FUNK",
@@ -313,7 +315,7 @@ function love.load()
 			"Red",
 			{
 				"fuck1",
-				"fuck2",
+				"fuck2",  -- i hate you guglio          the songs have names 
 				"fuck3"
 			}
 		},
@@ -324,11 +326,11 @@ function love.load()
 			}
 		},
 		{
-			"Week 6",
+			"Pink",
 			{
-				"Senpai",
-				"Roses",
-				"Thorns"
+				"Heartbeat",
+				"Pinkwave",
+				"Pretender"
 			},
 		},
 		{
@@ -362,7 +364,7 @@ function love.load()
 		["WEEK 3"] = require "weeks.yellow",
 		["WEEK 5"] = require "weeks.orange",
 		["WEEK 6"] = require "weeks.orange",
-		["WEEK 7"] = require "weeks.orange",
+		["WEEK 7"] = require "weeks.pink",
 		["WEEK J"] = require "weeks.orange",
 		["BOO!"] = require "weeks.orange",
 		["TOMONGUS"] = require "weeks.orange",

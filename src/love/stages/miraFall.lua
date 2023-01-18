@@ -8,7 +8,7 @@ return {
             graphics.newImage(love.graphics.newImage(graphics.imagePath("greenWeek/speedLines"))),
             graphics.newImage(love.graphics.newImage(graphics.imagePath("greenWeek/scrollingClouds"))),
             graphics.newImage(love.graphics.newImage(graphics.imagePath("greenWeek/sky"))),
-
+            graphics.newImage(love.graphics.newImage(graphics.imagePath("greenWeek/fgClouds"))),
         }
 
         stageImages[1].translation = {x = 0, y = 0}
@@ -23,8 +23,25 @@ return {
         stageImages[1].sizeX, stageImages[1].sizeY = 0.5, 0.5
         stageImages[3].sizeX, stageImages[3].sizeY = 0.7, 0.7
 
-        stageImages[2].x = -331
+        stageImages[7].sizeX, stageImages[7].sizeY = 0.4, 0.4
 
+        stageImages[8].sizeX, stageImages[8].sizeY = 0.4, 0.4
+
+        stageImages[5].sizeX, stageImages[5].sizeY = 0.5, 0.5
+        stageImages[6].sizeX, stageImages[6].sizeY = 0.5, 0.5
+
+        stageImages[2].x = -578
+
+        stageImages[3].x = -94
+
+
+        stageImages[4].x = 483
+
+        stageImages[6].x = 274
+
+        stageImages[7].y = -552
+
+        stageImages[8].y = 312
 
 
         video = love.graphics.newVideo("videos/ejected.ogv")
@@ -96,8 +113,8 @@ return {
 
 
 
-        stageImages[6].translation.y = stageImages[6].translation.y - 10000 * dt
-        if stageImages[6].translation.y < -1024 then
+        stageImages[6].translation.y = stageImages[6].translation.y - 4000 * dt
+        if stageImages[6].translation.y < -7024 then
             stageImages[6].translation.y = 0
         end
 
@@ -128,6 +145,7 @@ return {
         love.graphics.push()
         --love.graphics.translate(cam.x * 0.9, cam.y * 0.9)
             stageImages[7]:draw()
+            stageImages[8]:draw()
             love.graphics.translate(stageImages[1].translation.x, stageImages[1].translation.y)
             for i = 1, 4 do 
                 stageImages[1].y = (i - 1) * 9976
@@ -167,33 +185,19 @@ return {
             end
             love.graphics.pop()
 
-            love.graphics.push()
-            love.graphics.translate(stageImages[2].translation.x, stageImages[5].translation.y)
-            for i = 1, 4 do 
-                stageImages[5].y = (i - 1) * 1024
-                stageImages[5]:draw()
-            end
-        love.graphics.pop()
-
-
-
-
-
-
-
-
 
 		love.graphics.push()
 		--	love.graphics.translate(cam.x, cam.y)
             girlfriend:draw()
 			enemy:draw()
 			boyfriend:draw()
-		love.graphics.pop()
-        if not vidHasStarted or video:isPlaying() then
-            love.graphics.setColor(0, 0, 0)
-            --love.graphics.rectangle("fill", -1000, -1000, 10000, 10000)
-            love.graphics.setColor(1, 1, 1)
-        end
+
+            love.graphics.translate(stageImages[6].translation.x, stageImages[6].translation.y)
+            for i = 1, 4 do 
+                stageImages[6].y = (i - 1) * 7024
+                stageImages[6]:draw()
+            end
+            love.graphics.pop()
         if video:isPlaying() then
             love.graphics.draw(video, -750, -450, 0, 1.2, 1.2)
         end
