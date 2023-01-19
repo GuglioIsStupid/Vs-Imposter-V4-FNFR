@@ -22,8 +22,8 @@ return {
 
         enemy = love.filesystem.load("sprites/characters/pink.lua")()
 
-		boyfriend.x, boyfriend.y = 276, 86
-        girlfriend.x, girlfriend.y = -330, -226
+        boyfriend.x, boyfriend.y = 496, 350
+        girlfriend.x, girlfriend.y = 25, 107
         enemy.x, enemy.y = -432, 293
 
         flashAlpha = 0

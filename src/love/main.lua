@@ -266,6 +266,7 @@ function love.load()
 		require "weeks.red",
 		require "weeks.orange",
 		require "weeks.pink",
+        require "weeks.ow",
 	}
 	weekDesc = { -- Add your week description here
 		"LEARN TO FUNK",
@@ -335,11 +336,9 @@ function love.load()
 			},
 		},
 		{
-			"Week 7",
+			"Ow",
 			{
-				"Ugh",
-				"Guns",
-				"Stress"
+				"Ow"
 			}
 		}
 	}

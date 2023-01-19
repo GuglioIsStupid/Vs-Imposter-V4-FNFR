@@ -38,8 +38,8 @@ return {
         girlfriend = love.filesystem.load("sprites/characters/gfmira.lua")()
 
 
-        boyfriend.x, boyfriend.y = 276, 86
-        girlfriend.x, girlfriend.y = -330, -226
+        boyfriend.x, boyfriend.y = 496, 350
+        girlfriend.x, girlfriend.y = 25, 107
         enemy.x, enemy.y = -432, 293
 
         
@@ -50,8 +50,13 @@ return {
         stageImages["vines"].x, stageImages["vines"].y = 85, -451
         stageImages["blue"].x, stageImages["blue"].y = -1059, 297
         stageImages["grey"].x, stageImages["grey"].y = -513, 2
-        stageImages["Sky"].x, stageImages["Sky"].y = -575, -462
+        stageImages["Sky"].x, stageImages["Sky"].y = -149, -77
         stageImages["longus"].x, stageImages["longus"].y = 804, 50
+        stageImages["cloud4"].x, stageImages["cloud4"].y = -2172, -810
+        stageImages["cloud3"].x, stageImages["cloud3"].y = 363, -398
+        stageImages["cloud2"].x, stageImages["cloud2"].y = 24, -6
+        stageImages["cloud1"].x, stageImages["cloud1"].y = 622, 71
+
 
         stageImages["rhm"].sizeX, stageImages["rhm"].sizeY = 0.8, 0.8
         stageImages["blue"].sizeX, stageImages["blue"].sizeY = 0.8, 0.8
@@ -72,12 +77,15 @@ return {
     end,
 
     update = function(self, dt)
-        stageImages["rhm"]:update(dt)
-        stageImages["grey"]:update(dt)
-        stageImages["blue"]:update(dt)
-        stageImages["vines"]:update(dt)
-        stageImages["longus"]:update(dt)
-        stageImages["hearts"]:update(dt)
+
+        if not paused then
+            stageImages["rhm"]:update(dt)
+            stageImages["grey"]:update(dt)
+            stageImages["blue"]:update(dt)
+            stageImages["vines"]:update(dt)
+            stageImages["longus"]:update(dt)
+            stageImages["hearts"]:update(dt)
+        end
     end,
 
     draw = function()

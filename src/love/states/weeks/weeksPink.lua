@@ -1264,7 +1264,7 @@ return {
 						Timer.cancel(camTimer)
 					end
 					if events[i].mustHitSection then
-						camTimer = Timer.tween(1.25, cam, {x = -boyfriend.x + 200}, "out-quad")
+						camTimer = Timer.tween(1.25, cam, {x = -boyfriend.x + 420}, "out-quad")
 					else
 						camTimer = Timer.tween(1.25, cam, {x = -enemy.x - 300}, "out-quad")
 					end
