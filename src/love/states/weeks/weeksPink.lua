@@ -320,7 +320,7 @@ return {
 		end
 		useAltAnims = false
 
-		cam.x, cam.y = -boyfriend.x - 75, -boyfriend.y - 25
+		--cam.x, cam.y = -boyfriend.x - 75, -boyfriend.y - 25
 
 		notesPos = {
 			enemy = {
@@ -1264,23 +1264,9 @@ return {
 						Timer.cancel(camTimer)
 					end
 					if events[i].mustHitSection then
-						if curPlayer ~= "pixelboyfriend" then
-							camTimer = Timer.tween(1.25, cam, {x = -boyfriend.x - 75, y = -boyfriend.y - 25}, "out-quad")
-						else
-							camTimer = Timer.tween(1.25, cam, {x = -boyfriend.x + 100, y = -boyfriend.y + 75}, "out-quad")
-						end
+						camTimer = Timer.tween(1.25, cam, {x = -boyfriend.x + 420}, "out-quad")
 					else
-						if curEnemy == "pico" then
-							camTimer = Timer.tween(1.25, cam, {x = -enemy.x - 500, y = -enemy.y - 50}, "out-quad")
-						elseif curEnemy == "monsterchristmas" or curEnemy == "dearestduo" then
-							camTimer = Timer.tween(1.25, cam, {x = -enemy.x - 500, y = -enemy.y - 275}, "out-quad")
-						elseif curEnemy == "senpai" or curEnemy == "senpaiangry" or curEnemy == "spirit" then
-							Timer.tween(1.25, cam, {x = -enemy.x - 100, y = -enemy.y + 75}, "out-quad")
-						elseif curEnemy == "tankman" then
-							camTimer = Timer.tween(1.25, cam, {x = -enemy.x + 75, y = -enemy.y - 100}, "out-quad")
-						else
-							camTimer = Timer.tween(1.25, cam, {x = -enemy.x - 300, y = -enemy.y - 275}, "out-quad")
-						end
+						camTimer = Timer.tween(1.25, cam, {x = -enemy.x - 300}, "out-quad")
 					end
 
 					if events[i].altAnim then

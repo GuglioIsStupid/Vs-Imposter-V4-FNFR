@@ -5,17 +5,26 @@ local stageBack, stageFront, curtains
 return {
 	enter = function(self, from, songNum, songAppend)
 		pauseColor = {129, 100, 223}
-		weeks:enter()
+		weeksPink:enter()
 		stages["pinkMira"]:enter()
+
+		cam.sizeX, cam.sizeY = 0.7, 0.7
+		camScale.x, camScale.y = 0.7, 0.7
+		cam.x = -enemy.x - 300
+		cam.y = -50
 
 		week = 1
 
 		song = songNum
 		difficulty = songAppend
 
-		weeks:setIcon("enemy", "red impostor 1")
+		weeksPink:setIcon("enemy", "red impostor 1")
 
-        enemy = love.filesystem.load("sprites/characters/white.lua")()
+        enemy = love.filesystem.load("sprites/characters/pink.lua")()
+
+        boyfriend.x, boyfriend.y = 496, 350
+        girlfriend.x, girlfriend.y = 25, 107
+        enemy.x, enemy.y = -432, 293
 
         flashAlpha = 0
 
@@ -23,7 +32,7 @@ return {
 	end,
 
 	load = function(self)
-		weeks:load()
+		weeksPink:load()
 		stages["pinkMira"]:load()
 
 		if song == 3 then
@@ -39,26 +48,26 @@ return {
 
 		self:initUI()
 
-		weeks:setupCountdown()
+		weeksPink:setupCountdown()
 	end,
 
 	initUI = function(self)
-		weeks:initUI()
+		weeksPink:initUI()
 
 		if song == 3 then
-			weeks:generateNotes("songs/pretender/pretender-hard.json")
-            --weeks:generateEventsOld("songs/pretender/events.json")
+			weeksPink:generateNotes("songs/pretender/pretender-hard.json")
+            --weeksPink:generateEventsOld("songs/pretender/events.json")
 		elseif song == 2 then
-			weeks:generateNotes("songs/pinkwave/pinkwave-hard.json")
-           -- weeks:generateEventsOld("songs/pinkwave/events.json")
+			weeksPink:generateNotes("songs/pinkwave/pinkwave-hard.json")
+           -- weeksPink:generateEventsOld("songs/pinkwave/events.json")
 		else
-			weeks:generateNotes("songs/heartbeat/heartbeat-hard.json")
-           -- weeks:generateEventsOld("songs/heatbeat/events.json")
+			weeksPink:generateNotes("songs/heartbeat/heartbeat-hard.json")
+           -- weeksPink:generateEventsOld("songs/heatbeat/events.json")
 		end
 	end,
 
 	update = function(self, dt)
-		weeks:update(dt)
+		weeksPink:update(dt)
 		stages["pinkMira"]:update(dt)
 
         -- lerp flashAlpha to 0
@@ -66,11 +75,11 @@ return {
 
 		if health[1] >= 80 then
 			if enemyIcon:getAnimName() == "red impostor 1" then
-				weeks:setIcon("enemy", "red impostor 1 losing")
+				weeksPink:setIcon("enemy", "red impostor 1 losing")
 			end
 		else
 			if enemyIcon:getAnimName() == "red impostor 1 losing" then
-				weeks:setIcon("enemy", "red impostor 1")
+				weeksPink:setIcon("enemy", "red impostor 1")
 			end
 		end
 
@@ -103,7 +112,7 @@ return {
 			end
 		end
 
-		weeks:updateUI(dt)
+		weeksPink:updateUI(dt)
 	end,
 
 	draw = function(self)
@@ -114,21 +123,21 @@ return {
 
 			stages["pinkMira"]:draw()
 			
-			weeks:drawRating(0.9)
+			weeksPink:drawRating(0.9)
 		love.graphics.pop()
 
         graphics.setColor(1,0,0,flashAlpha)
         love.graphics.rectangle("fill", 0, 0, graphics.getWidth(), graphics.getHeight())
         graphics.setColor(1,1,1,1)
 
-		weeks:drawTimeLeftBar()
-		weeks:drawHealthBar()
+		weeksPink:drawTimeLeftBar()
+		weeksPink:drawHealthBar()
 		if not paused then
-			weeks:drawUI()
+			weeksPink:drawUI()
 		end
 	end,
 
 	leave = function(self)
-		weeks:leave()
+		weeksPink:leave()
 	end
 }

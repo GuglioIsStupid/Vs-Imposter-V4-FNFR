@@ -63,6 +63,9 @@ return {
         girlfriend.x, girlfriend.y = -114, -101
         enemy.x, enemy.y = -462, -61
         boyfriend.x, boyfriend.y = 495, 159
+
+        cam.sizeX, cam.sizeY = 1, 1
+        camScale.x, camScale.y = 1, 1
     end,
 
     load = function()

@@ -223,6 +223,7 @@ function love.load()
 	weeksHenry = require "states.weeks.weeksHenry"
 	weeksGreen = require "states.weeks.weeksGreen"
 	weeksFinale = require "states.weeks.weeksFinale"
+	weeksPink = require "states.weeks.weeksPink"
 
 	-- Load substates
 	gameOver = require "substates.game-over"
@@ -268,6 +269,7 @@ function love.load()
 		require "weeks.orange",
 		require "weeks.pink",
 		require "weeks.finale",
+        require "weeks.ow",
 	}
 	weekDesc = { -- Add your week description here
 		"LEARN TO FUNK",
@@ -342,6 +344,12 @@ function love.load()
 				"COCK",
 				"COCKCOCK",
 				"COCKCOCKCOCK"
+			},
+		},
+		{
+			"Ow",
+			{
+				"Ow"
 			}
 		}
 	}
