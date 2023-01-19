@@ -52,7 +52,7 @@ return {
 			"\ngraphics.getImageType(): " .. tostring(graphics.getImageType()) ..
 
 			"\n\nmusicTime: " .. tostring(math.floor(musicTime)) ..  -- Floored for readability
-			"\nhealth: " .. tostring(health[2])
+			"\nhealth: " .. tostring(health)
 		else
 			debugStr = "FPS: " .. tostring(love.timer.getFPS())
 		end

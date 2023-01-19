@@ -187,7 +187,8 @@ function love.load()
 		["miraCaf"] = require "stages.miraCaf",
 		["miraReactor"] = require "stages.miraReactor",
 		["miraFall"] = require "stages.miraFall",
-		["pinkMira"] = require "stages.pinkMira"
+		["pinkMira"] = require "stages.pinkMira",
+		["finale"] = require "stages.finale"
 	}
 
 	mods = {
@@ -221,6 +222,7 @@ function love.load()
 	weeksYellow = require "states.weeks.weeksYellow"
 	weeksHenry = require "states.weeks.weeksHenry"
 	weeksGreen = require "states.weeks.weeksGreen"
+	weeksFinale = require "states.weeks.weeksFinale"
 
 	-- Load substates
 	gameOver = require "substates.game-over"
@@ -265,6 +267,7 @@ function love.load()
 		require "weeks.red",
 		require "weeks.orange",
 		require "weeks.pink",
+		require "weeks.finale",
 	}
 	weekDesc = { -- Add your week description here
 		"LEARN TO FUNK",
@@ -334,11 +337,11 @@ function love.load()
 			},
 		},
 		{
-			"Week 7",
+			"Finale",
 			{
-				"Ugh",
-				"Guns",
-				"Stress"
+				"COCK",
+				"COCKCOCK",
+				"COCKCOCKCOCK"
 			}
 		}
 	}

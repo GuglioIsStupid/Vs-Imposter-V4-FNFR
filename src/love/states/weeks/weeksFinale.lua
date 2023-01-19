@@ -113,6 +113,9 @@ local eventFuncs = {
 			
 		end
 	end,
+	["Reactor Beep"] = function(value)
+		flashAlpha = tonumber(value) or 0.4
+	end,
 }
 
 missCounter = 0
@@ -136,6 +139,7 @@ end
 
 return {
 	enter = function(self, isPixel)
+		health = 50
 		girlfriendSpeedMultiplier = 1
 		isPixel = isPixel or "normal"
 		font = love.graphics.newFont("fonts/vcr.ttf", 24)
@@ -191,7 +195,26 @@ return {
 				notesplashes = love.graphics.newImage(graphics.imagePath("noteSplashes")),
 				numbers = love.graphics.newImage(graphics.imagePath("numbers")),
 				rating = love.graphics.newImage(graphics.imagePath("rating")),
+				healthbarImg = love.graphics.newImage(graphics.imagePath("finale/healthBarFinaleRed")),
+				healthbarCover = love.graphics.newImage(graphics.imagePath("finale/healthBarFinaleBlue")),
 			}
+
+			-- get width of healthbarImg
+			-- health has a max of 100 and a min of 0, make 100 quads for the image times 
+			-- image width is imagewidth * 0.85
+			-- the x value is what changes
+			function distance(x1, x2)
+				-- acts as a math.abs, basically finds the absolute value of the difference between x1 and x2
+				return (x2 - x1) * (x2 > x1 and 1 or -1)
+			end
+			healthbarQuads = {}
+			healthbarWidth = images.healthbarImg:getWidth() * 0.85
+			for i = 100, 1, -1 do
+				-- make the quad x value be the width of the image * 0.85 * i
+				healthbarQuads[i] = love.graphics.newQuad(healthbarWidth * i / 100, 0, healthbarWidth, images.healthbarImg:getHeight(), images.healthbarImg:getDimensions())
+			end
+			print(#healthbarQuads)
+			print(healthbarQuads[health])
 	
 			sprites = {
 				icons = love.filesystem.load("sprites/icons.lua"),
@@ -365,7 +388,8 @@ return {
 		enemyNotes = {}
 		boyfriendNotes = {}
 		picoNotes = {}
-		health[1] = 50
+		health = 50
+		health = 50
 		score = 0
 		missCounter = 0
 		altScore = 0
@@ -533,6 +557,9 @@ return {
 
 		for i = 1, #chart["notes"] do
 			bpm = chart["notes"][i]["bpm"]
+			if bpm == 0 or bpm == nil then
+				bpm = 120
+			end
 
 			if bpm then
 				break
@@ -1085,29 +1112,6 @@ return {
 		)
 	end,
 
-	setupEjectCountdown = function(self)
-		lastReportedPlaytime = 0
-		musicTime = (240 / bpm) * -1500
-		countdownFade[1] = 0
-
-
-		musicThres = 0
-		musicPos = 0
-
-		countingDown = false
-
-		previousFrameTime = love.timer.getTime() * 1000
-		musicTime = 0
-
-		voices:setVolume(settings.vocalsVol)
-		if inst then 
-			inst:setVolume(settings.instVol)
-			inst:play() 
-		end
-		voices:play()
-	end,
-
-
 	setIcon = function(self, icon, name)
 		if icon == "boyfriend" then
 			if boyfriendIcon:isAnimName(name) then
@@ -1279,21 +1283,15 @@ return {
 					if camTimer then
 						Timer.cancel(camTimer)
 					end
-
-					if not middleCam then
-						if events[i].mustHitSection then
-							if curPlayer ~= "pixelboyfriend" then
-								camTimer = Timer.tween(1.25, cam, {x = -boyfriend.x - 75}, "out-quad")
-							else
-								camTimer = Timer.tween(1.25, cam, {x = 300, y = -300}, "out-quad") --...... quibby.... did you do this....
-							end
+					if events[i].mustHitSection then
+						if curPlayer ~= "pixelboyfriend" then
+							camTimer = Timer.tween(1.25, cam, {x = -boyfriend.x - 75, y = -boyfriend.y - 25}, "out-quad")
 						else
-							camTimer = Timer.tween(1.25, cam, {x = 500, y = -300}, "out-quad")
+							camTimer = Timer.tween(1.25, cam, {x = -boyfriend.x + 100, y = -boyfriend.y + 75}, "out-quad")
 						end
 					else
-						camTimer = Timer.tween(1.25, cam, {x = 00, y = -300}, "out-quad")
+						camTimer = Timer.tween(1.25, cam, {x = -enemy.x - 300, y = -enemy.y - 100}, "out-quad")
 					end
-
 
 					if events[i].altAnim then
 						useAltAnims = true
@@ -1319,22 +1317,13 @@ return {
 					break
 				end
 			end
-			if song == 4 then
-				if musicThres ~= oldMusicThres and math.fmod(absMusicTime, 240000 / bpm) < 100 and not video:isPlaying() and musicTime > 1000 then
-					if uiScaleTimer then Timer.cancel(uiScaleTimer) end
-					if camScaleTimer then Timer.cancel(camScaleTimer) end
-	
-					camScaleTimer = Timer.tween((60 / bpm) / 16, cam, {sizeX = camScale.x * 1.05, sizeY = camScale.y * 1.05}, "out-quad", function() camScaleTimer = Timer.tween((60 / bpm), cam, {sizeX = camScale.x, sizeY = camScale.y}, "out-quad") end)
-					uiScaleTimer = Timer.tween((60 / bpm) / 16, uiScale, {sizeX = uiScale.x * 1.05, sizeY = uiScale.y * 1.05}, "out-quad", function() uiScaleTimer = Timer.tween((60 / bpm), uiScale, {sizeX = uiScale.x, sizeY = uiScale.y}, "out-quad") end)
-				end
-			else
-				if musicThres ~= oldMusicThres and math.fmod(absMusicTime, 240000 / bpm) < 100 then
-					if uiScaleTimer then Timer.cancel(uiScaleTimer) end
-					if camScaleTimer then Timer.cancel(camScaleTimer) end
 
-					camScaleTimer = Timer.tween((60 / bpm) / 16, cam, {sizeX = camScale.x * 1.05, sizeY = camScale.y * 1.05}, "out-quad", function() camScaleTimer = Timer.tween((60 / bpm), cam, {sizeX = camScale.x, sizeY = camScale.y}, "out-quad") end)
-					uiScaleTimer = Timer.tween((60 / bpm) / 16, uiScale, {sizeX = uiScale.x * 1.05, sizeY = uiScale.y * 1.05}, "out-quad", function() uiScaleTimer = Timer.tween((60 / bpm), uiScale, {sizeX = uiScale.x, sizeY = uiScale.y}, "out-quad") end)
-				end
+			if musicThres ~= oldMusicThres and math.fmod(absMusicTime, 240000 / bpm) < 100 then
+				if uiScaleTimer then Timer.cancel(uiScaleTimer) end
+				if camScaleTimer then Timer.cancel(camScaleTimer) end
+
+				camScaleTimer = Timer.tween((60 / bpm) / 16, cam, {sizeX = camScale.x * 1.05, sizeY = camScale.y * 1.05}, "out-quad", function() camScaleTimer = Timer.tween((60 / bpm), cam, {sizeX = camScale.x, sizeY = camScale.y}, "out-quad") end)
+				uiScaleTimer = Timer.tween((60 / bpm) / 16, uiScale, {sizeX = uiScale.x * 1.05, sizeY = uiScale.y * 1.05}, "out-quad", function() uiScaleTimer = Timer.tween((60 / bpm), uiScale, {sizeX = uiScale.x, sizeY = uiScale.y}, "out-quad") end)
 			end
 
 			girlfriend:update(dt)
@@ -1381,8 +1370,8 @@ return {
 	end,
 
 	updateUI = function(self, dt)
-		enemyIcon.x = 425 - health[1] * 10
-		boyfriendIcon.x = 585 - health[1] * 10
+		enemyIcon.x = 425 - health * 10
+		boyfriendIcon.x = 585 - health * 10
 		if extraCamZoom.sizeX > 1 then
 			extraCamZoom.sizeX = extraCamZoom.sizeX - 1 * dt
 			extraCamZoom.sizeY = extraCamZoom.sizeY - 1 * dt
@@ -1448,11 +1437,10 @@ return {
 									notMissed[noteNum] = false
 									if not settings.noMiss then
 										if boyfriendNote[1]:getAnimName() ~= "hold" and boyfriendNote[1]:getAnimName() ~= "end" then
-											if health[2] then Timer.cancel(health[2]) end
-											health[2] = Timer.tween((60 / bpm) / 4, health, {[1] = health[1] - 2}, "linear")
+											health = health - 2
 										end
 									else
-										health[1] = 0
+										health = 0
 									end
 									if boyfriendNote[1]:getAnimName() ~= "hold" and boyfriendNote[1]:getAnimName() ~= "end" then
 										missCounter = missCounter + 1
@@ -1586,25 +1574,14 @@ return {
 											},
 											"linear"
 										)
-										if song == 4 then
-											Timer.tween(
-												10, 
-												judgements[#judgements].img, 
-												{
-													y = girlfriend.y - 1000
-												}, 
-												"out-expo"
-											)
-										else
-											Timer.tween(
-												1.25, 
-												judgements[#judgements].img, 
-												{
-													y = girlfriend.y - 100
-												}, 
-												"out-expo"
-											)
-										end
+										Timer.tween(
+											1.25, 
+											judgements[#judgements].img, 
+											{
+												y = girlfriend.y - 100
+											}, 
+											"out-expo"
+										)
 										--ratingTimers[2] = Timer.tween(2, rating, {y = girlfriend.y - 100}, "out-elastic")
 										if combo >= 100 then
 											ratingTimers[3] = Timer.tween(2, numbers[1], {y = girlfriend.y + love.math.random(-10, 10)}, "out-elastic") -- 100's
@@ -1632,15 +1609,13 @@ return {
 
 											if not settings.noMiss then
 												if boyfriendNote[1]:getAnimName() ~= "hold" or boyfriendNote[1]:getAnimName() ~= "end" then
-													if health[2] then Timer.cancel(health[2]) end
-													health[2] = Timer.tween((60 / bpm) / 4, health, {[1] = health[1] + 1}, "linear")
+													health = health + 1
 												end
 											else
-												health[1] = 0
+												health = 0
 											end
 
-											if health[2] then Timer.cancel(health[2]) end
-											health[2] = Timer.tween((60 / bpm) / 4, health, {[1] = health[1] + 1}, "linear")
+											health = health + 1
 											if boyfriendNote[1]:getAnimName() ~= "hold" or boyfriendNote[1]:getAnimName() ~= "end" then
 												noteCounter = noteCounter + 1
 											end
@@ -1672,10 +1647,9 @@ return {
 										score = score - 10
 										combo = 0
 										if not settings.noMiss then
-											if health[2] then Timer.cancel(health[2]) end
-											health[2] = Timer.tween((60 / bpm) / 4, health, {[1] = health[1] - 2}, "linear")
+											health = health - 2
 										else
-											health[1] = 0
+											health = 0
 										end
 										missCounter = missCounter + 1
 									end
@@ -1693,8 +1667,6 @@ return {
 							boyfriendArrow:animate("confirm", false)
 
 							self:safeAnimate(boyfriend, curAnim, false, 3)
-
-							--health[1] = health[1] + 1
 						end
 
 						if input:released(curInput) then
@@ -1741,25 +1713,14 @@ return {
 									},
 									"linear"
 								)
-								if song == 4 then
-									Timer.tween(
-										10, 
-										judgements[#judgements].img, 
-										{
-											y = girlfriend.y - 1000
-										}, 
-										"out-expo"
-									)
-								else
-									Timer.tween(
-										1.25, 
-										judgements[#judgements].img, 
-										{
-											y = girlfriend.y - 100
-										}, 
-										"out-expo"
-									)
-								end
+								Timer.tween(
+									1.25, 
+									judgements[#judgements].img, 
+									{
+										y = girlfriend.y - 100
+									}, 
+									"out-expo"
+								)
 								if combo >= 100 then
 									ratingTimers[3] = Timer.tween(2, numbers[1], {y = girlfriend.y + love.math.random(-10, 10)}, "out-elastic") -- 100's
 								end
@@ -1785,21 +1746,21 @@ return {
 					end
 				end
 
-				if health[1] > 100 then
-					health[1] = 100
-				elseif health[1] > 20 and boyfriendIcon:getAnimName() == "boyfriend losing" then
+				if health > 100 then
+					health = 100
+				elseif health > 20 and boyfriendIcon:getAnimName() == "boyfriend losing" then
 					boyfriendIcon:animate("boyfriend", false)
-				elseif health[1] <= 0 then -- Game over
-					health[1] = 0
+				elseif health <= 0 then -- Game over
+					health = 0
 					if not settings.practiceMode then
 						Gamestate.push(gameOver)
 					end
-				elseif health[1] <= 20 and boyfriendIcon:getAnimName() == "boyfriend" then
+				elseif health <= 20 and boyfriendIcon:getAnimName() == "boyfriend" then
 					boyfriendIcon:animate("boyfriend losing", false)
 				end
 
-				enemyIcon.x = 425 - health[1] * 10
-				boyfriendIcon.x = 585 - health[1] * 10
+				enemyIcon.x = 425 - health* 10
+				boyfriendIcon.x = 585 - health * 10
 
 				if not countingDown then
 					if musicThres ~= oldMusicThres and math.fmod(absMusicTime, 60000 / bpm) < 100 then
@@ -1824,6 +1785,11 @@ return {
 	doFlash = function(self)
 		if not settings.noFlash then
 			Timer.tween((60/bpm)/4, flash, {alpha = 1}, "linear", function() Timer.tween((60/bpm), flash, {alpha = 0}, "linear") end)
+		end
+	end,
+	doFlashTimed = function(self)
+		if not settings.noFlash then
+			Timer.tween((60/bpm)/16, flash, {alpha = 1}, "linear", function() Timer.tween(2.2, flash, {alpha = 0}, "linear") end)
 		end
 	end,
 
@@ -2029,7 +1995,7 @@ return {
 
 	drawUI = function(self)
 		love.graphics.push()
-			graphics.setColor(1,1,1, flash.alpha)
+			graphics.setColor(1,0,0, flash.alpha)
 			love.graphics.rectangle("fill", 0, 0, 1280, 720)
 			graphics.setColor(1,1,1)
 		love.graphics.pop()
@@ -2181,61 +2147,59 @@ return {
 				love.graphics.pop()
 				
 				love.graphics.push()
-				if not inCutscene then
-						love.graphics.translate(0, -musicPos)
+					love.graphics.translate(0, -musicPos)
 
-						for j = #enemyNotes[i], 1, -1 do
-							if ((-400 + enemyNotes[i][j].y * 0.6 * speed) - musicPos <= 560) then
-								local animName = enemyNotes[i][j]:getAnimName()
+					for j = #enemyNotes[i], 1, -1 do
+						if ((-400 + enemyNotes[i][j].y * 0.6 * speed) - musicPos <= 560) then
+							local animName = enemyNotes[i][j]:getAnimName()
 
-								if animName == "hold" or animName == "end" then
-									graphics.setColor(1, 1, 1, 0.5)
-								end
-								if settings.middleScroll then
-									graphics.setColor(1, 1, 1, 0.5)
-								end
-								if pixel then
-									if enemyNotes[i][j]:getAnimName() == "hold" then
-										enemyNotes[i][j]:udraw(8, 8 * 1.7, enemyNotes[i][j].x + notesPos.enemy[i].x, -400 + enemyNotes[i][j].y * 0.6 * speed + notesPos.enemy[i].y)
-									else
-										enemyNotes[i][j]:udraw(8, enemyNotes[i][j].sizeY, enemyNotes[i][j].x + notesPos.enemy[i].x, -400 + enemyNotes[i][j].y * 0.6 * speed)
-									end
-								else
-									if enemyNotes[i][j]:getAnimName() == "hold" then
-										enemyNotes[i][j]:udraw(1, 1 * 1.7, enemyNotes[i][j].x + notesPos.enemy[i].x, -400 + enemyNotes[i][j].y * 0.6 * speed + notesPos.enemy[i].y)
-									else
-										enemyNotes[i][j]:udraw(1, enemyNotes[i][j].sizeY, enemyNotes[i][j].x + notesPos.enemy[i].x, -400 + enemyNotes[i][j].y * 0.6 * speed + notesPos.enemy[i].y)
-									end
-								end
-								graphics.setColor(1, 1, 1)
+							if animName == "hold" or animName == "end" then
+								graphics.setColor(1, 1, 1, 0.5)
 							end
-						end
-						for j = #boyfriendNotes[i], 1, -1 do
-							if ((-400 + boyfriendNotes[i][j].y * 0.6 * speed) - musicPos <= 560) then
-								local animName = boyfriendNotes[i][j]:getAnimName()
-
-								if animName == "hold" or animName == "end" then
-									graphics.setColor(1, 1, 1, math.min(0.5, (500 + ((-400 + boyfriendNotes[i][j].y * 0.6 * speed) - musicPos)) / 150))
+							if settings.middleScroll then
+								graphics.setColor(1, 1, 1, 0.5)
+							end
+							if pixel then
+								if enemyNotes[i][j]:getAnimName() == "hold" then
+									enemyNotes[i][j]:udraw(8, 8 * 1.7, enemyNotes[i][j].x + notesPos.enemy[i].x, -400 + enemyNotes[i][j].y * 0.6 * speed + notesPos.enemy[i].y)
 								else
-									graphics.setColor(1, 1, 1, math.min(1, (500 + ((-400 + boyfriendNotes[i][j].y * 0.6 * speed) - musicPos)) / 75))
+									enemyNotes[i][j]:udraw(8, enemyNotes[i][j].sizeY, enemyNotes[i][j].x + notesPos.enemy[i].x, -400 + enemyNotes[i][j].y * 0.6 * speed)
 								end
-								if pixel then
-									if boyfriendNotes[i][j]:getAnimName() == "hold" then
-										boyfriendNotes[i][j]:udraw(8, 8 * 1.7, boyfriendNotes[i][j].x + notesPos.boyfriend[i].x, -400 + boyfriendNotes[i][j].y * 0.6 * speed + notesPos.boyfriend[i].y)
-									else
-										boyfriendNotes[i][j]:udraw(8, boyfriendNotes[i][j].sizeY, boyfriendNotes[i][j].x + notesPos.boyfriend[i].x, -400 + boyfriendNotes[i][j].y * 0.6 * speed + notesPos.boyfriend[i].y)
-									end
+							else
+								if enemyNotes[i][j]:getAnimName() == "hold" then
+									enemyNotes[i][j]:udraw(1, 1 * 1.7, enemyNotes[i][j].x + notesPos.enemy[i].x, -400 + enemyNotes[i][j].y * 0.6 * speed + notesPos.enemy[i].y)
 								else
-									if boyfriendNotes[i][j]:getAnimName() == "hold" then
-										boyfriendNotes[i][j]:udraw(1, 1 * 1.7, boyfriendNotes[i][j].x + notesPos.boyfriend[i].x, -400 + boyfriendNotes[i][j].y * 0.6 * speed + notesPos.boyfriend[i].y)
-									else
-										boyfriendNotes[i][j]:udraw(1, boyfriendNotes[i][j].sizeY, boyfriendNotes[i][j].x + notesPos.boyfriend[i].x, -400 + boyfriendNotes[i][j].y * 0.6 * speed + notesPos.boyfriend[i].y)
-									end
+									enemyNotes[i][j]:udraw(1, enemyNotes[i][j].sizeY, enemyNotes[i][j].x + notesPos.enemy[i].x, -400 + enemyNotes[i][j].y * 0.6 * speed + notesPos.enemy[i].y)
+								end
+							end
+							graphics.setColor(1, 1, 1)
+						end
+					end
+					for j = #boyfriendNotes[i], 1, -1 do
+						if ((-400 + boyfriendNotes[i][j].y * 0.6 * speed) - musicPos <= 560) then
+							local animName = boyfriendNotes[i][j]:getAnimName()
+
+							if animName == "hold" or animName == "end" then
+								graphics.setColor(1, 1, 1, math.min(0.5, (500 + ((-400 + boyfriendNotes[i][j].y * 0.6 * speed) - musicPos)) / 150))
+							else
+								graphics.setColor(1, 1, 1, math.min(1, (500 + ((-400 + boyfriendNotes[i][j].y * 0.6 * speed) - musicPos)) / 75))
+							end
+							if pixel then
+								if boyfriendNotes[i][j]:getAnimName() == "hold" then
+									boyfriendNotes[i][j]:udraw(8, 8 * 1.7, boyfriendNotes[i][j].x + notesPos.boyfriend[i].x, -400 + boyfriendNotes[i][j].y * 0.6 * speed + notesPos.boyfriend[i].y)
+								else
+									boyfriendNotes[i][j]:udraw(8, boyfriendNotes[i][j].sizeY, boyfriendNotes[i][j].x + notesPos.boyfriend[i].x, -400 + boyfriendNotes[i][j].y * 0.6 * speed + notesPos.boyfriend[i].y)
+								end
+							else
+								if boyfriendNotes[i][j]:getAnimName() == "hold" then
+									boyfriendNotes[i][j]:udraw(1, 1 * 1.7, boyfriendNotes[i][j].x + notesPos.boyfriend[i].x, -400 + boyfriendNotes[i][j].y * 0.6 * speed + notesPos.boyfriend[i].y)
+								else
+									boyfriendNotes[i][j]:udraw(1, boyfriendNotes[i][j].sizeY, boyfriendNotes[i][j].x + notesPos.boyfriend[i].x, -400 + boyfriendNotes[i][j].y * 0.6 * speed + notesPos.boyfriend[i].y)
 								end
 							end
 						end
 					end
-						graphics.setColor(1, 1, 1)
+					graphics.setColor(1, 1, 1)
 				love.graphics.pop()
 			end
 			graphics.setColor(1, 1, 1, countdownFade[1])
@@ -2278,17 +2242,19 @@ return {
 				end
 				graphics.setColor(1,1,1,1)
 			love.graphics.pop()
-			love.graphics.translate(lovesize.getWidth() / 2, lovesize.getHeight() / 2)
+			love.graphics.translate(lovesize.getWidth() / 2, lovesize.getHeight() / 2 - (settings.downscroll and 300 or -300))
 			love.graphics.scale(0.7, 0.7)
 			love.graphics.scale(uiScale.sizeX, uiScale.sizeY)
-			graphics.setColor(enemy.colours[1]/255, enemy.colours[2]/255, enemy.colours[3]/255)
-			love.graphics.rectangle("fill", -500, 350+downscrollOffset, 1000, 25)
-			graphics.setColor(boyfriend.colours[1]/255, boyfriend.colours[2]/255, boyfriend.colours[3]/255)
-			love.graphics.rectangle("fill", 500, 350+downscrollOffset, -health[1] * 10, 25)
-			graphics.setColor(0, 0, 0)
-			love.graphics.setLineWidth(10)
-			love.graphics.rectangle("line", -500, 350+downscrollOffset, 1000, 25)
-			love.graphics.setLineWidth(1)
+			-- draw healthbarImg
+			love.graphics.draw(images.healthbarImg, 0, 0, 0, 0.85, (settings.downscroll and -0.85 or 0.85), images.healthbarImg:getWidth() / 2, images.healthbarImg:getHeight() / 2)
+			if health ~= 100 then
+				-- draw healthbarCover, image needs to stay lined up with healthbarImg using offsets
+				love.graphics.draw(images.healthbarCover, healthbarQuads[distance(health, 100)], 508, 0, 0, 0.85, (settings.downscroll and -0.85 or 0.85), images.healthbarCover:getWidth() / 2 - (healthbarWidth / 2) + (healthbarWidth * (health / 100)), images.healthbarCover:getHeight() / 2)
+			else
+				love.graphics.draw(images.healthbarCover, 0, 0, 0, 0.85, (settings.downscroll and -0.85 or 0.85), images.healthbarCover:getWidth() / 2, images.healthbarCover:getHeight() / 2)
+			end
+
+			--love.graphics.rectangle("line", -500, 350+downscrollOffset, 1000, 25)
 			graphics.setColor(1, 1, 1)
 
 			boyfriendIcon:draw()
