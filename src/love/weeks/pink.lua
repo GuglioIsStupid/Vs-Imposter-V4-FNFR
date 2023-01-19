@@ -11,7 +11,7 @@ return {
 		cam.sizeX, cam.sizeY = 0.7, 0.7
 		camScale.x, camScale.y = 0.7, 0.7
 		cam.x = -enemy.x - 300
-		cam.y = 50
+		cam.y = -50
 
 		week = 1
 
@@ -20,7 +20,7 @@ return {
 
 		weeksPink:setIcon("enemy", "red impostor 1")
 
-        enemy = love.filesystem.load("sprites/characters/white.lua")()
+        enemy = love.filesystem.load("sprites/characters/pink.lua")()
 
 		boyfriend.x, boyfriend.y = 276, 86
         girlfriend.x, girlfriend.y = -330, -226

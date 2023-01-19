@@ -33,7 +33,9 @@ return {
             ["frontPlant"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("pink/front pot")))
         }
 
-        enemy = love.filesystem.load("sprites/characters/white.lua")()
+        enemy = love.filesystem.load("sprites/characters/pink.lua")()
+        boyfriend = love.filesystem.load("sprites/characters/bfmira.lua")()
+        girlfriend = love.filesystem.load("sprites/characters/gfmira.lua")()
 
 
         boyfriend.x, boyfriend.y = 276, 86
@@ -42,21 +44,23 @@ return {
 
         
         stageImages["backPlant"].x, stageImages["backPlant"].y = -859, 35
-        stageImages["frontPlant"].x, stageImages["frontPlant"].y = -1488, 586
+        stageImages["frontPlant"].x, stageImages["frontPlant"].y = -1327, 586
         stageImages["theThingIDFK"].x, stageImages["theThingIDFK"].y = 27, -188
         stageImages["rhm"].x, stageImages["rhm"].y = 1057, 474
         stageImages["vines"].x, stageImages["vines"].y = 85, -451
-        stageImages["blue"].x, stageImages["blue"].y = -1034, 394
+        stageImages["blue"].x, stageImages["blue"].y = -1059, 297
         stageImages["grey"].x, stageImages["grey"].y = -513, 2
         stageImages["Sky"].x, stageImages["Sky"].y = -575, -462
+        stageImages["longus"].x, stageImages["longus"].y = 804, 50
 
         stageImages["rhm"].sizeX, stageImages["rhm"].sizeY = 0.8, 0.8
         stageImages["blue"].sizeX, stageImages["blue"].sizeY = 0.8, 0.8
+        stageImages["frontPlant"].sizeX, stageImages["frontPlant"].sizeY = 0.6, 0.6
 
         stageImages["rhm"]:animate("rhm", true)
         stageImages["grey"]:animate("grey", true)
         stageImages["blue"]:animate("blue", true)
-        stageImages["longus"]:animate("longus", true)
+        stageImages["longus"]:animate("tomatomongus", true)
         stageImages["vines"]:animate("anim", true)
         stageImages["hearts"]:animate("anim", true)
 
