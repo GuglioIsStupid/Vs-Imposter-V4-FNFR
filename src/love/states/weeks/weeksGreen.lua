@@ -1441,7 +1441,7 @@ return {
 
 					if #boyfriendNote > 0 then
 						if not countingDown then
-							if ((-400 + boyfriendNote[1].y * 0.6 * speed) - musicPos < -500) then
+							if ((-400 + boyfriendNote[1].y * 0.6 * speed) - musicPos < -575) then
 								if not settings.botPlay then
 									if inst then voices:setVolume(0) end
 
