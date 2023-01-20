@@ -36,6 +36,9 @@ return {
 		stages["pinkMira"]:load()
 
 		if song == 3 then
+			stages["pinkMira"]:leave()
+			stages["greyMira"]:enter()
+
 			inst = waveAudio:newSource("songs/pretender/Inst.ogg", "stream")
 			voices = waveAudio:newSource("songs/pretender/Voices.ogg", "stream")
 		elseif song == 2 then
@@ -68,7 +71,12 @@ return {
 
 	update = function(self, dt)
 		weeksPink:update(dt)
-		stages["pinkMira"]:update(dt)
+		if song ~= 3 then
+			stages["pinkMira"]:update(dt)
+		else
+			stages["greyMira"]:update(dt)
+		end
+
 
         -- lerp flashAlpha to 0
         flashAlpha = coolUtil.lerp(flashAlpha, 0, coolUtil.boundTo(0, dt * 5, 1))
@@ -121,7 +129,11 @@ return {
 			love.graphics.scale(extraCamZoom.sizeX, extraCamZoom.sizeY)
 			love.graphics.scale(cam.sizeX, cam.sizeY)
 
-			stages["pinkMira"]:draw()
+			if song ~= 3 then
+				stages["pinkMira"]:draw()
+			else
+				stages["greyMira"]:draw()
+			end
 			
 			weeksPink:drawRating(0.9)
 		love.graphics.pop()
@@ -138,6 +150,11 @@ return {
 	end,
 
 	leave = function(self)
+		if song ~= 3 then
+			stages["pinkMira"]:leave()
+		else
+			stages["greyMira"]:leave()
+		end
 		weeksPink:leave()
 	end
 }

@@ -188,7 +188,8 @@ function love.load()
 		["miraReactor"] = require "stages.miraReactor",
 		["miraFall"] = require "stages.miraFall",
 		["pinkMira"] = require "stages.pinkMira",
-		["finale"] = require "stages.finale"
+		["finale"] = require "stages.finale",
+        ["greyMira"] = require "stages.greyMira",
 	}
 
 	mods = {
