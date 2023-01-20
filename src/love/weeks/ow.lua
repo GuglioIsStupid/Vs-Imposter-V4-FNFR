@@ -4,18 +4,25 @@ local stageBack, stageFront, curtains
 return {
 	enter = function(self, from, songNum, songAppend)
 		pauseColor = {129, 100, 223}
-		weeksHenry:enter()
+		weeksOw:enter()
 
 		week = 1
 
 		song = songNum
 		difficulty = songAppend
 
-		weeksHenry:setIcon("enemy", "daddy dearest")
+		weeksOw:setIcon("enemy", "daddy dearest")
 
 		enemy = love.filesystem.load("sprites/characters/red.lua")()
 		boyfriend = love.filesystem.load("sprites/characters/blue.lua")()
 		enemyTwo = love.filesystem.load("sprites/characters/bluehit.lua")()
+
+		cam.sizeX, cam.sizeY = 0.7, 0.7
+		camScale.x, camScale.y = 0.7, 0.7
+
+		enemy.x = -75
+		boyfriend.x = 225
+		enemyTwo.x = 225
 
 		self:load()
 
@@ -23,7 +30,7 @@ return {
 
 	load = function(self)
 		curEnemy = "both"
-		weeksHenry:load()
+		weeksOw:load()
 
 		inst = waveAudio:newSource("songs/ow/Inst.ogg", "stream")
 		voices = waveAudio:newSource("songs/ow/Voices.ogg", "stream")
@@ -31,28 +38,27 @@ return {
 
 		self:initUI()
 
-		weeksHenry:setupCountdown()
+		weeksOw:setupCountdown()
 	end,
 
 	initUI = function(self)
-		weeksHenry:initUI()
+		weeksOw:initUI()
 
-		weeksHenry:generateNotes("songs/ow/ow-hard.json")
-		--weeksHenry:generateEventsOld("songs/ow/events.json")
+		weeksOw:generateNotes("songs/ow/ow-hard.json")
+		--weeksOw:generateEventsOld("songs/ow/events.json")
 
 	end,
 
 	update = function(self, dt)
-		weeksHenry:update(dt)
+		weeksOw:update(dt)
 		enemyTwo:update(dt)
-
 		if health[1] >= 80 then
 			if enemyIcon:getAnimName() == "daddy dearest" then
-				weeksHenry:setIcon("enemy", "daddy dearest losing")
+				weeksOw:setIcon("enemy", "daddy dearest losing")
 			end
 		else
 			if enemyIcon:getAnimName() == "daddy dearest losing" then
-				weeksHenry:setIcon("enemy", "daddy dearest")
+				weeksOw:setIcon("enemy", "daddy dearest")
 			end
 		end
 
@@ -85,7 +91,11 @@ return {
 			end
 		end
 
-		weeksHenry:updateUI(dt)
+		if boyfriend:getAnimName() ~= "idle" then 
+			enemyTwo:animate("idle")
+		end
+
+		weeksOw:updateUI(dt)
 	end,
 
 	draw = function(self)
@@ -94,27 +104,28 @@ return {
 			love.graphics.scale(extraCamZoom.sizeX, extraCamZoom.sizeY)
 			love.graphics.scale(cam.sizeX, cam.sizeY)
 			love.graphics.translate(cam.x, cam.y)
+			love.graphics.rectangle("fill", -1000, -1000, 5000, 6000) -- white rectangle :pleasure:
 			enemy:draw()
 		
 			--boyfriend:draw()
 
-			if enemyTwo:isAnimated() and not enemyTwo:getAnimName() == "idle" then
+			if enemyTwo:getAnimName() ~= "idle" then
 				enemyTwo:draw()
 			else
 				boyfriend:draw()
 			end
 
-			weeksHenry:drawRating(0.9)
+			weeksOw:drawRating(0.9)
 		love.graphics.pop()
 		
-		weeksHenry:drawTimeLeftBar()
-		weeksHenry:drawHealthBar()
+		weeksOw:drawTimeLeftBar()
+		weeksOw:drawHealthBar()
 		if not paused then
-			weeksHenry:drawUI()
+			weeksOw:drawUI()
 		end
 	end,
 
 	leave = function(self)
-		weeksHenry:leave()
+		weeksOw:leave()
 	end
 }
