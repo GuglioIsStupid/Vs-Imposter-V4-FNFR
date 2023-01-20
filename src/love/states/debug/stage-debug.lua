@@ -60,6 +60,10 @@ return {
 						stageImages[stageImgNames[selection]].y = stageImages[stageImgNames[selection]].y - 1
 					elseif key == "s" then
 						stageImages[stageImgNames[selection]].y = stageImages[stageImgNames[selection]].y + 1
+					elseif key == "q" then 
+						stageImages[stageImgNames[selection]].sizeX = stageImages[stageImgNames[selection]].sizeX - 0.1
+					elseif key == "e" then
+						stageImages[stageImgNames[selection]].sizeX = stageImages[stageImgNames[selection]].sizeX + 0.1
 					end
 				elseif curChanging == "boyfriend" then 
 					if key == "a" then
@@ -70,6 +74,12 @@ return {
 						boyfriend.y = boyfriend.y - 1
 					elseif key == "s" then
 						boyfriend.y = boyfriend.y + 1
+					elseif key == "q" then 
+						boyfriend.sizeX = boyfriend.sizeX - 0.1
+						boyfriend.sizeY = boyfriend.sizeY - 0.1
+					elseif key == "e" then
+						boyfriend.sizeX = boyfriend.sizeX + 0.1
+						boyfriend.sizeY = boyfriend.sizeY + 0.1
 					end
 				elseif curChanging == "girlfriend" then 
 					if key == "a" then
@@ -80,6 +90,12 @@ return {
 						girlfriend.y = girlfriend.y - 1
 					elseif key == "s" then
 						girlfriend.y = girlfriend.y + 1
+					elseif key == "q" then
+						girlfriend.sizeX = girlfriend.sizeX - 0.1
+						girlfriend.sizeY = girlfriend.sizeY - 0.1
+					elseif key == "e" then
+						girlfriend.sizeX = girlfriend.sizeX + 0.1
+						girlfriend.sizeY = girlfriend.sizeY + 0.1
 					end
 				elseif curChanging == "enemy" then 
 					if key == "a" then
@@ -90,6 +106,12 @@ return {
 						enemy.y = enemy.y - 1
 					elseif key == "s" then
 						enemy.y = enemy.y + 1
+					elseif key == "q" then
+						enemy.sizeX = enemy.sizeX - 0.1
+						enemy.sizeY = enemy.sizeY - 0.1
+					elseif key == "e" then
+						enemy.sizeX = enemy.sizeX + 0.1
+						enemy.sizeY = enemy.sizeY + 0.1
 					end
 				end
 			end
@@ -164,7 +186,7 @@ return {
 					else
                         fileStr = dirTable[selection]
                         fileStr = fileStr:sub(1, -5)
-                        boyfriend = Character.boyfriend(0, 0)
+                        boyfriend = love.filesystem.load("sprites/characters/boyfriend.lua")()
                         girlfriend = Character.girlfriend(0, 0)
                         stages[fileStr]:enter()
 						for i, v in pairs(stageImages) do
