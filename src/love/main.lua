@@ -342,14 +342,14 @@ function love.load()
 			"Finale",
 			{
 				"COCK",
-				"COCKCOCK",
+				"COCKCOCK",    -- bruhhh ahnfjdnkhsjdklgiloskgnolsfihfkjgiupvjkliuefwsdojkpk;lvhoiujeksfudzjocpklhaguibfvhjcnj90 oisyhkfcdnuigfjkvfadhunkiugxjmn THEY HAVE NAMES
 				"COCKCOCKCOCK"
 			},
 		},
 		{
 			"Ow",
 			{
-				"Ow"
+				"Ow"        -- YOU MADE OW IMPOSSIBLE TO REACH IN THE FREEPLAY MENU             and im too dumb to know how to fix that :(
 			}
 		}
 	}
