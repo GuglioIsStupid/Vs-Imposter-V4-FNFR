@@ -109,7 +109,6 @@ return {
             curEnemy = "black"
 			curPlayer = "BF-Scared"
         end
-		
 
 
 		if not (countingDown or graphics.isFading()) and not (inst:getDuration() > musicTime/1000) and not paused then

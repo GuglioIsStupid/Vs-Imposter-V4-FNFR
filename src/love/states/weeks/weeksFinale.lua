@@ -213,8 +213,6 @@ return {
 				-- make the quad x value be the width of the image * 0.85 * i
 				healthbarQuads[i] = love.graphics.newQuad(healthbarWidth * i / 100, 0, healthbarWidth, images.healthbarImg:getHeight(), images.healthbarImg:getDimensions())
 			end
-			print(#healthbarQuads)
-			print(healthbarQuads[health])
 	
 			sprites = {
 				icons = love.filesystem.load("sprites/icons.lua"),
@@ -372,6 +370,7 @@ return {
 		combo = 0
 
 		enemy:animate("idle")
+		enemy2:animate("idle")
 		boyfriend:animate("idle")
 		
 
@@ -466,7 +465,6 @@ return {
 
 		for i = 1, 4 do
 			if not settings.middleScroll then
-				enemyArrows[i].x = -925 + 165 * i 
 				boyfriendArrows[i].x = 100 + 165 * i 
 				if isPixel ~= "pixel" then
 					leftArrowSplash.x = 100 + 165 * 1
@@ -481,11 +479,6 @@ return {
 				end
 			else
 				boyfriendArrows[i].x = -410 + 165 * i
-				-- ew stuff
-				enemyArrows[1].x = -925 + 165 * 1 
-				enemyArrows[2].x = -925 + 165 * 2
-				enemyArrows[3].x = 100 + 165 * 3
-				enemyArrows[4].x = 100 + 165 * 4
 				if isPixel ~= "pixel" then
 					leftArrowSplash.x = -410 + 165 * 1
 					downArrowSplash.x = -410 + 165 * 2
@@ -498,7 +491,6 @@ return {
 					rightArrowSplash.x = -410 + 165 * 4 + 19
 				end
 			end
-			enemyArrows[i].y = -400
 			boyfriendArrows[i].y = -400
 			leftArrowSplash.y = -400
 			downArrowSplash.y = -400
@@ -1159,10 +1151,13 @@ return {
 			end
 		else
 			if not boyfriend:isAnimated() and boyfriend:getAnimName() ~= "idle" then 
-				weeks:safeAnimate(boyfriend, "idle", trfalseue, 1)
+				weeks:safeAnimate(boyfriend, "idle", false, 1)
 			end
 			if not enemy:isAnimated() and enemy:getAnimName() ~= "idle" then
 				weeks:safeAnimate(enemy, "idle", false, 2)
+			end
+			if not enemy2:isAnimated() and enemy2:getAnimName() ~= "idle" then
+				weeks:safeAnimate(enemy2, "idle", false, 3)
 			end
 		end
 
@@ -1328,6 +1323,7 @@ return {
 
 			girlfriend:update(dt)
 			enemy:update(dt)
+			enemy2:update(dt)
 			boyfriend:update(dt)
 			if picoSpeaker then picoSpeaker:update(dt) end
 			leftArrowSplash:update(dt)
@@ -1347,6 +1343,9 @@ return {
 					if enemy:getAnimName() ~= "idle" and not enemy:isAnimated() then
 						self:safeAnimate(enemy, "idle", false, 2)
 					end
+					if enemy2:getAnimName() ~= "idle" and not enemy2:isAnimated() then
+						self:safeAnimate(enemy2, "idle", false, 2)
+					end
 				end
 				if spriteTimers[3] == 0 then
 					self:safeAnimate(boyfriend, "idle", false, 3)
@@ -1365,6 +1364,11 @@ return {
 		if not enemy:isAnimated() then 
 			if enemy:getAnimName() == "idle" then
 				enemy:animate("idle", false)
+			end
+		end
+		if not enemy2:isAnimated() then 
+			if enemy2:getAnimName() == "idle" then
+				enemy2:animate("idle", false)
 			end
 		end
 	end,
@@ -1413,14 +1417,18 @@ return {
 							if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
 								if useAltAnims then
 									self:safeAnimate(enemy, curAnim .. " alt", false, 2)
+									self:safeAnimate(enemy2, curAnim .. " alt", false, 2)
 								else
 									self:safeAnimate(enemy, curAnim, false, 2) 
+									self:safeAnimate(enemy2, curAnim, false, 2)
 								end
 							else
 								if useAltAnims then
 									self:safeAnimate(enemy, curAnim .. " alt", false, 2)
+									self:safeAnimate(enemy2, curAnim .. " alt", false, 2)
 								else
 									self:safeAnimate(enemy, curAnim, false, 2)
+									self:safeAnimate(enemy2, curAnim, false, 2)
 								end
 							end
 
@@ -1995,7 +2003,7 @@ return {
 
 	drawUI = function(self)
 		love.graphics.push()
-			graphics.setColor(1,0,0, flash.alpha)
+			graphics.setColor(flash.colour[1], flash.colour[2], flash.colour[3], flash.alpha)
 			love.graphics.rectangle("fill", 0, 0, 1280, 720)
 			graphics.setColor(1,1,1)
 		love.graphics.pop()
@@ -2009,35 +2017,6 @@ return {
 			love.graphics.scale(uiScale.sizeX, uiScale.sizeY)
 
 			for i = 1, 4 do
-				if enemyArrows[i]:getAnimName() == "off" then
-					graphics.setColor(0.6, 0.6, 0.6,noteTransparencyNotes.enemy[i])
-				end
-				if settings.middleScroll then
-					graphics.setColor(0.6,0.6,0.6,(noteTransparencyNotes.enemy[i]-0.7))
-				else
-					if paused then 
-						graphics.setColor(0.6,0.6,0.6,(noteTransparencyNotes.enemy[i]-0.7))
-					else
-						graphics.setColor(1,1,1,noteTransparencyNotes.enemy[i] )
-					end
-				end
-
-				if not paused then
-					if not pixel then
-						if not settings.downscroll then
-							enemyArrows[i]:udraw(1, 1, enemyArrows[i].x + notesPos.enemy[i].x, enemyArrows[i].y + notesPos.enemy[i].y)
-						else
-							enemyArrows[i]:udraw(1, -1, enemyArrows[i].x + notesPos.enemy[i].x, enemyArrows[i].y + notesPos.enemy[i].y)
-						end
-					else
-						if not settings.downscroll then
-							enemyArrows[i]:udraw(8, 8, enemyArrows[i].x + notesPos.enemy[i].x, enemyArrows[i].y + notesPos.enemy[i].y)
-						else
-							enemyArrows[i]:udraw(8, -8, enemyArrows[i].x + notesPos.enemy[i].x, enemyArrows[i].y + notesPos.enemy[i].y)
-						end
-					end
-					
-				end
 				if paused then 
 					graphics.setColor(0.6,0.6,0.6,(noteTransparencyNotes.boyfriend[i]-0.7))
 				else
@@ -2148,33 +2127,6 @@ return {
 				
 				love.graphics.push()
 					love.graphics.translate(0, -musicPos)
-
-					for j = #enemyNotes[i], 1, -1 do
-						if ((-400 + enemyNotes[i][j].y * 0.6 * speed) - musicPos <= 560) then
-							local animName = enemyNotes[i][j]:getAnimName()
-
-							if animName == "hold" or animName == "end" then
-								graphics.setColor(1, 1, 1, 0.5)
-							end
-							if settings.middleScroll then
-								graphics.setColor(1, 1, 1, 0.5)
-							end
-							if pixel then
-								if enemyNotes[i][j]:getAnimName() == "hold" then
-									enemyNotes[i][j]:udraw(8, 8 * 1.7, enemyNotes[i][j].x + notesPos.enemy[i].x, -400 + enemyNotes[i][j].y * 0.6 * speed + notesPos.enemy[i].y)
-								else
-									enemyNotes[i][j]:udraw(8, enemyNotes[i][j].sizeY, enemyNotes[i][j].x + notesPos.enemy[i].x, -400 + enemyNotes[i][j].y * 0.6 * speed)
-								end
-							else
-								if enemyNotes[i][j]:getAnimName() == "hold" then
-									enemyNotes[i][j]:udraw(1, 1 * 1.7, enemyNotes[i][j].x + notesPos.enemy[i].x, -400 + enemyNotes[i][j].y * 0.6 * speed + notesPos.enemy[i].y)
-								else
-									enemyNotes[i][j]:udraw(1, enemyNotes[i][j].sizeY, enemyNotes[i][j].x + notesPos.enemy[i].x, -400 + enemyNotes[i][j].y * 0.6 * speed + notesPos.enemy[i].y)
-								end
-							end
-							graphics.setColor(1, 1, 1)
-						end
-					end
 					for j = #boyfriendNotes[i], 1, -1 do
 						if ((-400 + boyfriendNotes[i][j].y * 0.6 * speed) - musicPos <= 560) then
 							local animName = boyfriendNotes[i][j]:getAnimName()
@@ -2245,13 +2197,14 @@ return {
 			love.graphics.translate(lovesize.getWidth() / 2, lovesize.getHeight() / 2 - (settings.downscroll and 300 or -300))
 			love.graphics.scale(0.7, 0.7)
 			love.graphics.scale(uiScale.sizeX, uiScale.sizeY)
-			-- draw healthbarImg
-			love.graphics.draw(images.healthbarImg, 0, 0, 0, 0.85, (settings.downscroll and -0.85 or 0.85), images.healthbarImg:getWidth() / 2, images.healthbarImg:getHeight() / 2)
-			if health ~= 100 then
-				-- draw healthbarCover, image needs to stay lined up with healthbarImg using offsets
-				love.graphics.draw(images.healthbarCover, healthbarQuads[distance(health, 100)], 508, 0, 0, 0.85, (settings.downscroll and -0.85 or 0.85), images.healthbarCover:getWidth() / 2 - (healthbarWidth / 2) + (healthbarWidth * (health / 100)), images.healthbarCover:getHeight() / 2)
-			else
-				love.graphics.draw(images.healthbarCover, 0, 0, 0, 0.85, (settings.downscroll and -0.85 or 0.85), images.healthbarCover:getWidth() / 2, images.healthbarCover:getHeight() / 2)
+			if curStage == "finale" then
+				love.graphics.draw(images.healthbarImg, 0, 0, 0, 0.85, (settings.downscroll and -0.85 or 0.85), images.healthbarImg:getWidth() / 2, images.healthbarImg:getHeight() / 2)
+				if health ~= 100 then
+					-- draw healthbarCover, image needs to stay lined up with healthbarImg using offsets
+					love.graphics.draw(images.healthbarCover, healthbarQuads[distance(health, 100)], 508, 0, 0, 0.85, (settings.downscroll and -0.85 or 0.85), images.healthbarCover:getWidth() / 2 - (healthbarWidth / 2) + (healthbarWidth * (health / 100)), images.healthbarCover:getHeight() / 2)
+				else
+					love.graphics.draw(images.healthbarCover, 0, 0, 0, 0.85, (settings.downscroll and -0.85 or 0.85), images.healthbarCover:getWidth() / 2, images.healthbarCover:getHeight() / 2)
+				end
 			end
 
 			--love.graphics.rectangle("line", -500, 350+downscrollOffset, 1000, 25)

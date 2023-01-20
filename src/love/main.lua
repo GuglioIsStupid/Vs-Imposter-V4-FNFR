@@ -16,6 +16,12 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
+function tryexec(try, catch)
+	local status, err = pcall(try)
+	if not status then
+		catch()
+	end
+end
 __VERSION__ = love.filesystem.read("version.txt") or "UNKNOWN"
 __GIT_VERSION__ = love.filesystem.read("git-version.txt") or "UNKNOWN" 
 if love.filesystem.isFused() then function print() end end -- print functions tend the make the game lag when in update functions, so we do this just in
@@ -225,6 +231,7 @@ function love.load()
 	weeksGreen = require "states.weeks.weeksGreen"
 	weeksFinale = require "states.weeks.weeksFinale"
 	weeksPink = require "states.weeks.weeksPink"
+	weeksOw = require "states.weeks.weeks-ow"
 
 	-- Load substates
 	gameOver = require "substates.game-over"

@@ -1144,6 +1144,7 @@ return {
 			if not enemy:isAnimated() and enemy:getAnimName() ~= "idle" then
 				weeks:safeAnimate(enemy, "idle", false, 2)
 			end
+			
 		end
 
 		status.setLoading(true)
@@ -1308,6 +1309,7 @@ return {
 
 			girlfriend:update(dt)
 			enemy:update(dt)
+			
 			boyfriend:update(dt)
 			if picoSpeaker then picoSpeaker:update(dt) end
 			leftArrowSplash:update(dt)
@@ -1347,6 +1349,7 @@ return {
 				enemy:animate("idle", false)
 			end
 		end
+		
 	end,
 
 	updateUI = function(self, dt)

@@ -14,8 +14,6 @@ return {
 
 		weeksFinale:setIcon("enemy", "daddy dearest")
 
-        enemy = love.filesystem.load("sprites/characters/boyfriend.lua")()
-
 		self:load()
 	end,
 
@@ -91,6 +89,15 @@ return {
 			love.graphics.scale(cam.sizeX, cam.sizeY)
 			stages["finale"]:draw()
 			weeksFinale:drawRating(0.9)
+			
+		love.graphics.pop()
+		love.graphics.push()
+			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
+			graphics.setColor(1, 1, 1, cock)
+			if doingFlashback then 
+				stageImages["finaleFlashback"]:draw()
+			end
+			graphics.setColor(1,1,1)
 		love.graphics.pop()
 		
 		weeksFinale:drawTimeLeftBar()
@@ -98,6 +105,7 @@ return {
 		if not paused then
 			weeksFinale:drawUI()
 		end
+		
 	end,
 
 	leave = function(self)
