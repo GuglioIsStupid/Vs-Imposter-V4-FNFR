@@ -13,7 +13,25 @@ return {
             ["defeat"] = love.filesystem.load("sprites/defeat/defeat.lua")(),
         }
 
+        stageImages["dead"].x, stageImages["dead"].y = 56, -476
+        stageImages["lamp"].x, stageImages["lamp"].y = 447, -593
+        stageImages["dark"].x, stageImages["dark"].y = 75, -102
+
         curStage = "finalem"
+
+        enemy = love.filesystem.load("sprites/characters/black.lua")()
+        enemy2 = love.filesystem.load("sprites/characters/blackparasite.lua")()
+
+        enemy.x, enemy.y = -400, 34
+
+        enemy2.sizeX, enemy2.sizeY = 1.25, 1.25
+        enemy2.x, enemy2.y = -455, 18
+
+        boyfriend.sizeX, boyfriend.sizeY = 0.75, 0.75
+        boyfriend.x, boyfriend.y = 110, 2
+
+        cam.sizeX, cam.sizeY = 0.4, 0.4
+        camScale.sizeX, camScale.sizeY = 0.4, 0.4
 
         cock = 0
 
@@ -21,12 +39,23 @@ return {
 
     load = function()
         flash.alpha = 0
+        flash.colour = {1, 1, 1}
+        cam.sizeX, cam.sizeY = 0.4, 0.4
+        camScale.x, camScale.y = 0.4, 0.4
+        curStage = "finalem"
     end,
 
     update = function(self, dt)
         stageImages["finaleFlashback"]:update(dt)
         stageImages["light"]:update(dt)
         stageImages["defeat"]:update(dt)
+
+        if musicTime >= 0 and musicTime <= 300 then 
+            if cam.sizeX == 0.4 then 
+                Timer.tween(8.4, cam, {sizeX = 0.6, sizeY = 0.6}, "linear", function()  end)
+                Timer.tween(8.4, camScale, {x = 0.6, y = 0.6}, "linear", function() end)
+            end
+        end
 
         if musicTime >= 4800 and musicTime <= 4850 then 
             doingFlashback = true
@@ -38,16 +67,38 @@ return {
             stageImages["finaleFlashback"]:animate("doog", false)
         elseif musicTime >= 8400 and musicTime <= 8450 then
             doingFlashback = false
-            if flash.alpha == 0 then weeksFinale:doFlashTimed() end
+            if flash.alpha == 0 then 
+                flash.colour = {1, 1, 1}
+                Timer.tween(0.9, flash, {alpha = 1}, "linear", function() 
+                    flash.colour = {1, 0, 0}
+                    Timer.tween(0.3, cam, {sizeX = 0.9, sizeY = 0.9}, "in-quad") 
+                    Timer.tween(0.22, camScale, {x = 0.9, y = 0.9}, "in-quad")
+                    Timer.tween(0.5, flash, {alpha = 0}, "linear", function() 
+                        flash.alpha = 0
+                    end)
+                end
+                )
+            end
             cock = 0
         end
 
         if musicTime >= 20400 and musicTime <= 20450 then 
             health = 10
+            flash.colour = {255/255, 18/255, 104/255}
+            if flash.alpha == 0 then
+                Timer.tween(0.18, flash, {alpha = 1}, "linear", function() 
+                    Timer.tween(0.22, cam, {sizeX = 0.75, sizeY = 0.75}, "in-quad") 
+                    Timer.tween(0.22, camScale, {x = 0.75, y = 0.75}, "in-quad")
+                    Timer.tween(0.5, flash, {alpha = 0}, "linear", function()
+                        flash.alpha = 0
+                    end)
+                end
+                )
+            end
             curStage = "finale"
         end
 
-        if musicThres ~= oldMusicThres and math.fmod(absMusicTime, 240000 / bpm) < 100 then
+        if musicThres ~= oldMusicThres and math.fmod(absMusicTime, 180000 / bpm) < 100 then
 			stageImages["defeat"]:animate("anim", false)
             stageImages["light"]:animate("anim", false)
 		end
@@ -65,11 +116,6 @@ return {
 
                 enemy:draw()
                 boyfriend:draw()
-
-                graphics.setColor(1, 1, 1, cock)
-                if doingFlashback then 
-                    stageImages["finaleFlashback"]:draw()
-                end
                 graphics.setColor(1, 1, 1, 1)
             love.graphics.pop()
         elseif curStage == "finale" then
@@ -77,6 +123,15 @@ return {
                 love.graphics.translate(cam.x * 0.9, cam.y * 0.9)
                 stageImages["bgg"]:draw()
                 stageImages["BG"]:draw()
+                stageImages["dead"]:draw()
+
+                boyfriend:draw()
+                enemy2:draw()
+
+                stageImages["fore"]:draw()
+                stageImages["lamp"]:draw()
+                stageImages["light"]:draw()
+                stageImages["dark"]:draw()
 
                 
             love.graphics.pop() 
