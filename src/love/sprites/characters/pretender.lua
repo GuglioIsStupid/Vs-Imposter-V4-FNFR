@@ -355,7 +355,7 @@ return graphics.newSprite(
 		--Start is the first frame, stop is the last frame, speed is the speed of the animation, offsetX and offsetY are the offset of the animation
 		--Get the offset by using the ingame offset editor and pressing 7
 		["left"] = {start = 29, stop = 58, speed = 24, offsetX = 7, offsetY = 12},
-		["down"] = {start = 1, stop = 14, speed = 24, offsetX = 15, offsetY = -23
+		["down"] = {start = 1, stop = 14, speed = 24, offsetX = 15, offsetY = -23},
 		["up"] = {start = 79, stop = 89, speed = 24, offsetX = 39, offsetY = -34},
 		["right"] = {start = 59, stop = 78, speed = 24, offsetX = 151, offsetY = 5},
 		["idle"] = {start = 15, stop = 28, speed = 24, offsetX = 0, offsetY = 0},
@@ -363,9 +363,9 @@ return graphics.newSprite(
 		["miss down"] = {start = 193, stop = 204, speed = 24, offsetX = 22, offsetY = -22},
 		["miss up"] = {start = 245, stop = 255, speed = 24, offsetX = 28, offsetY = -34},
 		["miss right"] = {start = 235, stop = 244, speed = 24, offsetX = 168, offsetY = 4},
-		["dies"] = {start = 256, stop = 337, speed = 24, offsetX = 0, offsetY = 0},
-		["dead confirm"] = {start = 90, stop = 158, speed = 24, offsetX = 74, offsetY = 1},
-		["dead loop"] = {start = 159, stop = 192, speed = 24, offsetX = 68, offsetY = 6},
+		["dies"] = {start = 256, stop = 313, speed = 24, offsetX = -256, offsetY = 5},
+		["dead confirm"] = {start = 90, stop = 158, speed = 24, offsetX = 80, offsetY = -2},
+		["dead loop"] = {start = 159, stop = 192, speed = 24, offsetX = 80, offsetY = -2},
 
 	},
 	"idle", -- set to default animation

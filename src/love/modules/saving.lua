@@ -79,8 +79,7 @@ highscores = {
             scores = {0,0,0,0,0,0,0,0,0}, accuracys = {0,0,0,0,0,0,0,0,0}
         }
     }, -- Week 7
-
-    version = 3
+    version = 4
 }
 achievementProgress = {
     ["death"] = 0,
