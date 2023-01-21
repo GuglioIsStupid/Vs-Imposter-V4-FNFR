@@ -117,7 +117,7 @@ return graphics.newSprite(
 		--To get the animations, look at the number and the name of the frame
 		--Start is the first frame, stop is the last frame, speed is the speed of the animation, offsetX and offsetY are the offset of the animation
 		--Get the offset by using the ingame offset editor and pressing 7
-		["sad"] = {start = 31, stop = 110, speed = 24, offsetX = 0, offsetY = 0},
+		["sad"] = {start = 31, stop = 110, speed = 24, offsetX = 0, offsetY = -5},
 		["idle"] = {start = 1, stop = 30, speed = 24, offsetX = 0, offsetY = 0},
 	},
 	"idle", -- set to default animation
