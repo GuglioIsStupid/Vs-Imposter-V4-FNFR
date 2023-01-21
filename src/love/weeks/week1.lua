@@ -55,7 +55,7 @@ return {
 		weeks:update(dt)
 		stages["stage"]:update(dt)
 
-		if health[1] >= 80 then
+		if health >= 80 then
 			if enemyIcon:getAnimName() == "daddy dearest" then
 				weeks:setIcon("enemy", "daddy dearest losing")
 			end

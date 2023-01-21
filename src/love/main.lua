@@ -468,8 +468,7 @@ function love.load()
 	musicTime = 0
 	
 	health = {}
-	health[1] = 50 -- tweened one
-	health[2] = 50 -- normal one
+	health = 50 -- tweened one
 
 	if curOS == "Web" then
 		Gamestate.switch(clickStart)

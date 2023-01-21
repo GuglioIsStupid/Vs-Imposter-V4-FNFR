@@ -109,7 +109,7 @@ return {
 			stages["miraCaf"]:update(dt)
 		end
 
-		if health[1] >= 80 then
+		if health >= 80 then
 			if enemyIcon:getAnimName() == "daddy dearest" then
 				weeksGreen:setIcon("enemy", "daddy dearest losing")
 			end

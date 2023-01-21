@@ -85,7 +85,7 @@ return {
 			stages["yellowAirship"]:update(dt)
 		end
 
-		if health[1] >= 80 then
+		if health >= 80 then
 			if enemyIcon:getAnimName() == "yellow" then
 				weeksYellow:setIcon("enemy", "yellow losing")
 			elseif enemyIcon:getAnimName() == "white" then

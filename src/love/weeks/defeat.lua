@@ -78,7 +78,7 @@ return {
 			end
 		end
 
-		if health[1] >= 80 then
+		if health >= 80 then
 			if enemyIcon:getAnimName() == "black" then
 				weeksDefeat:setIcon("enemy", "black losing")
 			end

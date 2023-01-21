@@ -52,7 +52,7 @@ return {
 	update = function(self, dt)
 		weeksOw:update(dt)
 		enemyTwo:update(dt)
-		if health[1] >= 80 then
+		if health >= 80 then
 			if enemyIcon:getAnimName() == "daddy dearest" then
 				weeksOw:setIcon("enemy", "daddy dearest losing")
 			end

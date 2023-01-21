@@ -59,7 +59,7 @@ return {
 			HOLY_SHIT_CH_AND_GUGLIO_ARE_MAKING_OUT = true
 		end
 
-		if health[1] >= 80 then
+		if health >= 80 then
 			if enemyIcon:getAnimName() == "daddy dearest" then
 				weeksHenry:setIcon("enemy", "daddy dearest losing")
 			end

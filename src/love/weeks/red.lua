@@ -64,7 +64,7 @@ return {
         -- lerp flashAlpha to 0
         flashAlpha = coolUtil.lerp(flashAlpha, 0, coolUtil.boundTo(0, dt * 5, 1))
 
-		if health[1] >= 80 then
+		if health >= 80 then
 			if enemyIcon:getAnimName() == "red impostor 1" then
 				weeks:setIcon("enemy", "red impostor 1 losing")
 			end
