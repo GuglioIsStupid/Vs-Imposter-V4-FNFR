@@ -167,7 +167,6 @@ function saveSettings()
 end
 
 function love.load()
-	gamePause = false
 	paused = false
 	settings = {}
 	local curOS = love.system.getOS()
@@ -567,12 +566,6 @@ end
 
 function love.update(dt)
 	previousFrameTime = love.timer.getTime() * 1000
-	if gamePause then 
-		if inst then inst:pause() end
-		if music then music:pause() end
-		if voices then voices:pause() end
-		return
-	end
 	dt = math.min(dt, 1 / 30)
 
 	if volFade > 0 then
@@ -640,12 +633,4 @@ end
 
 function love.focus(t)
 	Gamestate.focus(t)
-	gamePause = not t
-	if t then
-		if inst and not playMenuMusic then inst:play() end
-		if music and playMenuMusic then
-			music:play()
-		end
-		if voices and not playMenuMusic then voices:play() end
-	end
 end
