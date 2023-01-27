@@ -565,7 +565,6 @@ function love.mousepressed(x, y, button, istouch, presses)
 end
 
 function love.update(dt)
-	previousFrameTime = love.timer.getTime() * 1000
 	dt = math.min(dt, 1 / 30)
 
 	if volFade > 0 then
