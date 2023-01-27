@@ -66,7 +66,7 @@ return {
 		zoom[1] = 1
 
 		inst = nil
-		voices = waveAudio:newSource("songs/tutorial/inst.ogg", "stream")
+		voices = love.audio.newSource("songs/tutorial/inst.ogg", "stream")
 
 		self:initUI()
 

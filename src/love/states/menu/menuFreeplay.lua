@@ -11,29 +11,28 @@ local songDifficulty = 2
 local difficultyStrs
 local selectSound, confirmSound
 local ratingText
+
 return {
     enter = function(self)
         selectSound = love.audio.newSource("sounds/menu/select.ogg", "static")
         confirmSound = love.audio.newSource("sounds/menu/confirm.ogg", "static")
-        menuBG = graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/fp_bg")))
-        songSelect = graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/fp_songSelect")))
-        songStats = graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/fp_songStats")))
-        tabs = graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/fp_tabs")))
-        weekSelect = graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/fp_weekSelect")))
-        weekStats = graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/fp_weekStats")))
-        backButton = graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/backBtn")))
+        menuBG = graphics.newImage(graphics.imagePath("menu/fp_bg"))
+        songSelect = graphics.newImage(graphics.imagePath("menu/fp_songSelect"))
+        songStats = graphics.newImage(graphics.imagePath("menu/fp_songStats"))
+        tabs = graphics.newImage(graphics.imagePath("menu/fp_tabs"))
+        weekSelect = graphics.newImage(graphics.imagePath("menu/fp_weekSelect"))
+        weekStats = graphics.newImage(graphics.imagePath("menu/fp_weekStats"))
+        backButton = graphics.newImage(graphics.imagePath("menu/backBtn"))
 
         graphics.fadeIn(0.3)
 
         difficultyStrs = {
-            "hard",
-            "hard",
-            "hard"
+            "-easy",
+            "",
+            "-hard"
         }
         songBefore = ""
         songAfter = ""
-
-        updatePres("Choosing a song", "In the Freeplay Menu")
 
         menuNum = 1
         songNum = 1
@@ -42,10 +41,10 @@ return {
         averageAccuracy = 0
         ratingText = "???"
         for i = 1, #weekMeta[weekNum][2] do
-            curWeekScore = curWeekScore + highscores[weekNum-1][difficultyStrs[songDifficulty]].scores[i]
-            averageAccuracy = averageAccuracy + highscores[weekNum-1][difficultyStrs[songDifficulty]].accuracys[i]
+            curWeekScore = 0
+            averageAccuracy = 0
         end
-        averageAccuracy = averageAccuracy / #weekMeta[weekNum][2]
+        averageAccuracy = 0
         if averageAccuracy >= 101 then
             ratingText = "what"
         elseif averageAccuracy >= 100 then
@@ -87,10 +86,10 @@ return {
                 curWeekScore = 0
                 averageAccuracy = 0
                 for i = 1, #weekMeta[weekNum][2] do
-                    curWeekScore = curWeekScore + highscores[weekNum-1][difficultyStrs[songDifficulty]].scores[i]
-                    averageAccuracy = averageAccuracy + highscores[weekNum-1][difficultyStrs[songDifficulty]].accuracys[i]
+                    curWeekScore = 0
+                    averageAccuracy = 0
                 end
-                averageAccuracy = averageAccuracy / #weekMeta[weekNum][2]
+                averageAccuracy = 0
                 if averageAccuracy >= 101 then
                     ratingText = "what"
                 elseif averageAccuracy >= 100 then
@@ -139,10 +138,10 @@ return {
                 curWeekScore = 0
                 averageAccuracy = 0
                 for i = 1, #weekMeta[weekNum][2] do
-                    curWeekScore = curWeekScore + highscores[weekNum-1][difficultyStrs[songDifficulty]].scores[i]
-                    averageAccuracy = averageAccuracy + highscores[weekNum-1][difficultyStrs[songDifficulty]].accuracys[i]
+                    curWeekScore = curWeekScore + 0
+                    averageAccuracy = averageAccuracy + 0
                 end
-                averageAccuracy = averageAccuracy / #weekMeta[weekNum][2]
+                averageAccuracy = 0
                 if averageAccuracy >= 101 then
                     ratingText = "what"
                 elseif averageAccuracy >= 100 then
@@ -197,10 +196,10 @@ return {
             averageAccuracy = 0
             ratingText = "???"
             for i = 1, #weekMeta[weekNum][2] do
-                curWeekScore = curWeekScore + highscores[weekNum-1][difficultyStrs[songDifficulty]].scores[i]
-                averageAccuracy = averageAccuracy + highscores[weekNum-1][difficultyStrs[songDifficulty]].accuracys[i]
+                curWeekScore = 0
+                averageAccuracy = 0
             end
-            averageAccuracy = averageAccuracy / #weekMeta[weekNum][2]
+            averageAccuracy = 0
             if averageAccuracy >= 101 then
                 ratingText = "what"
             elseif averageAccuracy >= 100 then
@@ -239,10 +238,10 @@ return {
             averageAccuracy = 0
             ratingText = "???"
             for i = 1, #weekMeta[weekNum][2] do
-                curWeekScore = curWeekScore + highscores[weekNum-1][difficultyStrs[songDifficulty]].scores[i]
-                averageAccuracy = averageAccuracy + highscores[weekNum-1][difficultyStrs[songDifficulty]].accuracys[i]
+                curWeekScore = 0
+                averageAccuracy = 0
             end
-            averageAccuracy = averageAccuracy / #weekMeta[weekNum][2]
+            averageAccuracy = 0
             if averageAccuracy >= 101 then
                 ratingText = "what"
             elseif averageAccuracy >= 100 then
@@ -283,7 +282,7 @@ return {
     
                         storyMode = false
     
-                        music[1]:stop()
+                        music:stop()
     
                         Gamestate.switch(weekData[weekNum], songNum, songAppend)
     
@@ -334,7 +333,7 @@ return {
                 uitextf(averageAccuracy, -825, 50, 600, "center")
                 uitextf(ratingText, -675, 195, 600, "center")
             else
-                graphics.setColorF(141, 130, 123)
+                graphics.setColor(141/255, 130/255, 123/255)
                 love.graphics.setFont(weekFontSmall)
                 love.graphics.printf(songBefore, 60, -72, 600, "center")
 
@@ -342,7 +341,7 @@ return {
                 love.graphics.setFont(weekFont)
                 love.graphics.printf(weekMeta[weekNum][2][songNum], 65, -18, 600, "center")
 
-                graphics.setColorF(141, 130, 123)
+                graphics.setColor(141/255, 130/255, 123/255)
                 love.graphics.setFont(weekFontSmall)
                 love.graphics.printf(songAfter, 60, 72, 600, "center")
 
@@ -353,6 +352,15 @@ return {
             -- make the current dificulties first letter uppercase
             local difficultyStr = difficultyStrs[songDifficulty]
             difficultyStr = difficultyStr:sub(1,1):upper() .. difficultyStr:sub(2)
+            if difficultyStr == "" then 
+                difficultyStr = "Normal"
+            else
+                -- remove the first letter from the difficulty string
+                difficultyStr = difficultyStr:sub(2)
+                -- make the first letter uppercase
+                difficultyStr = difficultyStr:sub(1,1):upper() .. difficultyStr:sub(2)
+                --difficultyStr:gsub("-", "")
+            end
             uitextf(difficultyStr, 65, -370, 600, "center")
             backButton:draw()
         love.graphics.pop()

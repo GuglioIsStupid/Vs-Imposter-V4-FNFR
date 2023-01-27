@@ -62,8 +62,10 @@ return {
 						stageImages[stageImgNames[selection]].y = stageImages[stageImgNames[selection]].y + 1
 					elseif key == "q" then 
 						stageImages[stageImgNames[selection]].sizeX = stageImages[stageImgNames[selection]].sizeX - 0.1
+						stageImages[stageImgNames[selection]].sizeY = stageImages[stageImgNames[selection]].sizeY - 0.1
 					elseif key == "e" then
 						stageImages[stageImgNames[selection]].sizeX = stageImages[stageImgNames[selection]].sizeX + 0.1
+						stageImages[stageImgNames[selection]].sizeY = stageImages[stageImgNames[selection]].sizeY + 0.1
 					end
 				elseif curChanging == "boyfriend" then 
 					if key == "a" then
@@ -113,6 +115,22 @@ return {
 						enemy.sizeX = enemy.sizeX + 0.1
 						enemy.sizeY = enemy.sizeY + 0.1
 					end
+				end
+
+				if key == "i" then 
+					camera.y = camera.y + 1
+				elseif key == "k" then
+					camera.y = camera.y - 1
+				elseif key == "j" then
+					camera.x = camera.x + 1
+				elseif key == "l" then
+					camera.x = camera.x - 1
+				end
+
+				if key == "1" then 
+					camera:moveToPoint(1.25, "boyfriend")
+				elseif key == "2" then
+					camera:moveToPoint(1.25, "enemy")
 				end
 			end
 		end
@@ -186,9 +204,11 @@ return {
 					else
                         fileStr = dirTable[selection]
                         fileStr = fileStr:sub(1, -5)
-                        boyfriend = love.filesystem.load("sprites/characters/boyfriend.lua")()
-                        girlfriend = Character.girlfriend(0, 0)
+                        boyfriend = love.filesystem.load("sprites/boyfriend.lua")()
+                        girlfriend = love.filesystem.load("sprites/girlfriend.lua")()
                         stages[fileStr]:enter()
+						if not camera.points["enemy"] then camera:addPoint("enemy", -boyfriend.x + 100, -boyfriend.y + 75) end
+						if not camera.points["boyfriend"] then camera:addPoint("boyfriend", -enemy.x - 100, -enemy.y + 75) end
 						for i, v in pairs(stageImages) do
 							-- insert into the stageImgNames table
 							table.insert(stageImgNames, i)
@@ -225,10 +245,10 @@ return {
 			graphics.fadeOut(0.5, love.event.quit)
 		end
 		if input:pressed("debugZoomOut") then
-			cam.sizeX, cam.sizeY = cam.sizeX - 0.05, cam.sizeY - 0.05
+			camera.sizeX, camera.sizeY = camera.sizeX - 0.05, camera.sizeY - 0.05
 		end
 		if input:pressed("debugZoomIn") then
-			cam.sizeX, cam.sizeY = cam.sizeX + 0.05, cam.sizeY + 0.05
+			camera.sizeX, camera.sizeY = camera.sizeX + 0.05, camera.sizeY + 0.05
 		end
 	end,
 
@@ -238,8 +258,8 @@ return {
 				graphics.clear(0.5, 0.5, 0.5)
 
 				love.graphics.push()
-					love.graphics.translate(lovesize.getWidth() / 2, lovesize.getHeight() / 2)
-					love.graphics.scale(cam.sizeX, cam.sizeY)
+					love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
+					love.graphics.scale(camera.sizeX, camera.sizeY)
                     stages[fileStr]:draw()
 				love.graphics.pop()
 
@@ -278,7 +298,8 @@ return {
                     end
                     graphics.setColor(1, 1, 1)
                         
-                    love.graphics.print("\n\n\n\n\n\n\n\nPress Esc to exit at any time", 0, (#menus[menuID] + 1) * 20)
+                    love.graphics.print("\n\n\n\n\n\nCamX: " .. camera.x .. "\nCamY: " .. camera.y ..
+					"\n\nPress Esc to exit at any time", 0, (#menus[menuID] + 1) * 20)
                 end
 			else
 				for i = 1, #dirTable do

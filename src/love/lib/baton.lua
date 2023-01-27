@@ -179,6 +179,7 @@ function Player:_init(config)
 	self:_initPairs()
 	self._activeDevice = 'none'
 end
+
 --[[
 	detects the active device (keyboard/mouse or joystick).
 	if the keyboard or mouse is currently being used, joystick
@@ -244,8 +245,8 @@ function Player:_updateControls()
 		control.rawValue = self:_getControlRawValue(control)
 		control.value = control.rawValue >= self.config.deadzone and control.rawValue or 0
 		control.downPrevious = control.down
-		control.down = (not control.forcedDown and control.value > 0)
-		control.pressed = control.down and not control.downPrevious and not control.forcedPressed
+		control.down = control.value > 0
+		control.pressed = control.down and not control.downPrevious
 		control.released = control.downPrevious and not control.down
 	end
 end
@@ -334,29 +335,6 @@ function Player:pressed(name)
 		return self._pairs[name].pressed
 	elseif self._controls[name] then
 		return self._controls[name].pressed
-	else
-		error('No control with name "' .. name .. '" defined', 3)
-	end
-end
-
-function Player:setPressed(name)
-	if self._pairs[name] then
-		self._pairs[name].pressed = true
-		self._pairs[name].forcedPressed = true
-	elseif self._controls[name] then
-		self._controls[name].pressed = true
-		self._controls[name].forcedPressed = true
-	else
-		error('No control with name "' .. name .. '" defined', 3)
-	end
-end
-function Player:setDown(name)
-	if self._pairs[name] then
-		self._pairs[name].down = true
-		self._pairs[name].forcedDown = true
-	elseif self._controls[name] then
-		self._controls[name].down = true
-		self._controls[name].forcedDown = true
 	else
 		error('No control with name "' .. name .. '" defined', 3)
 	end

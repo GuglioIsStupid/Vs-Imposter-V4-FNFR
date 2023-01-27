@@ -16,73 +16,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
-function tryexec(try, catch)
-	local status, err = pcall(try)
-	if not status then
-		catch()
-	end
-end
-__VERSION__ = love.filesystem.read("version.txt") or "UNKNOWN"
-__GIT_VERSION__ = love.filesystem.read("git-version.txt") or "UNKNOWN" 
 if love.filesystem.isFused() then function print() end end -- print functions tend the make the game lag when in update functions, so we do this just in
-function uitextf(text,x,y,limit,align,r,sx,sy,ox,oy,kx,ky,alpha)
-	local x = x or 0
-	local y = y or 0
-	local r = r or 0
-	local limit = limit or 750
-	local align = align or "left"
-	local sx = sx or 1
-	local sy = sy or 1
-	local ox = ox or 0
-	local oy = oy or 0
-	local kx = kx or 0
-	local ky = ky or 0
-	graphics.setColor(0,0,0, alpha or 1)
-	love.graphics.printf(text,x-2,y,limit,align,r,sx,sy,ox,oy,kx,ky)
-	love.graphics.printf(text,x+2,y,limit,align,r,sx,sy,ox,oy,kx,ky)
-	love.graphics.printf(text,x,y-2,limit,align,r,sx,sy,ox,oy,kx,ky)
-	love.graphics.printf(text,x,y+2,limit,align,r,sx,sy,ox,oy,kx,ky)
-	graphics.setColor(1,1,1, alpha or 1)
-    love.graphics.printf(text,x,y,limit,align,r,sx,sy,ox,oy,kx,ky)
-end
-function weekUIText(text,x,y,limit,align,r,sx,sy,ox,oy,kx,ky,alpha)
-	local x = x or 0
-	local y = y or 0
-	local r = r or 0
-	local limit = limit or 750
-	local align = align or "left"
-	local sx = sx or 1
-	local sy = sy or 1
-	local ox = ox or 0
-	local oy = oy or 0
-	local kx = kx or 0
-	local ky = ky or 0
-	graphics.setColor(0,0,0, alpha or 1)
-	love.graphics.printf(text,x-2,y,limit,align,r,sx,sy,ox,oy,kx,ky)
-	love.graphics.printf(text,x+2,y,limit,align,r,sx,sy,ox,oy,kx,ky)
-	love.graphics.printf(text,x,y-2,limit,align,r,sx,sy,ox,oy,kx,ky)
-	love.graphics.printf(text,x,y+2,limit,align,r,sx,sy,ox,oy,kx,ky)
-	graphics.setColor(1,1,1, alpha or 1)
-    love.graphics.printf({{enemy.colours[1]/255, enemy.colours[2]/255, enemy.colours[3]/255}, text},x,y,limit,align,r,sx,sy,ox,oy,kx,ky)
-end
-function uitext(text,x,y,r,sx,sy,ox,oy,kx,ky,alpha)
-	local x = x or 0
-	local y = y or 0
-	local r = r or 0
-	local sx = sx or 1
-	local sy = sy or 1
-	local ox = ox or 0
-	local oy = oy or 0
-	local kx = kx or 0
-	local ky = ky or 0
-	graphics.setColor(0,0,0, alpha or 1)
-	love.graphics.print(text,x-2,y,r,sx,sy,a,ox,oy,kx,ky)
-	love.graphics.print(text,x+2,y,r,sx,sy,a,ox,oy,kx,ky)
-	love.graphics.print(text,x,y-2,r,sx,sy,a,ox,oy,kx,ky)
-	love.graphics.print(text,x,y+2,r,sx,sy,a,ox,oy,kx,ky)
-	graphics.setColor(1,1,1, alpha or 1)
-    love.graphics.print(text,x,y,r,sx,sy,a,ox,oy,kx,ky)
-end
+
 function uitextflarge(text,x,y,limit,align,hovered,r,sx,sy,ox,oy,kx,ky)
 	local x = x or 0
 	local y = y or 0
@@ -104,83 +39,270 @@ function uitextflarge(text,x,y,limit,align,hovered,r,sx,sy,ox,oy,kx,ky)
 	if not hovered then graphics.setColor(1,1,1) else graphics.setColor(0,0,0) end
 	love.graphics.printf(text,x,y,limit,align,r,sx,sy,ox,oy,kx,ky)
 end
+function uitextf(text,x,y,limit,align,r,sx,sy,ox,oy,kx,ky,alpha)
+	local x = x or 0
+	local y = y or 0
+	local r = r or 0
+	local limit = limit or 750
+	local align = align or "left"
+	local sx = sx or 1
+	local sy = sy or 1
+	local ox = ox or 0
+	local oy = oy or 0
+	local kx = kx or 0
+	local ky = ky or 0
+	graphics.setColor(0,0,0, alpha or 1)
+	love.graphics.printf(text,x-2,y,limit,align,r,sx,sy,ox,oy,kx,ky)
+	love.graphics.printf(text,x+2,y,limit,align,r,sx,sy,ox,oy,kx,ky)
+	love.graphics.printf(text,x,y-2,limit,align,r,sx,sy,ox,oy,kx,ky)
+	love.graphics.printf(text,x,y+2,limit,align,r,sx,sy,ox,oy,kx,ky)
+	graphics.setColor(1,1,1, alpha or 1)
+    love.graphics.printf(text,x,y,limit,align,r,sx,sy,ox,oy,kx,ky)
+end
+function uitext(text,x,y,r,sx,sy,ox,oy,kx,ky,alpha)
+	local x = x or 0
+	local y = y or 0
+	local r = r or 0
+	local sx = sx or 1
+	local sy = sy or 1
+	local ox = ox or 0
+	local oy = oy or 0
+	local kx = kx or 0
+	local ky = ky or 0
+	graphics.setColor(0,0,0, alpha or 1)
+	love.graphics.print(text,x-2,y,r,sx,sy,a,ox,oy,kx,ky)
+	love.graphics.print(text,x+2,y,r,sx,sy,a,ox,oy,kx,ky)
+	love.graphics.print(text,x,y-2,r,sx,sy,a,ox,oy,kx,ky)
+	love.graphics.print(text,x,y+2,r,sx,sy,a,ox,oy,kx,ky)
+	graphics.setColor(1,1,1, alpha or 1)
+    love.graphics.print(text,x,y,r,sx,sy,a,ox,oy,kx,ky)
+end
 
-volFade = 0
+function saveSettings()
+    if settings.hardwareCompression ~= settingdata.saveSettingsMoment.hardwareCompression then
+        settingdata = {}
+        if settings.hardwareCompression then
+            imageTyppe = "dds" 
+        else
+            imageTyppe = "png"
+        end
+        settingdata.saveSettingsMoment = {
+            hardwareCompression = settings.hardwareCompression,
+            downscroll = settings.downscroll,
+            ghostTapping = settings.ghostTapping,
+            showDebug = settings.showDebug,
+            setImageType = "dds",
+            sideJudgements = settings.sideJudgements,
+            botPlay = settings.botPlay,
+            middleScroll = settings.middleScroll,
+            randomNotePlacements = settings.randomNotePlacements,
+            practiceMode = settings.practiceMode,
+            noMiss = settings.noMiss,
+            customScrollSpeed = settings.customScrollSpeed,
+            keystrokes = settings.keystrokes,
+            scrollUnderlayTrans = settings.scrollUnderlayTrans,
+            Hitsounds = settings.Hitsounds,
+            vocalsVol = settings.vocalsVol,
+            instVol = settings.instVol,
+            hitsoundVol = settings.hitsoundVol,
+            noteSkins = settings.noteSkins,
+            flashinglights = settings.flashinglights,
+            window = settings.window,
+            customBindDown = customBindDown,
+            customBindUp = customBindUp,
+            customBindLeft = customBindLeft,
+            customBindRight = customBindRight,
+            settingsVer = settingsVer
+        }
+        serialized = lume.serialize(settingdata)
+        love.filesystem.write("settings", serialized)
+        love.window.showMessageBox("Settings Saved!", "Settings saved. Vanilla Engine will now restart to make sure your settings saved")
+        love.event.quit("restart")
+    else
+        settingdata = {}
+        if settings.hardwareCompression then
+            imageTyppe = "dds" 
+        else
+            imageTyppe = "png"
+        end
+        settingdata.saveSettingsMoment = {
+            hardwareCompression = settings.hardwareCompression,
+            downscroll = settings.downscroll,
+            ghostTapping = settings.ghostTapping,
+            showDebug = settings.showDebug,
+            setImageType = "dds",
+            sideJudgements = settings.sideJudgements,
+            botPlay = settings.botPlay,
+            middleScroll = settings.middleScroll,
+            randomNotePlacements = settings.randomNotePlacements,
+            practiceMode = settings.practiceMode,
+            noMiss = settings.noMiss,
+            customScrollSpeed = settings.customScrollSpeed,
+            keystrokes = settings.keystrokes,
+            scrollUnderlayTrans = settings.scrollUnderlayTrans,
+            Hitsounds = settings.Hitsounds,
+            vocalsVol = settings.vocalsVol,
+            instVol = settings.instVol,
+            hitsoundVol = settings.hitsoundVol,
+            noteSkins = settings.noteSkins,
+            flashinglights = settings.flashinglights,
+            multiplayer = settings.multiplayer,
 
-function math.round(num)
-	return math.floor(num + 0.5)
+            customBindDown = customBindDown,
+            customBindUp = customBindUp,
+            customBindLeft = customBindLeft,
+            customBindRight = customBindRight,
+            settingsVer = settingsVer
+        }
+        serialized = lume.serialize(settingdata)
+        love.filesystem.write("settings", serialized)
+        graphics.fadeOut(
+            0.3,
+            function()
+                Gamestate.switch(menuSelect)
+                status.setLoading(false)
+            end
+        )
+    end
 end
 
 function love.load()
+	gamePause = false
+	paused = false
+	settings = {}
 	local curOS = love.system.getOS()
-
-	local selectSound = love.audio.newSource("sounds/menu/select.ogg", "static")
-	local confirmSound = love.audio.newSource("sounds/menu/confirm.ogg", "static")
-
-	curMusicBeat = 0
-
-	if not love.filesystem.getInfo("ratEAT.png") then
-		ratEat = love.image.newImageData("fonts/ratEAT.png")
-		ratEat:encode("png", "ratEAT.png")
-	end
 
 	-- Load libraries
 	baton = require "lib.baton"
-	if love.system.getOS() == "Android" or love.system.getOS() == "iOS" then
-		paddy = require "lib.paddy"
-	end  
+	ini = require "lib.ini"
 	lovesize = require "lib.lovesize"
 	Gamestate = require "lib.gamestate"
 	Timer = require "lib.timer"
-	lume = require "lib.lume"
 	json = require "lib.json"
-	Object = require "lib.classic"
-	waveAudio = require "lib.wave"
-	moonshine = require "lib.moonshine"
+	lume = require "lib.lume"
 
-	e = require "modules.e"   -- wtf is e 
-
+	-- Load modules
 	status = require "modules.status"
 	audio = require "modules.audio"
 	graphics = require "modules.graphics"
-	modchartHandler = require "modules.modchart"
-	sprite = require "modules.sprite"
-	paths = require "modules.paths"
-	Character = require "modules.Character"
-	require "modules.volume"
-	require "modules.saving"
-	require "modules.camera"
-	require "modules.discord"
-	require "modules.errHandler"
-	coolUtil = require "modules.coolUtil"
+	camera = require "modules.camera"
+	beatHandler = require "modules.beatHandler"
+	util = require "modules.util"
 	cutscene = require "modules.cutscene"
+	settings = require "settings"
+
+	playMenuMusic = true
+
+	if love.filesystem.getInfo("settings") then 
+		settingdata = love.filesystem.read("settings")
+		settingdata = lume.deserialize(settingdata)
+	
+		settings.hardwareCompression = settingdata.saveSettingsMoment.hardwareCompression
+		settings.downscroll = settingdata.saveSettingsMoment.downscroll
+		settings.ghostTapping = settingdata.saveSettingsMoment.ghostTapping
+		settings.showDebug = settingdata.saveSettingsMoment.showDebug
+		graphics.setImageType(settingdata.saveSettingsMoment.setImageType)
+		settings.sideJudgements = settingdata.saveSettingsMoment.sideJudgements
+		settings.botPlay = settingdata.saveSettingsMoment.botPlay
+		settings.middleScroll = settingdata.saveSettingsMoment.middleScroll
+		settings.practiceMode = settingdata.saveSettingsMoment.practiceMode
+		settings.noMiss = settingdata.saveSettingsMoment.noMiss
+		settings.customScrollSpeed = settingdata.saveSettingsMoment.customScrollSpeed
+		settings.scrollUnderlayTrans = settingdata.saveSettingsMoment.scrollUnderlayTrans
+		settings.noteSkins = settingdata.saveSettingsMoment.noteSkins
+		customBindDown = settingdata.saveSettingsMoment.customBindDown
+		customBindUp = settingdata.saveSettingsMoment.customBindUp
+		customBindLeft = settingdata.saveSettingsMoment.customBindLeft
+		customBindRight = settingdata.saveSettingsMoment.customBindRight
+	
+		settingsVer = settingdata.saveSettingsMoment.settingsVer
+	
+		settingdata.saveSettingsMoment = {
+			hardwareCompression = settings.hardwareCompression,
+			downscroll = settings.downscroll,
+			ghostTapping = settings.ghostTapping,
+			showDebug = settings.showDebug,
+			setImageType = "dds",
+			sideJudgements = settings.sideJudgements,
+			botPlay = settings.botPlay,
+			middleScroll = settings.middleScroll,
+			practiceMode = settings.practiceMode,
+			noMiss = settings.noMiss,
+			customScrollSpeed = settings.customScrollSpeed,
+			keystrokes = settings.keystrokes,
+			scrollUnderlayTrans = settings.scrollUnderlayTrans,
+			customBindDown = customBindDown,
+			customBindUp = customBindUp,
+			customBindLeft = customBindLeft,
+			customBindRight = customBindRight,
+			settingsVer = settingsVer
+		}
+		serialized = lume.serialize(settingdata)
+		love.filesystem.write("settings", serialized)
+	end
+	if settingsVer ~= 7 then
+		love.window.showMessageBox("Uh Oh!", "Settings have been reset.", "warning")
+		love.filesystem.remove("settings")
+	end
+	if not love.filesystem.getInfo("settings") or settingsVer ~= 7 then
+		settings.hardwareCompression = true
+		graphics.setImageType("dds")
+		settings.downscroll = false
+		settings.middleScroll = false
+		settings.ghostTapping = false
+		settings.showDebug = false
+		settings.sideJudgements = false
+		settings.botPlay = false
+		settings.practiceMode = false
+		settings.noMiss = false
+		settings.customScrollSpeed = 1
+		settings.keystrokes = false
+		settings.scrollUnderlayTrans = 0
+		--settings.noteSkins = 1
+		customBindLeft = "a"
+		customBindRight = "d"
+		customBindUp = "w"
+		customBindDown = "s"
+	
+		settings.flashinglights = false
+		settingsVer = 7
+		settingdata = {}
+		settingdata.saveSettingsMoment = {
+			hardwareCompression = settings.hardwareCompression,
+			downscroll = settings.downscroll,
+			ghostTapping = settings.ghostTapping,
+			showDebug = settings.showDebug,
+			setImageType = "dds",
+			sideJudgements = settings.sideJudgements,
+			botPlay = settings.botPlay,
+			middleScroll = settings.middleScroll,
+			practiceMode = settings.practiceMode,
+			noMiss = settings.noMiss,
+			customScrollSpeed = settings.customScrollSpeed,
+			keystrokes = settings.keystrokes,
+			scrollUnderlayTrans = settings.scrollUnderlayTrans,
+			customBindLeft = customBindLeft,
+			customBindRight = customBindRight,
+			customBindUp = customBindUp,
+			customBindDown = customBindDown,
+			
+			settingsVer = settingsVer
+		}
+		serialized = lume.serialize(settingdata)
+		love.filesystem.write("settings", serialized)
+	end
+
+	volumeWidth = {width = 160}
+	volFade = 0
+
+	-- Load settings
+	--settings = require "settings"
 	input = require "input"
 
-	music = {
-		waveAudio:newSource("songs/misc/menu.ogg", "stream"),
-		--love.audio.newSource("songs/misc/menu.ogg", "stream"),
-		vol = 1
-	}
-
-	died = false
-
-	music[1]:parse()
-	music[1]:setBPM(102)
-	music[1]:setIntensity(20)
-	music[1]:setVolume(music.vol)
-	music[1]:setLooping(true)
-
-	music[1]:play()
-
-	spongebirth = love.graphics.newImage(graphics.imagePath("spongebirth"))
-
-	-- Load states
-	clickStart = require "states.click-start"
-
+	-- Load Debugs
 	debugMenu = require "states.debug.debugMenu"
 	spriteDebug = require "states.debug.sprite-debug"
 	stageDebug = require "states.debug.stage-debug"
-	xmlDebug = require "states.debug.xml-debug"
 
 	-- Load stages
 	stages = {
@@ -198,25 +320,15 @@ function love.load()
         ["greyMira"] = require "stages.greyMira",
 	}
 
-	mods = {
-		weekMeta = {},
-		modNames = {},
-		WeekData = {}
-	}
-
-	modloader = require "modules.modloader"
-	modloader.load()
-
-	-- Load menus
+	-- Load Menus
+	clickStart = require "states.click-start"
 	menu = require "states.menu.menu"
 	menuWeek = require "states.menu.menuWeek"
 	menuSelect = require "states.menu.menuSelect"
 	menuFreeplay = require "states.menu.menuFreeplay"
-	menuChooseFreeplay = require "states.menu.menuChooseFreeplay"
 	menuSettings = require "states.menu.menuSettings"
 	menuCredits = require "states.menu.menuCredits"
 	impWeekMenu = require "states.menu.impWeekMenu"
-	intro = require "states.menu.intro" -- unused for now (Im too lazy)
 
 	chooseMissCount = require "states.misc.chooseMissCount"
 
@@ -224,48 +336,11 @@ function love.load()
 	credits = require "states.hi"
 
 	-- Load weeks
-	weeks = require "states.weeks.weeks"
-	weeksDefeat = require "states.weeks.weeks-Defeat"
-	weeksYellow = require "states.weeks.weeksYellow"
-	weeksHenry = require "states.weeks.weeksHenry"
-	weeksGreen = require "states.weeks.weeksGreen"
-	weeksFinale = require "states.weeks.weeksFinale"
-	weeksPink = require "states.weeks.weeksPink"
-	weeksOw = require "states.weeks.weeks-ow"
+	weeks = require "states.weeks"
 
 	-- Load substates
 	gameOver = require "substates.game-over"
-	settingsKeybinds = require "substates.settings-keybinds"
-
-	uiTextColour = {1,1,1} -- Set a custom UI colour (Put it in the weeks file to change it for only that week)
-	-- When adding custom colour for the health bar. Make sure to use 255 RGB values. It will automatically convert it for you.
-	pauseColor = {0,0,0} -- Pause screen colour
-	volumeWidth = {width = 160}
-
-	function setDialogue(strList)
-		dialogueList = strList
-		curDialogue = 1
-		timer = 0
-		progress = 1
-		output = ""
-		isDone = false
-	end
-
-	function setDialogueFromTxt(path)
-		dialogueList = {}
-		curDialogue = 1
-		timer = 0
-		progress = 1
-		output = ""
-		isDone = false
-
-		for line in love.filesystem.lines(path) do
-			-- remove the first :
-			line = line:sub(2)
-			local speaker, text = line:match("([^:]+):(.+)")
-			table.insert(dialogueList, {speaker, text})
-		end
-	end
+	gameOverPixel = require "substates.game-over-pixel"
 
 	-- Load week data
 	weekData = {
@@ -279,6 +354,18 @@ function love.load()
 		require "weeks.finale",
         require "weeks.ow",
 	}
+
+	weekDesc = { -- Add your week description here
+		"LEARN TO FUNK",
+		"DADDY DEAREST",
+		"SPOOKY MONTH",
+		"PICO",
+		"MOMMY MUST MURDER",
+		"RED SNOW",
+		"HATING SIMULATOR FT. MOAWLING",
+		"TANKMAN"
+	}
+
 	weekDesc = { -- Add your week description here
 		"LEARN TO FUNK",
 		"DADDY DEAREST",
@@ -329,7 +416,7 @@ function love.load()
 			{
 				"fuck1",
 				"fuck2",  -- i hate you guglio          the songs have names 
-				"fuck3"
+				"fuck3" -- i dont fucking know them
 			}
 		},
 		{
@@ -351,7 +438,7 @@ function love.load()
 			{
 				"COCK",
 				"COCKCOCK",    -- bruhhh ahnfjdnkhsjdklgiloskgnolsfihfkjgiupvjkliuefwsdojkpk;lvhoiujeksfudzjocpklhaguibfvhjcnj90 oisyhkfcdnuigfjkvfadhunkiugxjmn THEY HAVE NAMES
-				"COCKCOCKCOCK"
+				"COCKCOCKCOCK" -- I DONT KNOW THE NAMES
 			},
 		},
 		{
@@ -391,35 +478,6 @@ function love.load()
 		["..."] = chooseMissCount
 	}
 
-	defeatWeekLololol = require "weeks.defeat"
-
-	noteskins = {
-		"arrows",
-		"circles"
-	}
-
-	if love.system.getOS() == "NX" then
-		love.window.setMode(1920, 1080)
-	else
-		love.window.setMode(
-			settings.window.windowWidth,
-			settings.window.windowHeight,
-			{
-				vsync = settings.window.vsync,
-				fullscreen = settings.window.fullscreen,
-				fullscreentype = settings.window.fullscreentype,
-				resizable = true
-			}
-		)
-	end
-	--[[
-	; Fullscreen settings, if you don't want Vsync (60 FPS cap), set "fullscreenType" to "exclusive" and "vsync" to "0"
-	fullscreen=false
-	fullscreenType=desktop
-	vsync=1
-	
-	]]
-
 	-- LÖVE init
 	if curOS == "OS X" then
 		love.window.setIcon(love.image.newImageData("icons/macos.png"))
@@ -438,14 +496,11 @@ function love.load()
 	pauseFont = love.graphics.newFont("fonts/Dosis-SemiBold.ttf", 96)
 	weekFont = love.graphics.newFont("fonts/Dosis-SemiBold.ttf", 84)
 	weekFontSmall = love.graphics.newFont("fonts/Dosis-SemiBold.ttf", 54)
-	
 	susFontSmall = love.graphics.newFont("fonts/AmaticSC-Regular.ttf", 32)
 	susFont = love.graphics.newFont("fonts/AmaticSC-Bold.ttf", 32)
 
 	weekNum = 1
 	songDifficulty = 2
-
-	paused = false
 
 	spriteTimers = {
 		0, -- Girlfriend
@@ -456,41 +511,19 @@ function love.load()
 	storyMode = false
 	countingDown = false
 
-	menuDetails = {
-		titleBG = {x = 0,y = 0,sizeX = 1,sizeY = 1},
-		titleLogo = {x = 0,y = 0,sizeX = 1,sizeY = 1},
-		girlfriendTitle = {x = 0,y = 0,sizeX = 1,sizeY = 1},
-		selectBG = {x = 0,y = 0,sizeX = 1,sizeY = 1},
-		selectBGOverlay = {x = 0,y = 0,sizeX = 1,sizeY = 1},
-		selectUIElements = {x = 0,y = 0,sizeX = 1,sizeY = 1}
-	}
+	--cam = {x = 0, y = 0, sizeX = 0.9, sizeY = 0.9}
+	--camScale = {x = 0.9, y = 0.9}
+	uiScale = {x = 1, y = 1, sizeX = 1, sizeY = 1}
 
 	musicTime = 0
-	
-	health = {}
-	health = 50 -- tweened one
+	health = 0
+
+	music = love.audio.newSource("music/menu/menu.ogg", "stream")
 
 	if curOS == "Web" then
 		Gamestate.switch(clickStart)
 	else
 		Gamestate.switch(menu)
-	end
-end
-function love.graphics.setColorF(R,G,B,A)
-	local R, G, B = R/255 or 1, G/255 or 1, B/255 or 1 -- convert 255 values to work with the setColor
-	graphics.setColor(R,G,B,A or 1) -- Alpha is not converted because using 255 alpha can be strange (I much rather 0-1 values lol)
-end
-if useDiscordRPC then
-	function discordRPC.ready(userId, username, discriminator, avatar)
-		print(string.format("Discord: ready (%s, %s, %s, %s)", userId, username, discriminator, avatar))
-	end
-
-	function discordRPC.disconnected(errorCode, message)
-		print(string.format("Discord: disconnected (%d: %s)", errorCode, message))
-	end
-
-	function discordRPC.errored(errorCode, message)
-		print(string.format("Discord: error (%d: %s)", errorCode, message))
 	end
 end
 
@@ -505,18 +538,27 @@ function love.keypressed(key)
 		love.graphics.captureScreenshot("screenshots/" .. os.time() .. ".png")
 	elseif key == "7" then
 		Gamestate.switch(debugMenu)
-	elseif key == "f11" then
-		fullscreen = not fullscreen
-		love.window.setFullscreen(fullscreen, fstype)
-		love.resize(love.graphics.getDimensions())
-	else
-		volumeKeyPressed(key)
+	elseif key == "0" then
+		volFade = 1
+		if fixVol == 0 then
+			love.audio.setVolume(lastAudioVolume)
+		else
+			lastAudioVolume = love.audio.getVolume()
+			love.audio.setVolume(0)
+		end
+	elseif key == "-" then
+		volFade = 1
+		if fixVol > 0 then
+			love.audio.setVolume(love.audio.getVolume() - 0.1)
+		end
+	elseif key == "=" then
+		volFade = 1
+		if fixVol <= 0.9 then
+			love.audio.setVolume(love.audio.getVolume() + 0.1)
+		end
+    else
 		Gamestate.keypressed(key)
 	end
-end
-
-function love.textinput(text)
-	Gamestate.textinput(text)
 end
 
 function love.mousepressed(x, y, button, istouch, presses)
@@ -524,48 +566,20 @@ function love.mousepressed(x, y, button, istouch, presses)
 end
 
 function love.update(dt)
+	previousFrameTime = love.timer.getTime() * 1000
+	if gamePause then 
+		if inst then inst:pause() end
+		if music then music:pause() end
+		if voices then voices:pause() end
+		return
+	end
 	dt = math.min(dt, 1 / 30)
 
-	delta = love.timer.getDelta()
-
 	if volFade > 0 then
-		volFade = volFade - 0.4 * delta
+		volFade = volFade - 0.4 * dt
 	end
 
-	if Gamestate.current() ~= gjlogin then
-		music[1]:update(dt)
-		music[1]:setVolume(music.vol)
-	end
-
-	if paddy then 
-		if paddy.dpad.isDown("gameLeft") then 
-			--love.keypressed("left")
-			input:setPressed("gameLeft")
-			input:setDown("left")
-		end
-		if paddy.dpad.isDown("gameDown") then 
-			--love.keypressed("down")
-			input:setPressed("gameDown")
-			input:setDown("down")
-		end
-		if paddy.dpad.isDown("gameUp") then 
-			--love.keypressed("up")
-			input:setPressed("gameUp")
-			input:setDown("up")
-		end
-		if paddy.dpad.isDown("gameRight") then 
-			--love.keypressed("right")
-			input:setPressed("gameRight")
-			input:setDown("right")
-		end
-		if paddy.dpad.isDown("enter") then 
-			--love.keypressed("return") 
-			input:setDown("confirm")
-		end
-		paddy.update(dt)
-	end
-	
-	input:update(dt)
+	input:update()
 
 	if status.getNoResize() then
 		Gamestate.update(dt)
@@ -578,13 +592,6 @@ function love.update(dt)
 		graphics.screenBase(love.graphics.getWidth(), love.graphics.getHeight())
 		love.graphics.setFont(font)
 	end
-	if useDiscordRPC then
-		if nextPresenceUpdate < love.timer.getTime() then
-			discordRPC.updatePresence(presence)
-			nextPresenceUpdate = love.timer.getTime() + 2.0
-		end
-		discordRPC.runCallbacks()
-	end
 
 	Timer.update(dt)
 end
@@ -592,18 +599,37 @@ end
 function love.draw()
 	love.graphics.setFont(font)
 	graphics.screenBase(lovesize.getWidth(), lovesize.getHeight())
+
 	lovesize.begin()
 		graphics.setColor(1, 1, 1) -- Fade effect on
-		
 		Gamestate.draw()
-		if paddy then paddy.draw() end
 		love.graphics.setColor(1, 1, 1) -- Fade effect off
-		
 		love.graphics.setFont(font)
-		volumeControl()
-		
+		if status.getLoading() then
+			love.graphics.print("Loading...", lovesize.getWidth() - 175, lovesize.getHeight() - 50)
+		end
+		love.graphics.setColor(1, 1, 1, volFade)
+		fixVol = tonumber(string.format(
+			"%.1f  ",
+			(love.audio.getVolume())
+		))
+		love.graphics.setColor(0.5, 0.5, 0.5, volFade - 0.3)
+
+		love.graphics.rectangle("fill", 1110, 0, 170, 50)
+
+		love.graphics.setColor(1, 1, 1, volFade)
+
+		if volTween then Timer.cancel(volTween) end
+		volTween = Timer.tween(
+			0.2,
+			volumeWidth,
+			{width = fixVol * 160},
+			"out-quad"
+		)
+		love.graphics.rectangle("fill", 1113, 10, volumeWidth.width, 30)
+		graphics.setColor(1, 1, 1, 1)
 	lovesize.finish()
-	
+
 	graphics.screenBase(love.graphics.getWidth(), love.graphics.getHeight())
 
 	-- Debug output
@@ -611,10 +637,15 @@ function love.draw()
 		love.graphics.print(status.getDebugStr(settings.showDebug), 5, 5, nil, 0.5, 0.5)
 	end
 end
-function love.quit()
-	if useDiscordRPC then
-		discordRPC.shutdown()
+
+function love.focus(t)
+	Gamestate.focus(t)
+	gamePause = not t
+	if t then
+		if inst and not playMenuMusic then inst:play() end
+		if music and playMenuMusic then
+			music:play()
+		end
+		if voices and not playMenuMusic then voices:play() end
 	end
-	saveAchivementsProgress()
-	saveSettings()
 end

@@ -56,8 +56,6 @@ return {
 			{2}
 		}
 
-		love.keyboard.setKeyRepeat(true)
-
 		graphics.setFade(0)
 		graphics.fadeIn(0.5)
 	end,
@@ -170,10 +168,10 @@ return {
 			graphics.fadeOut(0.5, love.event.quit)
 		end
 		if input:pressed("debugZoomOut") then
-			cam.sizeX, cam.sizeY = cam.sizeX - 0.05, cam.sizeY - 0.05
+			camera.sizeX, camera.sizeY = camera.sizeX - 0.05, camera.sizeY - 0.05
 		end
 		if input:pressed("debugZoomIn") then
-			cam.sizeX, cam.sizeY = cam.sizeX + 0.05, cam.sizeY + 0.05
+			camera.sizeX, camera.sizeY = camera.sizeX + 0.05, camera.sizeY + 0.05
 		end
 	end,
 
@@ -184,7 +182,7 @@ return {
 
 				love.graphics.push()
 					love.graphics.translate(lovesize.getWidth() / 2, lovesize.getHeight() / 2)
-					love.graphics.scale(cam.sizeX, cam.sizeY)
+					love.graphics.scale(camera.sizeX, camera.sizeY)
 
 					sprite:draw()
 					graphics.setColor(1, 1, 1, 0.5)

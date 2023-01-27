@@ -32,8 +32,8 @@ return {
 		stages["henry"]:load()
 		
 
-		inst = waveAudio:newSource("songs/bopeebo/Inst.ogg", "stream")
-		voices = waveAudio:newSource("songs/bopeebo/Voices.ogg", "stream")
+		inst = love.audio.newSource("songs/bopeebo/Inst.ogg", "stream")
+		voices = love.audio.newSource("songs/bopeebo/Voices.ogg", "stream")
 	
 
 		self:initUI()
@@ -69,7 +69,7 @@ return {
 			end
 		end
 
-		if not (countingDown or graphics.isFading()) and not (inst:getDuration() > musicTime/1000) and not paused then
+		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused then
 			if storyMode and song < 1 then
 				if score > highscores[weekNum-1][difficulty].scores[song] then
 					highscores[weekNum-1][difficulty].scores[song] = score

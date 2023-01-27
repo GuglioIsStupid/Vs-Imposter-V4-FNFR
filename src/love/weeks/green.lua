@@ -48,28 +48,28 @@ return {
 			stages["miraReactor"]:leave()
 			stages["miraFall"]:enter()
 			stages["miraFall"]:load()
-			inst = waveAudio:newSource("songs/ejected/Inst.ogg")
-			voices = waveAudio:newSource("songs/ejected/Voices.ogg")
+			inst = love.audio.newSource("songs/ejected/Inst.ogg")
+			voices = love.audio.newSource("songs/ejected/Voices.ogg")
 			self:initUI()
 			weeksGreen:setupEjectCountdown()
 		elseif song == 3 then
 			stages["miraCaf"]:leave()
 			stages["miraReactor"]:enter()
 			stages["miraReactor"]:load()
-			inst = waveAudio:newSource("songs/reactor/Inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/reactor/Voices.ogg", "stream")
+			inst = love.audio.newSource("songs/reactor/Inst.ogg", "stream")
+			voices = love.audio.newSource("songs/reactor/Voices.ogg", "stream")
 			self:initUI()
 			weeksGreen:setupCountdown()
 		elseif song == 2 then
 			stages["miraCaf"]:load()
-			inst = waveAudio:newSource("songs/lights-down/Inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/lights-down/Voices.ogg", "stream")
+			inst = love.audio.newSource("songs/lights-down/Inst.ogg", "stream")
+			voices = love.audio.newSource("songs/lights-down/Voices.ogg", "stream")
 			self:initUI()
 			weeksGreen:setupCountdown()
 		else
 			stages["miraCaf"]:load()
-			inst = waveAudio:newSource("songs/sussus-toogus/Inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/sussus-toogus/Voices.ogg", "stream")
+			inst = love.audio.newSource("songs/sussus-toogus/Inst.ogg", "stream")
+			voices = love.audio.newSource("songs/sussus-toogus/Voices.ogg", "stream")
 			if not died and storyMode then
 				inCutscene = true
 				video = love.graphics.newVideo("videos/toogus.ogv")
@@ -119,7 +119,7 @@ return {
 			end
 		end
 
-		if not (countingDown or graphics.isFading()) and not (inst:getDuration() > musicTime/1000) and not paused then
+		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused then
 			if storyMode and song < 4 then
 				if score > highscores[weekNum-1][difficulty].scores[song] then
 					highscores[weekNum-1][difficulty].scores[song] = score

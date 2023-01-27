@@ -39,14 +39,14 @@ return {
 			stages["pinkMira"]:leave()
 			stages["greyMira"]:enter()
 
-			inst = waveAudio:newSource("songs/pretender/Inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/pretender/Voices.ogg", "stream")
+			inst = love.audio.newSource("songs/pretender/Inst.ogg", "stream")
+			voices = love.audio.newSource("songs/pretender/Voices.ogg", "stream")
 		elseif song == 2 then
-			inst = waveAudio:newSource("songs/pinkwave/Inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/pinkwave/Voices.ogg", "stream")
+			inst = love.audio.newSource("songs/pinkwave/Inst.ogg", "stream")
+			voices = love.audio.newSource("songs/pinkwave/Voices.ogg", "stream")
 		else
-			inst = waveAudio:newSource("songs/heartbeat/Inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/heartbeat/Voices.ogg", "stream")
+			inst = love.audio.newSource("songs/heartbeat/Inst.ogg", "stream")
+			voices = love.audio.newSource("songs/heartbeat/Voices.ogg", "stream")
 		end
 
 		self:initUI()
@@ -79,7 +79,7 @@ return {
 
 
         -- lerp flashAlpha to 0
-        flashAlpha = coolUtil.lerp(flashAlpha, 0, coolUtil.boundTo(0, dt * 5, 1))
+        flashAlpha = util.lerp(flashAlpha, 0, util.clamp(0, dt * 5, 1))
 
 		if health >= 80 then
 			if enemyIcon:getAnimName() == "red impostor 1" then
@@ -91,18 +91,8 @@ return {
 			end
 		end
 
-		if not (countingDown or graphics.isFading()) and not (inst:getDuration() > musicTime/1000) and not paused then
+		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused then
 			if storyMode and song < 3 then
-				if score > highscores[weekNum-1][difficulty].scores[song] then
-					highscores[weekNum-1][difficulty].scores[song] = score
-					saveHighscores()
-				end
-				newAccuracy = convertedAcc:gsub("%%", "")
-				if tonumber(newAccuracy) > highscores[weekNum-1][difficulty].accuracys[song] then
-					print("New accuracy: " .. newAccuracy)
-					highscores[weekNum-1][difficulty].accuracys[song] = tonumber(newAccuracy)
-					saveHighscores()
-				end
 				song = song + 1
 
 				self:load()

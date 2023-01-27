@@ -16,8 +16,25 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
--- Add new controls here
+
+local gameLeft
+local gameDown
+local gameUp
+local gameRight
+
 if love.system.getOS() == "NX" then
+	if settings.dfjk then
+		gameLeft = {"axis:triggerleft+", "axis:leftx-", "axis:rightx-", "button:dpleft", "button:x", "key:d", "key:left"}
+		gameDown = {"axis:lefty+", "axis:righty+", "button:leftshoulder", "button:dpdown", "button:a", "key:f", "key:down"}
+		gameUp = {"axis:lefty-", "axis:righty-", "button:rightshoulder", "button:dpup", "button:y", "key:j", "key:up"}
+		gameRight = {"axis:triggerright+", "axis:leftx+", "axis:rightx+", "button:dpright", "button:b", "key:k", "key:right"}
+	else
+		gameLeft = {"axis:triggerleft+", "axis:leftx-", "axis:rightx-", "button:dpleft", "button:x", "key:a", "key:left"}
+		gameDown = {"axis:lefty+", "axis:righty+", "button:leftshoulder", "button:dpdown", "button:a", "key:s", "key:down"}
+		gameUp = {"axis:lefty-", "axis:righty-", "button:rightshoulder", "button:dpup", "button:y", "key:w", "key:up"}
+		gameRight = {"axis:triggerright+", "axis:leftx+", "axis:rightx+", "button:dpright", "button:b", "key:d", "key:right"}
+	end
+
 	return baton.new {
 		controls = {
 			left = {"axis:leftx-", "button:dpleft", "key:left"},
@@ -26,21 +43,32 @@ if love.system.getOS() == "NX" then
 			right = {"axis:leftx+", "button:dpright", "key:right"},
 			confirm = {"button:b", "key:return"},
 			back = {"button:a", "key:escape"},
+			tab = {"button:minus", "key:tab"},
 			debugZoomOut = {"key:["},
 			debugZoomIn = {"key:]"},
-			pause = {"key:p", "button:back"},
-			tab = {"key:tab", "button:back"},
+			pause = {"button:plus", "key:return"},
 
-			gameLeft = {"axis:triggerleft+", "axis:leftx-", "axis:rightx-", "button:dpleft", "button:x", "key:" .. customBindLeft, "key:left"},
-			gameDown = {"axis:lefty+", "axis:righty+", "button:leftshoulder", "button:dpdown", "button:a", "key:" .. customBindDown, "key:down"},
-			gameUp = {"axis:lefty-", "axis:righty-", "button:rightshoulder", "button:dpup", "button:y", "key:" .. customBindUp, "key:up"},
-			gameRight = {"axis:triggerright+", "axis:leftx+", "axis:rightx+", "button:dpright", "button:b", "key:" .. customBindRight, "key:right"},
+			gameLeft = gameLeft,
+			gameDown = gameDown,
+			gameUp = gameUp,
+			gameRight = gameRight,
 			gameBack = {"button:start", "key:escape"},
-			killYourself = {},
 		},
 		joystick = love.joystick.getJoysticks()[1]
 	}
 else
+	if settings.dfjk then
+		gameLeft = {"key:d", "key:left", "axis:triggerleft+", "axis:leftx-", "axis:rightx-", "button:dpleft", "button:x"}
+		gameDown = {"key:f", "key:down", "axis:lefty+", "axis:righty+", "button:leftshoulder", "button:dpdown", "button:a"}
+		gameUp = {"key:j", "key:up", "axis:lefty-", "axis:righty-", "button:rightshoulder", "button:dpup", "button:y"}
+		gameRight = {"key:k", "key:right", "axis:triggerright+", "axis:leftx+", "axis:rightx+", "button:dpright", "button:b"}
+	else
+		gameLeft = {"key:a", "key:left", "axis:triggerleft+", "axis:leftx-", "axis:rightx-", "button:dpleft", "button:x"}
+		gameDown = {"key:s", "key:down", "axis:lefty+", "axis:righty+", "button:leftshoulder", "button:dpdown", "button:a"}
+		gameUp = {"key:w", "key:up", "axis:lefty-", "axis:righty-", "button:rightshoulder", "button:dpup", "button:y"}
+		gameRight = {"key:d", "key:right", "axis:triggerright+", "axis:leftx+", "axis:rightx+", "button:dpright", "button:b"}
+	end
+
 	return baton.new {
 		controls = {
 			left = {"key:left", "axis:leftx-", "button:dpleft"},
@@ -49,17 +77,16 @@ else
 			right = {"key:right", "axis:leftx+", "button:dpright"},
 			confirm = {"key:return", "button:a"},
 			back = {"key:escape", "button:b"},
+			tab = {"key:tab", "button:back"},
 			debugZoomOut = {"key:["},
 			debugZoomIn = {"key:]"},
-			pause = {"button:back", "key:p"},
-			tab = {"button:back", "key:tab"},
+			pause = {"button:plus", "key:return"},
 
-			gameLeft = {"key:" .. customBindLeft, "key:left", "axis:triggerleft+", "axis:leftx-", "axis:rightx-", "button:dpleft", "button:x"},
-			gameDown = {"key:" .. customBindDown, "key:down", "axis:lefty+", "axis:righty+", "button:leftshoulder", "button:dpdown", "button:a"},
-			gameUp = {"key:" .. customBindUp, "key:up", "axis:lefty-", "axis:righty-", "button:rightshoulder", "button:dpup", "button:y"},
-			gameRight = {"key:" .. customBindRight, "key:right", "axis:triggerright+", "axis:leftx+", "axis:rightx+", "button:dpright", "button:b"},
+			gameLeft = gameLeft,
+			gameDown = gameDown,
+			gameUp = gameUp,
+			gameRight = gameRight,
 			gameBack = {"key:escape", "button:start"},
-			killYourself = {},
 		},
 		joystick = love.joystick.getJoysticks()[1]
 	}

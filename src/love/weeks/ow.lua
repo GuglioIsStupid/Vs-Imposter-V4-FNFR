@@ -32,8 +32,8 @@ return {
 		curEnemy = "both"
 		weeksOw:load()
 
-		inst = waveAudio:newSource("songs/ow/Inst.ogg", "stream")
-		voices = waveAudio:newSource("songs/ow/Voices.ogg", "stream")
+		inst = love.audio.newSource("songs/ow/Inst.ogg", "stream")
+		voices = love.audio.newSource("songs/ow/Voices.ogg", "stream")
 
 
 		self:initUI()
@@ -62,7 +62,7 @@ return {
 			end
 		end
 
-		if not (countingDown or graphics.isFading()) and not (inst:getDuration() > musicTime/1000) and not paused then
+		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused then
 			if storyMode and song < 3 then
 				if score > highscores[weekNum-1][difficulty].scores[song] then
 					highscores[weekNum-1][difficulty].scores[song] = score

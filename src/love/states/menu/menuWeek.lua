@@ -8,10 +8,10 @@ weekNum = 1
 local songNum, songAppend
 local songDifficulty = 2
 
-local difficultyStrs = { 
-	"easy",
-	"normal",
-	"hard"
+local difficultyStrs = {
+	"-easy",
+	"",
+	"-hard"
 }
 local selectSound = love.audio.newSource("sounds/menu/select.ogg", "static")
 local confirmSound = love.audio.newSource("sounds/menu/confirm.ogg", "static")
@@ -61,10 +61,8 @@ return {
 			)
 		end
 
-		cam.sizeX, cam.sizeY = 0.9, 0.9
-		camScale.x, camScale.y = 0.9, 0.9
-
-		updatePres("Choosing A Week", "In the Week Select Menu", "logo", now)
+		camera.sizeX, camera.sizeY = 0.9, 0.9
+		camera.scaleX, camera.scaleY = 0.9, 0.9
 
 		freeColour = {
 			255,255,255
@@ -90,7 +88,7 @@ return {
 			"linear"
 		)
 		
-		titleBG = graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/weekMenu")))
+		titleBG = graphics.newImage(graphics.imagePath("menu/weekMenu"))
 
 		arrowUp = love.filesystem.load("sprites/menu/menuArrow.lua")()
 		arrowDown = love.filesystem.load("sprites/menu/menuArrow.lua")()
@@ -132,7 +130,7 @@ return {
 		--week images
 		weekImages = {}
 		for i = 0, 7 do 
-			table.insert(weekImages, graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/week" .. i))))
+			table.insert(weekImages, graphics.newImage(graphics.imagePath("menu/week" .. i)))
 		end
 
 		for i = 1, #weekImages do
@@ -149,7 +147,7 @@ return {
 		graphics.fadeIn(0.5)
 
 		function confirmFunc()
-			music[1]:stop()
+			music:stop()
 			songNum = 1
 
 			status.setLoading(true)
@@ -301,8 +299,8 @@ return {
 
 			love.graphics.push()
 
-				graphics.setColorF(freeColour[1], freeColour[2], freeColour[3])
-				love.graphics.scale(cam.sizeX, cam.sizeY)
+				graphics.setColor(freeColour[1]/255, freeColour[2]/255, freeColour[3]/255)
+				love.graphics.scale(camera.sizeX, camera.sizeY)
 				for i = 1, #weekDesc do
 					weekImages[i]:draw()
 				end
@@ -321,7 +319,7 @@ return {
 				gfDanceLines:draw()
 
 				--weekImages[currentWeek + 1]:draw()
-				graphics.setColorF(freeColour[1], freeColour[2], freeColour[3])
+				graphics.setColor(freeColour[1]/255, freeColour[2]/255, freeColour[3]/255)
 
 				if weekImages[currentWeek+1]then weekImages[currentWeek+1]:draw() end
 

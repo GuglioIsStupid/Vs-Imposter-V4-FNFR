@@ -23,17 +23,17 @@ return {
 		stages["henry"]:load()
 
 		if song == 4 then
-			inst = waveAudio:newSource("songs/armed/Inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/armed/Voices.ogg", "stream")
+			inst = love.audio.newSource("songs/armed/Inst.ogg", "stream")
+			voices = love.audio.newSource("songs/armed/Voices.ogg", "stream")
 		elseif song == 3 then
-			inst = waveAudio:newSource("songs/reinforcements/Inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/reinforcements/Voices.ogg", "stream")
+			inst = love.audio.newSource("songs/reinforcements/Inst.ogg", "stream")
+			voices = love.audio.newSource("songs/reinforcements/Voices.ogg", "stream")
 		elseif song == 2 then
-			inst = waveAudio:newSource("songs/greatest-plan/Inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/greatest-plan/Voices.ogg", "stream")
+			inst = love.audio.newSource("songs/greatest-plan/Inst.ogg", "stream")
+			voices = love.audio.newSource("songs/greatest-plan/Voices.ogg", "stream")
 		else
-			inst = waveAudio:newSource("songs/titular/Inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/titular/Voices.ogg", "stream")
+			inst = love.audio.newSource("songs/titular/Inst.ogg", "stream")
+			voices = love.audio.newSource("songs/titular/Voices.ogg", "stream")
 		end
 
 		self:initUI()
@@ -69,7 +69,7 @@ return {
 			end
 		end
 
-		if not (countingDown or graphics.isFading()) and not (inst:getDuration() > musicTime/1000) and not paused then
+		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused then
 			if storyMode and song < 4 then
 				if score > highscores[weekNum-1][difficulty].scores[song] then
 					highscores[weekNum-1][difficulty].scores[song] = score

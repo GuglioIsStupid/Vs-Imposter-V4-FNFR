@@ -28,28 +28,28 @@ return {
 		if song == 5 then
 			stages["blackChase"]:leave()
 			stages["cargo"]:enter()                                                                                    -- i wanna fucking quit
-			inst = waveAudio:newSource("songs/double-kill/Inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/double-kill/Voices.ogg", "stream")
+			inst = love.audio.newSource("songs/double-kill/Inst.ogg", "stream")
+			voices = love.audio.newSource("songs/double-kill/Voices.ogg", "stream")
 			thefunnyjudgmentsgoleftabit = false
 
 		elseif song == 4 then
 			stages["yellowAirship"]:leave()
 			stages["blackChase"]:enter()
-			inst = waveAudio:newSource("songs/danger/Inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/danger/Voices.ogg", "stream")
+			inst = love.audio.newSource("songs/danger/Inst.ogg", "stream")
+			voices = love.audio.newSource("songs/danger/Voices.ogg", "stream")
 			thefunnyjudgmentsgoleftabit = true
 		elseif song == 3 then
-			inst = waveAudio:newSource("songs/oversight/Inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/oversight/Voices.ogg", "stream")
+			inst = love.audio.newSource("songs/oversight/Inst.ogg", "stream")
+			voices = love.audio.newSource("songs/oversight/Voices.ogg", "stream")
 		elseif song == 2 then
-			inst = waveAudio:newSource("songs/dlow/Inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/dlow/Voices.ogg", "stream")
+			inst = love.audio.newSource("songs/dlow/Inst.ogg", "stream")
+			voices = love.audio.newSource("songs/dlow/Voices.ogg", "stream")
 		elseif song == 50 then
 			inst = "https://www.youtube.com/watch?v=p3wVSfHumRA"
 			voices = inst
 		else
-			inst = waveAudio:newSource("songs/mando/Inst.ogg", "stream")
-			voices = waveAudio:newSource("songs/mando/Voices.ogg", "stream")
+			inst = love.audio.newSource("songs/mando/Inst.ogg", "stream")
+			voices = love.audio.newSource("songs/mando/Voices.ogg", "stream")
 		end
 
 		self:initUI()
@@ -103,7 +103,7 @@ return {
 			end
 		end
 
-		if not (countingDown or graphics.isFading()) and not (inst:getDuration() > musicTime/1000) and not paused then
+		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused then
 			if storyMode and song < 5 then
 				if score > highscores[weekNum-1][difficulty].scores[song] then
 					highscores[weekNum-1][difficulty].scores[song] = score

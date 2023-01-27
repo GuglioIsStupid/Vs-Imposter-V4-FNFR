@@ -13,10 +13,10 @@ return {
             if choice ~= 1 then
                 choice = choice - 1
             else
-                choice = 3
+                choice = 2
             end
         elseif key == "down" then
-            if choice ~= 3 then
+            if choice ~= 2 then
                 choice = choice + 1
             else
                 choice = 1
@@ -26,8 +26,6 @@ return {
                 Gamestate.switch(spriteDebug)
             elseif choice == 2 then
                 Gamestate.switch(stageDebug)
-            elseif choice == 3 then
-                Gamestate.switch(xmlDebug)
             end
         end
     end,
@@ -47,12 +45,5 @@ return {
             graphics.setColor(1, 1, 1)
         end
         love.graphics.print("2. Stage Editor", 10, 50)
-        if choice == 3 then
-            graphics.setColor(1, 1, 0)
-        else
-            graphics.setColor(1, 1, 1)
-        end
-        love.graphics.print("3. XML Sprite Viewer", 10, 70)
-
     end
 }

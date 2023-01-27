@@ -16,7 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
--- This is currently an unused state for FNFR.
+
 local confirmSound = love.audio.newSource("sounds/menu/confirm.ogg", "static")
 
 return {
@@ -43,7 +43,7 @@ return {
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
 
 			love.graphics.push()
-				love.graphics.scale(cam.sizeX, cam.sizeY)
+				love.graphics.scale(camera.sizeX, camera.sizeY)
 
 				love.graphics.printf("Click to start game", -1280, 0, 1280, "center", nil, 2, 2)
 			love.graphics.pop()

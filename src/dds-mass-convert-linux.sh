@@ -30,15 +30,11 @@ for d in $(find . ! -path . -type d | cut -c3-)
 do
 	rm -rf ../dds/$d
 	mkdir -p ../dds/$d
-
-	# if pixel doesn't equal
-	if [[ $d != *"pixel"* ]] || [[ $d != *"week6"* ]]; then
-		for f in $(find $d -maxdepth 1 -name "*.png" -type f | cut -c3-)
-		do
-			mogrify -define dds:cluster-fit=true -define dds:compression=dxt5 -define dds:mipmaps=0 -format dds -monitor -path ../dds/$d $d/$f
-		done
-	fi
 	
+	for f in $(find $d -maxdepth 1 -name "*.png" -type f | cut -c3-)
+	do
+		mogrify -define dds:cluster-fit=true -define dds:compression=dxt5 -define dds:mipmaps=0 -format dds -monitor -path ../dds/$d $d/$f
+	done
 done
 for f in $(find . -maxdepth 1 -name "*.png" -type f | cut -c3-)
 do

@@ -1,26 +1,7 @@
 # ![Logo](images/logo.png)
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/VanillaEngineDevs/Vanilla-Engine?style=flat-square)](https://github.com/VanillaEngineDevs/Vanilla-Engine/releases/latest) [![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/VanillaEngineDevs/Vanilla-Engine?include_prereleases&style=flat-square)](https://github.com/VanillaEngineDevs/Vanilla-Engine/releases) [![GitHub all releases](https://img.shields.io/github/downloads/VanillaEngineDevs/Vanilla-Engine/total?style=flat-square)](https://github.com/VanillaEngineDevs/Vanilla-Engine/releases) [![GitHub issues](https://img.shields.io/github/issues/VanillaEngineDevs/Vanilla-Engine?style=flat-square)](https://github.com/VanillaEngineDevs/Vanilla-Engine/issues) [![GitHub](https://img.shields.io/github/license/VanillaEngineDevs/Vanilla-Engine?style=flat-square)](https://github.com/VanillaEngineDevs/Vanilla-Engine/blob/main/LICENSE) [![Discord](https://img.shields.io/discord/852658576577003550?style=flat-square)](https://discord.gg/TBF3HkXWhq)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/HTV04/funkin-rewritten?style=flat-square)](https://github.com/HTV04/funkin-rewritten/releases/latest) [![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/HTV04/funkin-rewritten?include_prereleases&style=flat-square)](https://github.com/HTV04/funkin-rewritten/releases) [![GitHub all releases](https://img.shields.io/github/downloads/HTV04/funkin-rewritten/total?style=flat-square)](https://github.com/HTV04/funkin-rewritten/releases) [![GitHub issues](https://img.shields.io/github/issues/HTV04/funkin-rewritten?style=flat-square)](https://github.com/HTV04/funkin-rewritten/issues) [![GitHub](https://img.shields.io/github/license/HTV04/funkin-rewritten?style=flat-square)](https://github.com/HTV04/funkin-rewritten/blob/main/LICENSE) [![Discord](https://img.shields.io/discord/852658576577003550?style=flat-square)](https://discord.gg/tQGzN2Wu48)
 
 Friday Night Funkin' Rewritten is a rewrite of [Friday Night Funkin'](https://ninja-muffin24.itch.io/funkin) built on [LÖVE](https://love2d.org/) for Windows, macOS, Linux, and Web platforms, as well as previously unsupported platforms, like the Nintendo Switch!
-
-Friday Night Funkin' Vanilla Engine is a modification of [Friday Night Funkin' Rewritten](https://github.com/HTV04/funkin-rewritten/releases) and should not be treated as an official download for it.
-
-Features with Funkin' Vanilla Engine:
-* Better menu
-* Custom keybinds ([read here for more available binds](https://love2d.org/wiki/KeyConstant))
-* A Settings menu
-* Slightly better judgements
-* Accuracy counter + Miss counter
-* Discord RPC (Windows only)
-* Week 6 dialogue
-* Note splashes 
-* Some Gameplay modifications
-* Pausing
-* Mod Folder
-* Gamejolt Achievement Support
-* And More!
-
-Join Vanilla Engines's Discord server for updates and other stuff: https://discord.gg/TBF3HkXWhq
 
 Friday Night Funkin' Rewritten features:
 * A rewritten engine focused on performance and playability
@@ -29,7 +10,7 @@ Friday Night Funkin' Rewritten features:
 * Other cool features, like downscroll
 * And more to come!
 
-Join HTV04's Discord server for Funkin' Rewritten updates and discussion: [https://discord.gg/tQGzN2Wu48](https://discord.gg/TBF3HkXWhq)
+Join my Discord server for Funkin' Rewritten updates and discussion: https://discord.gg/tQGzN2Wu48
 
 # Controls
 If using a controller on a PC, a controller with an Xbox button layout is recommended. Controller buttons will be remappable in a future update.
@@ -47,7 +28,7 @@ If using a controller on a PC, a controller with an Xbox button layout is recomm
 
 ## Game
 ### Keyboard
-* WASD/Arrow Keys - Arrows/Special keybinds defined by you! (in the settings.ini)
+* WASD/Arrow Keys - Arrows
 * Enter - Confirm (Game Over)
 * Escape - Exit
 
@@ -60,31 +41,33 @@ If using a controller on a PC, a controller with an Xbox button layout is recomm
 ### Keyboard
 * 6 - Take screenshot
   * Screenshot paths:
-    * Windows - `%APPDATA%\vanilla-engine\screenshots`
-    * macOS - `~/Library/Application Support/vanilla-engine/screenshots`
-	* Linux - `~/.local/share/love/vanilla-engine/screenshots`
-	* Nintendo Switch - `./vanilla-engine/screenshots`
+    * Windows - `%APPDATA%\funkin-rewritten\screenshots`
+    * macOS - `~/Library/Application Support/funkin-rewritten/screenshots`
+	* Linux - `~/.local/share/love/funkin-rewritten/screenshots`
+	* Nintendo Switch - `./funkin-rewritten/screenshots`
 * 7 - Open debug menu
 
 # Settings
 The settings file can be found in the following places on the following systems:
-* Windows - `%APPDATA%\vanilla-engine\settings.ini` & `%APPDATA%\vanilla-engine\settings`
-* macOS - `~/Library/Application Support/vanilla-engine/settings.ini` & `~/Library/Application Support/vanilla-engine/settings`
-* Linux - `~/.local/share/love/vanilla-engine/settings.ini` & `~/.local/share/love/vanilla-engine/settings`
-* Nintendo Switch - `./vanilla-engine/settings.ini` & `./vanilla-engine/settings`
+* Windows - `%APPDATA%\funkin-rewritten\settings.ini`
+* macOS - `~/Library/Application Support/funkin-rewritten/settings.ini`
+* Linux - `~/.local/share/love/funkin-rewritten/settings.ini`
+* Nintendo Switch - `./funkin-rewritten/settings.ini`
 
 # Progress
-**Menus** - 95% Complete
-* The menu is almost done, just need to clean up some code and add transitions
+**Menus** - 50% Complete
+* A proper menu has not been implemented yet. For now, a placeholder menu has been implemented.
 
-**Game Engine** - 95% Complete
-* A few more small changes are stil needed, but its very close
+**Game Engine** - 90% Complete
+* Engine is in close parity with the original game's Week 6 update.
+* No pause menu yet.
 
-**Weeks** - ~7/9 Complete
-* Tutorial + Weeks 1-7 are implemented.
-* Week 3's train is not implemented yet.
-* Week 4's passing car is not implemented yet.
-* Weeks 7's Tankmen running and Tank is not implemented yet.
+**Weeks** - ~7/8 Complete
+* Tutorial + Weeks 1-6 are implemented.
+* Week 3's train is not added yet.
+* Week 4's passing car is not added yet.
+* Week 6 is a WIP.
+* Week 7 is not implemented yet.
 
 # License
 *Friday Night Funkin' Rewritten* is licensed under the terms of the GNU General Public License v3, with the exception of most of the images, music, and sounds, which are proprietary. While FNF Rewritten's code is FOSS, use its assets at your own risk.
@@ -143,9 +126,6 @@ After running a build method, its release ZIP will be located at `./build/releas
 Follow the official instructions for LÖVE game distribution for your platform: https://love2d.org/wiki/Game_Distribution
 
 # Special Thanks
-* [PHANTOMCLO](https://twitter.com/PHANTOMCLO) for the pixel note splashes
-* [Keoiki](https://twitter.com/Keoiki_) For the Note splashes used in weeks 1-5
-* [HTV04](https://github.com/HTV-4) For developing Funkin Rewritten
 * KadeDev for [FNFDataAPI](https://github.com/KadeDev/FNFDataAPI), which was refrenced while developing the chart-reading system
 * The developers of [BeatFever Mania](https://github.com/Sulunia/beatfever) for their music time interpolation code
 * The developers of the [LÖVE](https://love2d.org/) framework, for making Funkin' Rewritten possible
@@ -153,4 +133,3 @@ Follow the official instructions for LÖVE game distribution for your platform: 
 * Davidobot for developing [love.js](https://github.com/Davidobot/love.js), used for the Web version of the game
 * TurtleP for developing [LÖVE Potion](https://github.com/lovebrew/LovePotion), originally used for the Nintendo Switch version of the game
 * Funkin' Crew (ninjamuffin99, PhantomArcade, kawaisprite, and evilsk8er), for making such an awesome game!
-* Getsaa for making our amazing menu assets

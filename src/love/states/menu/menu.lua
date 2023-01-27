@@ -22,12 +22,9 @@ end
 
 return {
 	enter = function(self, previous)
-		if not music[1]:isPlaying() then
-			music[1]:play()
+		if not music:isPlaying() then
+			music:play()
 		end
-		music[1]:onBeat(function()
-			self:onBeat(music[1]:getBeat())
-		end)
 		danceRight = false
 		transparency = {0}
 		Timer.tween(
@@ -37,24 +34,12 @@ return {
 			"out-quad"
 		)
 		changingMenu = false
-		logo = sprite(-390, -420)
-		logo:setFrames(paths.getSparrowFrames("logoBumpin"))
-   		logo:addAnimByPrefix("bump", "logo bumpin", 24)
 
-		starBG = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/starBG")))
-		startFG = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/starFG")))
+		starBG = graphics.newImage(graphics.imagePath("impmenu/starBG"))
+		startFG = graphics.newImage(graphics.imagePath("impmenu/starFG"))
 
 		starBG.translation = {x = 0, y = 0}
 		startFG.translation = {x = 0, y = 0}
-
-		logo:animate("bumpin", false)
-		
-		whiteRectangles = {}
-		for i = 1, 15 do
-			table.insert(whiteRectangles, graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/whiteRectangle"))))
-			whiteRectangles[i].x = -780 + 100*i
-			whiteRectangles[i].y = -1000
-		end
 
 		songNum = 0
 
@@ -62,38 +47,22 @@ return {
 
 		graphics.setFade(0)
 		graphics.fadeIn(0.5)
-
-		updatePres("Press Enter", "In the Menu")
 	end,
 	onBeat = function(self, n)
 		--if logo then logo:animate("anim", false) end
-		if logo then logo:animate("bump", false) end
 	end,
 
 	update = function(self, dt)
-		logo:update(dt)
-
-		music[1]:updateBeat()
-
 		if not graphics.isFading() then
 			if input:pressed("confirm") then
 				
 				if not changingMenu then
 					audio.playSound(confirmSound)
 					changingMenu = true
-					for i = 1, 15 do
-						Timer.tween(0.5 + 0.1 + 0.03*i, whiteRectangles[i], {y = 0}, "linear",
-							function()
-								if i == 15 then
-									graphics.fadeOut(0.2, function()
-										Gamestate.switch(menuSelect)
-										status.setLoading(false)
-									end)
-									
-								end
-							end
-						)
-					end
+					graphics.fadeOut(0.2, function()
+						Gamestate.switch(menuSelect)
+						status.setLoading(false)
+					end)
 				end
 			elseif input:pressed("back") then
 				audio.playSound(selectSound)
@@ -135,18 +104,9 @@ return {
 				love.graphics.push()
 					love.graphics.push()
 						love.graphics.scale(0.9, 0.9)
-						love.graphics.translate(menuDetails.titleLogo.x, menuDetails.titleLogo.y)
-						logo:draw()
 					love.graphics.pop()
 					love.graphics.push()
 						love.graphics.scale(0.9, 0.9)
-					love.graphics.pop()
-					love.graphics.push()
-						graphics.setColor(0, 0, 0, 0.9)
-						for i = 1, 15 do
-							whiteRectangles[i]:draw()
-						end
-						graphics.setColor(1, 1, 1)
 					love.graphics.pop()
 				love.graphics.pop()
 

@@ -19,16 +19,18 @@ return {
 
         curStage = "finalem"
 
+        boyfriend = love.filesystem.load("sprites/characters/BF_Defeat_Scared.lua")()
+
         enemy = love.filesystem.load("sprites/characters/black.lua")()
         enemy2 = love.filesystem.load("sprites/characters/blackparasite.lua")()
 
         enemy.x, enemy.y = -400, 34
 
-        enemy2.sizeX, enemy2.sizeY = 1.25, 1.25
+        enemy2.sizeX, enemy2.sizeY = 1.5, 1.5
         enemy2.x, enemy2.y = -455, 18
 
-        boyfriend.sizeX, boyfriend.sizeY = 0.75, 0.75
-        boyfriend.x, boyfriend.y = 110, 2
+        boyfriend.sizeX, boyfriend.sizeY = 0.65, 0.65
+        boyfriend.x, boyfriend.y = 456, 209
 
         cam.sizeX, cam.sizeY = 0.4, 0.4
         camScale.sizeX, camScale.sizeY = 0.4, 0.4
@@ -66,11 +68,11 @@ return {
         elseif musicTime >= 7200 and musicTime <= 7250 then
             stageImages["finaleFlashback"]:animate("doog", false)
         elseif musicTime >= 8400 and musicTime <= 8450 then
-            doingFlashback = false
             if flash.alpha == 0 then 
                 flash.colour = {1, 1, 1}
                 Timer.tween(0.9, flash, {alpha = 1}, "linear", function() 
                     flash.colour = {1, 0, 0}
+                    doingFlashback = false
                     Timer.tween(0.3, cam, {sizeX = 0.9, sizeY = 0.9}, "in-quad") 
                     Timer.tween(0.22, camScale, {x = 0.9, y = 0.9}, "in-quad")
                     Timer.tween(0.5, flash, {alpha = 0}, "linear", function() 

@@ -25,15 +25,15 @@ return {
         rightIcon.x = 200
         rightIcon.y = -245
 
-        border = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/border")))
-        circle = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/circle")))
+        border = graphics.newImage(graphics.imagePath("impmenu/border"))
+        circle = graphics.newImage(graphics.imagePath("impmenu/circle"))
         --circlered impostor 1 = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/circlered impostor 1"))) -- unused img (i think)
-        finaleAura = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/finaleAura")))
-        line = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/line")))
-        menuBack = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/menuBack")))
+        finaleAura = graphics.newImage(graphics.imagePath("impmenu/finaleAura"))
+        line = graphics.newImage(graphics.imagePath("impmenu/line"))
+        menuBack = graphics.newImage(graphics.imagePath("impmenu/menuBack"))
 
-        starBG = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/starBG")))
-		startFG = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/starFG")))
+        starBG = graphics.newImage(graphics.imagePath("impmenu/starBG"))
+		startFG = graphics.newImage(graphics.imagePath("impmenu/starFG"))
 
 		starBG.translation = {x = 0, y = 0}
 		startFG.translation = {x = 0, y = 0}
@@ -61,8 +61,8 @@ return {
 
         currentWeek = ""
 
-        cam.sizeX, cam.sizeY = 0.9, 0.9
-		camScale.x, camScale.y = 0.9, 0.9
+        camera.sizeX, camera.sizeY = 0.9, 0.9
+		camera.scaleX, camera.scaleY = 0.9, 0.9
     end,
 
     update = function(self, dt)
@@ -94,7 +94,7 @@ return {
                     graphics.fadeOut(
                         0.5,
                         function()
-                            music[1]:stop()
+                            music:stop()
                             songAppend = "hard"
                             storyMode = true
                             songNum = 1

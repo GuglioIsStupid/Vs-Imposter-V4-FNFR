@@ -17,8 +17,8 @@ return {
 		menuButton = 1
 		songNum = 0
 
-        starBG = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/starBG")))
-		startFG = graphics.newImage(love.graphics.newImage(graphics.imagePath("impmenu/starFG")))
+        starBG = graphics.newImage(graphics.imagePath("impmenu/starBG"))
+		startFG = graphics.newImage(graphics.imagePath("impmenu/starFG"))
 
         images = {
             bigButtons = love.graphics.newImage(graphics.imagePath("impmenu/Big_Buttons_UI")),
@@ -38,11 +38,9 @@ return {
         greenSussy = love.filesystem.load("sprites/impmenu/greenmenu.lua")()
         redSussy = love.filesystem.load("sprites/impmenu/redmenu.lua")()
 
-        logo = sprite(-390, -520)
-		logo:setFrames(paths.getSparrowFrames("logoBumpin"))
-   		logo:addAnimByPrefix("bump", "logo bumpin", 24)
+        
 
-        logo.scale.x, logo.scale.y = 0.6, 0.6
+        --logo.scale.x, logo.scale.y = 0.6, 0.6
 
         greenSussy.sizeX, greenSussy.sizeY = 0.8, 0.8
         redSussy.sizeX, redSussy.sizeY = 0.8, 0.8
@@ -192,8 +190,6 @@ return {
 		graphics.setFade(0)
 		graphics.fadeIn(0.5)
 
-        updatePres("Choosing a mode", "In the Main Menu")
-
 	end,
 
 	update = function(self, dt)
@@ -336,8 +332,7 @@ return {
             redSussy:draw()
             love.graphics.push()
                 graphics.setColor(0,0,0)
-                love.graphics.translate(menuDetails.selectUIElements.x, menuDetails.selectUIElements.y)
-                love.graphics.print("Vanilla Engine " .. __VERSION__ .. "\nBuilt on: Funkin Rewritten v1.1.0 Beta 2", -635, -360)
+                love.graphics.print("Vanilla Engine " .. "???" .. "\nBuilt on: Funkin Rewritten v1.1.0 Beta 2", -635, -360)
                 graphics.setColor(1,1,1)
                 story:draw()
                 freeplay:draw()
@@ -348,7 +343,7 @@ return {
                 inntersloth:draw()
                 shop:draw()
 
-                logo:draw()
+                --logo:draw()
             love.graphics.pop()
             love.graphics.setFont(font)
 		love.graphics.pop()
@@ -372,8 +367,6 @@ return {
         greenSussy = nil
 
         images = nil
-
-        logo = nil
         
 		Timer.clear()
 	end

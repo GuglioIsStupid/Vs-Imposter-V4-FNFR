@@ -20,7 +20,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 local loading
 
 local noResize
-local font = love.graphics.newFont("fonts/vcr.ttf", 24)
+
 return {
 	setLoading = function(state)
 		loading = state
@@ -38,15 +38,12 @@ return {
 
 	getDebugStr = function(type)
 		local debugStr
-		love.graphics.setFont(font)
 
 		if type == "detailed" then
-			debugStr = "Vanilla Engine v" .. __VERSION__ ..
-			"\nCurrent Version (Git) " .. __GIT_VERSION__ ..
-			"\nFPS: " .. tostring(love.timer.getFPS()) ..
-			"\nDelta Time: " .. tostring(love.timer.getDelta()) ..
+			debugStr = "FPS: " .. tostring(love.timer.getFPS()) ..
 			"\nLUA MEM USAGE (KB): " .. tostring(math.floor(collectgarbage("count"))) ..
 			"\nGRAPHICS MEM USAGE (MB): " .. tostring(math.floor(love.graphics.getStats().texturememory / 1048576)) ..
+			"\nDelta Time: " .. tostring(love.timer.getDelta()) ..
 
 			"\n\nsettings.hardwareCompression: " .. tostring(settings.hardwareCompression) ..
 			"\ngraphics.getImageType(): " .. tostring(graphics.getImageType()) ..

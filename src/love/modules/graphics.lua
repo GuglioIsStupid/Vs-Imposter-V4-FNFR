@@ -20,7 +20,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 local imageType = "png"
 local fade = {1}
 local isFading = false
-color = {}
 
 local fadeTimer
 
@@ -37,32 +36,23 @@ return {
 		return screenHeight
 	end,
 
+	cache = {},
+
+	clearCache = function()
+		graphics.cache = {}
+	end,
+
+	clearItemCache = function(path)
+		graphics.cache[path] = nil
+	end,
+
 	imagePath = function(path)
 		local pathStr = "images/" .. imageType .. "/" .. path .. "." .. imageType
 
-		--[[
 		if love.filesystem.getInfo(pathStr) then
 			return pathStr
 		else
-			if love.filesystem.getInfo("images/png/" .. path .. ".png") then
-				return "images/png/" .. path .. ".png"
-			else
-				return "mods/" .. mods.modNames[modWeekNum] .. "/images/png/" .. path .. ".png"
-			end
-		end
-		--]]
-		if love.filesystem.getInfo("images/dds/" .. path .. ".dds") then
-			return "images/dds/" .. path .. ".dds"
-		else
-			if love.filesystem.getInfo("images/png/" .. path .. ".png") then
-				return "images/png/" .. path .. ".png"
-			else
-				if love.filesystem.getInfo("mods/" .. mods.modNames[modWeekNum] .. "/images/dds/" .. path .. ".dds") then
-					return "mods/" .. mods.modNames[modWeekNum] .. "/images/dds/" .. path .. ".dds"
-				else
-					return "mods/" .. mods.modNames[modWeekNum] .. "/images/png/" .. path .. ".png"
-				end
-			end
+			return "images/png/" .. path .. ".png"
 		end
 	end,
 	setImageType = function(type)
@@ -72,8 +62,14 @@ return {
 		return imageType
 	end,
 
-	newImage = function(imageData, optionsTable)
+	newImage = function(image, optionsTable)
+		local pathStr = image
+		if not graphics.cache[pathStr] then 
+			graphics.cache[pathStr] = love.graphics.newImage(pathStr)
+		end
 		local image, width, height
+
+		image = graphics.cache[pathStr]
 
 		local options
 
@@ -88,8 +84,11 @@ return {
 			shearX = 0,
 			shearY = 0,
 
-			setImage = function(self, imageData)
-				image = imageData
+			scrollX = 1,
+			scrollY = 1,
+
+			setImage = function(self, image)
+				image = image
 				width = image:getWidth()
 				height = image:getHeight()
 			end,
@@ -121,36 +120,9 @@ return {
 				)
 			end,
 
-			udraw = function(self,sizeX,sizeY) -- auto upscale pixel images
-				local x = self.x
-				local y = self.y
-				local sizeX, sizeY = sizeX or 7, sizeY or 7
-
-				if options and options.floored then
-					x = math.floor(x)
-					y = math.floor(y)
-				end
-
-				love.graphics.draw(
-					image,
-					self.x,
-					self.y,
-					self.orientation,
-					sizeX,
-					sizeY,
-					math.floor(width / 2) + self.offsetX,
-					math.floor(height / 2) + self.offsetY,
-					self.shearX,
-					self.shearY
-				)
-			end,
-
-			cdraw = function(self,R,G,B,A)
-				local R = R or 255
-				local G = G or 255
-				local B = B or 255
-				local A = A or 1
-				love.graphics.setColorF(R,G,B,A)
+			udraw = function(self, sx, sy)
+				local sx = sx or 7
+				local sy = sy or 7
 				local x = self.x
 				local y = self.y
 
@@ -164,47 +136,17 @@ return {
 					self.x,
 					self.y,
 					self.orientation,
-					self.sizeX,
-					self.sizeY,
+					sx,
+					sy,
 					math.floor(width / 2) + self.offsetX,
 					math.floor(height / 2) + self.offsetY,
 					self.shearX,
 					self.shearY
 				)
-				love.graphics.setColor(1,1,1,1)
-			end,
-			
-			cudraw = function(self,R,G,B,A,sizeX,sizeY) -- Colour draw for pixel assets
-				local R = R or 255
-				local G = G or 255
-				local B = B or 255
-				local A = A or 1
-				love.graphics.setColorF(R,G,B,A)
-				local x = self.x
-				local y = self.y
-				local sizeX, sizeY = sizeX or 7, sizeY or 7
-
-				if options and options.floored then
-					x = math.floor(x)
-					y = math.floor(y)
-				end
-				love.graphics.draw(
-					image,
-					self.x,
-					self.y,
-					self.orientation,
-					sizeX,
-					sizeY,
-					math.floor(width / 2) + self.offsetX,
-					math.floor(height / 2) + self.offsetY,
-					self.shearX,
-					self.shearY
-				)
-				love.graphics.setColor(1,1,1,1)
 			end
 		}
 
-		object:setImage(imageData)
+		object:setImage(image)
 
 		options = optionsTable
 
@@ -242,6 +184,19 @@ return {
 			shearX = 0,
 			shearY = 0,
 
+			scrollX = 1,
+			scrollY = 1,
+
+			holdTimer = 0,
+			lastHit = 0,
+
+			heyTimer = 0,
+			specialAnim = false,
+
+			singDuration = optionsTable and optionsTable.singDuration or 4,
+			isCharacter = optionsTable and optionsTable.isCharacter or false,
+			danceSpeed = optionsTable and optionsTable.danceSpeed or 2,
+
 			setSheet = function(self, imageData)
 				sheet = imageData
 				sheetWidth = sheet:getWidth()
@@ -252,38 +207,42 @@ return {
 				return sheet
 			end,
 
+			isAnimName = function(self, name)
+				return anims[name] ~= nil
+			end,
+
 			animate = function(self, animName, loopAnim, func)
-				if self:isAnimName(animName) then
-					anim.name = animName
-					anim.start = anims[animName].start
-					anim.stop = anims[animName].stop
-					anim.speed = anims[animName].speed
-					anim.offsetX = anims[animName].offsetX
-					anim.offsetY = anims[animName].offsetY
-					anim.func = func
-
-					frame = anim.start
-					isLooped = loopAnim
-
-					isAnimated = true
-
-					-- do the func when the animation is done
-				else
-					print("Error: Animation: " .. animName .. " does not exist")
+				self.holdTimer = 0
+				if not self:isAnimName(animName) then
+					return
 				end
+				anim.name = animName
+				anim.start = anims[animName].start
+				anim.stop = anims[animName].stop
+				anim.speed = anims[animName].speed
+				anim.offsetX = anims[animName].offsetX
+				anim.offsetY = anims[animName].offsetY
+
+				if not (util.startsWith(animName, "sing") or self:getAnimName() == "idle") then -- its a special anim
+					self.heyTimer = 0.6
+					self.specialAnim = true
+				else
+					self.heyTimer = 0
+					self.specialAnim = false
+				end
+
+				self.func = func
+				
+				frame = anim.start
+				isLooped = loopAnim
+
+				isAnimated = true
 			end,
 			getAnims = function(self)
 				return anims
 			end,
 			getAnimName = function(self)
 				return anim.name
-			end,
-			isAnimName = function(self, animName)
-				if anims[animName] then
-					return true
-				else
-					return false
-				end
 			end,
 			setAnimSpeed = function(self, speed)
 				anim.speed = speed
@@ -306,12 +265,11 @@ return {
 				if isAnimated then
 					frame = frame + anim.speed * dt
 				end
-				
+
 				if isAnimated and frame > anim.stop then
-					if anim.func then
-						anim.func()
-						anim.func = nil
-						print("did the function for "..anim.name)
+					if self.func then
+						self.func()
+						self.func = nil
 					end
 					if isLooped then
 						frame = anim.start
@@ -319,184 +277,46 @@ return {
 						isAnimated = false
 					end
 				end
-			end,
-			draw = function(self, x, y)
-				local flooredFrame = math.floor(frame)
 
-				if flooredFrame <= anim.stop then
-					local x = x or self.x
-					local y = y or self.y 
-					if x == 0 then 
-						x = self.x 
+				if self.specialAnim then 
+					self.heyTimer = self.heyTimer - dt 
+					if self.heyTimer <= 0 and not self:isAnimated() then 
+						self.heyTimer = 0 
+						self.specialAnim = false
+						self:animate("idle", false) 
 					end
-					if y == 0 then 
-						y = self.y 
-					end
-					local width
-					local height
-
-					if options and options.floored then
-						x = math.floor(x)
-						y = math.floor(y)
-					end
-
-					if options and options.noOffset then
-						if frameData[flooredFrame].offsetWidth ~= 0 then
-							width = frameData[flooredFrame].offsetX
-						end
-						if frameData[flooredFrame].offsetHeight ~= 0 then
-							height = frameData[flooredFrame].offsetY
-						end
-					else
-						if frameData[flooredFrame].offsetWidth == 0 then
-							width = math.floor(frameData[flooredFrame].width / 2)
-						else
-							width = math.floor(frameData[flooredFrame].offsetWidth / 2) + frameData[flooredFrame].offsetX
-						end
-						if frameData[flooredFrame].offsetHeight == 0 then
-							height = math.floor(frameData[flooredFrame].height / 2)
-						else
-							height = math.floor(frameData[flooredFrame].offsetHeight / 2) + frameData[flooredFrame].offsetY
-						end
-					end
-
-					love.graphics.draw(
-						sheet,
-						frames[flooredFrame],
-						x,
-						y,
-						self.orientation,
-						self.sizeX,
-						self.sizeY,
-						width + anim.offsetX + self.offsetX,
-						height + anim.offsetY + self.offsetY,
-						self.shearX,
-						self.shearY
-					)
 				end
 			end,
 
-			udraw = function(self, sizeX, sizeY, x, y)
-				local flooredFrame = math.floor(frame)
-				local sizeX, sizeY = sizeX or 7, sizeY or 7
-
-				if flooredFrame <= anim.stop then
-					local x = x or self.x 
-					local y = y or self.y 
-					if x == 0 then 
-						x = self.x 
-					end
-					if y == 0 then 
-						y = self.y 
-					end
-					local width
-					local height
-
-					if options and options.floored then
-						x = math.floor(x)
-						y = math.floor(y)
-					end
-
-					if options and options.noOffset then
-						if frameData[flooredFrame].offsetWidth ~= 0 then
-							width = frameData[flooredFrame].offsetX
-						end
-						if frameData[flooredFrame].offsetHeight ~= 0 then
-							height = frameData[flooredFrame].offsetY
-						end
-					else
-						if frameData[flooredFrame].offsetWidth == 0 then
-							width = math.floor(frameData[flooredFrame].width / 2)
-						else
-							width = math.floor(frameData[flooredFrame].offsetWidth / 2) + frameData[flooredFrame].offsetX
-						end
-						if frameData[flooredFrame].offsetHeight == 0 then
-							height = math.floor(frameData[flooredFrame].height / 2)
-						else
-							height = math.floor(frameData[flooredFrame].offsetHeight / 2) + frameData[flooredFrame].offsetY
+			beat = function(self, beat)
+				if self.isCharacter then
+					if beatHandler.onBeat() then
+						if (not self:isAnimated() and util.startsWith(self:getAnimName(), "sing")) or (self:getAnimName() == "idle" or self:getAnimName() == "idle loop") then
+							if beat % self.danceSpeed == 0 then 
+								if self.lastHit > 0 then
+									if self.lastHit + beatHandler.getStepCrochet() * self.singDuration <= musicTime then
+										self:animate("idle", false, function()
+											if self:isAnimName("idle loop") then 
+												self:animate("idle loop", true)
+											end
+										end)
+										self.lastHit = 0
+									end
+								else
+									self:animate("idle", false, function()
+										if self:isAnimName("idle loop") then 
+											self:animate("idle loop", true)
+										end
+									end)
+								end
+							end
 						end
 					end
-
-					love.graphics.draw(
-						sheet,
-						frames[flooredFrame],
-						x,
-						y,
-						self.orientation,
-						sizeX,
-						sizeY,
-						width + anim.offsetX + self.offsetX,
-						height + anim.offsetY + self.offsetY,
-						self.shearX,
-						self.shearY
-					)
 				end
-			end,
-
-			cdraw = function(self,R,G,B,A)
-				local R = R or 255
-				local G = G or 255
-				local B = B or 255
-				local A = A or 1
-				love.graphics.setColorF(R,G,B,A)
-				local flooredFrame = math.floor(frame)
-
-				if flooredFrame <= anim.stop then
-					local x = self.x
-					local y = self.y
-					local width
-					local height
-
-					if options and options.floored then
-						x = math.floor(x)
-						y = math.floor(y)
-					end
-
-					if options and options.noOffset then
-						if frameData[flooredFrame].offsetWidth ~= 0 then
-							width = frameData[flooredFrame].offsetX
-						end
-						if frameData[flooredFrame].offsetHeight ~= 0 then
-							height = frameData[flooredFrame].offsetY
-						end
-					else
-						if frameData[flooredFrame].offsetWidth == 0 then
-							width = math.floor(frameData[flooredFrame].width / 2)
-						else
-							width = math.floor(frameData[flooredFrame].offsetWidth / 2) + frameData[flooredFrame].offsetX
-						end
-						if frameData[flooredFrame].offsetHeight == 0 then
-							height = math.floor(frameData[flooredFrame].height / 2)
-						else
-							height = math.floor(frameData[flooredFrame].offsetHeight / 2) + frameData[flooredFrame].offsetY
-						end
-					end
-
-					love.graphics.draw(
-						sheet,
-						frames[flooredFrame],
-						x,
-						y,
-						self.orientation,
-						self.sizeX,
-						self.sizeY,
-						width + anim.offsetX + self.offsetX,
-						height + anim.offsetY + self.offsetY,
-						self.shearX,
-						self.shearY
-					)
-				end
-				love.graphics.setColor(1,1,1,1)
 			end,
 			
-			cudraw = function(self,R,G,B,A,sizeX,sizeY) -- Colour draw for pixel assets
-				local R = R or 255
-				local G = G or 255
-				local B = B or 255
-				local A = A or 1
-				love.graphics.setColorF(R,G,B,A)
+			draw = function(self)
 				local flooredFrame = math.floor(frame)
-				local sizeX, sizeY = sizeX or 7, sizeY or 7
 
 				if flooredFrame <= anim.stop then
 					local x = self.x
@@ -535,15 +355,66 @@ return {
 						x,
 						y,
 						self.orientation,
-						sizeX,
-						sizeY,
+						self.sizeX,
+						self.sizeY,
 						width + anim.offsetX + self.offsetX,
 						height + anim.offsetY + self.offsetY,
 						self.shearX,
 						self.shearY
 					)
 				end
-				love.graphics.setColor(1,1,1,1)
+			end,
+
+			udraw = function(self, sx, sy)
+				local sx = sx or 7
+				local sy = sy or 7
+				local flooredFrame = math.floor(frame)
+
+				if flooredFrame <= anim.stop then
+					local x = self.x
+					local y = self.y
+					local width
+					local height
+
+					if options and options.floored then
+						x = math.floor(x)
+						y = math.floor(y)
+					end
+
+					if options and options.noOffset then
+						if frameData[flooredFrame].offsetWidth ~= 0 then
+							width = frameData[flooredFrame].offsetX
+						end
+						if frameData[flooredFrame].offsetHeight ~= 0 then
+							height = frameData[flooredFrame].offsetY
+						end
+					else
+						if frameData[flooredFrame].offsetWidth == 0 then
+							width = math.floor(frameData[flooredFrame].width / 2)
+						else
+							width = math.floor(frameData[flooredFrame].offsetWidth / 2) + frameData[flooredFrame].offsetX
+						end
+						if frameData[flooredFrame].offsetHeight == 0 then
+							height = math.floor(frameData[flooredFrame].height / 2)
+						else
+							height = math.floor(frameData[flooredFrame].offsetHeight / 2) + frameData[flooredFrame].offsetY
+						end
+					end
+
+					love.graphics.draw(
+						sheet,
+						frames[flooredFrame],
+						self.x,
+						self.y,
+						self.orientation,
+						sx,
+						sy,
+						width + anim.offsetX + self.offsetX,
+						height + anim.offsetY + self.offsetY,
+						self.shearX,
+						self.shearY
+					)
+				end
 			end
 		}
 
@@ -623,41 +494,7 @@ return {
 	isFading = function()
 		return isFading
 	end,
-	newVertGradient = function(w, h, c1, c2)
-		local data = love.image.newImageData(1, h)
-		for j=0, h-1 do
-			local percent = j/h
-			local r = c1[1] + (c2[1] - c1[1]) * percent
-			local g = c1[2] + (c2[2] - c1[2]) * percent
-			local b = c1[3] + (c2[3] - c1[3]) * percent
-			local a = c1[4] + (c2[4] - c1[4]) * percent
-			data:setPixel(0, j, r, g, b, a)
-		end
-		local img = love.graphics.newImage(data)
-		img:setWrap('repeat', 'clamp')
 
-		local quad = love.graphics.newQuad(0, 0, w, h, 1, h)
-
-		return img, quad
-	end,
-	updateVertGradient = function(img, quad, w, h, c1, c2)
-		local data = love.image.newImageData(1, h)
-		for j=0, h-1 do
-			local percent = j/h
-			local r = c1[1] + (c2[1] - c1[1]) * percent
-			local g = c1[2] + (c2[2] - c1[2]) * percent
-			local b = c1[3] + (c2[3] - c1[3]) * percent
-			local a = c1[4] + (c2[4] - c1[4]) * percent
-			data:setPixel(0, j, r, g, b, a)
-		end
-		img:replacePixels(data)
-		img:setWrap('repeat', 'clamp')
-
-		quad:setViewport(0, 0, w, h)
-	end,
-	drawGradient = function(gradient, quad, x, y)
-		love.graphics.draw(gradient, quad, x, y)
-	end,
 	clear = function(r, g, b, a, s, d)
 		local fade = fade[1]
 
@@ -667,11 +504,6 @@ return {
 		local fade = fade[1]
 
 		love.graphics.setColor(fade * r, fade * g, fade * b, a)
-	end,
-	setColorF = function(r, g, b, a)
-		local fade = fade[1]
-
-		love.graphics.setColor(fade * (r/255), fade * (g/255), fade * (b/255), a)
 	end,
 	setBackgroundColor = function(r, g, b, a)
 		local fade = fade[1]

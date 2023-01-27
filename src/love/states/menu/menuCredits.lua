@@ -82,20 +82,18 @@ return {
         credY = {
             250
         }
-        Timer.tween(0.5, music, {vol = 0.15}, "out-quad")
         selectSound = love.audio.newSource("sounds/menu/select.ogg", "static")
 	    confirmSound = love.audio.newSource("sounds/menu/confirm.ogg", "static")
         selectSound:setVolume(0.2)
         confirmSound:setVolume(0.2)
         graphics.fadeIn(0.5)
-        bg = graphics.newImage(love.graphics.newImage(graphics.imagePath("menu/menuBG")))
+        bg = graphics.newImage(graphics.imagePath("menu/menuBG"))
     end,
     update = function(self, dt)
         if input:pressed("gameBack") then
             graphics.fadeOut(0.5,
             function()
                 Gamestate.switch(menu)
-                Timer.tween(0.5, music, {vol = 1}, "out-quad")
             end)
         end
         if input:pressed("down") then
@@ -115,7 +113,9 @@ return {
         love.graphics.setFont(credFont)
         love.graphics.push()
         love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
-        bg:cdraw(0, 0, 0.4*255, 1)
+        graphics.setColor(0, 0, 0.4, 1)
+        bg:draw()
+        graphics.setColor(1, 1, 1, 1)
         love.graphics.translate(-350,math.abs(graphics.getHeight() / 2)+credY[1]-700)
         love.graphics.printf(creditText, 0, 0, 750, "center")
         love.graphics.pop()

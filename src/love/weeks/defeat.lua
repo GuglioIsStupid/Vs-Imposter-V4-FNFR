@@ -51,8 +51,8 @@ return {
 		curEnemy = "black"
 		lolAlpha = {0}
 
-		inst = waveAudio:newSource("songs/defeat/Inst.ogg", "stream")
-		voices = waveAudio:newSource("songs/defeat/Voices.ogg", "stream")
+		inst = love.audio.newSource("songs/defeat/Inst.ogg", "stream")
+		voices = love.audio.newSource("songs/defeat/Voices.ogg", "stream")
 
 		self:initUI()
 
@@ -111,7 +111,7 @@ return {
         end
 
 
-		if not (countingDown or graphics.isFading()) and not (inst:getDuration() > musicTime/1000) and not paused then
+		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused then
 			status.setLoading(true)
 
 			graphics.fadeOut(

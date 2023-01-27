@@ -1,78 +1,210 @@
-if musicTime >= 22588.2352941176 and musicTime < 22613.2352941176 then 
-	Lightsout()
+if musicTime >= 37600 and musicTime < 37675 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 45176.4705882353 and musicTime < 45201.4705882353 then 
-	Lightson()
+if musicTime >= 37600 and musicTime < 37675 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 56470.5882352941 and musicTime < 56495.5882352941 then 
-	Lightsout()
+if musicTime >= 38400 and musicTime < 38475 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 67764.7058823529 and musicTime < 67789.7058823529 then 
-	Lightson()
+if musicTime >= 38400 and musicTime < 38475 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 69176.4705882352 and musicTime < 69201.4705882352 then 
-	Lightsout()
+if musicTime >= 40000 and musicTime < 40075 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 70588.2352941176 and musicTime < 70613.2352941176 then 
-	Lightson()
+if musicTime >= 40000 and musicTime < 40075 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 70588.2352941176 and musicTime < 70613.2352941176 then 
-	Lightsout()
+if musicTime >= 41600 and musicTime < 41675 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 71999.9999999999 and musicTime < 72024.9999999999 then 
-	Lightson()
+if musicTime >= 41600 and musicTime < 41675 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 73411.7647058823 and musicTime < 73436.7647058823 then 
-	Lightson()
+if musicTime >= 43200 and musicTime < 43275 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 95999.9999999999 and musicTime < 96024.9999999999 then 
-	Lightsout()
+if musicTime >= 43200 and musicTime < 43275 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 97411.7647058822 and musicTime < 97436.7647058822 then 
-	Lightson()
+if musicTime >= 44800 and musicTime < 44875 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 98823.5294117646 and musicTime < 98848.5294117646 then 
-	Lightsout()
+if musicTime >= 44800 and musicTime < 44875 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 100235.294117647 and musicTime < 100260.294117647 then 
-	Lightson()
+if musicTime >= 46400 and musicTime < 46475 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 101647.058823529 and musicTime < 101672.058823529 then 
-	Lightsout()
+if musicTime >= 46400 and musicTime < 46475 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 103058.823529412 and musicTime < 103083.823529412 then 
-	Lightson()
+if musicTime >= 48000 and musicTime < 48075 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 104470.588235294 and musicTime < 104495.588235294 then 
-	Lightsout()
+if musicTime >= 48000 and musicTime < 48075 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 104470.588235294 and musicTime < 104495.588235294 then 
-	Lightsout()
+if musicTime >= 49600 and musicTime < 49675 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 104470.588235294 and musicTime < 104495.588235294 then 
-	Lightson()
+if musicTime >= 49600 and musicTime < 49675 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 104470.588235294 and musicTime < 104495.588235294 then 
-	Lightson()
+if musicTime >= 51200 and musicTime < 51275 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 105882.352941176 and musicTime < 105907.352941176 then 
-	Lightsout()
+if musicTime >= 51200 and musicTime < 51275 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 105882.352941176 and musicTime < 105907.352941176 then 
-	Lightson()
+if musicTime >= 52800 and musicTime < 52875 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 107294.117647059 and musicTime < 107319.117647059 then 
-	Lightsout()
+if musicTime >= 52800 and musicTime < 52875 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 127058.823529412 and musicTime < 127083.823529412 then 
-	Lightson()
+if musicTime >= 55200 and musicTime < 55275 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 129882.352941176 and musicTime < 129907.352941176 then 
-	Lightsout()
+if musicTime >= 55200 and musicTime < 55275 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 141176.470588235 and musicTime < 141201.470588235 then 
-	LightsonEnding()
+if musicTime >= 56000 and musicTime < 56075 then 
+	ReactorBeep(0.4)
 end
-if musicTime >= 144000 and musicTime < 144025 then 
-	LightsDownOFF()
+if musicTime >= 56000 and musicTime < 56075 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 57600 and musicTime < 57675 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 57600 and musicTime < 57675 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 59200 and musicTime < 59275 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 59200 and musicTime < 59275 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 60800 and musicTime < 60875 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 60800 and musicTime < 60875 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 62400 and musicTime < 62475 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 62400 and musicTime < 62475 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 115200 and musicTime < 115275 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 121600 and musicTime < 121675 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 127200 and musicTime < 127275 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 127200 and musicTime < 127275 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 128000 and musicTime < 128075 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 128000 and musicTime < 128075 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 129600 and musicTime < 129675 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 129600 and musicTime < 129675 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 131200 and musicTime < 131275 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 131200 and musicTime < 131275 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 132800 and musicTime < 132875 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 132800 and musicTime < 132875 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 134400 and musicTime < 134475 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 134400 and musicTime < 134475 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 136800 and musicTime < 136875 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 136800 and musicTime < 136875 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 138400 and musicTime < 138475 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 138400 and musicTime < 138475 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 139200 and musicTime < 139275 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 139200 and musicTime < 139275 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 140800 and musicTime < 140875 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 140800 and musicTime < 140875 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 142400 and musicTime < 142475 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 142400 and musicTime < 142475 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 144000 and musicTime < 144075 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 144000 and musicTime < 144075 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 145600 and musicTime < 145675 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 145600 and musicTime < 145675 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 147200 and musicTime < 147275 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 147200 and musicTime < 147275 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 148800 and musicTime < 148875 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 148800 and musicTime < 148875 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 150400 and musicTime < 150475 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 150400 and musicTime < 150475 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 152000 and musicTime < 152075 then 
+	ReactorBeep(0.4)
+end
+if musicTime >= 152000 and musicTime < 152075 then 
+	ReactorBeep(0.4)
 end

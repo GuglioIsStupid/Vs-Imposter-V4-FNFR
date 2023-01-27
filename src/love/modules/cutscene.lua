@@ -3,7 +3,6 @@ local cutscene = {}
 function cutscene.video(path)
     local video = {
         video = love.graphics.newVideo(path),
-        playing = false,
         finished = false,
         x = 0,
         y = 0,
@@ -16,25 +15,21 @@ function cutscene.video(path)
 
         play = function(self)
             self.video:play()
-            self.playing = true
             self.finished = false
             inCutscene = true
         end,
 
         stop = function(self)
             self.video:stop()
-            self.playing = false
             self.finished = true
         end,
 
         pause = function(self)
             self.video:pause()
-            self.playing = false
         end,
 
         resume = function(self)
             self.video:resume()
-            self.playing = true
         end,
 
         stopped = function(self, func)
@@ -44,7 +39,7 @@ function cutscene.video(path)
         end,
 
         isPlaying = function(self, func)
-            return self.playing
+            return self.video:isPlaying()
         end,
 
         draw = function(self)

@@ -21,8 +21,8 @@ return {
 		weeksFinale:load()
 		stages["finale"]:load()
 
-		inst = waveAudio:newSource("songs/finale/Inst.ogg", "stream")
-		voices = waveAudio:newSource("songs/finale/Voices.ogg", "stream")
+		inst = love.audio.newSource("songs/finale/Inst.ogg", "stream")
+		voices = love.audio.newSource("songs/finale/Voices.ogg", "stream")
 
 		self:initUI()
 
@@ -41,16 +41,16 @@ return {
 		stages["finale"]:update(dt)
 
 		if health >= 80 then
-			if enemyIcon:getAnimName() == "daddy dearest" then
-				weeksFinale:setIcon("enemy", "daddy dearest losing")
+			if enemyIcon:getAnimName() == "calm" then
+				if enemyIcon:getAnimName() ~= "mad" then weeksFinale:setIcon("enemy", "mad") end
 			end
 		else
-			if enemyIcon:getAnimName() == "daddy dearest losing" then
-				weeksFinale:setIcon("enemy", "daddy dearest")
+			if enemyIcon:getAnimName() == "mad" then
+				if enemyIcon:getAnimName() ~= "calm" then weeksFinale:setIcon("enemy", "calm") end
 			end
 		end
 
-		if not (countingDown or graphics.isFading()) and not (inst:getDuration() > musicTime/1000) and not paused then
+		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused then
 			if storyMode and song < 3 then
 				if score > highscores[weekNum-1][difficulty].scores[song] then
 					highscores[weekNum-1][difficulty].scores[song] = score

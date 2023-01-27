@@ -1,15 +1,15 @@
 return {
     enter = function()
         stageImages = {
-            ["Sky"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("polus/polus_custom_sky"))), -- stage-back
-		    ["Rocks"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("polus/polusrocks"))), -- stage-back
-            ["Hills"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("polus/polusHills"))), -- stage-back
-            ["Lab"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("polus/polus_custom_lab"))),
-            ["Ground"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("polus/polus_custom_floor")))
+            ["Sky"] = graphics.newImage(graphics.imagePath("polus/polus_custom_sky")), -- stage-back
+		    ["Rocks"] = graphics.newImage(graphics.imagePath("polus/polusrocks")), -- stage-back
+            ["Hills"] = graphics.newImage(graphics.imagePath("polus/polusHills")), -- stage-back
+            ["Lab"] = graphics.newImage(graphics.imagePath("polus/polus_custom_lab")),
+            ["Ground"] = graphics.newImage(graphics.imagePath("polus/polus_custom_floor"))
         }
 
         stageImages["Sky"].sizeX = 1.4
-        enemy = love.filesystem.load("sprites/characters/boyfriend.lua")()
+        enemy = love.filesystem.load("sprites/boyfriend.lua")()
 
         stageImages["Sky"].y = -200
         stageImages["Rocks"].x, stageImages["Rocks"].y = -373, -10
@@ -43,19 +43,23 @@ return {
     draw = function()
         love.graphics.push()
             love.graphics.push()
-			    love.graphics.translate(cam.x * 0.5, cam.y * 0.5)
+			    love.graphics.translate(camera.x * 0.5, camera.y * 0.5)
+                love.graphics.translate(camera.ex * 0.5, camera.ey * 0.5)
                 stageImages["Sky"]:draw()
             love.graphics.pop()
             love.graphics.push()
-                love.graphics.translate(cam.x * 0.6, cam.y * 0.6)
+                love.graphics.translate(camera.x * 0.6, camera.y * 0.6)
+                love.graphics.translate(camera.ex * 0.6, camera.ey * 0.6)
                 stageImages["Rocks"]:draw()
             love.graphics.pop()
             love.graphics.push()
-                love.graphics.translate(cam.x * 0.7, cam.y * 0.7)
+                love.graphics.translate(camera.x * 0.7, camera.y * 0.7)
+                love.graphics.translate(camera.ex * 0.7, camera.ey * 0.7)
                 stageImages["Hills"]:draw()
             love.graphics.pop()
             love.graphics.push()
-            love.graphics.translate(cam.x * 0.9, cam.y * 0.9)
+                love.graphics.translate(camera.x * 0.9, camera.y * 0.9)
+                love.graphics.translate(camera.ex * 0.9, camera.ey * 0.9)
                 stageImages["Lab"]:draw()
                 stageImages["Ground"]:draw()
 
@@ -65,15 +69,11 @@ return {
             
 		love.graphics.pop()
 		love.graphics.push()
-			love.graphics.translate(cam.x, cam.y)
+			love.graphics.translate(camera.x, camera.y)
+            love.graphics.translate(camera.ex, camera.ey)
 
 			enemy:draw()
 			boyfriend:draw()
-		love.graphics.pop()
-		love.graphics.push()
-			love.graphics.translate(cam.x * 1.1, cam.y * 1.1)
-
-			
 		love.graphics.pop()
     end,
 
