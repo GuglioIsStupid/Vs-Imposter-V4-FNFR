@@ -51,5 +51,9 @@ return graphics.newSprite(
 		["up moan"] = {start = 30, stop = 34, speed = 24, offsetX = 0, offsetY = 40},
 	},
 	"idle", -- set to default animation
-	false -- If the sprite repeats
+	false,
+	{
+		sing_duration = 4,
+		isCharacter = true
+	}
 )

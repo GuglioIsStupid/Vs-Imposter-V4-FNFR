@@ -335,7 +335,8 @@ function love.load()
 	credits = require "states.hi"
 
 	-- Load weeks
-	weeks = require "states.weeks"
+	weeks = require "states.weeks.weeks"
+	weeksDefeat = require "states.weeks.weeksDefeat"
 
 	-- Load substates
 	gameOver = require "substates.game-over"
@@ -476,6 +477,8 @@ function love.load()
 		["HENRY"] = require "weeks.henry",
 		["..."] = chooseMissCount
 	}
+
+	defeatWeekLololol = require "weeks.defeat"
 
 	-- LÖVE init
 	if curOS == "OS X" then

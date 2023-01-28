@@ -286,6 +286,16 @@ return {
 						self:animate("idle", false) 
 					end
 				end
+
+				if self.isCharacter then 
+					self.holdTimer = self.holdTimer + dt
+					if self.holdTimer >= beatHandler.getStepCrochet() * 0.001 * self.singDuration then
+						if util.startsWith(self:getAnimName(), "sing") then 
+							self.holdTimer = 0
+							self:animate("idle", false)
+						end
+					end
+				end
 			end,
 
 			beat = function(self, beat)

@@ -248,5 +248,9 @@ return graphics.newSprite(
 		["enter"] = {start = 16, stop = 56, speed = 24, offsetX = 0, offsetY = 0},
 	},
 	"anim", -- set to default animation
-	false -- If the sprite repeats
+	false,
+	{
+		sing_duration = 4,
+		isCharacter = true
+	}
 )

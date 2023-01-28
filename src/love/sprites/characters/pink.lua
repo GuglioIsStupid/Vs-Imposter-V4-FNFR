@@ -65,5 +65,9 @@ return graphics.newSprite(
 		["up"] = {start = 40, stop = 48, speed = 24, offsetX = 26, offsetY = 12},
 	},
 	"idle", -- set to default animation
-	false -- If the sprite repeats
+	false,
+	{
+		sing_duration = 4,
+		isCharacter = true
+	}
 )

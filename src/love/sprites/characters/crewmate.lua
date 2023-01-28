@@ -148,5 +148,9 @@ return graphics.newSprite(
 		["unwave"] = {start = 58, stop = 74, speed = 24, offsetX = 0, offsetY = 0},
 	},
 	"anim", -- set to default animation
-	false -- If the sprite repeats
+	false,
+	{
+		sing_duration = 4,
+		isCharacter = true
+	}
 )
