@@ -62,32 +62,16 @@ return {
 		end
 
 		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused then
-			if storyMode and song < 3 then
-				if score > highscores[weekNum-1][difficulty].scores[song] then
-					highscores[weekNum-1][difficulty].scores[song] = score
-					saveHighscores()
+			status.setLoading(true)
+
+			graphics.fadeOut(
+				0.5,
+				function()
+					Gamestate.switch(menu)
+
+					status.setLoading(false)
 				end
-				newAccuracy = convertedAcc:gsub("%%", "")
-				if tonumber(newAccuracy) > highscores[weekNum-1][difficulty].accuracys[song] then
-					print("New accuracy: " .. newAccuracy)
-					highscores[weekNum-1][difficulty].accuracys[song] = tonumber(newAccuracy)
-					saveHighscores()
-				end
-				song = song + 1
-
-				self:load()
-			else
-				status.setLoading(true)
-
-				graphics.fadeOut(
-					0.5,
-					function()
-						Gamestate.switch(menu)
-
-						status.setLoading(false)
-					end
-				)
-			end
+			)
 		end
 
 		if boyfriend:getAnimName() ~= "idle" then 

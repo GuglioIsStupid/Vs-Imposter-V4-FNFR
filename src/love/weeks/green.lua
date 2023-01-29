@@ -35,7 +35,7 @@ return {
 		song = songNum
 		difficulty = songAppend
 
-		weeksGreen:setIcon("enemy", "daddy dearest")
+		enemyIcon:animate("green", false)
 
 		darkTween = {0}
 
@@ -43,13 +43,12 @@ return {
 	end,
 
 	load = function(self)
-		weeksGreen:load()
 		if song == 4 then
 			stages["miraReactor"]:leave()
 			stages["miraFall"]:enter()
 			stages["miraFall"]:load()
-			inst = love.audio.newSource("songs/ejected/Inst.ogg")
-			voices = love.audio.newSource("songs/ejected/Voices.ogg")
+			inst = love.audio.newSource("songs/ejected/Inst.ogg", "stream")
+			voices = love.audio.newSource("songs/ejected/Voices.ogg", "stream")
 			self:initUI()
 			weeksGreen:setupEjectCountdown()
 		elseif song == 3 then
@@ -72,18 +71,17 @@ return {
 			voices = love.audio.newSource("songs/sussus-toogus/Voices.ogg", "stream")
 			if not died and storyMode then
 				inCutscene = true
-				video = love.graphics.newVideo("videos/toogus.ogv")
+				video = cutscene.video("videos/toogus.ogv")
 				video:play()
 				Timer.after(33, function()
 					inCutscene = false
-					video:release()
+					video:destroy()
 					weeksGreen:setupCountdown()
-					
 				end)
 			end
 			self:initUI()
 		end
-
+		weeksGreen:load()
 	end,
 
 	initUI = function(self)
@@ -94,6 +92,7 @@ return {
 			weeksGreen:generateNotes("songs/reactor/reactor-hard.json")
 		elseif song == 2 then
 			weeksGreen:generateNotes("songs/lights-down/lights-down-hard.json")
+			weeksGreen:generateEvents("songs/lights-down/events.json")
 		else
 			weeksGreen:generateNotes("songs/sussus-toogus/sussus-toogus-hard.json")
 		end
@@ -110,27 +109,17 @@ return {
 		end
 
 		if health >= 80 then
-			if enemyIcon:getAnimName() == "daddy dearest" then
-				weeksGreen:setIcon("enemy", "daddy dearest losing")
+			if enemyIcon:getAnimName() == "green" then
+				enemyIcon:animate("green losing", false)
 			end
 		else
-			if enemyIcon:getAnimName() == "daddy dearest losing" then
-				weeksGreen:setIcon("enemy", "daddy dearest")
+			if enemyIcon:getAnimName() == "green losing" then
+				enemyIcon:animate("green", false)
 			end
 		end
 
-		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused then
+		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused and not inCutscene then
 			if storyMode and song < 4 then
-				if score > highscores[weekNum-1][difficulty].scores[song] then
-					highscores[weekNum-1][difficulty].scores[song] = score
-					saveHighscores()
-				end
-				newAccuracy = convertedAcc:gsub("%%", "")
-				if tonumber(newAccuracy) > highscores[weekNum-1][difficulty].accuracys[song] then
-					print("New accuracy: " .. newAccuracy)
-					highscores[weekNum-1][difficulty].accuracys[song] = tonumber(newAccuracy)
-					saveHighscores()
-				end
 				song = song + 1
 
 				self:load()
@@ -150,197 +139,6 @@ return {
 
 
 		if song == 2 then
-			if musicTime >= 22588.2352941176 and musicTime < 22613.2352941176 then
-				if lights1 then
-					Timer.cancel(lights1)
-				end
-				lights1 = Timer.tween(0.1, darkTween, {[1] = 1}, "linear")
-			end
-
-
-			if musicTime >= 45176.4705882353 and musicTime < 45201.4705882353 then 
-				if lights2 then
-					Timer.cancel(lights2)
-				end
-				lights2 = Timer.tween(0.1, darkTween, {[1] = 0}, "linear")
-			end
-
-
-			if musicTime >= 56470.5882352941 and musicTime < 56495.5882352941 then 
-				if lights3 then
-					Timer.cancel(lights3)
-				end
-				lights3 = Timer.tween(0.1, darkTween, {[1] = 1}, "linear")
-			end
-
-
-			if musicTime >= 67764.7058823529 and musicTime < 67789.7058823529 then 
-				if lights4 then
-					Timer.cancel(lights4)
-				end
-				lights4 = Timer.tween(0.1, darkTween, {[1] = 0}, "linear")
-			end
-
-
-			if musicTime >= 69176.4705882352 and musicTime < 69201.4705882352 then 
-				if lights5 then
-					Timer.cancel(lights5)
-				end
-				lights5 = Timer.tween(0.1, darkTween, {[1] = 1}, "linear")
-			end
-
-
-			if musicTime >= 70588.2352941176 and musicTime < 70613.2352941176 then 
-				if lights6 then
-					Timer.cancel(lights6)
-				end
-				lights6 = Timer.tween(0.1, darkTween, {[1] = 0}, "linear")
-			end
-
-
-			if musicTime >= 70588.2352941176 and musicTime < 70613.2352941176 then 
-				if lights7 then
-					Timer.cancel(lights7)
-				end
-				lights7 = Timer.tween(0.1, darkTween, {[1] = 1}, "linear")
-			end
-
-
-			if musicTime >= 71999.9999999999 and musicTime < 72024.9999999999 then 
-				if lights8 then
-					Timer.cancel(lights8)
-				end
-				lights8 = Timer.tween(0.1, darkTween, {[1] = 0}, "linear")
-			end
-
-			
-			if musicTime >= 73411.7647058823 and musicTime < 73436.7647058823 then 
-				if lights9 then
-					Timer.cancel(lights9)
-				end
-				lights9 = Timer.tween(0.1, darkTween, {[1] = 1}, "linear")
-			end
-
-
-			if musicTime >= 95999.9999999999 and musicTime < 96024.9999999999 then 
-				if lights10 then
-					Timer.cancel(lights10)
-				end
-				lights10 = Timer.tween(0.1, darkTween, {[1] = 0}, "linear")
-			end
-
-
-			if musicTime >= 97411.7647058822 and musicTime < 97436.7647058822 then 
-				if lights11 then
-					Timer.cancel(lights11)
-				end
-				lights11 = Timer.tween(0.1, darkTween, {[1] = 1}, "linear")
-			end
-
-
-			if musicTime >= 98823.5294117646 and musicTime < 98848.5294117646 then 
-				if lights12 then
-					Timer.cancel(lights12)
-				end
-				lights12 = Timer.tween(0.1, darkTween, {[1] = 0}, "linear")
-			end
-
-
-			if musicTime >= 100235.294117647 and musicTime < 100260.294117647 then 
-				if lights13 then
-					Timer.cancel(lights13)
-				end
-				lights13 = Timer.tween(0.1, darkTween, {[1] = 1}, "linear")
-			end
-
-
-			if musicTime >= 101647.058823529 and musicTime < 101672.058823529 then 
-				if lights14 then
-					Timer.cancel(lights14)
-				end
-				lights14 = Timer.tween(0.1, darkTween, {[1] = 0}, "linear")
-			end
-
-
-			if musicTime >= 103058.823529412 and musicTime < 103083.823529412 then 
-				if lights15 then
-					Timer.cancel(lights15)
-				end
-				lights15 = Timer.tween(0.1, darkTween, {[1] = 1}, "linear")
-			end
-
-
-			if musicTime >= 104470.588235294 and musicTime < 104495.588235294 then 
-				if lights16 then
-					Timer.cancel(lights16)
-				end
-				lights16 = Timer.tween(0.1, darkTween, {[1] = 0}, "linear")
-			end
-
-
-			if musicTime >= 104470.588235294 and musicTime < 104495.588235294 then 
-				if lights17 then
-					Timer.cancel(lights17)
-				end
-				lights17 = Timer.tween(0.1, darkTween, {[1] = 1}, "linear")
-			end
-
-
-			if musicTime >= 104470.588235294 and musicTime < 104495.588235294 then 
-				if lights18 then
-					Timer.cancel(lights18)
-				end
-				lights18 = Timer.tween(0.1, darkTween, {[1] = 0}, "linear")
-			end
-
-
-			if musicTime >= 104470.588235294 and musicTime < 104495.588235294 then 
-				if lights19 then
-					Timer.cancel(lights19)
-				end
-				lights19 = Timer.tween(0.1, darkTween, {[1] = 1}, "linear")
-			end
-
-
-			if musicTime >= 105882.352941176 and musicTime < 105907.352941176 then 
-				if lights20 then
-					Timer.cancel(lights20)
-				end
-				lights20 = Timer.tween(0.1, darkTween, {[1] = 0}, "linear")
-			end
-
-
-			if musicTime >= 105882.352941176 and musicTime < 105907.352941176 then 
-				if lights21 then
-					Timer.cancel(lights21)
-				end
-				lights21 = Timer.tween(0.1, darkTween, {[1] = 1}, "linear")
-			end
-
-
-			if musicTime >= 107294.117647059 and musicTime < 107319.117647059 then 
-				if lights22 then
-					Timer.cancel(lights22)
-				end
-				lights22 = Timer.tween(0.1, darkTween, {[1] = 0}, "linear")
-			end
-
-
-			if musicTime >= 127058.823529412 and musicTime < 127083.823529412 then 
-				if lights23 then
-					Timer.cancel(lights23)
-				end
-				lights23 = Timer.tween(0.1, darkTween, {[1] = 1}, "linear")
-			end
-
-
-			if musicTime >= 129882.352941176 and musicTime < 129907.352941176 then 
-				if lights24 then
-					Timer.cancel(lights24)
-				end
-				lights24 = Timer.tween(0.1, darkTween, {[1] = 0}, "linear")
-			end
-
 
 			if musicTime >= 141176.470588235 and musicTime < 141201.470588235 then 
 				--LightsonEnding()
@@ -359,8 +157,8 @@ return {
 	draw = function(self)
 		love.graphics.push()
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
-			love.graphics.scale(extraCamZoom.sizeX, extraCamZoom.sizeY)
-			love.graphics.scale(cam.sizeX, cam.sizeY)
+			love.graphics.scale(camera.esizeX, camera.esizeY)
+			love.graphics.scale(camera.sizeX, camera.sizeY)
 			if song == 4 then
 				stages["miraFall"]:draw()
 			elseif song == 3 then
@@ -374,14 +172,10 @@ return {
 
 		if song == 4 then
 			if not paused and not video:isPlaying() then	
-				weeksGreen:drawTimeLeftBar()
-				weeksGreen:drawHealthBar()
 				weeksGreen:drawUI()
 			end
 		else
 			if not paused then	
-				weeksGreen:drawTimeLeftBar()
-				weeksGreen:drawHealthBar()
 				weeksGreen:drawUI()
 			end
 		end

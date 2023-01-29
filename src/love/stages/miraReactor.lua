@@ -1,9 +1,9 @@
 return {
     enter = function()
         stageImages = {
-            graphics.newImage(love.graphics.newImage(graphics.imagePath("greenWeek/floornew"))),
+            graphics.newImage(graphics.imagePath("greenWeek/floornew")),
             love.filesystem.load("sprites/greenWeek/crewback.lua")(),
-            graphics.newImage(love.graphics.newImage(graphics.imagePath("greenWeek/backbars"))),
+            graphics.newImage(graphics.imagePath("greenWeek/backbars")),
             love.filesystem.load("sprites/greenWeek/corereactor.lua")(),
             love.filesystem.load("sprites/greenWeek/crewfront.lua")(),
         }
@@ -50,7 +50,8 @@ return {
 
     draw = function()
 		love.graphics.push()
-			love.graphics.translate(cam.x, cam.y)
+            love.graphics.translate(camera.x, camera.y)
+            love.graphics.translate(camera.ex, camera.ey)
             stageImages[1]:draw()
             stageImages[2]:draw()
             stageImages[3]:draw()

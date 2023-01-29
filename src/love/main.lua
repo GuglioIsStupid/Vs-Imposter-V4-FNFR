@@ -171,6 +171,8 @@ function love.load()
 	settings = {}
 	local curOS = love.system.getOS()
 
+	flash = {alpha = 0}
+
 	-- Load libraries
 	baton = require "lib.baton"
 	ini = require "lib.ini"
@@ -338,6 +340,7 @@ function love.load()
 	weeks = require "states.weeks.weeks"
 	weeksDefeat = require "states.weeks.weeksDefeat"
 	weeksOw = require "states.weeks.weeksOw"
+	weeksGreen = require "states.weeks.weeksGreen"
 
 	-- Load substates
 	gameOver = require "substates.game-over"
