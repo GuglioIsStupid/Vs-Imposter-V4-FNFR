@@ -11,21 +11,20 @@ return {
 		song = songNum
 		difficulty = songAppend
 
-		weeksOw:setIcon("enemy", "daddy dearest")
+		enemyIcon:animate("black", false)
 
 		enemy = love.filesystem.load("sprites/characters/red.lua")()
 		boyfriend = love.filesystem.load("sprites/characters/blue.lua")()
 		enemyTwo = love.filesystem.load("sprites/characters/bluehit.lua")()
 
-		cam.sizeX, cam.sizeY = 0.7, 0.7
-		camScale.x, camScale.y = 0.7, 0.7
+		camera.sizeX, camera.sizeY = 0.7, 0.7
+		camera.scaleX, camera.scaleY = 0.7, 0.7
 
 		enemy.x = -75
 		boyfriend.x = 225
 		enemyTwo.x = 225
 
 		self:load()
-
 	end,
 
 	load = function(self)
@@ -53,12 +52,12 @@ return {
 		weeksOw:update(dt)
 		enemyTwo:update(dt)
 		if health >= 80 then
-			if enemyIcon:getAnimName() == "daddy dearest" then
-				weeksOw:setIcon("enemy", "daddy dearest losing")
+			if enemyIcon:getAnimName() == "black" then
+				enemyIcon:animate("black losing", false)
 			end
 		else
-			if enemyIcon:getAnimName() == "daddy dearest losing" then
-				weeksOw:setIcon("enemy", "daddy dearest")
+			if enemyIcon:getAnimName() == "black losing" then
+				enemyIcon:animate("black", false)
 			end
 		end
 
@@ -101,9 +100,10 @@ return {
 	draw = function(self)
 		love.graphics.push()
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
-			love.graphics.scale(extraCamZoom.sizeX, extraCamZoom.sizeY)
-			love.graphics.scale(cam.sizeX, cam.sizeY)
-			love.graphics.translate(cam.x, cam.y)
+			love.graphics.scale(camera.esizeX, camera.esizeY)
+			love.graphics.scale(camera.sizeX, camera.sizeY)
+			love.graphics.translate(camera.x, camera.y)
+			love.graphics.translate(camera.ex, camera.ey)
 			love.graphics.rectangle("fill", -1000, -1000, 5000, 6000) -- white rectangle :pleasure:
 			enemy:draw()
 		
@@ -118,11 +118,7 @@ return {
 			weeksOw:drawRating(0.9)
 		love.graphics.pop()
 		
-		weeksOw:drawTimeLeftBar()
-		weeksOw:drawHealthBar()
-		if not paused then
-			weeksOw:drawUI()
-		end
+		weeksOw:drawUI()
 	end,
 
 	leave = function(self)

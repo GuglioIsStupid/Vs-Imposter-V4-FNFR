@@ -44,16 +44,16 @@ return graphics.newSprite(
 		--To get the animations, look at the number and the name of the frame
 		--Start is the first frame, stop is the last frame, speed is the speed of the animation, offsetX and offsetY are the offset of the animation
 		--Get the offset by using the ingame offset editor and pressing 7
-		["down moan"] = {start = 1, stop = 3, speed = 24, offsetX = -7, offsetY = -15},
+		["singDOWN moan"] = {start = 1, stop = 3, speed = 24, offsetX = -7, offsetY = -15},
 		["idle"] = {start = 4, stop = 17, speed = 24, offsetX = 0, offsetY = 0},
-		["left moan"] = {start = 18, stop = 26, speed = 24, offsetX = 8, offsetY = 61},
-		["right moan"] = {start = 27, stop = 29, speed = 24, offsetX = -5, offsetY = 3},
-		["up moan"] = {start = 30, stop = 34, speed = 24, offsetX = 0, offsetY = 40},
+		["singLEFT moan"] = {start = 18, stop = 26, speed = 24, offsetX = 8, offsetY = 61},
+		["singRIGHT moan"] = {start = 27, stop = 29, speed = 24, offsetX = -5, offsetY = 3},
+		["singUP moan"] = {start = 30, stop = 34, speed = 24, offsetX = 0, offsetY = 40},
 	},
 	"idle", -- set to default animation
 	false,
 	{
-		sing_duration = 4,
+		sing_duration = 10,
 		isCharacter = true
 	}
 )
