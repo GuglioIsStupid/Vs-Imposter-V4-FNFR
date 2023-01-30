@@ -335,7 +335,8 @@ function love.load()
 	credits = require "states.hi"
 
 	-- Load weeks
-	weeks = require "states.weeks"
+	weeks = require "states.weeks.weeks"
+	weeksHenry = require "states.weeks.weeksHenry"
 
 	-- Load substates
 	gameOver = require "substates.game-over"

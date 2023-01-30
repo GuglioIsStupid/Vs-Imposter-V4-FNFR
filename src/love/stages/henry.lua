@@ -1,13 +1,13 @@
 return {
     enter = function()
         stageImages = {
-            graphics.newImage(love.graphics.newImage(graphics.imagePath("henry/stagehenry"))),
+            graphics.newImage(graphics.imagePath("henry/stagehenry")),
         }
 
 
         enemy = love.filesystem.load("sprites/characters/HENRY_ASSS.lua")()
         enemyTwo = enemy
-        boyfriend = Character.boyfriend(0,0)
+        boyfriend = love.filesystem.load("sprites/boyfriend.lua")()
 
 
         girlfriend.x, girlfriend.y = -200, -445
@@ -17,8 +17,8 @@ return {
 
         
 
-        cam.sizeX, cam.sizeY = 0.7, 0.7
-        camScale.x, camScale.y = 0.7, 0.7
+       -- cam.sizeX, cam.sizeY = 0.7, 0.7
+        --camScale.x, camScale.y = 0.7, 0.7
     end,
 
     load = function()
@@ -56,7 +56,8 @@ return {
 
     draw = function()
 		love.graphics.push()
-			love.graphics.translate(cam.x, cam.y)
+			love.graphics.translate(camera.x, camera.y)
+			love.graphics.translate(camera.ex, camera.ey)
             stageImages[1]:draw()
             girlfriend:draw()
             if song == 3 or song == 4 then
