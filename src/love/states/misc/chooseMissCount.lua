@@ -2,7 +2,7 @@ return {
     enter = function(self)
         dummypostors = {}
         for i = 1, 6 do 
-            table.insert(dummypostors, graphics.newImage(love.graphics.newImage(graphics.imagePath("defeat/dummypostor" .. i))))
+            table.insert(dummypostors, graphics.newImage(graphics.imagePath("defeat/dummypostor" .. i)))
         end
 
         for i = 1, #dummypostors do
@@ -10,7 +10,7 @@ return {
             dummypostors[i].y = 75
         end
 
-        arrow = graphics.newImage(love.graphics.newImage(graphics.imagePath("defeat/missAmountArrow")))
+        arrow = graphics.newImage(graphics.imagePath("defeat/missAmountArrow"))
 
         arrow.x = dummypostors[1].x
         arrow.y = 0
@@ -52,7 +52,7 @@ return {
                 graphics.fadeOut(
                     0.5,
                     function()
-                        music[1]:stop()
+                        music:stop()
                         songAppend = "hard"
                         storyMode = true
                         songNum = 1

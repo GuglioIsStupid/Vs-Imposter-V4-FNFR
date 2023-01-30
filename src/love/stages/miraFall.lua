@@ -1,14 +1,14 @@
 return {
     enter = function()
         stageImages = {
-            graphics.newImage(love.graphics.newImage(graphics.imagePath("greenWeek/buildingA"))),
-            graphics.newImage(love.graphics.newImage(graphics.imagePath("greenWeek/buildingA2"))),
-            graphics.newImage(love.graphics.newImage(graphics.imagePath("greenWeek/buildingB"))),
-            graphics.newImage(love.graphics.newImage(graphics.imagePath("greenWeek/buildingB2"))),
-            graphics.newImage(love.graphics.newImage(graphics.imagePath("greenWeek/speedLines"))),
-            graphics.newImage(love.graphics.newImage(graphics.imagePath("greenWeek/scrollingClouds"))),
-            graphics.newImage(love.graphics.newImage(graphics.imagePath("greenWeek/sky"))),
-            graphics.newImage(love.graphics.newImage(graphics.imagePath("greenWeek/fgClouds"))),
+            graphics.newImage(graphics.imagePath("greenWeek/buildingA")),
+            graphics.newImage(graphics.imagePath("greenWeek/buildingA2")),
+            graphics.newImage(graphics.imagePath("greenWeek/buildingB")),
+            graphics.newImage(graphics.imagePath("greenWeek/buildingB2")),
+            graphics.newImage(graphics.imagePath("greenWeek/speedLines")),
+            graphics.newImage(graphics.imagePath("greenWeek/scrollingClouds")),
+            graphics.newImage(graphics.imagePath("greenWeek/sky")),
+            graphics.newImage(graphics.imagePath("greenWeek/fgClouds")),
         }
 
         stageImages[1].translation = {x = 0, y = 0}
@@ -64,8 +64,8 @@ return {
         enemy.x, enemy.y = -462, -61
         boyfriend.x, boyfriend.y = 495, 159
 
-        cam.sizeX, cam.sizeY = 1, 1
-        camScale.x, camScale.y = 1, 1
+        camera.sizeX, camera.sizeY = 1, 1
+        camera.scaleY, camera.scaleY = 1, 1
     end,
 
     load = function()
@@ -133,7 +133,7 @@ return {
 
         if vidEnded and not didFlash then
             didFlash = true
-            weeks:doFlash()
+            weeksGreen:doFlash()
         end
 
         if not video:isPlaying() and not didFlash then
@@ -145,9 +145,9 @@ return {
     end,
 
     draw = function()
+        love.graphics.translate(camera.ex * 0.9, camera.ey * 0.9)
         love.graphics.push()
         --love.graphics.translate(cam.x * 0.9, cam.y * 0.9)
-            stageImages[7]:draw()
             stageImages[8]:draw()
             love.graphics.translate(stageImages[1].translation.x, stageImages[1].translation.y)
             for i = 1, 4 do 
@@ -190,7 +190,6 @@ return {
 
 
 		love.graphics.push()
-		--	love.graphics.translate(cam.x, cam.y)
             girlfriend:draw()
 			enemy:draw()
 			boyfriend:draw()

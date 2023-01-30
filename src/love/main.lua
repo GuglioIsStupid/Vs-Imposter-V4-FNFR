@@ -171,6 +171,8 @@ function love.load()
 	settings = {}
 	local curOS = love.system.getOS()
 
+	flash = {alpha = 0}
+
 	-- Load libraries
 	baton = require "lib.baton"
 	ini = require "lib.ini"
@@ -337,6 +339,9 @@ function love.load()
 	-- Load weeks
 	weeks = require "states.weeks.weeks"
 	weeksHenry = require "states.weeks.weeksHenry"
+	weeksDefeat = require "states.weeks.weeksDefeat"
+	weeksOw = require "states.weeks.weeksOw"
+	weeksGreen = require "states.weeks.weeksGreen"
 
 	-- Load substates
 	gameOver = require "substates.game-over"
@@ -477,6 +482,8 @@ function love.load()
 		["HENRY"] = require "weeks.henry",
 		["..."] = chooseMissCount
 	}
+
+	defeatWeekLololol = require "weeks.defeat"
 
 	-- LÖVE init
 	if curOS == "OS X" then

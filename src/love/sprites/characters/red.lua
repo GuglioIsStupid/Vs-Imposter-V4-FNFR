@@ -52,12 +52,16 @@ return graphics.newSprite(
 		--To get the animations, look at the number and the name of the frame
 		--Start is the first frame, stop is the last frame, speed is the speed of the animation, offsetX and offsetY are the offset of the animation
 		--Get the offset by using the ingame offset editor and pressing 7
-		["down"] = {start = 1, stop = 7, speed = 24, offsetX = -102, offsetY = 26},
+		["singDOWN"] = {start = 1, stop = 7, speed = 24, offsetX = -102, offsetY = 26},
 		["idle"] = {start = 8, stop = 21, speed = 24, offsetX = 0, offsetY = 0},
-		["left"] = {start = 22, stop = 28, speed = 24, offsetX = -70, offsetY = 24},
-		["right"] = {start = 29, stop = 35, speed = 24, offsetX = -218, offsetY = 16},
-		["up"] = {start = 36, stop = 42, speed = 24, offsetX = 20, offsetY = 12},
+		["singLEFT"] = {start = 22, stop = 28, speed = 24, offsetX = -70, offsetY = 24},
+		["singRIGHT"] = {start = 29, stop = 35, speed = 24, offsetX = -218, offsetY = 16},
+		["singUP"] = {start = 36, stop = 42, speed = 24, offsetX = 20, offsetY = 12},
 	},
 	"idle", -- set to default animation
-	false -- If the sprite repeats
+	false,
+	{
+		sing_duration = 10,
+		isCharacter = true
+	}
 )

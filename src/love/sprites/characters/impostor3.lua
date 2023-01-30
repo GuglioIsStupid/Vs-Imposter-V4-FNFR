@@ -248,14 +248,18 @@ return graphics.newSprite(
 		--Start is the first frame, stop is the last frame, speed is the speed of the animation, offsetX and offsetY are the offset of the animation
 		--Get the offset by using the ingame offset editor and pressing 7
 		["bwomp"] = {start = 1, stop = 153, speed = 24, offsetX = 0, offsetY = 0},
-		["left"] = {start = 154, stop = 164, speed = 24, offsetX = 0, offsetY = 0},
+		["singLEFT"] = {start = 154, stop = 164, speed = 24, offsetX = 0, offsetY = 0},
 		["danceLeft"] = {start = 165, stop = 176, speed = 24, offsetX = 0, offsetY = 0},
 		["danceRight"] = {start = 177, stop = 188, speed = 24, offsetX = 0, offsetY = 0},
-		["down"] = {start = 189, stop = 196, speed = 24, offsetX = 0, offsetY = 0},
+		["singDOWN"] = {start = 189, stop = 196, speed = 24, offsetX = 0, offsetY = 0},
 		["idle"] = {start = 197, stop = 208, speed = 24, offsetX = 0, offsetY = 0},
-		["right"] = {start = 209, stop = 216, speed = 24, offsetX = 0, offsetY = 0},
-		["up"] = {start = 217, stop = 234, speed = 24, offsetX = 0, offsetY = 0},
+		["singRIGHT"] = {start = 209, stop = 216, speed = 24, offsetX = 0, offsetY = 0},
+		["singUP"] = {start = 217, stop = 234, speed = 24, offsetX = 0, offsetY = 0},
 	},
 	"idle", -- set to default animation
-	false -- If the sprite repeats
+	false,
+	{
+		sing_duration = 4,
+		isCharacter = true
+	}
 )
