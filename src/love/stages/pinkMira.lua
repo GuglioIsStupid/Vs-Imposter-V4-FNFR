@@ -1,17 +1,17 @@
 return {
     enter = function()
         stageImages = {
-            ["Sky"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("pink/bg sky"))),
-            ["backCloud"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("pink/cloud fathest"))),  --yes it is misspelled in the actual game
-            ["cloud1"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("pink/cloud 1"))),
-            ["cloud2"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("pink/cloud 2"))),
-            ["cloud3"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("pink/cloud 3"))),
-            ["cloud4"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("pink/cloud 4"))),
-            ["floor"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("pink/glasses"))),
-            ["backPlant"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("pink/lmao"))),
-            ["frontPlant"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("pink/front pot"))),
+            ["Sky"] = graphics.newImage(graphics.imagePath("pink/bg sky")),
+            ["backCloud"] = graphics.newImage(graphics.imagePath("pink/cloud fathest")),  --yes it is misspelled in the actual game
+            ["cloud1"] = graphics.newImage(graphics.imagePath("pink/cloud 1")),
+            ["cloud2"] = graphics.newImage(graphics.imagePath("pink/cloud 2")),
+            ["cloud3"] = graphics.newImage(graphics.imagePath("pink/cloud 3")),
+            ["cloud4"] = graphics.newImage(graphics.imagePath("pink/cloud 4")),
+            ["floor"] = graphics.newImage(graphics.imagePath("pink/glasses")),
+            ["backPlant"] = graphics.newImage(graphics.imagePath("pink/lmao")),
+            ["frontPlant"] = graphics.newImage(graphics.imagePath("pink/front pot")),
             ["blackPretender"] = love.filesystem.load("sprites/pink/black_pretender.lua")(),
-            ["theThingIDFK"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("pink/what is this"))),
+            ["theThingIDFK"] = graphics.newImage(graphics.imagePath("pink/what is this")),
             ["greyPretender"] = love.filesystem.load("sprites/pink/grey_pretender.lua")(),
             ["rhm"] = love.filesystem.load("sprites/pink/crew.lua")(),
             ["blue"] = love.filesystem.load("sprites/pink/crew.lua")(),
@@ -28,34 +28,33 @@ return {
             ["vines"] = love.filesystem.load("sprites/pink/vines.lua")(),
             ["hearts"] = love.filesystem.load("sprites/pink/hearts.lua")(),
             ["littleHearts"] = love.filesystem.load("sprites/pink/littleheart.lua")(),
-            ["overlaySmallHoleIDK"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("pink/vignette"))),
-            ["overlayLargeHoleIDK"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("pink/vignette2"))),                 --"akjgtbukhionjksdtjgiormk jfdghrieojkfd"  - guglio
-            ["frontPlant"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("pink/front pot")))
+            ["overlaySmallHoleIDK"] = graphics.newImage(graphics.imagePath("pink/vignette")),
+            ["overlayLargeHoleIDK"] = graphics.newImage(graphics.imagePath("pink/vignette2")),                 --"akjgtbukhionjksdtjgiormk jfdghrieojkfd"  - guglio
+            ["frontPlant"] = graphics.newImage(graphics.imagePath("pink/front pot"))
         }
 
         enemy = love.filesystem.load("sprites/characters/pink.lua")()
         boyfriend = love.filesystem.load("sprites/characters/bfmira.lua")()
         girlfriend = love.filesystem.load("sprites/characters/gfmira.lua")()
 
+        enemy.x, enemy.y = -459, 308
+        boyfriend.x, boyfriend.y = 518, 375
+        girlfriend.x, girlfriend.y = 10, 90
 
-        boyfriend.x, boyfriend.y = 496, 350
-        girlfriend.x, girlfriend.y = 25, 107
-        enemy.x, enemy.y = -432, 293
-
-        
-        stageImages["backPlant"].x, stageImages["backPlant"].y = -859, 35
-        stageImages["frontPlant"].x, stageImages["frontPlant"].y = -1327, 586
-        stageImages["theThingIDFK"].x, stageImages["theThingIDFK"].y = 27, -188
-        stageImages["rhm"].x, stageImages["rhm"].y = 1057, 474
-        stageImages["vines"].x, stageImages["vines"].y = 85, -451
-        stageImages["blue"].x, stageImages["blue"].y = -1059, 297
-        stageImages["grey"].x, stageImages["grey"].y = -513, 2
-        stageImages["Sky"].x, stageImages["Sky"].y = -149, -77
-        stageImages["longus"].x, stageImages["longus"].y = 804, 50
-        stageImages["cloud4"].x, stageImages["cloud4"].y = -2172, -810
-        stageImages["cloud3"].x, stageImages["cloud3"].y = 363, -398
-        stageImages["cloud2"].x, stageImages["cloud2"].y = 24, -6
-        stageImages["cloud1"].x, stageImages["cloud1"].y = 622, 71
+        stageImages["theThingIDFK"].x, stageImages["theThingIDFK"].y = 0, -239
+        stageImages["rhm"].x, stageImages["rhm"].y = 1323, 398
+        stageImages["Sky"].x, stageImages["Sky"].y = -183, 102
+        stageImages["blue"].x, stageImages["blue"].y = -796, 258
+        stageImages["grey"].x, stageImages["grey"].y = -514, 38
+        stageImages["longus"].x, stageImages["longus"].y = 797, 48
+        stageImages["backCloud"].x, stageImages["backCloud"].y = -199, 339
+        stageImages["cloud1"].x, stageImages["cloud1"].y = -1369, -179
+        stageImages["cloud2"].x, stageImages["cloud2"].y = -27, 43
+        stageImages["cloud3"].x, stageImages["cloud3"].y = 261, -317
+        stageImages["cloud4"].x, stageImages["cloud4"].y = 72, -133
+        stageImages["backPlant"].x, stageImages["backPlant"].y = -875, 155
+        stageImages["frontPlant"].x, stageImages["frontPlant"].y = -1059, 559
+        stageImages["vines"].x, stageImages["vines"].y = 5, -678
 
 
         stageImages["rhm"].sizeX, stageImages["rhm"].sizeY = 0.8, 0.8
@@ -69,10 +68,17 @@ return {
         stageImages["vines"]:animate("anim", true)
         stageImages["hearts"]:animate("anim", true)
 
+        camera.scaleX, camera.scaleY = 0.5, 0.5
+        camera.sizeX, camera.sizeY = 0.5, 0.5
+
 
     end,
 
     load = function()
+        camera.x, camera.y = -3, 18
+
+        camera:addPoint("boyfriend", -40, 18)
+        camera:addPoint("enemy", -3, 18)
 
     end,
 
@@ -91,15 +97,21 @@ return {
     draw = function()
         love.graphics.push()
             love.graphics.push()
-            love.graphics.translate(cam.x * 0.8, cam.y * 0.8)
+            love.graphics.translate(camera.x * 0.8, camera.y * 0.8)
+            love.graphics.translate(camera.ex * 0.8, camera.ey * 0.8)
+
             stageImages["Sky"]:draw()
             stageImages["backCloud"]:draw()
-            love.graphics.translate(cam.x * 0.9, cam.y * 0.9)
+            love.graphics.translate(camera.x * 0.9, camera.y * 0.9)
+            love.graphics.translate(camera.ex * 0.9, camera.ey * 0.9)
+
             stageImages["cloud1"]:draw()
             stageImages["cloud2"]:draw()
             stageImages["cloud3"]:draw()
             stageImages["cloud4"]:draw()
-            love.graphics.translate(cam.x, cam.y)
+            love.graphics.translate(camera.x, camera.y)
+            love.graphics.translate(camera.ex, camera.ey)
+
             stageImages["floor"]:draw()
             stageImages["backPlant"]:draw()
             stageImages["theThingIDFK"]:draw()
@@ -108,7 +120,9 @@ return {
             girlfriend:draw()
             enemy:draw()
             boyfriend:draw()
-            love.graphics.translate(cam.x * 1.1, cam.y * 1.1)
+            love.graphics.translate(camera.x * 1.1, camera.y * 1.1)
+            love.graphics.translate(camera.ex * 1.1, camera.ey * 1.1)
+
             stageImages["rhm"]:draw()
             stageImages["blue"]:draw()
             stageImages["frontPlant"]:draw()

@@ -8,23 +8,18 @@ return {
 		weeksPink:enter()
 		stages["pinkMira"]:enter()
 
-		cam.sizeX, cam.sizeY = 0.7, 0.7
-		camScale.x, camScale.y = 0.7, 0.7
-		cam.x = -enemy.x - 300
-		cam.y = -50
+
 
 		week = 1
 
 		song = songNum
 		difficulty = songAppend
 
-		weeksPink:setIcon("enemy", "red impostor 1")
+
 
         enemy = love.filesystem.load("sprites/characters/pink.lua")()
 
-        boyfriend.x, boyfriend.y = 496, 350
-        girlfriend.x, girlfriend.y = 25, 107
-        enemy.x, enemy.y = -432, 293
+
 
         flashAlpha = 0
 
@@ -35,9 +30,14 @@ return {
 		weeksPink:load()
 		stages["pinkMira"]:load()
 
+		enemy.x, enemy.y = -459, 308
+        boyfriend.x, boyfriend.y = 518, 375
+        girlfriend.x, girlfriend.y = 10, 90
+
 		if song == 3 then
 			stages["pinkMira"]:leave()
 			stages["greyMira"]:enter()
+			stages["greyMira"]:load()
 
 			inst = love.audio.newSource("songs/pretender/Inst.ogg", "stream")
 			voices = love.audio.newSource("songs/pretender/Voices.ogg", "stream")
@@ -116,8 +116,8 @@ return {
 	draw = function(self)
 		love.graphics.push()
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
-			love.graphics.scale(extraCamZoom.sizeX, extraCamZoom.sizeY)
-			love.graphics.scale(cam.sizeX, cam.sizeY)
+			love.graphics.scale(camera.esizeX, camera.esizeY)
+			love.graphics.scale(camera.sizeX, camera.sizeY)
 
 			if song ~= 3 then
 				stages["pinkMira"]:draw()
@@ -132,8 +132,7 @@ return {
         love.graphics.rectangle("fill", 0, 0, graphics.getWidth(), graphics.getHeight())
         graphics.setColor(1,1,1,1)
 
-		weeksPink:drawTimeLeftBar()
-		weeksPink:drawHealthBar()
+
 		if not paused then
 			weeksPink:drawUI()
 		end
