@@ -9,7 +9,6 @@ return {
             ["cloud4"] = graphics.newImage(graphics.imagePath("pink/cloud 4")),
             ["floor"] = graphics.newImage(graphics.imagePath("pink/glasses")),
             ["backPlant"] = graphics.newImage(graphics.imagePath("pink/lmao")),
-            ["frontPlant"] = graphics.newImage(graphics.imagePath("pink/front pot")),
             ["blackPretender"] = love.filesystem.load("sprites/pink/black_pretender.lua")(),
             ["theThingIDFK"] = graphics.newImage(graphics.imagePath("pink/what is this")),
             ["greyPretender"] = love.filesystem.load("sprites/pink/grey_pretender.lua")(),
@@ -30,7 +29,9 @@ return {
             ["littleHearts"] = love.filesystem.load("sprites/pink/littleheart.lua")(),
             ["overlaySmallHoleIDK"] = graphics.newImage(graphics.imagePath("pink/vignette")),
             ["overlayLargeHoleIDK"] = graphics.newImage(graphics.imagePath("pink/vignette2")),                 --"akjgtbukhionjksdtjgiormk jfdghrieojkfd"  - guglio
-            ["frontPlant"] = graphics.newImage(graphics.imagePath("pink/front pot"))
+            ["frontPlant"] = graphics.newImage(graphics.imagePath("pink/front pot")),
+            ["vignette"] = graphics.newImage(graphics.imagePath("pink/vignette")),
+            ["vignette2"] = graphics.newImage(graphics.imagePath("pink/vignette2")),
         }
 
         enemy = love.filesystem.load("sprites/characters/pink.lua")()
@@ -70,8 +71,13 @@ return {
 
         camera.scaleX, camera.scaleY = 0.5, 0.5
         camera.sizeX, camera.sizeY = 0.5, 0.5
+        
+        stageImages["littleHearts"].alpha = 0
+        stageImages["hearts"].alpha = 0
+        stageImages["vignette"].alpha = 0
+        stageImages["vignette2"].alpha = 0
 
-
+        hearts = {}
     end,
 
     load = function()
@@ -80,56 +86,111 @@ return {
         camera:addPoint("boyfriend", -40, 18)
         camera:addPoint("enemy", -3, 18)
 
+        pinkToggle = false
     end,
 
     update = function(self, dt)
+        if paused then return end
+        stageImages["rhm"]:update(dt)
+        stageImages["grey"]:update(dt)
+        stageImages["blue"]:update(dt)
+        stageImages["vines"]:update(dt)
+        stageImages["longus"]:update(dt)
+        stageImages["hearts"]:update(dt)
 
-        if not paused then
-            stageImages["rhm"]:update(dt)
-            stageImages["grey"]:update(dt)
-            stageImages["blue"]:update(dt)
-            stageImages["vines"]:update(dt)
-            stageImages["longus"]:update(dt)
-            stageImages["hearts"]:update(dt)
+        if beatHandler.onBeat() and beatHandler.getBeat() % 2 == 0 then 
+            stageImages["rhm"]:animate("rhm", false)
+            stageImages["grey"]:animate("grey", false)
+            stageImages["blue"]:animate("blue", false)
+            stageImages["longus"]:animate("tomatomongus", false)
         end
+
+        if pinkCanPulse then
+            if beatHandler.onBeat() then 
+                if beatHandler.getBeat() % 3 == 1 then 
+                    stageImages["vignette"].alpha = 1
+                    if vignetteTween then Timer.cancel(vignetteTween) end
+                    vignetteTween = Timer.tween(1.2, stageImages["vignette"], {alpha = 0}, "out-sine")
+                end
+                hearts[#hearts+1] = {x = love.math.random(-lovesize.getWidth()/2, lovesize.getWidth()/2), y = 730, speed = love.math.random(80, 200), scale = 1}
+                collectedGarbage = false
+            end
+        end
+
+        if #hearts > 0 then 
+            for i, v in ipairs(hearts) do
+                v.y = v.y - v.speed * dt
+                if v.y < -480 then
+                    table.remove(hearts, i)
+                end
+                -- make scale get smaller until it's 0
+                v.scale = v.scale - 0.08 * dt
+                if v.scale <= 0 then
+                    table.remove(hearts, i)
+                end
+            end
+        end
+
+        if #hearts == 0 then 
+            if not collectedGarbage then collectgarbage() end
+            collectedGarbage = true
+        end
+
+        flash.alpha = util.lerp(flash.alpha, 0, util.clamp(0, dt * 5, 1))
     end,
 
     draw = function()
         love.graphics.push()
             love.graphics.push()
-            love.graphics.translate(camera.x * 0.8, camera.y * 0.8)
-            love.graphics.translate(camera.ex * 0.8, camera.ey * 0.8)
+                love.graphics.translate(camera.x * 0.8, camera.y * 0.8)
+                love.graphics.translate(camera.ex * 0.5 * 0.8, camera.ey * 0.5 * 0.8)
 
-            stageImages["Sky"]:draw()
-            stageImages["backCloud"]:draw()
-            love.graphics.translate(camera.x * 0.9, camera.y * 0.9)
-            love.graphics.translate(camera.ex * 0.9, camera.ey * 0.9)
+                stageImages["Sky"]:draw()
+                stageImages["backCloud"]:draw()
+                love.graphics.translate(camera.x * 0.9, camera.y * 0.9)
+                love.graphics.translate(camera.ex * 0.5 * 0.9, camera.ey * 0.5 * 0.9)
 
-            stageImages["cloud1"]:draw()
-            stageImages["cloud2"]:draw()
-            stageImages["cloud3"]:draw()
-            stageImages["cloud4"]:draw()
-            love.graphics.translate(camera.x, camera.y)
-            love.graphics.translate(camera.ex, camera.ey)
+                stageImages["cloud1"]:draw()
+                stageImages["cloud2"]:draw()
+                stageImages["cloud3"]:draw()
+                stageImages["cloud4"]:draw()
+                love.graphics.translate(camera.x, camera.y)
+                love.graphics.translate(camera.ex * 0.5, camera.ey * 0.5)
 
-            stageImages["floor"]:draw()
-            stageImages["backPlant"]:draw()
-            stageImages["theThingIDFK"]:draw()
-            stageImages["grey"]:draw()
-            stageImages["longus"]:draw()
-            girlfriend:draw()
-            enemy:draw()
-            boyfriend:draw()
-            love.graphics.translate(camera.x * 1.1, camera.y * 1.1)
-            love.graphics.translate(camera.ex * 1.1, camera.ey * 1.1)
+                stageImages["floor"]:draw()
+                stageImages["backPlant"]:draw()
+                stageImages["theThingIDFK"]:draw()
+                stageImages["grey"]:draw()
+                stageImages["longus"]:draw()
+                girlfriend:draw()
+                enemy:draw()
+                boyfriend:draw()
+                love.graphics.translate(camera.x * 1.1, camera.y * 1.1)
+                love.graphics.translate(camera.ex * 0.5 * 1.1, camera.ey * 0.5 * 1.1)
 
-            stageImages["rhm"]:draw()
-            stageImages["blue"]:draw()
-            stageImages["frontPlant"]:draw()
-            stageImages["vines"]:draw()
+                stageImages["rhm"]:draw()
+                stageImages["blue"]:draw()
+                stageImages["frontPlant"]:draw()
+                stageImages["vines"]:draw()
             love.graphics.pop()
             love.graphics.push()
-            stageImages["hearts"]:draw()
+                love.graphics.scale(2, 2)
+                graphics.setColor(1,1,1, stageImages["vignette"].alpha)
+                stageImages["vignette"]:draw()
+                graphics.setColor(1,1,1, stageImages["vignette2"].alpha)
+                stageImages["vignette2"]:draw()
+                graphics.setColor(1,1,1, 1)
+                if stageImages["vignette2"].alpha > 0.1 then
+                    stageImages["hearts"]:draw()
+                end
+
+                if #hearts > 0 then 
+                    for i, v in ipairs(hearts) do
+                        stageImages["littleHearts"].x, stageImages["littleHearts"].y = v.x, v.y
+                        stageImages["littleHearts"].sizeX, stageImages["littleHearts"].sizeY = v.scale, v.scale
+                        stageImages["littleHearts"]:draw()
+                    end
+                end
             love.graphics.pop()
 		love.graphics.pop()
     end,

@@ -59,11 +59,17 @@ function beatHandler.update(dt)
         beatHandler.beat = beatHandler.beat + 1
         beatHandler.beatTime = 0
     end
+
+    if beatHandler.reseted then
+        beatHandler.reseted = false
+        beatHandler.beat = 0
+    end
 end
 
 function beatHandler.reset()
     beatHandler.beat = 0
     beatHandler.beatTime = 0
+    beatHandler.reseted = true
 end
 
 function beatHandler.onBeat()
