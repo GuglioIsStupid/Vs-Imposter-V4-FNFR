@@ -34,14 +34,14 @@ return {
         elseif song == 3 then
             enemy = love.filesystem.load("sprites/characters/HENRY_ASSS.lua")()
             enemyTwo = love.filesystem.load("sprites/characters/Ellie_Assets.lua")()
-            boyfriend = Character.boyfriend(0,0)
+            boyfriend = love.filesystem.load("sprites/boyfriend.lua")()
         elseif song == 2 then
             enemy = love.filesystem.load("sprites/characters/charles.lua")()
             boyfriend = love.filesystem.load("sprites/characters/henry_i_phone.lua")()
 
         else
             enemy = love.filesystem.load("sprites/characters/HENRY_ASSS.lua")()
-            boyfriend = Character.boyfriend(0,0)
+            boyfriend = love.filesystem.load("sprites/boyfriend.lua")()
             curEnemy = "white"
             enemy.x, enemy.y = -325, 90
             girlfriend.x, girlfriend.y = -258, -255

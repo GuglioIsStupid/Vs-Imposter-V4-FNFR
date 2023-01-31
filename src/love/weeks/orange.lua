@@ -8,8 +8,8 @@ return {
 		weeksHenry:enter()
 		stages["henry"]:enter()
 
-		bg = graphics.newImage(love.graphics.newImage(graphics.imagePath("bopeebo/bg")))
-		kissing = graphics.newImage(love.graphics.newImage(graphics.imagePath("bopeebo/text")))
+		bg = graphics.newImage(graphics.imagePath("bopeebo/bg"))
+		kissing = graphics.newImage(graphics.imagePath("bopeebo/text"))
 
 		bg.sizeX, bg.sizeY = 1.2, 1.2
 
@@ -19,7 +19,7 @@ return {
 		song = songNum
 		difficulty = songAppend
 
-		weeksHenry:setIcon("enemy", "daddy dearest")
+		--weeksHenry:setIcon("enemy", "daddy dearest")
 
 		HOLY_SHIT_CH_AND_GUGLIO_ARE_MAKING_OUT = false
 
@@ -34,6 +34,9 @@ return {
 
 		inst = love.audio.newSource("songs/bopeebo/Inst.ogg", "stream")
 		voices = love.audio.newSource("songs/bopeebo/Voices.ogg", "stream")
+
+		camera:addPoint("boyfriend", 0, 10)
+		camera:addPoint("enemy", 0, -10)
 	
 
 		self:initUI()
@@ -104,10 +107,11 @@ return {
 	draw = function(self)
 		love.graphics.push()
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
-			love.graphics.scale(extraCamZoom.sizeX, extraCamZoom.sizeY)
-			love.graphics.scale(cam.sizeX, cam.sizeY)
+			love.graphics.scale(camera.sizeX, camera.sizeY)
 			love.graphics.push()
-			love.graphics.translate(cam.x * 0.3, cam.y * 0.3)
+			love.graphics.translate(camera.x * 0.3, camera.y * 0.3)
+			love.graphics.translate(camera.ex * 0.3, camera.ey * 0.3)
+
 			bg:draw()
 			if HOLY_SHIT_CH_AND_GUGLIO_ARE_MAKING_OUT then
 				kissing:draw()
@@ -117,9 +121,7 @@ return {
 
 			weeksHenry:drawRating(0.9)
 		love.graphics.pop()
-		
-		weeksHenry:drawTimeLeftBar()
-		weeksHenry:drawHealthBar()
+
 		if not paused then
 			weeksHenry:drawUI()
 		end
