@@ -63,7 +63,6 @@ local eventFuncs = {
             darkTween = {1}
         end)
     end,
-
 }
 
 local animList = {
