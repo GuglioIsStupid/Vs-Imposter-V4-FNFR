@@ -308,14 +308,14 @@ return graphics.newSprite(
 		--To get the animations, look at the number and the name of the frame
 		--Start is the first frame, stop is the last frame, speed is the speed of the animation, offsetX and offsetY are the offset of the animation
 		--Get the offset by using the ingame offset editor and pressing 7
-		["greatestPlanIntro"] = {start = 15, stop = 99, speed = 24, offsetX = 0, offsetY = 0},
-		["shock"] = {start = 255, stop = 295, speed = 24, offsetX = 0, offsetY = 0},
-		["react"] = {start = 120, stop = 226, speed = 24, offsetX = 0, offsetY = 0},
+		["greatestPlanIntro"] = {start = 15, stop = 99, speed = 24, offsetX = 0, offsetY = -32},
+		["shock"] = {start = 255, stop = 295, speed = 24, offsetX = 4, offsetY = 0},
+		["react"] = {start = 120, stop = 226, speed = 24, offsetX = 13, offsetY = 11},
 		["idle"] = {start = 100, stop = 113, speed = 24, offsetX = 0, offsetY = 0},
-		["left"] = {start = 114, stop = 119, speed = 24, offsetX = 0, offsetY = 0},
-		["down"] = {start = 1, stop = 14, speed = 24, offsetX = 0, offsetY = 0},
-		["up"] = {start = 241, stop = 254, speed = 24, offsetX = 0, offsetY = 0},
-		["right"] = {start = 227, stop = 240, speed = 24, offsetX = 0, offsetY = 0},
+		["singLEFT"] = {start = 114, stop = 119, speed = 24, offsetX = 89, offsetY = -21},
+		["singDOWN"] = {start = 1, stop = 14, speed = 24, offsetX = 59, offsetY = -96},
+		["singUP"] = {start = 241, stop = 254, speed = 24, offsetX = 20, offsetY = -2},
+		["singRIGHT"] = {start = 227, stop = 240, speed = 24, offsetX = -18, offsetY = -39},
 	},
 	"idle", -- set to default animation
 	false,
