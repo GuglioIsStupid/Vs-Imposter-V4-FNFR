@@ -17,36 +17,46 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
 local eventFuncs = {
-	["Add Camera Zoom"] = function(size, sizeHud)
-		size = tonumber(size) or 0.015
-		sizeHud = tonumber(sizeHud) or 0.03
-
-		Timer.tween(
-			(60/bpm)/4,
-			camera,
-			{
-				sizeX = camera.esizeX + size,
-				sizeY = camera.esizeY + size
-			},
-			"out-quad"
-		)
-		Timer.tween(
-			(60/bpm)/4,
-			uiScale,
-			{
-				sizeX = uiScale.sizeX + sizeHud,
-				sizeY = uiScale.sizeY + sizeHud
-			},
-			"out-quad"
-		)
-	end,
 	["Hey!"] = function()
 		weeks:safeAnimate(boyfriend, "hey", false, 3)
 	end,
 	["Reactor Beep"] = function(value)
-		print("haiiii")
 		flashAlpha = tonumber(value) or 0.4
 	end,
+	["pink toggle"] = function(value)
+		--pinkToggle = trigger == "1" and true or false
+		if not pinkCanPulse then 
+			pinkCanPulse = true
+
+			stageImages["vignette"].alpha = 1
+			stageImages["vignette2"].alpha = 0.3
+
+			if tonumber(value) == nil then
+				value = 0
+			end
+
+			fadeTime = tonumber(value) * 1.2
+		else 
+			if tonumber(value) == nil then
+				value = 0
+			end
+			fadeTime = tonumber(value) * 1.2
+
+			if vignetteTween then Timer.cancel(vignetteTween) end
+			if vignetteTween2 then Timer.cancel(vignetteTween2) end
+			if whiteTween then Timer.cancel(whiteTween) end
+
+			stageImages["vignette"].alpha = 1
+			stageImages["vignette2"].alpha = 0.4
+
+			vignetteTween = Timer.tween(fadeTime, stageImages["vignette"], {alpha = 0}, "out-quad")
+			vignetteTween2 = Timer.tween(fadeTime, stageImages["vignette2"], {alpha = 0}, "out-quad")
+
+
+			pinkCanPulse = false
+		end
+	end,
+
 }
 
 local animList = {
@@ -601,7 +611,7 @@ return {
 
 										previousFrameTime = love.timer.getTime() * 1000
 										musicTime = 0
-										beatHandler.setBeat(0)
+										beatHandler.reset()
 
 										if inst then inst:play() end
 										voices:play()
