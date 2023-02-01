@@ -923,29 +923,28 @@ return {
 				if #boyfriendNote > 0 then
 					if (boyfriendNote[1].y - musicPos <= -400) then
 						voices:setVolume(1)
+						ratingVisibility = {1}
 
 						boyfriendArrow:animate("confirm", false)
 
 						if boyfriendNote[1]:getAnimName() == "hold" or boyfriendNote[1]:getAnimName() == "end" then
 							if (not boyfriend:isAnimated()) or boyfriend:getAnimName() == "idle" then self:safeAnimate(boyfriend, curAnim, false, 2) end
-                            if boyfriendDark then if (not boyfriendDark:isAnimated()) or boyfriendDark:getAnimName() == "idle" then self:safeAnimate(boyfriendDark, curAnim, false, 2) end end
 						else
 							self:safeAnimate(boyfriend, curAnim, false, 2)
-                            if boyfriendDark then self:safeAnimate(boyfriendDark, curAnim, false, 2) end
 						end
 
 						boyfriend.lastHit = musicTime
-                        if boyfriendDark then boyfriendDark.lastHit = musicTime end
 
 						if boyfriendNote[1]:getAnimName() ~= "hold" and boyfriendNote[1]:getAnimName() ~= "end" then 
 							additionalAccuracy = additionalAccuracy + 100.0
 							noteCounter = noteCounter + 1
 							combo = combo + 1
 
-							table.insert(judgements, {ratingAnim, 1, girlfriend.y - 50})
 							numbers[1]:animate(tostring(math.floor(combo / 100 % 10)), false)
 							numbers[2]:animate(tostring(math.floor(combo / 10 % 10)), false)
 							numbers[3]:animate(tostring(math.floor(combo % 10)), false)
+
+							ratingAnim = "sick"
 
 							for i = 1, 5 do
 								if ratingTimers[i] then Timer.cancel(ratingTimers[i]) end
@@ -956,8 +955,10 @@ return {
 								numbers[i].y = girlfriend.y + 50
 							end
 
-							Timer.tween(2, judgements[#judgements], {[2] = 0}, "linear")
-							Timer.tween(2, judgements[#judgements], {[3] = girlfriend.y - 100}, "out-elastic")
+							ratingTimers[1] = Timer.tween(2, ratingVisibility, {0}, "linear")
+							ratingTimers[2] = Timer.tween(2, rating, {y = girlfriend.y - 100}, "out-elastic")
+
+							rating:animate(ratingAnim, false)
 
 							ratingTimers[3] = Timer.tween(2, numbers[1], {y = girlfriend.y + love.math.random(-10, 10)}, "out-elastic")
 							ratingTimers[4] = Timer.tween(2, numbers[2], {y = girlfriend.y + love.math.random(-10, 10)}, "out-elastic")
@@ -1150,32 +1151,17 @@ return {
 	end,
 
 	drawRating = function(self, multiplier)
+		local multiplier = multiplier or 1
 		love.graphics.push()
-			if multiplier then
-				love.graphics.translate(camera.x * multiplier, camera.y * multiplier)
-				love.graphics.translate(camera.ex * multiplier, camera.ey * multiplier)
-			else
-				love.graphics.translate(camera.x, camera.y)
-				love.graphics.translate(camera.ex, camera.ey)
-			end
+			love.graphics.translate(camera.x * multiplier, camera.y * multiplier)
+			love.graphics.translate(camera.ex * multiplier, camera.ey * multiplier)
 
-			for i = 1, #judgements do
-				rating:animate(judgements[i][1], false)
-				rating.y = judgements[i][3]
-				graphics.setColor(1, 1, 1, judgements[i][2])
-				if not pixel then
-					rating:draw()
-					for k = 1, 3 do
-						numbers[k]:draw()
-					end
-				else
-					rating:udraw(6, 6)
-					for k = 1, 3 do
-						numbers[k]:udraw(6, 6)
-					end
-				end
-				graphics.setColor(1, 1, 1)
+			graphics.setColor(1, 1, 1, ratingVisibility[1])
+			rating:draw()
+			for i = 1, 3 do
+				numbers[i]:draw()
 			end
+			graphics.setColor(1, 1, 1)
 		love.graphics.pop()
 	end,
 

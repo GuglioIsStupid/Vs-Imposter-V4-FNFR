@@ -43,7 +43,7 @@ if love.system.getOS() == "NX" then
 			right = {"axis:leftx+", "button:dpright", "key:right"},
 			confirm = {"button:b", "key:return"},
 			back = {"button:a", "key:escape"},
-			tab = {"button:minus", "key:tab"},
+			tab = {"button:back", "key:tab"},
 			debugZoomOut = {"key:["},
 			debugZoomIn = {"key:]"},
 			pause = {"button:plus", "key:return"},

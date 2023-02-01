@@ -113,7 +113,6 @@ return {
                     vignetteTween = Timer.tween(1.2, stageImages["vignette"], {alpha = 0}, "out-sine")
                 end
                 hearts[#hearts+1] = {x = love.math.random(-lovesize.getWidth()/2, lovesize.getWidth()/2), y = 730, speed = love.math.random(80, 200), scale = 1}
-                collectedGarbage = false
             end
         end
 
@@ -129,11 +128,6 @@ return {
                     table.remove(hearts, i)
                 end
             end
-        end
-
-        if #hearts == 0 then 
-            if not collectedGarbage then collectgarbage() end
-            collectedGarbage = true
         end
 
         flash.alpha = util.lerp(flash.alpha, 0, util.clamp(0, dt * 5, 1))
