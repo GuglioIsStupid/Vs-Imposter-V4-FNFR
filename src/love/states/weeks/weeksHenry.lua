@@ -722,15 +722,17 @@ return {
 					beatHandler.setBPM(bpm)
 				end
 
-				if camera.mustHit then
-					if events[i].mustHitSection then
-						mustHitSection = true
-						--camTimer = Timer.tween(1.25, camera, {x = -boyfriend.x + 100, y = -boyfriend.y + 75}, "out-quad")
-						camera:moveToPoint(1.25, "boyfriend")
-					else
-						mustHitSection = false
-						--camTimer = Timer.tween(1.25, camera, {x = -enemy.x - 100, y = -enemy.y + 75}, "out-quad")
-						camera:moveToPoint(1.25, "enemy")
+				if song ~= 2 then
+					if camera.mustHit then
+						if events[i].mustHitSection then
+							mustHitSection = true
+							--camTimer = Timer.tween(1.25, camera, {x = -boyfriend.x + 100, y = -boyfriend.y + 75}, "out-quad")
+							camera:moveToPoint(1.25, "boyfriend")
+						else
+							mustHitSection = false
+							--camTimer = Timer.tween(1.25, camera, {x = -enemy.x - 100, y = -enemy.y + 75}, "out-quad")
+							camera:moveToPoint(1.25, "enemy")
+						end
 					end
 				end
 
@@ -763,9 +765,16 @@ return {
 			if camScaleTimer then Timer.cancel(camScaleTimer) end
 			if uiScaleTimer then Timer.cancel(uiScaleTimer) end
 
-			camScaleTimer = Timer.tween((60 / bpm) / 16, camera, {sizeX = camera.scaleX * 1.05, sizeY = camera.scaleY * 1.05}, "out-quad", function() camScaleTimer = Timer.tween((60 / bpm), camera, {sizeX = camera.scaleX, sizeY = camera.scaleY}, "out-quad") end)
-			if beatHandler.getBeat() % 8 == 0  then
-				uiScaleTimer = Timer.tween((60 / bpm) / 16, uiScale, {x = uiScale.x * 1.03, y = uiScale.y * 1.03}, "out-quad", function() camScaleTimer = Timer.tween((60 / bpm), uiScale, {x = uiScale.sizeX, y = uiScale.sizeY}, "out-quad") end)
+			if song ~= 2 then
+				camScaleTimer = Timer.tween((60 / bpm) / 16, camera, {sizeX = camera.scaleX * 1.05, sizeY = camera.scaleY * 1.05}, "out-quad", function() camScaleTimer = Timer.tween((60 / bpm), camera, {sizeX = camera.scaleX, sizeY = camera.scaleY}, "out-quad") end)
+				if beatHandler.getBeat() % 8 == 0  then
+					uiScaleTimer = Timer.tween((60 / bpm) / 16, uiScale, {x = uiScale.x * 1.03, y = uiScale.y * 1.03}, "out-quad", function() camScaleTimer = Timer.tween((60 / bpm), uiScale, {x = uiScale.sizeX, y = uiScale.sizeY}, "out-quad") end)
+				end
+			else
+				camScaleTimer = Timer.tween((60 / bpm) / 16, camera, {sizeX = camera.scaleX * 1.01, sizeY = camera.scaleY * 1.01}, "out-quad", function() camScaleTimer = Timer.tween((60 / bpm), camera, {sizeX = camera.scaleX, sizeY = camera.scaleY}, "out-quad") end)
+				if beatHandler.getBeat() % 8 == 0  then
+					uiScaleTimer = Timer.tween((60 / bpm) / 16, uiScale, {x = uiScale.x * 1.03, y = uiScale.y * 1.03}, "out-quad", function() camScaleTimer = Timer.tween((60 / bpm), uiScale, {x = uiScale.sizeX, y = uiScale.sizeY}, "out-quad") end)
+				end
 			end
 		end
 		--[[
@@ -834,60 +843,64 @@ return {
 
 					enemyArrow:animate("confirm", false)
 
-					if enemyNote[1].who == "henry" then
-						if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
-							if useAltAnims then
-								if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim .. " alt", false, 2) end
-							else
-								if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim, false, 2) end
-							end
-						else
-							if useAltAnims then
-								self:safeAnimate(enemy, curAnim .. " alt", false, 2)
-							else
-								self:safeAnimate(enemy, curAnim, false, 2)
-							end
-						end
-						enemy.lastHit = musicTime
-					elseif enemyNote[1].who == "Opponent 2 Sing" then
-						if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
-							if useAltAnims then
-								if (not enemyTwo:isAnimated()) or enemyTwo:getAnimName() == "idle" then self:safeAnimate(enemyTwo, curAnim .. " alt", false, 2) end
-							else
-								if (not enemyTwo:isAnimated()) or enemyTwo:getAnimName() == "idle" then self:safeAnimate(enemyTwo, curAnim, false, 2) end
-							end
-						else
-							if useAltAnims then
-								self:safeAnimate(enemyTwo, curAnim .. " alt", false, 2)
-							else
-								self:safeAnimate(enemyTwo, curAnim, false, 2)
-							end
-						end
-						enemyTwo.lastHit = musicTime
-					elseif enemyNote[1].who == "Both Opponents Sing" then
-						if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
-							if useAltAnims then
-								if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim .. " alt", false, 2) end
-								if (not enemyTwo:isAnimated()) or enemyTwo:getAnimName() == "idle" then self:safeAnimate(enemyTwo, curAnim .. " alt", false, 2) end
-							else
-								if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim, false, 2) end
-								if (not enemyTwo:isAnimated()) or enemyTwo:getAnimName() == "idle" then self:safeAnimate(enemyTwo, curAnim, false, 2) end
-							end
-						else
-							if useAltAnims then
-								self:safeAnimate(enemy, curAnim .. " alt", false, 2)
-								self:safeAnimate(enemyTwo, curAnim .. " alt", false, 2)
-							else
-								self:safeAnimate(enemy, curAnim, false, 2)
-								self:safeAnimate(enemyTwo, curAnim, false, 2)
-							end
-						end
 
-						enemy.lastHit = musicTime
-						enemyTwo.lastHit = musicTime
+					if enemy:getAnimName() ~= "oh" and enemy:getAnimName() ~= "perfect" then
+
+						if enemyNote[1].who == "henry" then
+							if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
+								if useAltAnims then
+									if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim .. " alt", false, 2) end
+								else
+									if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim, false, 2) end
+								end
+							else
+								if useAltAnims then
+									self:safeAnimate(enemy, curAnim .. " alt", false, 2)
+								else
+									self:safeAnimate(enemy, curAnim, false, 2)
+								end
+							end
+							enemy.lastHit = musicTime
+						elseif enemyNote[1].who == "Opponent 2 Sing" then
+							if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
+								if useAltAnims then
+									if (not enemyTwo:isAnimated()) or enemyTwo:getAnimName() == "idle" then self:safeAnimate(enemyTwo, curAnim .. " alt", false, 2) end
+								else
+									if (not enemyTwo:isAnimated()) or enemyTwo:getAnimName() == "idle" then self:safeAnimate(enemyTwo, curAnim, false, 2) end
+								end
+							else
+								if useAltAnims then
+									self:safeAnimate(enemyTwo, curAnim .. " alt", false, 2)
+								else
+									self:safeAnimate(enemyTwo, curAnim, false, 2)
+								end
+							end
+							enemyTwo.lastHit = musicTime
+						elseif enemyNote[1].who == "Both Opponents Sing" then
+							if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
+								if useAltAnims then
+									if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim .. " alt", false, 2) end
+									if (not enemyTwo:isAnimated()) or enemyTwo:getAnimName() == "idle" then self:safeAnimate(enemyTwo, curAnim .. " alt", false, 2) end
+								else
+									if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim, false, 2) end
+									if (not enemyTwo:isAnimated()) or enemyTwo:getAnimName() == "idle" then self:safeAnimate(enemyTwo, curAnim, false, 2) end
+								end
+							else
+								if useAltAnims then
+									self:safeAnimate(enemy, curAnim .. " alt", false, 2)
+									self:safeAnimate(enemyTwo, curAnim .. " alt", false, 2)
+								else
+									self:safeAnimate(enemy, curAnim, false, 2)
+									self:safeAnimate(enemyTwo, curAnim, false, 2)
+								end
+							end
+
+							enemy.lastHit = musicTime
+							enemyTwo.lastHit = musicTime
+						end
 					end
 
-					if not mustHitSection then 
+					if not mustHitSection and song ~= 2 then 
 						noteCamTweens[i]()
 					end
 
@@ -1032,7 +1045,7 @@ return {
 									numbers[i].y = girlfriend.y + 50
 								end
 
-								if mustHitSection then 
+								if mustHitSection and song ~= 2 then 
 									noteCamTweens[i]()
 								end
 

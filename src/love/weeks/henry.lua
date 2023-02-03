@@ -71,6 +71,9 @@ return {
 
 		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused then
 			if storyMode and song < 4 then
+
+
+				--[[
 				if score > highscores[weekNum-1][difficulty].scores[song] then
 					highscores[weekNum-1][difficulty].scores[song] = score
 					saveHighscores()
@@ -81,6 +84,8 @@ return {
 					highscores[weekNum-1][difficulty].accuracys[song] = tonumber(newAccuracy)
 					saveHighscores()
 				end
+
+				--]]
 				song = song + 1
 
 				self:load()

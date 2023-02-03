@@ -11,8 +11,9 @@ return {
 
 
 
-        camera.scaleX, camera.scaleY = 0.8, 0.8
-        camera.sizeX, camera.sizeY = 0.8, 0.8
+
+        camera.scaleX, camera.scaleY = 0.85, 0.85
+        camera.sizeX, camera.sizeY = 0.85, 0.85
 
         enemy.x, enemy.y = -275, 84
         boyfriend.x, boyfriend.y = 571, 252
@@ -33,6 +34,11 @@ return {
         if song == 4 then
             enemyTwo = love.filesystem.load("sprites/characters/Reginald_Assets.lua")()
             enemy = love.filesystem.load("sprites/characters/rhm.lua")()
+            enemy.x, enemy.y = -259, 69
+            enemyTwo.x, enemyTwo.y = -574, 67
+            
+            camera.scaleX, camera.scaleY = 0.85, 0.85
+            camera.sizeX, camera.sizeY = 0.85, 0.85
 
         elseif song == 3 then
             enemy = love.filesystem.load("sprites/characters/HENRY_ASSS.lua")()
@@ -42,9 +48,27 @@ return {
             boyfriend.x, boyfriend.y = 571, 252
             girlfriend.x, girlfriend.y = 144, 53
             enemyTwo.x, enemyTwo.y = -602, 148
+            
+            camera.scaleX, camera.scaleY = 0.85, 0.85
+            camera.sizeX, camera.sizeY = 0.85, 0.85
         elseif song == 2 then
             enemy = love.filesystem.load("sprites/characters/charles.lua")()
             boyfriend = love.filesystem.load("sprites/characters/henry_i_phone.lua")()
+            boyfriend.x, boyfriend.y = -275, 84
+
+            boyfriendButNotReally = love.filesystem.load("sprites/boyfriend.lua")()
+            boyfriendButNotReally.x, boyfriendButNotReally.y = 571, 252
+            boyfriendButNotReally:animate("idle", true)
+            camera.x, camera.y = -113, 0
+            boyfriend:animate("greatestPlanIntro", false)
+            camera:addPoint("enemy", 687, 0)
+            enemy.x, enemy.y = -4000, 0
+
+
+            zoom1Num = 0.95
+            zoom2Num = 1.05
+            camera.scaleX, camera.scaleY = 0.85, 0.85
+            camera.sizeX, camera.sizeY = 0.85, 0.85
 
         else
             enemy = love.filesystem.load("sprites/characters/HENRY_ASSS.lua")()
@@ -53,6 +77,8 @@ return {
             enemy.x, enemy.y = -275, 84
             boyfriend.x, boyfriend.y = 571, 252
             girlfriend.x, girlfriend.y = 144, 53
+            camera.scaleX, camera.scaleY = 0.85, 0.85
+            camera.sizeX, camera.sizeY = 0.85, 0.85
 
             camera:addPoint("boyfriend", -335, -153)
         end
@@ -68,9 +94,36 @@ return {
             end
             if musicTime >= 71663 and musicTime < 71713 then
                 enemyTwo:animate("enter", false)
+                enemy:animate("shock", false)
                 afterEllie = true
 
             end
+        elseif song == 2 then
+            boyfriendButNotReally:update(dt)
+            if musicTime >= 2666 and musicTime < 2716 then
+                camera:moveToPoint(2.25, "enemy")
+                if charlesTween then Timer.cancel(charlesTween) end
+                charlesTween = Timer.tween(3, enemy, {x = -955}, "out-expo")
+            end
+
+            if musicTime >= 3333 and musicTime < 3383 then
+                camera.sizeX, camera.sizeY = zoom1Num, zoom1Num
+                camera.scaleX, camera.scaleY = zoom1Num, zoom1Num
+            end
+
+            if musicTime >= 3500 and musicTime < 3550 then
+                camera.sizeX, camera.sizeY = zoom2Num, zoom2Num
+                camera.scaleX, camera.scaleY = zoom2Num, zoom2Num
+            end
+
+            if musicTime >= 4333 and musicTime < 4383 then
+                enemy:animate("oh", false)
+            end
+
+            if musicTime >= 68166 and musicTime < 68216 then
+                enemy:animate("perfect", false)
+            end
+            
         end
 
 
@@ -84,19 +137,19 @@ return {
             stageImages[1]:draw()
             girlfriend:draw()
 
-            if song == 4 then
+            enemy:draw()
+            if song == 3 and afterEllie then
                 enemyTwo:draw()
-                enemy:draw()
-            elseif song == 3 then
-                enemy:draw()
-                if song == 3 and afterEllie then
-                    enemyTwo:draw()
-                elseif song == 4 then
-                    enemyTwo:draw()
-                end
+            elseif song == 4 then
+                enemyTwo:draw()
             end
- 
 
+            if song == 2 then
+                boyfriendButNotReally:draw()
+            end
+           -- stageImages[2]:draw()
+
+ 
             boyfriend:draw()
 		love.graphics.pop()
     end,
