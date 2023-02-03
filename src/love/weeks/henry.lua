@@ -13,7 +13,7 @@ return {
 		song = songNum
 		difficulty = songAppend
 
-		weeksHenry:setIcon("enemy", "daddy dearest")
+		--weeksHenry:setIcon("enemy", "daddy dearest")
 
 		self:load()
 	end,
@@ -104,15 +104,17 @@ return {
 	draw = function(self)
 		love.graphics.push()
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
-			love.graphics.scale(extraCamZoom.sizeX, extraCamZoom.sizeY)
-			love.graphics.scale(cam.sizeX, cam.sizeY)
+			love.graphics.scale(camera.sizeX, camera.sizeY)
+
+		--	love.graphics.scale(extraCamZoom.sizeX, extraCamZoom.sizeY)
+		--	love.graphics.scale(cam.sizeX, cam.sizeY)
 
 			stages["henry"]:draw()
 			weeksHenry:drawRating(0.9)
 		love.graphics.pop()
 		
-		weeksHenry:drawTimeLeftBar()
-		weeksHenry:drawHealthBar()
+		--weeksHenry:drawTimeLeftBar()
+		--weeksHenry:drawHealthBar()
 		if not paused then
 			weeksHenry:drawUI()
 		end

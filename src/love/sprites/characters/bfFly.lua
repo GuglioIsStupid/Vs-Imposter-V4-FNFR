@@ -367,19 +367,24 @@ return graphics.newSprite(
 		--To get the animations, look at the number and the name of the frame
 		--Start is the first frame, stop is the last frame, speed is the speed of the animation, offsetX and offsetY are the offset of the animation
 		--Get the offset by using the ingame offset editor and pressing 7
-		["left"] = {start = 297, stop = 314, speed = 24, offsetX = 0, offsetY = 0},
+		["singLEFT"] = {start = 297, stop = 314, speed = 24, offsetX = 0, offsetY = 0},
 		["idle"] = {start = 279, stop = 296, speed = 24, offsetX = 0, offsetY = 0},
-		["down"] = {start = 261, stop = 278, speed = 24, offsetX = 0, offsetY = 0},
-		["up"] = {start = 333, stop = 350, speed = 24, offsetX = 0, offsetY = 0},
-		["right"] = {start = 315, stop = 332, speed = 24, offsetX = 0, offsetY = 0},
-		["miss left"] = {start = 1, stop = 18, speed = 24, offsetX = 0, offsetY = 0},
-		["miss up"] = {start = 37, stop = 54, speed = 24, offsetX = 0, offsetY = 0},
-		["miss right"] = {start = 55, stop = 72, speed = 24, offsetX = 0, offsetY = 0},
-		["miss down"] = {start = 19, stop = 36, speed = 24, offsetX = 0, offsetY = 0},
+		["idle loop"] = {start = 286, stop = 296, speed = 24, offsetX = 0, offsetY = 0},
+		["singDOWN"] = {start = 261, stop = 278, speed = 24, offsetX = 0, offsetY = 0},
+		["singUP"] = {start = 333, stop = 350, speed = 24, offsetX = 0, offsetY = 0},
+		["singRIGHT"] = {start = 315, stop = 332, speed = 24, offsetX = 0, offsetY = 0},
+		["miss singLEFT"] = {start = 1, stop = 18, speed = 24, offsetX = 0, offsetY = 0},
+		["miss singUP"] = {start = 37, stop = 54, speed = 24, offsetX = 0, offsetY = 0},
+		["miss singRIGHT"] = {start = 55, stop = 72, speed = 24, offsetX = 0, offsetY = 0},
+		["miss singDOWN"] = {start = 19, stop = 36, speed = 24, offsetX = 0, offsetY = 0},
 		["dies"] = {start = 73, stop = 192, speed = 24, offsetX = 0, offsetY = 0},
 		["dead loop"] = {start = 193, stop = 226, speed = 24, offsetX = 0, offsetY = 0},
 		["dead confirm"] = {start = 227, stop = 260, speed = 24, offsetX = 0, offsetY = 0}
 	},
 	"idle", -- set to default animation
-	false -- If the sprite repeats
+	false,
+	{
+		sing_duration = 4,
+		isCharacter = true
+	}
 )

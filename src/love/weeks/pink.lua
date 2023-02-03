@@ -4,27 +4,14 @@ local stageBack, stageFront, curtains
 
 return {
 	enter = function(self, from, songNum, songAppend)
-		pauseColor = {129, 100, 223}
 		weeksPink:enter()
 		stages["pinkMira"]:enter()
-
-		cam.sizeX, cam.sizeY = 0.7, 0.7
-		camScale.x, camScale.y = 0.7, 0.7
-		cam.x = -enemy.x - 300
-		cam.y = -50
 
 		week = 1
 
 		song = songNum
-		difficulty = songAppend
-
-		weeksPink:setIcon("enemy", "red impostor 1")
 
         enemy = love.filesystem.load("sprites/characters/pink.lua")()
-
-        boyfriend.x, boyfriend.y = 496, 350
-        girlfriend.x, girlfriend.y = 25, 107
-        enemy.x, enemy.y = -432, 293
 
         flashAlpha = 0
 
@@ -33,11 +20,18 @@ return {
 
 	load = function(self)
 		weeksPink:load()
-		stages["pinkMira"]:load()
+		if song ~= 3 then
+			stages["pinkMira"]:load()
+		end
+
+		enemy.x, enemy.y = -459, 308
+        boyfriend.x, boyfriend.y = 518, 375
+        girlfriend.x, girlfriend.y = 10, 90
 
 		if song == 3 then
 			stages["pinkMira"]:leave()
 			stages["greyMira"]:enter()
+			stages["greyMira"]:load()
 
 			inst = love.audio.newSource("songs/pretender/Inst.ogg", "stream")
 			voices = love.audio.newSource("songs/pretender/Voices.ogg", "stream")
@@ -59,13 +53,13 @@ return {
 
 		if song == 3 then
 			weeksPink:generateNotes("songs/pretender/pretender-hard.json")
-            --weeksPink:generateEventsOld("songs/pretender/events.json")
+			weeksPink:generateEvents("songs/pretender/events.json")
 		elseif song == 2 then
 			weeksPink:generateNotes("songs/pinkwave/pinkwave-hard.json")
-           -- weeksPink:generateEventsOld("songs/pinkwave/events.json")
+			weeksPink:generateEvents("songs/pinkwave/events.json")
 		else
 			weeksPink:generateNotes("songs/heartbeat/heartbeat-hard.json")
-           -- weeksPink:generateEventsOld("songs/heatbeat/events.json")
+			weeksPink:generateEvents("songs/heartbeat/events.json")
 		end
 	end,
 
@@ -76,10 +70,6 @@ return {
 		else
 			stages["greyMira"]:update(dt)
 		end
-
-
-        -- lerp flashAlpha to 0
-        flashAlpha = util.lerp(flashAlpha, 0, util.clamp(0, dt * 5, 1))
 
 		if health >= 80 then
 			if enemyIcon:getAnimName() == "red impostor 1" then
@@ -116,8 +106,8 @@ return {
 	draw = function(self)
 		love.graphics.push()
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
-			love.graphics.scale(extraCamZoom.sizeX, extraCamZoom.sizeY)
-			love.graphics.scale(cam.sizeX, cam.sizeY)
+			love.graphics.scale(camera.esizeX, camera.esizeY)
+			love.graphics.scale(camera.sizeX, camera.sizeY)
 
 			if song ~= 3 then
 				stages["pinkMira"]:draw()
@@ -127,16 +117,7 @@ return {
 			
 			weeksPink:drawRating(0.9)
 		love.graphics.pop()
-
-        graphics.setColor(1,0,0,flashAlpha)
-        love.graphics.rectangle("fill", 0, 0, graphics.getWidth(), graphics.getHeight())
-        graphics.setColor(1,1,1,1)
-
-		weeksPink:drawTimeLeftBar()
-		weeksPink:drawHealthBar()
-		if not paused then
-			weeksPink:drawUI()
-		end
+		weeksPink:drawUI()
 	end,
 
 	leave = function(self)

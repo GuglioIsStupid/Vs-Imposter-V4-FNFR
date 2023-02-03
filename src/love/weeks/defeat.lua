@@ -2,15 +2,14 @@ local lolAlpha
 
 return {
 	enter = function(self, from, songNum, songAppend)
-		pauseColor = {129, 100, 223}
 		weeksDefeat:enter()
 
         blackold = love.filesystem.load("sprites/characters/blackold.lua")()
 
-        redGradient = graphics.newImage(love.graphics.newImage(graphics.imagePath("defeat/iluminao omaga")))
-        deadBG = graphics.newImage(love.graphics.newImage(graphics.imagePath("defeat/deadbg")))
-        deadFG = graphics.newImage(love.graphics.newImage(graphics.imagePath("defeat/deadfg")))
-        lolThing = graphics.newImage(love.graphics.newImage(graphics.imagePath("defeat/lol thing")))
+        redGradient = graphics.newImage(graphics.imagePath("defeat/iluminao omaga"))
+        deadBG = graphics.newImage(graphics.imagePath("defeat/deadbg"))
+        deadFG = graphics.newImage(graphics.imagePath("defeat/deadfg"))
+        lolThing = graphics.newImage(graphics.imagePath("defeat/lol thing"))
 		defeat = love.filesystem.load("sprites/defeat/defeat.lua")()
 		week = 1
 
@@ -21,7 +20,7 @@ return {
 		bfScared = love.filesystem.load("sprites/characters/BF_Defeat_Scared.lua")()
 		bfOther = love.filesystem.load("sprites/characters/BF_Defeat_Nomal.lua")()
 
-		weeksDefeat:setIcon("enemy", "black")
+		enemyIcon:animate("black", false)
 
         enemy.x = -375
         blackold.x = -350
@@ -63,7 +62,7 @@ return {
 		weeksDefeat:initUI()
 
 		weeksDefeat:generateNotes("songs/defeat/defeat-hard.json")
-		weeksDefeat:generateEventsOld("songs/defeat/events.json")
+		weeksDefeat:generateEvents("songs/defeat/events.json")
 	end,
 
 	update = function(self, dt)
@@ -72,7 +71,7 @@ return {
 		bfOther:update(dt)
 		bfScared:update(dt)
 
-		if musicThres ~= oldMusicThres and math.fmod(absMusicTime, 240000 / bpm) < 100 then
+		if beatHandler.onBeat() and beatHandler.getBeat() % 2 == 0 then
 			if curEnemy == "black" then
 				defeat:animate("anim", false)
 			end
@@ -80,11 +79,11 @@ return {
 
 		if health >= 80 then
 			if enemyIcon:getAnimName() == "black" then
-				weeksDefeat:setIcon("enemy", "black losing")
+				enemyIcon:animate("black losing", false)
 			end
 		else
 			if enemyIcon:getAnimName() == "black losing" then
-				weeksDefeat:setIcon("enemy", "black")
+				enemyIcon:animate("black", false)
 			end
 		end
 
@@ -130,8 +129,9 @@ return {
 	draw = function(self)
 		love.graphics.push()
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
-			love.graphics.scale(extraCamZoom.sizeX, extraCamZoom.sizeY)
-			love.graphics.scale(cam.sizeX, cam.sizeY)
+			love.graphics.scale(camera.esizeX, camera.esizeY)
+			love.graphics.scale(camera.sizeX, camera.sizeY)
+			love.graphics.translate(camera.ex, camera.ey)
 
             defeat:draw()
             graphics.setColor(1,1,1, lolAlpha[1])
@@ -157,14 +157,10 @@ return {
             	redGradient:draw()
 			end
 
-			weeksDefeat:drawRating(0.9)
+			weeksDefeat:drawRating()
 		love.graphics.pop()
 		
-		weeksDefeat:drawTimeLeftBar()
-		weeksDefeat:drawHealthBar()
-		if not paused then
-			weeksDefeat:drawUI()
-		end
+		weeksDefeat:drawUI()
 	end,
 
 	leave = function(self)

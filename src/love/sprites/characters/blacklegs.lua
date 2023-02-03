@@ -25,5 +25,9 @@ return graphics.newSprite(
 		["run"] = {start = 1, stop = 16, speed = 24, offsetX = 0, offsetY = 0},
 	},
 	"run", -- set to default animation
-	false -- If the sprite repeats
+	false,
+	{
+		sing_duration = 4,
+		isCharacter = true
+	}
 )
