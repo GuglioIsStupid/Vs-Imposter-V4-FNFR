@@ -37,6 +37,8 @@ return {
 	end,
 
 	enter = function(self, previous)
+		inDebug = true
+		love.keyboard.setKeyRepeat(true)
 		menuID = 1
 		selection = 3
 

@@ -277,22 +277,23 @@ return {
 						isAnimated = false
 					end
 				end
-
-				if self.specialAnim then 
-					self.heyTimer = self.heyTimer - dt 
-					if self.heyTimer <= 0 and not self:isAnimated() then 
-						self.heyTimer = 0 
-						self.specialAnim = false
-						self:animate("idle", false) 
+				if not inDebug then
+					if self.specialAnim then 
+						self.heyTimer = self.heyTimer - dt 
+						if self.heyTimer <= 0 and not self:isAnimated() then 
+							self.heyTimer = 0 
+							self.specialAnim = false
+							self:animate("idle", false) 
+						end
 					end
-				end
 
-				if self.isCharacter then 
-					self.holdTimer = self.holdTimer + dt
-					if self.holdTimer >= beatHandler.getStepCrochet() * 0.001 * self.singDuration then
-						if util.startsWith(self:getAnimName(), "sing") then 
-							self.holdTimer = 0
-							self:animate("idle", false)
+					if self.isCharacter then 
+						self.holdTimer = self.holdTimer + dt
+						if self.holdTimer >= beatHandler.getStepCrochet() * 0.001 * self.singDuration then
+							if util.startsWith(self:getAnimName(), "sing") then 
+								self.holdTimer = 0
+								self:animate("idle", false)
+							end
 						end
 					end
 				end

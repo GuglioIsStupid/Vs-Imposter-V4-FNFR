@@ -228,6 +228,7 @@ return {
 
 		enemy:animate("idle")
 		boyfriend:animate("idle")
+		enemyTwo:animate("idle")
 
 		if not camera.points["boyfriend"] then camera:addPoint("boyfriend", -boyfriend.x + 100, -boyfriend.y + 75) end
 		if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -enemy.y + 75) end
@@ -384,6 +385,8 @@ return {
 					   	table.insert(enemyNotes[id], sprite())
 					   	enemyNotes[id][c].x = x
 					   	enemyNotes[id][c].y = -400 + noteTime * 0.6 * speed
+						enemyNotes[id][c].who = sectionNotes[j][4] or "henry"
+
 						if settings.downscroll then
 							enemyNotes[id][c].sizeY = -1
 						end
@@ -399,7 +402,7 @@ return {
 							 	table.insert(enemyNotes[id], sprite())
 							 	enemyNotes[id][c].x = x
 							 	enemyNotes[id][c].y = -400 + (noteTime + k) * 0.6 * speed
-				 
+								enemyNotes[id][c].who = sectionNotes[j][4] or "henry"
 								enemyNotes[id][c]:animate("hold", false)
 							end
 				 
@@ -408,6 +411,8 @@ return {
 							enemyNotes[id][c].offsetY = not pixel and 10 or 2
 				 
 						  	enemyNotes[id][c]:animate("end", false)
+							  enemyNotes[id][c].who = sectionNotes[j][4] or "henry"
+
 					    end
 					else
 					   	local id = noteType + 1
@@ -487,6 +492,8 @@ return {
 					   	table.insert(enemyNotes[id], sprite())
 					   	enemyNotes[id][c].x = x
 					   	enemyNotes[id][c].y = -400 + noteTime * 0.6 * speed
+						enemyNotes[id][c].who = sectionNotes[j][4] or "henry"
+
 						if settings.downscroll then
 							enemyNotes[id][c].sizeY = -1
 						end
@@ -509,6 +516,8 @@ return {
 							 	else
 									enemyNotes[id][c]:animate("hold", false)
 							 	end
+								enemyNotes[id][c].who = sectionNotes[j][4] or "henry"
+
 						  	end
 				 
 						  	c = #enemyNotes[id]
@@ -516,7 +525,8 @@ return {
 						  	enemyNotes[id][c].offsetY = not pixel and 10 or 2
 				 
 						  	enemyNotes[id][c]:animate("end", false)
-					   	end
+							enemyNotes[id][c].who = sectionNotes[j][4] or "henry"
+						end
 					end
 				 end
 			end
@@ -769,6 +779,7 @@ return {
 
 		girlfriend:update(dt)
 		enemy:update(dt)
+		enemyTwo:update(dt)
 		boyfriend:update(dt)
 
 		if beatHandler.onBeat() and beatHandler.getBeat() % 2 == 0 then
@@ -779,6 +790,7 @@ return {
 		end
 		boyfriend:beat(beatHandler.getBeat())
 		enemy:beat(beatHandler.getBeat())
+		enemyTwo:beat(beatHandler.getBeat())
 
 		for i = 1, 3 do
 			local spriteTimer = spriteTimers[i]
@@ -822,17 +834,51 @@ return {
 
 					enemyArrow:animate("confirm", false)
 
-					if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
-						if useAltAnims then
-							if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim .. " alt", false, 2) end
+					if enemyNote[1].who == "henry" then
+						if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
+							if useAltAnims then
+								if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim .. " alt", false, 2) end
+							else
+								if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim, false, 2) end
+							end
 						else
-							if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim, false, 2) end
+							if useAltAnims then
+								self:safeAnimate(enemy, curAnim .. " alt", false, 2)
+							else
+								self:safeAnimate(enemy, curAnim, false, 2)
+							end
 						end
-					else
-						if useAltAnims then
-							self:safeAnimate(enemy, curAnim .. " alt", false, 2)
+					elseif enemyNote[1].who == "Opponent 2 Sing" then
+						if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
+							if useAltAnims then
+								if (not enemyTwo:isAnimated()) or enemyTwo:getAnimName() == "idle" then self:safeAnimate(enemyTwo, curAnim .. " alt", false, 2) end
+							else
+								if (not enemyTwo:isAnimated()) or enemyTwo:getAnimName() == "idle" then self:safeAnimate(enemyTwo, curAnim, false, 2) end
+							end
 						else
-							self:safeAnimate(enemy, curAnim, false, 2)
+							if useAltAnims then
+								self:safeAnimate(enemyTwo, curAnim .. " alt", false, 2)
+							else
+								self:safeAnimate(enemyTwo, curAnim, false, 2)
+							end
+						end
+					elseif enemyNote[1].who == "Both Opponents Sing" then
+						if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
+							if useAltAnims then
+								if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim .. " alt", false, 2) end
+								if (not enemyTwo:isAnimated()) or enemyTwo:getAnimName() == "idle" then self:safeAnimate(enemyTwo, curAnim .. " alt", false, 2) end
+							else
+								if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim, false, 2) end
+								if (not enemyTwo:isAnimated()) or enemyTwo:getAnimName() == "idle" then self:safeAnimate(enemyTwo, curAnim, false, 2) end
+							end
+						else
+							if useAltAnims then
+								self:safeAnimate(enemy, curAnim .. " alt", false, 2)
+								self:safeAnimate(enemyTwo, curAnim .. " alt", false, 2)
+							else
+								self:safeAnimate(enemy, curAnim, false, 2)
+								self:safeAnimate(enemyTwo, curAnim, false, 2)
+							end
 						end
 					end
 
@@ -872,7 +918,6 @@ return {
 				if #boyfriendNote > 0 then
 					if (boyfriendNote[1].y - musicPos <= -400) then
 						voices:setVolume(1)
-						ratingVisibility = {1}
 
 						boyfriendArrow:animate("confirm", false)
 
@@ -889,11 +934,10 @@ return {
 							noteCounter = noteCounter + 1
 							combo = combo + 1
 
+							table.insert(judgements, {ratingAnim, 1, girlfriend.y - 50})
 							numbers[1]:animate(tostring(math.floor(combo / 100 % 10)), false)
 							numbers[2]:animate(tostring(math.floor(combo / 10 % 10)), false)
 							numbers[3]:animate(tostring(math.floor(combo % 10)), false)
-
-							ratingAnim = "sick"
 
 							for i = 1, 5 do
 								if ratingTimers[i] then Timer.cancel(ratingTimers[i]) end
@@ -904,10 +948,8 @@ return {
 								numbers[i].y = girlfriend.y + 50
 							end
 
-							ratingTimers[1] = Timer.tween(2, ratingVisibility, {0}, "linear")
-							ratingTimers[2] = Timer.tween(2, rating, {y = girlfriend.y - 100}, "out-elastic")
-
-							rating:animate(ratingAnim, false)
+							Timer.tween(2, judgements[#judgements], {[2] = 0}, "linear")
+							Timer.tween(2, judgements[#judgements], {[3] = girlfriend.y - 100}, "out-elastic")
 
 							ratingTimers[3] = Timer.tween(2, numbers[1], {y = girlfriend.y + love.math.random(-10, 10)}, "out-elastic")
 							ratingTimers[4] = Timer.tween(2, numbers[2], {y = girlfriend.y + love.math.random(-10, 10)}, "out-elastic")
@@ -1091,17 +1133,32 @@ return {
 	end,
 
 	drawRating = function(self, multiplier)
-		local multiplier = multiplier or 1
 		love.graphics.push()
-			love.graphics.translate(camera.x * multiplier, camera.y * multiplier)
-			love.graphics.translate(camera.ex * multiplier, camera.ey * multiplier)
-
-			graphics.setColor(1, 1, 1, ratingVisibility[1])
-			rating:draw()
-			for i = 1, 3 do
-				numbers[i]:draw()
+			if multiplier then
+				love.graphics.translate(camera.x * multiplier, camera.y * multiplier)
+				love.graphics.translate(camera.ex * multiplier, camera.ey * multiplier)
+			else
+				love.graphics.translate(camera.x, camera.y)
+				love.graphics.translate(camera.ex, camera.ey)
 			end
-			graphics.setColor(1, 1, 1)
+
+			for i = 1, #judgements do
+				rating:animate(judgements[i][1], false)
+				rating.y = judgements[i][3]
+				graphics.setColor(1, 1, 1, judgements[i][2])
+				if not pixel then
+					rating:draw()
+					for k = 1, 3 do
+						numbers[k]:draw()
+					end
+				else
+					rating:udraw(6, 6)
+					for k = 1, 3 do
+						numbers[k]:udraw(6, 6)
+					end
+				end
+				graphics.setColor(1, 1, 1)
+			end
 		love.graphics.pop()
 	end,
 

@@ -6,7 +6,7 @@ return {
 
 
         enemy = love.filesystem.load("sprites/characters/HENRY_ASSS.lua")()
-        enemyTwo = enemy
+        enemyTwo = love.filesystem.load("sprites/characters/Ellie_Assets.lua")()
         boyfriend = love.filesystem.load("sprites/boyfriend.lua")()
 
 
@@ -24,6 +24,7 @@ return {
         enemy.x, enemy.y = -275, 84
         boyfriend.x, boyfriend.y = 571, 252
         girlfriend.x, girlfriend.y = 144, 53
+        afterEllie = false
 
 
         camera:addPoint("enemy", 234, 0)
@@ -36,6 +37,9 @@ return {
             enemy = love.filesystem.load("sprites/characters/HENRY_ASSS.lua")()
             enemyTwo = love.filesystem.load("sprites/characters/Ellie_Assets.lua")()
             boyfriend = love.filesystem.load("sprites/boyfriend.lua")()
+            enemy.x, enemy.y = -275, 84
+            boyfriend.x, boyfriend.y = 571, 252
+            girlfriend.x, girlfriend.y = 144, 53
         elseif song == 2 then
             enemy = love.filesystem.load("sprites/characters/charles.lua")()
             boyfriend = love.filesystem.load("sprites/characters/henry_i_phone.lua")()
@@ -49,12 +53,24 @@ return {
             girlfriend.x, girlfriend.y = 144, 53
 
             camera:addPoint("boyfriend", -335, -153)
-
         end
 
     end,
 
     update = function(self, dt)
+
+        if song == 3 then
+
+            if musicTime >= 70163 and musicTime < 70213 then
+                camera:moveToPoint(1.25, "enemy")
+            end
+            if musicTime >= 71663 and musicTime < 71713 then
+                enemyTwo:animate("enter", false)
+                afterEllie = true
+
+            end
+        end
+
 
     end,
 
@@ -65,10 +81,15 @@ return {
             love.graphics.scale(camera.sizeX, camera.sizeY)
             stageImages[1]:draw()
             girlfriend:draw()
-            if song == 3 or song == 4 then
-              --  enemyTwo:draw()
+
+            if song == 3 and afterEllie then
+                enemyTwo:draw()
+            elseif song == 4 then
+                enemyTwo:draw()
             end
-            enemyTwo:draw()
+                    
+
+            --enemyTwo:draw()
             enemy:draw()
             
 

@@ -239,15 +239,15 @@ return graphics.newSprite(
 		--To get the animations, look at the number and the name of the frame
 		--Start is the first frame, stop is the last frame, speed is the speed of the animation, offsetX and offsetY are the offset of the animation
 		--Get the offset by using the ingame offset editor and pressing 7
-		["left"] = {start = 72, stop = 86, speed = 24, offsetX = 0, offsetY = 0},
-		["down"] = {start = 1, stop = 15, speed = 24, offsetX = 0, offsetY = 0},
-		["up"] = {start = 213, stop = 227, speed = 24, offsetX = 0, offsetY = 0},
-		["right"] = {start = 198, stop = 212, speed = 24, offsetX = 0, offsetY = 0},
+		["singLEFT"] = {start = 72, stop = 86, speed = 24, offsetX = 91, offsetY = -30},
+		["singDOWN"] = {start = 1, stop = 15, speed = 24, offsetX = -66, offsetY = -32},
+		["singUP"] = {start = 213, stop = 227, speed = 24, offsetX = -34, offsetY = 25},
+		["singRIGHT"] = {start = 198, stop = 212, speed = 24, offsetX = -58, offsetY = 30},
 		["idle"] = {start = 57, stop = 71, speed = 24, offsetX = 0, offsetY = 0},
-		["react"] = {start = 87, stop = 197, speed = 24, offsetX = 0, offsetY = 0},
-		["enter"] = {start = 16, stop = 56, speed = 24, offsetX = 0, offsetY = 0},
+		["react"] = {start = 87, stop = 197, speed = 24, offsetX = 6, offsetY = 0},
+		["enter"] = {start = 16, stop = 56, speed = 24, offsetX = -105, offsetY = 533},
 	},
-	"anim", -- set to default animation
+	"idle", -- set to default animation
 	false,
 	{
 		sing_duration = 4,
