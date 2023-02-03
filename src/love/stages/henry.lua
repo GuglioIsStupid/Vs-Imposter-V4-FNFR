@@ -11,14 +11,8 @@ return {
 
 
 
-
-        
-
-       -- cam.sizeX, cam.sizeY = 0.7, 0.7
-        --camScale.x, camScale.y = 0.7, 0.7
-
-        --camera.scaleX, camera.scaleY = 0.1, 0.1
-        --camera.sizeX, camera.sizeY = 0.1, 0.1
+        camera.scaleX, camera.scaleY = 0.8, 0.8
+        camera.sizeX, camera.sizeY = 0.8, 0.8
 
         enemy.x, enemy.y = -275, 84
         boyfriend.x, boyfriend.y = 571, 252
@@ -31,8 +25,6 @@ return {
         boyfriend.x, boyfriend.y = 571, 252
         girlfriend.x, girlfriend.y = 144, 53
 
-        --camera.scaleX, camera.scaleY = 0.1, 0.1
-       -- camera.sizeX, camera.sizeY = 0.1, 0.1
 
         camera:addPoint("enemy", 234, 0)
 
@@ -70,6 +62,7 @@ return {
 		love.graphics.push()
 			love.graphics.translate(camera.x, camera.y)
 			love.graphics.translate(camera.ex, camera.ey)
+            love.graphics.scale(camera.sizeX, camera.sizeY)
             stageImages[1]:draw()
             girlfriend:draw()
             if song == 3 or song == 4 then

@@ -22,8 +22,6 @@ return {
 		weeksHenry:load()
 		stages["henry"]:load()
 
-      --  camera.scaleX, camera.scaleY = 0.1, 0.1
-        --camera.sizeX, camera.sizeY = 0.1, 0.1
 		if song == 4 then
 			inst = love.audio.newSource("songs/armed/Inst.ogg", "stream")
 			voices = love.audio.newSource("songs/armed/Voices.ogg", "stream")
@@ -52,9 +50,6 @@ return {
 			weeksHenry:generateNotes("songs/reinforcements/reinforcements-hard.json")
 		elseif song == 2 then
 			weeksHenry:generateNotes("songs/greatest-plan/greatest-plan-hard.json")
-
-			--weeksHenry:generateNotes("songs/greatest-plan/greatest-plan-hard.json")
-
 		else
 			weeksHenry:generateNotes("songs/titular/titular-hard.json")
 		end
@@ -109,6 +104,8 @@ return {
 	draw = function(self)
 		love.graphics.push()
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
+			love.graphics.scale(camera.sizeX, camera.sizeY)
+
 		--	love.graphics.scale(extraCamZoom.sizeX, extraCamZoom.sizeY)
 		--	love.graphics.scale(cam.sizeX, cam.sizeY)
 

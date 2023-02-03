@@ -6,14 +6,16 @@ return {
 	enter = function(self, from, songNum, songAppend)
 		pauseColor = {129, 100, 223}
 		weeksYellow:enter()
-		stages["yellowAirship"]:enter()
+		--stages["yellowAirship"]:enter()
+		stages["blackChase"]:enter()
+
 
 		week = 1
 
 		song = songNum
 		difficulty = songAppend
 
-		weeksYellow:setIcon("enemy", "yellow")
+		--weeksYellow:setIcon("enemy", "yellow")
 		curEnemy = "white"
 
 		self:load()
@@ -152,8 +154,10 @@ return {
 	draw = function(self)
 		love.graphics.push()
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
-			love.graphics.scale(extraCamZoom.sizeX, extraCamZoom.sizeY)
-			love.graphics.scale(cam.sizeX, cam.sizeY)
+			love.graphics.translate(camera.x * 0.3, camera.y * 0.3)
+			love.graphics.translate(camera.ex * 0.3, camera.ey * 0.3)
+			love.graphics.scale(camera.esizeX, camera.esizeY)
+			love.graphics.scale(camera.sizeX, camera.sizeY)
 
 			if song == 5 then
 				stages["cargo"]:draw()
