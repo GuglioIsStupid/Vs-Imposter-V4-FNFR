@@ -848,6 +848,7 @@ return {
 								self:safeAnimate(enemy, curAnim, false, 2)
 							end
 						end
+						enemy.lastHit = musicTime
 					elseif enemyNote[1].who == "Opponent 2 Sing" then
 						if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
 							if useAltAnims then
@@ -862,6 +863,7 @@ return {
 								self:safeAnimate(enemyTwo, curAnim, false, 2)
 							end
 						end
+						enemyTwo.lastHit = musicTime
 					elseif enemyNote[1].who == "Both Opponents Sing" then
 						if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
 							if useAltAnims then
@@ -880,9 +882,10 @@ return {
 								self:safeAnimate(enemyTwo, curAnim, false, 2)
 							end
 						end
-					end
 
-					enemy.lastHit = musicTime
+						enemy.lastHit = musicTime
+						enemyTwo.lastHit = musicTime
+					end
 
 					if not mustHitSection then 
 						noteCamTweens[i]()
