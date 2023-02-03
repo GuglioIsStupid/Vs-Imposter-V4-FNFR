@@ -17,6 +17,7 @@ return {
         enemy.x, enemy.y = -275, 84
         boyfriend.x, boyfriend.y = 571, 252
         girlfriend.x, girlfriend.y = 144, 53
+
     end,
 
     load = function()
@@ -30,8 +31,8 @@ return {
         camera:addPoint("enemy", 234, 0)
 
         if song == 4 then
-            enemy = love.filesystem.load("sprites/characters/Reginald_Assets.lua")()
-            enemyTwo = love.filesystem.load("sprites/characters/rhm.lua")()
+            enemyTwo = love.filesystem.load("sprites/characters/Reginald_Assets.lua")()
+            enemy = love.filesystem.load("sprites/characters/rhm.lua")()
 
         elseif song == 3 then
             enemy = love.filesystem.load("sprites/characters/HENRY_ASSS.lua")()
@@ -40,6 +41,7 @@ return {
             enemy.x, enemy.y = -275, 84
             boyfriend.x, boyfriend.y = 571, 252
             girlfriend.x, girlfriend.y = 144, 53
+            enemyTwo.x, enemyTwo.y = -602, 148
         elseif song == 2 then
             enemy = love.filesystem.load("sprites/characters/charles.lua")()
             boyfriend = love.filesystem.load("sprites/characters/henry_i_phone.lua")()
@@ -82,16 +84,18 @@ return {
             stageImages[1]:draw()
             girlfriend:draw()
 
-            if song == 3 and afterEllie then
+            if song == 4 then
                 enemyTwo:draw()
-            elseif song == 4 then
-                enemyTwo:draw()
+                enemy:draw()
+            elseif song == 3 then
+                enemy:draw()
+                if song == 3 and afterEllie then
+                    enemyTwo:draw()
+                elseif song == 4 then
+                    enemyTwo:draw()
+                end
             end
-                    
-
-            --enemyTwo:draw()
-            enemy:draw()
-            
+ 
 
             boyfriend:draw()
 		love.graphics.pop()
