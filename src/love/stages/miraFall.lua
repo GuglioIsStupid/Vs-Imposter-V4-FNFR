@@ -148,7 +148,8 @@ return {
         love.graphics.translate(camera.ex * 0.9, camera.ey * 0.9)
         love.graphics.push()
         --love.graphics.translate(cam.x * 0.9, cam.y * 0.9)
-            stageImages[8]:draw()
+        stageImages[7]:draw()
+        stageImages[8]:draw()
             love.graphics.translate(stageImages[1].translation.x, stageImages[1].translation.y)
             for i = 1, 4 do 
                 stageImages[1].y = (i - 1) * 9976

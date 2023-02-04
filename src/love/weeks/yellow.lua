@@ -6,8 +6,8 @@ return {
 	enter = function(self, from, songNum, songAppend)
 		pauseColor = {129, 100, 223}
 		weeksYellow:enter()
-		--stages["yellowAirship"]:enter()
-		stages["blackChase"]:enter()
+		stages["yellowAirship"]:enter()
+		--stages["blackChase"]:enter()
 
 
 		week = 1
@@ -25,7 +25,13 @@ return {
 
 	load = function(self)
 		weeksYellow:load()
-		stages["stage"]:load()
+		if song == 5 then
+			stages["cargo"]:load()
+		elseif song == 4 then
+			stages["blackChase"]:load()
+		else
+			stages["yellowAirship"]:load()
+		end
 
 		if song == 5 then
 			stages["blackChase"]:leave()
@@ -169,8 +175,8 @@ return {
 			weeksYellow:drawRating(0.9)
 		love.graphics.pop()
 		
-		weeksYellow:drawTimeLeftBar()
-		weeksYellow:drawHealthBar()
+		--weeksYellow:drawTimeLeftBar()
+		--weeksYellow:drawHealthBar()
 		if not paused then
 			weeksYellow:drawUI()
 		end

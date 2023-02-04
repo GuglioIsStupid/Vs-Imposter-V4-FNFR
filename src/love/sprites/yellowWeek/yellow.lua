@@ -237,12 +237,12 @@ return graphics.newSprite(
 		--To get the animations, look at the number and the name of the frame
 		--Start is the first frame, stop is the last frame, speed is the speed of the animation, offsetX and offsetY are the offset of the animation
 		--Get the offset by using the ingame offset editor and pressing 7
-		["left"] = {start = 200, stop = 208, speed = 15, offsetX = -33, offsetY = -36},
-		["up"] = {start = 218, stop = 226, speed = 15, offsetX = 49, offsetY = -9},
-		["down"] = {start = 141, stop = 171, speed = 15, offsetX = -35, offsetY = -59},
-		["right"] = {start = 209, stop = 217, speed = 15, offsetX = -38, offsetY = -17},
-		["idle"] = {start = 172, stop = 199, speed = 15, offsetX = 0, offsetY = 0},
-		["fuckingDies"] = {start = 1, stop = 140, speed = 15, offsetX = -70, offsetY = -40},
+		["singLEFT"] = {start = 200, stop = 208, speed = 24, offsetX = -33, offsetY = -36},
+		["singUP"] = {start = 218, stop = 226, speed = 24, offsetX = 49, offsetY = -9},
+		["singDOWN"] = {start = 141, stop = 171, speed = 24, offsetX = -35, offsetY = -59},
+		["singRIGHT"] = {start = 209, stop = 217, speed = 24, offsetX = -38, offsetY = -17},
+		["idle"] = {start = 172, stop = 199, speed = 24, offsetX = 0, offsetY = 0},
+		["fuckingDies"] = {start = 1, stop = 140, speed = 24, offsetX = -70, offsetY = -40},
 
 	},
 	"idle", -- set to default animation
