@@ -227,6 +227,8 @@ return {
 		combo = 0
 
 		enemy:animate("idle")
+
+		enemyTwo:animate("idle")
 		boyfriend:animate("idle")
 
 		if not camera.points["boyfriend"] then camera:addPoint("boyfriend", -boyfriend.x + 100, -boyfriend.y + 75) end
@@ -769,6 +771,8 @@ return {
 
 		girlfriend:update(dt)
 		enemy:update(dt)
+
+		enemyTwo:update(dt)
 		boyfriend:update(dt)
 
 		if beatHandler.onBeat() and beatHandler.getBeat() % 2 == 0 then
@@ -777,8 +781,19 @@ return {
 				girlfriend:setAnimSpeed(14.4 / (60 / bpm))
 			end
 		end
-		boyfriend:beat(beatHandler.getBeat())
-		enemy:beat(beatHandler.getBeat())
+
+		if song ~= 4 then
+			boyfriend:beat(beatHandler.getBeat())
+			enemy:beat(beatHandler.getBeat())
+		else
+			if not boyfriend:isAnimated() then
+				boyfriend:animate("idle", false, 2)
+			end
+			if not enemy:isAnimated() then
+				enemy:animate("idle", false, 2)
+			end
+		end
+		
 
 		for i = 1, 3 do
 			local spriteTimer = spriteTimers[i]
@@ -825,14 +840,22 @@ return {
 					if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
 						if useAltAnims then
 							if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim .. " alt", false, 2) end
+							if (not enemyTwo:isAnimated()) or enemyTwo:getAnimName() == "idle" then self:safeAnimate(enemyTwo, curAnim .. " alt", false, 2) end
+
 						else
 							if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim, false, 2) end
+							if (not enemyTwo:isAnimated()) or enemyTwo:getAnimName() == "idle" then self:safeAnimate(enemyTwo, curAnim, false, 2) end
+
 						end
 					else
 						if useAltAnims then
 							self:safeAnimate(enemy, curAnim .. " alt", false, 2)
+
+							self:safeAnimate(enemyTwo, curAnim .. " alt", false, 2)
 						else
 							self:safeAnimate(enemy, curAnim, false, 2)
+
+							self:safeAnimate(enemyTwo, curAnim, false, 2)
 						end
 					end
 

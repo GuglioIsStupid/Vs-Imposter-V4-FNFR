@@ -54,7 +54,6 @@ return {
 
     load = function()
         ohnoHeAngy = false
-        stageImages[9]:update(dt)
 
     end,
 

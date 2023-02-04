@@ -25,7 +25,7 @@ return {
 
         stageImages[8].x, stageImages[8].y = -65, 60
 
-        enemy = love.filesystem.load("sprites/yellowWeek/yellow.lua")()
+        enemy = love.filesystem.load("sprites/characters/yellow.lua")()
         enemyTwo = enemy
 
 
