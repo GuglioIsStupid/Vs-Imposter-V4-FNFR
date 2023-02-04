@@ -782,6 +782,8 @@ return {
 			end
 		end
 
+		--[[
+
 		if song ~= 4 then
 			boyfriend:beat(beatHandler.getBeat())
 			enemy:beat(beatHandler.getBeat())
@@ -793,7 +795,26 @@ return {
 				enemy:animate("idle", false, 2)
 			end
 		end
+
+		--]]
+		boyfriend:beat(beatHandler.getBeat())
+		enemy:beat(beatHandler.getBeat())
+
+		--[[
+
+		if not boyfriend:isAnimated() then
+			boyfriend:animate("idle", false, 2)
+		end
+		if not enemy:isAnimated() then
+			enemy:animate("idle", false, 2)
+		end
+
+		--]]
+
+
+
 		
+
 
 		for i = 1, 3 do
 			local spriteTimer = spriteTimers[i]

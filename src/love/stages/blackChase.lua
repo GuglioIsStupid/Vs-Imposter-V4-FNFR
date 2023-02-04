@@ -13,13 +13,18 @@ return {
         }
         curEnemy = "both"
 
-        camera.sizeX, camera.sizeY = 0.3, 0.3
-        camera.scaleX, camera.scaleY= 0.3, 0.3
+        camSize = {2}
+
+
+        
+
+        camera.sizeX, camera.sizeY = camSize[1], camSize[1]
+        camera.scaleX, camera.scaleY= camSize[1], camSize[1]
 
         
 
 
-        stageImages[4].sizeX, stageImages[4].sizeY = 0.9, 0.9
+        stageImages[4].sizeX, stageImages[4].sizeY = 1.1, 1.1
         stageImages[1].sizeX, stageImages[1].sizeY = 1.5, 1.5
 
 
@@ -53,11 +58,32 @@ return {
     end,
 
     load = function()
+        camSize = {2}
+
+
         ohnoHeAngy = false
 
     end,
 
     update = function(self, dt)
+
+
+        if musicTime >= 1 and musicTime < 51 then
+            Timer.tween(2, camSize, {[1] = 0.55}, "out-expo")
+            print("JHKFDASFHJHFAHFJH")
+
+        end
+
+ 
+
+        camera.sizeX, camera.sizeY = camSize[1], camSize[1]
+        camera.scaleX, camera.scaleY = camSize[1], camSize[1]
+
+
+        --print(camera.sizeY)
+
+        print(camSize[1])
+
         stageImages[7]:update(dt)
         stageImages[8]:update(dt)
         stageImages[9]:update(dt)
