@@ -69,7 +69,8 @@ return {
 
 
         if musicTime >= 1 and musicTime < 51 then
-            Timer.tween(2, camSize, {[1] = 0.55}, "out-expo")
+            firstZoom = Timer.tween(2, camSize, {[1] = 0.55}, "out-expo")
+            if firstZoom then Timer.cancel(firstZoom) end
             print("JHKFDASFHJHFAHFJH")
 
         end
