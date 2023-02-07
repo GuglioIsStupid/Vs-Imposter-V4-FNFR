@@ -38,6 +38,8 @@ return {
 		menuID = 1
 		selection = 3
 
+		inDebug = true
+
 		menus = {
 			{
 				1,

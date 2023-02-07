@@ -1,15 +1,15 @@
 return {
     enter = function()
         stageImages = {
-            graphics.newImage(love.graphics.newImage(graphics.imagePath("yellowWeek/airship/cargo"))),
-            graphics.newImage(love.graphics.newImage(graphics.imagePath("yellowWeek/airship/airshipFlashback"))),
+            graphics.newImage(graphics.imagePath("yellowWeek/airship/cargo")),
+            graphics.newImage(graphics.imagePath("yellowWeek/airship/airshipFlashback")),
         }
 
         stageImages[1].y = 0
         stageImages[2].y = 0
 
 
-        enemyTwo = love.filesystem.load("sprites/yellowWeek/yellow.lua")()
+        enemyTwo = love.filesystem.load("sprites/characters/yellow.lua")()
         enemy = love.filesystem.load("sprites/characters/white.lua")()
 
         girlfriend.x, girlfriend.y = 0, 0
@@ -57,7 +57,9 @@ return {
 
     draw = function()
 		love.graphics.push()
-			love.graphics.translate(cam.x, cam.y)
+			love.graphics.translate(camera.x, camera.y)
+            love.graphics.translate(camera.ex, camera.ey)
+
             stageImages[1]:draw()
             enemy:draw()
             enemyTwo:draw()

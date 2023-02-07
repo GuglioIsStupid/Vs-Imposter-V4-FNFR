@@ -69,16 +69,21 @@ return {
 		weeksYellow:initUI()
 
 		if song == 5 then
+			doMustHitSectionCam = true
 			weeksYellow:generateNotes("songs/double-kill/double-kill-hard.json")
 			weeksYellow:generateEventsOld("songs/double-kill/events.json")
 			weeksYellow:setIcon("enemy", "white")
 		elseif song == 4 then
+			doMustHitSectionCam = false
 			weeksYellow:generateNotes("songs/danger/danger-hard.json")
 		elseif song == 3 then
+			doMustHitSectionCam = true
 			weeksYellow:generateNotes("songs/oversight/oversight-hard.json")
 		elseif song == 2 then
+			doMustHitSectionCam = true
 			weeksYellow:generateNotes("songs/dlow/dlow-hard.json")
 		else
+			doMustHitSectionCam = true
 			weeksYellow:generateNotes("songs/mando/mando-hard.json")
 		end
 	end,

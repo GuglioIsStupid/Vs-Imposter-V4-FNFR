@@ -23,7 +23,7 @@ for i in range(1, len(sys.argv)):
                     # remove the spaces k[2]
                     k[2] = k[2].replace(" ", "")
                     lua += (
-                        'if musicTime >= ' + str(j['sectionNotes'][0][0]) + ' and musicTime < ' + str(j['sectionNotes'][0][0]+25) + ' then \n'
+                        'if musicTime >= ' + str(j['sectionNotes'][0][0]) + ' and musicTime < ' + str(j['sectionNotes'][0][0]+75) + ' then \n'
                         '\t' + k[2] + '(' + k[3] + ')\n'
                         'end\n'
                     )

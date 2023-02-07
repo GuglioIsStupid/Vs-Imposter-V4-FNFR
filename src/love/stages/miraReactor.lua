@@ -31,14 +31,17 @@ return {
         enemy.x, enemy.y = -533, 415
         boyfriend.x, boyfriend.y = 493, 413
 
-        cam.sizeX, cam.sizeY = 0.9, 0.9
-        camScale.x, camScale.y = 0.9, 0.9
-        Timer.tween(1.25, cam, {x = 00, y = -300}, "out-quad")
+        camera.sizeX, camera.sizeY = 0.7, 0.7
+        camera.scaleX, camera.scaleY = 0.7, 0.7
+        --Timer.tween(1.25, camer, {x = 00, y = -300}, "out-quad")
 
     end,
 
     load = function()
 
+        camera:addPoint("boyfriend", -362, -230)
+        camera:addPoint("enemy", 463, -230)
+        camera:addPoint("middle", 33, -192)
     end,
 
     update = function(self, dt)

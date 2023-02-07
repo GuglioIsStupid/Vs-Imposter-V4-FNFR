@@ -319,6 +319,7 @@ function love.load()
 		["pinkMira"] = require "stages.pinkMira",
 		["finale"] = require "stages.finale",
         ["greyMira"] = require "stages.greyMira",
+		["esculent"] = require "stages.esculent",
 	}
 
 	-- Load Menus
@@ -361,6 +362,8 @@ function love.load()
 		require "weeks.pink",
 		require "weeks.finale",
         require "weeks.ow",
+		require "weeks.esculent",
+		require "weeks.insaneStreamer",
 	}
 
 	weekDesc = { -- Add your week description here
@@ -424,7 +427,7 @@ function love.load()
 			{
 				"fuck1",
 				"fuck2",  -- i hate you guglio          the songs have names 
-				"fuck3" -- i dont fucking know them
+				"fuck3" -- i dont fucking know them          learn them
 			}
 		},
 		{
@@ -446,13 +449,25 @@ function love.load()
 			{
 				"COCK",
 				"COCKCOCK",    -- bruhhh ahnfjdnkhsjdklgiloskgnolsfihfkjgiupvjkliuefwsdojkpk;lvhoiujeksfudzjocpklhaguibfvhjcnj90 oisyhkfcdnuigfjkvfadhunkiugxjmn THEY HAVE NAMES
-				"COCKCOCKCOCK" -- I DONT KNOW THE NAMES
+				"COCKCOCKCOCK" -- I DONT KNOW THE NAMES                  THEN LEARN THEM FUCKER ITS NOT HARD
 			},
 		},
 		{
 			"Ow",
 			{
-				"Ow"        -- YOU MADE OW IMPOSSIBLE TO REACH IN THE FREEPLAY MENU             and im too dumb to know how to fix that :(
+				"Ow"
+			}
+		},
+		{
+			"Esculent",
+			{
+				"Esculent"
+			}
+		},
+		{
+			"Insane Streamer",
+			{
+				"Insane Streamer"
 			}
 		}
 	}

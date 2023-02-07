@@ -60,8 +60,14 @@ return {
     load = function()
         camSize = {2}
 
+        cameraZooms = {false}
+
 
         ohnoHeAngy = false
+
+        camera.x, camera.y = 0, 732
+
+        camera:addPoint("one", 0, 0)
 
     end,
 
@@ -69,16 +75,27 @@ return {
 
 
         if musicTime >= 1 and musicTime < 51 then
-            firstZoom = Timer.tween(2, camSize, {[1] = 0.55}, "out-expo")
-            if firstZoom then Timer.cancel(firstZoom) end
+            if not cameraZooms[1] then
+                Timer.tween(2, camera, {sizeX = 0.6, sizeY = 0.6, scaleX = 0.6, scaleY = 0.6}, "out-expo")
+                camera:moveToPoint(2, "one")
+            end
+            cameraZooms[1] = true
             print("JHKFDASFHJHFAHFJH")
 
         end
 
- 
 
-        camera.sizeX, camera.sizeY = camSize[1], camSize[1]
-        camera.scaleX, camera.scaleY = camSize[1], camSize[1]
+        --[[
+
+        FUCK YOU CAMERA BUMP THIS WOULD HAVE WORKED IF YOU DIDNT EXIST
+
+
+        if not inDebug then
+            camera.sizeX, camera.sizeY = camSize[1], camSize[1]
+            camera.scaleX, camera.scaleY = camSize[1], camSize[1]
+        end
+
+        --]]
 
 
         --print(camera.sizeY)
@@ -163,7 +180,7 @@ return {
             love.graphics.scale(camera.sizeX, camera.sizeY)
 
 
-            if stageImages[9]:isAnimated() then
+            if stageImages[9]:isAnimated() and musicTime > 10000 then
                 stageImages[9]:draw()
             end
             love.graphics.push()

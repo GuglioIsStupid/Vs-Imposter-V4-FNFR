@@ -8,8 +8,8 @@ return {
             graphics.newImage(graphics.imagePath("yellowWeek/airship/newAirship/backDlowFloor")),
             graphics.newImage(graphics.imagePath("yellowWeek/airship/newAirship/DlowFloor")),
             graphics.newImage(graphics.imagePath("yellowWeek/airship/newAirship/YELLOW")),
-            love.filesystem.load("sprites/yellowWeek/white_awkward.lua")()
-
+            love.filesystem.load("sprites/yellowWeek/white_awkward.lua")(),
+            love.filesystem.load("sprites/characters/bfshock.lua")()
         }
 
         stageImages[1].x, stageImages[1].y = 10, 117
@@ -20,14 +20,18 @@ return {
         stageImages[6].x, stageImages[6].y = -215, 243
         stageImages[7].x, stageImages[7].y = 0, 188
 
+        stageImages[9].x, stageImages[9].y = 368, 97
+
         
         stageImages[3].sizeY, stageImages[3].sizeX = 0.5, 0.5
 
         stageImages[8].x, stageImages[8].y = -65, 60
+        stageImages[7].x, stageImages[7].y = 74, 222
 
         enemy = love.filesystem.load("sprites/characters/yellow.lua")()
         enemyTwo = enemy
 
+        fakeEnemy = enemy
 
         boyfriend = love.filesystem.load("sprites/boyfriend.lua")()
 
@@ -38,6 +42,8 @@ return {
     end,
 
     load = function()
+
+        fuckingDead = false
 
         camera.sizeX, camera.sizeY = 0.7, 0.7
         camera.scaleX, camera.scaleY = 0.7, 0.7
@@ -55,6 +61,24 @@ return {
     end,
 
     update = function(self, dt)
+
+        stageImages[8]:update(dt)
+        stageImages[9]:update(dt)
+
+        if inDebug then
+            if not enemy:isAnimated() or enemy:getAnimName() == "idle" then
+                enemy:animate("fuckingDies", false)
+            end
+        end
+
+        if song == 2 then
+            if musicTime >= 125600 and musicTime < 125650 then
+                fuckingDying = true
+                fakeEnemy:animate("fuckingDies", false, function()
+                    fuckingDead = true
+                end)
+            end
+        end
 
     end,
 
@@ -86,9 +110,28 @@ return {
             if song == 5 then
                 enemyTwo:draw()
             end
-            enemy:draw()
+
+            if not fuckingDead then
+                enemy:draw()
+            else
+                if fakeEnemy:isAnimated() then         -- i thought this would fix the animation speed but it didnt
+                    fakeEnemy:draw()
+                else
+                    stageImages[7]:draw()
+                end
+            end
+
+            if inDebug then
+                stageImages[7]:draw()
+            end
+
+            if not fuckingDying then
+                boyfriend:draw()
+            else
+                stageImages[9]:draw()
+            end
                 
-            boyfriend:draw()
+ 
 
         love.graphics.pop()
 
