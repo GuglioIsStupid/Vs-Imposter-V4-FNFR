@@ -712,19 +712,19 @@ return {
 					beatHandler.setBPM(bpm)
 				end
 
-				if doMustHitSectionCam then
-					if camera.mustHit then
-						if events[i].mustHitSection then
-							mustHitSection = true
-							--camTimer = Timer.tween(1.25, camera, {x = -boyfriend.x + 100, y = -boyfriend.y + 75}, "out-quad")
-							camera:moveToPoint(1.25, "boyfriend")
-						else
-							mustHitSection = false
-							--camTimer = Timer.tween(1.25, camera, {x = -enemy.x - 100, y = -enemy.y + 75}, "out-quad")
-							camera:moveToPoint(1.25, "enemy")
-						end
+
+				if camera.mustHit then
+					if events[i].mustHitSection then
+						mustHitSection = true
+						--camTimer = Timer.tween(1.25, camera, {x = -boyfriend.x + 100, y = -boyfriend.y + 75}, "out-quad")
+						camera:moveToPoint(1.25, "boyfriend")
+					else
+						mustHitSection = false
+						--camTimer = Timer.tween(1.25, camera, {x = -enemy.x - 100, y = -enemy.y + 75}, "out-quad")
+						camera:moveToPoint(1.25, "enemy")
 					end
 				end
+
 
 				if events[i].altAnim then
 					useAltAnims = true

@@ -840,9 +840,8 @@ return {
 					enemy.lastHit = musicTime
                     enemyTwo.lastHit = musicTime
 
-					if not mustHitSection then 
-						noteCamTweens[i]()
-					end
+					noteCamTweens[i]()
+					
 
 					table.remove(enemyNote, 1)
 				end
@@ -989,9 +988,8 @@ return {
 									numbers[i].y = girlfriend.y + 50
 								end
 
-								if mustHitSection then 
-									noteCamTweens[i]()
-								end
+								noteCamTweens[i]()
+								
 
 								Timer.tween(2, judgements[#judgements], {[2] = 0}, "linear")
 								Timer.tween(2, judgements[#judgements], {[3] = girlfriend.y - 100}, "out-elastic")
