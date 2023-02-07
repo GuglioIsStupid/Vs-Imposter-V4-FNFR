@@ -321,6 +321,7 @@ function love.load()
         ["greyMira"] = require "stages.greyMira",
 		["esculent"] = require "stages.esculent",
 		["jerma"] = require "stages.jerma",
+		["crewicide"] = require "stages.crewicide",
 	}
 
 	-- Load Menus
@@ -365,6 +366,7 @@ function love.load()
         require "weeks.ow",
 		require "weeks.esculent",
 		require "weeks.insaneStreamer",
+		require "weeks.crewicide",
 	}
 
 	weekDesc = { -- Add your week description here
@@ -469,6 +471,12 @@ function love.load()
 			"Insane Streamer",
 			{
 				"Insane Streamer"
+			}
+		},
+		{
+			"Crewicide",
+			{
+				"Crewicide"
 			}
 		}
 	}

@@ -40,8 +40,6 @@ return {
 
     draw = function()
         love.graphics.push()
-            love.graphics.translate(camera.x, camera.y)
-            love.graphics.translate(camera.ex, camera.ey)
             stageImages[1]:draw()
             boyfriend:draw()
             enemy:draw()
