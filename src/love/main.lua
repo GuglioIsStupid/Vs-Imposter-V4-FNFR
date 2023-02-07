@@ -322,6 +322,7 @@ function love.load()
 		["esculent"] = require "stages.esculent",
 		["jerma"] = require "stages.jerma",
 		["o2"] = require "stages.o2",
+		["crewicide"] = require "stages.crewicide",
 	}
 
 	-- Load Menus
@@ -367,7 +368,8 @@ function love.load()
         require "weeks.ow",
 		require "weeks.esculent",
 		require "weeks.insaneStreamer",
-		require "weeks.j"
+		require "weeks.j",
+		require "weeks.crewicide",
 	}
 
 	weekDesc = { -- Add your week description here
@@ -481,6 +483,12 @@ function love.load()
 				"Voting Time",
 				"Turbulence",
 				"Victory"
+			},
+		},
+		{
+			"Crewicide",
+			{
+				"Crewicide"
 			}
 		}
 	}
