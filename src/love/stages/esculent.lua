@@ -14,7 +14,6 @@ return {
     end,
 
     load = function()
-        doMustHitSectionCam = false
 
     end,
 
@@ -35,6 +34,5 @@ return {
         stageImages[1] = nil
         enemy = nil
         boyfriend = nil
-        doMustHitSectionCam = true
-    end
+        end
 }

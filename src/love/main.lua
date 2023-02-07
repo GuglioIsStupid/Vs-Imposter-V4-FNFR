@@ -320,6 +320,7 @@ function love.load()
 		["finale"] = require "stages.finale",
         ["greyMira"] = require "stages.greyMira",
 		["esculent"] = require "stages.esculent",
+		["jerma"] = require "stages.jerma",
 	}
 
 	-- Load Menus

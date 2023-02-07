@@ -112,6 +112,7 @@ return graphics.newSprite(
 	false,
 	{
 		sing_duration = 4,
+		danceSpeed = 4,
 		isCharacter = true
 	}
 )
