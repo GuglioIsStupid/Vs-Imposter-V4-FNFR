@@ -13,7 +13,7 @@ camera.esizeX = 1
 camera.esizeY = 1
 
 camera.flash = 0
-camera.col = {1, 1, 1}
+camera.col = {1, 1, 1, 1}
 camera.points = {}
 
 camera.mustHit = true
@@ -50,6 +50,7 @@ function camera:reset()
     camera.ey = 0
     camera.esizeX = 1
     camera.esizeY = 1
+    camera.col = {1, 1, 1, 1}
 end
 
 function camera:flash(time, x, col)
@@ -99,6 +100,18 @@ function camera:attach()
     love.graphics.translate(camera.ex, camera.ey)
 
     love.graphics.setColor(camera.col[1], camera.col[2], camera.col[3], camera.flash)
+end
+
+function camera:setColor(color, time)
+    if camTimer then 
+        Timer.cancel(camTimer)
+    end
+    color[4] = color[4] or 1
+    camTimer = Timer.tween(time, camera.col, {[1] = color[1], [2] = color[2], [3] = color[3], [4] = color[4]}, "out-quad")
+end
+
+function camera:getColor()
+    return camera.col[1], camera.col[2], camera.col[3], camera.col[4]
 end
 
 function camera:detach()
