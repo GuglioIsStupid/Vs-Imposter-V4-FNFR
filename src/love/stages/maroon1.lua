@@ -48,6 +48,13 @@ return {
         stageImages["snowFront"]:update(dt)
         stageImages["snowBack"]:update(dt)
 
+        if not enemy:isAnimated() then
+            enemy:animate("idle", false)
+        end
+        if not boyfriend:isAnimated() then
+            boyfriend:animate("idle", false)
+        end
+
     end,
 
     draw = function()
