@@ -8,8 +8,10 @@ return {
             ["snowBack"] = love.filesystem.load("sprites/maroon/snowback.lua")(),
         }
 
-        enemy = love.filesystem.load("sprites/characters/yellow.lua")()
+        enemy = love.filesystem.load("sprites/characters/maroon.lua")()
+        boyfriend = love.filesystem.load("sprites/characters/bfpolus.lua")()
 
+        girlfriend = love.filesystem.load("sprites/characters/gfpolus.lua")()
 
         enemy.x, enemy.y = -451, 361
         girlfriend.x, girlfriend.y = 50, 80
