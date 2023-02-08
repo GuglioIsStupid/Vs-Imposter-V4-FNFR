@@ -50,12 +50,18 @@ return {
 		if song == 3 then
 			doMustHitSectionCam = true
 			weeksGrey:generateNotes("songs/neurotic/neurotic-hard.json")
+			--weeksGrey:generateEvents("songs/neurotic/events.json")
+
 		elseif song == 2 then
 			doMustHitSectionCam = true
 			weeksGrey:generateNotes("songs/blackout/blackout-hard.json")
+			weeksGrey:generateEvents("songs/blackout/events.json")
+
 		else
 			doMustHitSectionCam = true
 			weeksGrey:generateNotes("songs/delusion/delusion-hard.json")
+			weeksGrey:generateEvents("songs/delusion/events.json")
+
 		end
 	end,
 

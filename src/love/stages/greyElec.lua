@@ -24,13 +24,10 @@ return {
 
         camera.sizeX, camera.sizeY = 0.9, 0.9
         camera.scaleX, camera.scaleY = 0.9, 0.9
+        camera:addPoint("boyfriend", -64, -67)
 
-        camera:addPoint("boyfriend", -92, -67)
-
-        camera:addPoint("enemy", -185, -67)
-
-    
-
+        camera:addPoint("enemy", 182, -67)
+        camera:moveToPoint(0, "boyfriend")
 
     end,
 
@@ -38,7 +35,7 @@ return {
 
         camera:addPoint("boyfriend", -64, -67)
 
-        camera:addPoint("enemy", -182, -67)
+        camera:addPoint("enemy", 182, -67)
     end,
 
     update = function(self, dt)
@@ -46,6 +43,10 @@ return {
         stageImages["black"]:update(dt)
         girlfriend:update(dt)
 
+
+        if not enemy:isAnimated() then
+            enemy:animate("idle", false)        -- fixed the animation issues
+        end
 
 
     end,

@@ -210,7 +210,7 @@ return {
 		end
 		useAltAnims = false
 
-		camera.x, camera.y = -boyfriend.x + 100, -boyfriend.y + 75
+        camera:moveToPoint(0, "boyfriend")
 
 		rating.x = girlfriend.x
 		if not pixel then
@@ -229,8 +229,6 @@ return {
 		enemy:animate("idle")
 		boyfriend:animate("idle")
 
-		if not camera.points["boyfriend"] then camera:addPoint("boyfriend", -boyfriend.x + 100, -boyfriend.y + 75) end
-		if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -enemy.y + 75) end
 
 		graphics.fadeIn(0.5)
 	end,
