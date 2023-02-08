@@ -326,6 +326,7 @@ function love.load()
 		["voting-lounge"] = require "stages.voting-lounge",
 		["nuzzus"] = require "stages.nuzzus",
 		["greyElec"] = require "stages.greyElec",
+		["turbulence"] = require "stages.turbulence",
 	}
 
 	-- Load Menus
@@ -581,6 +582,7 @@ function love.load()
 	--cam = {x = 0, y = 0, sizeX = 0.9, sizeY = 0.9}
 	--camScale = {x = 0.9, y = 0.9}
 	uiScale = {x = 1, y = 1, sizeX = 1, sizeY = 1}
+	camHUD = {x = 0, y = 0, angle = 0}
 
 	musicTime = 0
 	health = 0

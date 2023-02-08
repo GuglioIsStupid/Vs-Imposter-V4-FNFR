@@ -14,8 +14,10 @@ return {
 
 		if song == 1 then 
 			stages["o2"]:enter()
-		else
+		elseif song == 2 then 
 			stages["voting-lounge"]:enter()
+		elseif song == 3 then 
+			stages["turbulence"]:enter()
 		end
         
         flashAlpha = 0
@@ -31,8 +33,10 @@ return {
 		weeksJ:load()
 		if song == 1 then
 			stages["o2"]:load()
-		else
+		elseif song == 2 then
 			stages["voting-lounge"]:load()
+		elseif song == 3 then
+			stages["turbulence"]:load()
 		end
 
         if song == 4 then
@@ -41,6 +45,11 @@ return {
 		elseif song == 3 then
 			inst = love.audio.newSource("songs/turbulence/Inst.ogg", "stream")
 			voices = love.audio.newSource("songs/turbulence/Voices.ogg", "stream")
+			camera:addPoint("boyfriend", -boyfriend.x + 100, -boyfriend.y + 75)
+			camera:addPoint("enemy", -enemy.x - 100, -enemy.y + 75)
+
+			stages["voting-lounge"]:leave()
+			stages["turbulence"]:enter()
 		elseif song == 2 then
 			inst = love.audio.newSource("songs/voting-time/Inst.ogg", "stream")
 			voices = love.audio.newSource("songs/voting-time/Voices.ogg", "stream")
@@ -70,12 +79,14 @@ return {
         elseif song == 3 then
 			weeksJ:generateNotes("songs/turbulence/turbulence-hard.json")
 			weeksJ:generateEvents("songs/turbulence/events.json")
+
+			enemyIcon:animate("redmungus")
 		elseif song == 2 then
 			weeksJ:generateNotes("songs/voting-time/voting-time-hard.json")
             weeksJ:generateOtherNotes("songs/voting-time/voting-time-other.json")
 			weeksJ:generateEvents("songs/voting-time/events.json")
 
-			camera:addPoint("middle", 0, 0)
+			camera:addPoint("middle", 0, 110, 0.78, 0.78)
 			camera:moveToPoint(1, "middle", false)
 		else
 			weeksJ:generateNotes("songs/O2/O2-hard.json")
@@ -87,20 +98,40 @@ return {
 		weeksJ:update(dt)
 		if song == 1 then
 			stages["o2"]:update(dt)
-		else
+		elseif song == 2 then
 			stages["voting-lounge"]:update(dt)
+		elseif song == 3 then
+			stages["turbulence"]:update(dt)
 		end
 
         -- lerp flashAlpha to 0
         flashAlpha = util.lerp(flashAlpha, 0, util.clamp(0, dt * 5, 1))
 
 		if health >= 80 then
-			if enemyIcon:getAnimName() == "red impostor 1" then
-				enemyIcon:animate("red impostor 1 losing", false)
+			if enemyIcon:getAnimName() == "jorsawsee" then
+				enemyIcon:animate("jorsawsee losing", false)
+			end
+			if enemyIcon:getAnimName() == "warchief" then 
+				enemyIcon:animate("warchief losing", false)
+			end
+			if enemyIcon:getAnimName() == "redmungus" then 
+				enemyIcon:animate("redmungus losing", false)
+			end
+			if enemyIcon:getAnimName() == "thejelqer" then 
+				enemyIcon:animate("thejelqer losing", false)
 			end
 		else
-			if enemyIcon:getAnimName() == "red impostor 1 losing" then
-				enemyIcon:animate("red impostor 1", false)
+			if enemyIcon:getAnimName() == "jorsawsee losing" then
+				enemyIcon:animate("jorsawsee", false)
+			end
+			if enemyIcon:getAnimName() == "warchief losing" then
+				enemyIcon:animate("warchief", false)
+			end
+			if enemyIcon:getAnimName() == "redmungus losing" then
+				enemyIcon:animate("redmungus", false)
+			end
+			if enemyIcon:getAnimName() == "thejelqer losing" then
+				enemyIcon:animate("thejelqer", false)
 			end
 		end
 
@@ -134,8 +165,10 @@ return {
 
 			if song == 1 then
 				stages["o2"]:draw()
-			else
+			elseif song == 2 then
 				stages["voting-lounge"]:draw()
+			elseif song == 3 then
+				stages["turbulence"]:draw()
 			end
 			
 			weeksJ:drawRating(0.9)

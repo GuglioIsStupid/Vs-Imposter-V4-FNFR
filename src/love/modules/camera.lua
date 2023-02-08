@@ -66,7 +66,7 @@ function camera:removePoint(name)
 end
 
 function camera:addPoint(name, x, y, sx, sy)
-    camera.points[name] = {x = x, y = y, sx=sx or 1, sy=sy or 1}
+    camera.points[name] = {x = x, y = y, sx=sx or camera.scaleX, sy=camera.scaleY or 1}
 end
 
 function camera:moveToPoint(time, name, mustHit)

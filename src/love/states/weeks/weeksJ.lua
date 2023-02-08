@@ -63,9 +63,11 @@ local eventFuncs = {
 		if who == "dad" then 
 			if close == "in" then 
 				camera:moveToPoint(0, "enemy", false)
+				enemyIcon:animate("warchief")
 				print("DADDY INSIDE ME")
 			elseif close == "close" then 
 				camera:moveToPoint(0, "otherdude", false)
+				enemyIcon:animate("thejelqer")
 				print("DADDY CLOSE TO ME")
 			end
 		else
@@ -74,14 +76,21 @@ local eventFuncs = {
 				print("BOYFRIEND INSIDE ME")
 			elseif close == "close" then 
 				camera:moveToPoint(0, "redmungus", false)
+				enemyIcon:animate("redmungus")
 				print("BOYFRIEND CLOSE TO ME")
-			end
+			else
+				camera:moveToPoint(0, "middle", false)
+				print("BOYFRIEND NOT CLOSE TO ME")
+			end			
 		end
 	end,
 	["Play Animation"] = function(anim, who)
 		if who == "3" then 
 			boyfriend2:animate(anim, false)
 		end
+	end,
+	["Turbulence Ending"] = function()
+		turbEnding = true
 	end,
 }
 
@@ -264,9 +273,9 @@ return {
 		combo = 0
 
 		enemy:animate("idle")
-        enemy2:animate("idle")
+        if enemy2 then enemy2:animate("idle") end
 		boyfriend:animate("idle")
-        --boyfriend2:animate("idle")
+        if boyfriend2 then boyfriend2:animate("idle") end
 
 		if not camera.points["boyfriend"] then camera:addPoint("boyfriend", -boyfriend.x + 100, -boyfriend.y + 75) end
 		if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -enemy.y + 75) end
@@ -1056,14 +1065,14 @@ return {
 
 		girlfriend:update(dt)
 		enemy:update(dt)
-        enemy2:update(dt)
+        if enemy2 then enemy2:update(dt) end
 		boyfriend:update(dt)
-		boyfriend2:update(dt)
+		if boyfriend2 then boyfriend2:update(dt) end
 
 		boyfriend:beat(beatHandler.getBeat())
-		boyfriend2:beat(beatHandler.getBeat())
+		if boyfriend2 then boyfriend2:beat(beatHandler.getBeat()) end
 		enemy:beat(beatHandler.getBeat())
-        enemy2:beat(beatHandler.getBeat())
+        if enemy2 then enemy2:beat(beatHandler.getBeat()) end
 
 		for i = 1, 3 do
 			local spriteTimer = spriteTimers[i]
@@ -1112,18 +1121,18 @@ return {
 					if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
 						if useAltAnims then
 							if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim .. " alt", false, 2) end
-                            if song ~= 2 and ((not enemy2:isAnimated()) or enemy2:getAnimName() == "idle") then self:safeAnimate(enemy2, curAnim .. " alt", false, 2) end
+                            if song ~= 2 and enemy2 and ((not enemy2:isAnimated()) or enemy2:getAnimName() == "idle") then self:safeAnimate(enemy2, curAnim .. " alt", false, 2) end
 						else
 							if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim, false, 2) end
-                            if song ~= 2 and ((not enemy2:isAnimated()) or enemy2:getAnimName() == "idle") then self:safeAnimate(enemy2, curAnim, false, 2) end
+                            if song ~= 2 and enemy2 and ((not enemy2:isAnimated()) or enemy2:getAnimName() == "idle") then self:safeAnimate(enemy2, curAnim, false, 2) end
 						end
 					else
 						if useAltAnims then
 							self:safeAnimate(enemy, curAnim .. " alt", false, 2)
-                            if song ~= 2 then self:safeAnimate(enemy2, curAnim .. " alt", false, 2) end
+                            if song ~= 2 and enemy2 then self:safeAnimate(enemy2, curAnim .. " alt", false, 2) end
 						else
 							self:safeAnimate(enemy, curAnim, false, 2)
-                            if song ~= 2 then self:safeAnimate(enemy2, curAnim, false, 2) end
+                            if song ~= 2 and enemy2 then self:safeAnimate(enemy2, curAnim, false, 2) end
 						end
 					end
 
@@ -1141,67 +1150,69 @@ return {
 				end
 			end
 
-			if #enemy2Note > 0 then 
-				if (enemy2Note[1].y - musicPos <= -400) then
-					voices:setVolume(1)
+			if song == 2 then
+				if #enemy2Note > 0 then 
+					if (enemy2Note[1].y - musicPos <= -400) then
+						voices:setVolume(1)
 
-					if enemy2Note[1]:getAnimName() == "hold" or enemy2Note[1]:getAnimName() == "end" then
-						if useAltAnims then
-							if (not enemy2:isAnimated()) or enemy2:getAnimName() == "idle" then self:safeAnimate(enemy2, curAnim .. " alt", false, 2) end
+						if enemy2Note[1]:getAnimName() == "hold" or enemy2Note[1]:getAnimName() == "end" then
+							if useAltAnims then
+								if (not enemy2:isAnimated()) or enemy2:getAnimName() == "idle" then self:safeAnimate(enemy2, curAnim .. " alt", false, 2) end
+							else
+								if (not enemy2:isAnimated()) or enemy2:getAnimName() == "idle" then self:safeAnimate(enemy2, curAnim, false, 2) end
+							end
 						else
-							if (not enemy2:isAnimated()) or enemy2:getAnimName() == "idle" then self:safeAnimate(enemy2, curAnim, false, 2) end
+							if useAltAnims then
+								self:safeAnimate(enemy2, curAnim .. " alt", false, 2)
+							else
+								self:safeAnimate(enemy2, curAnim, false, 2)
+							end
 						end
-					else
-						if useAltAnims then
-							self:safeAnimate(enemy2, curAnim .. " alt", false, 2)
+
+						enemy2.lastHit = musicTime
+
+						if doMustHitSectionCam then	
+							if not mustHitSection then 
+								noteCamTweens[i]()
+							end
 						else
-							self:safeAnimate(enemy2, curAnim, false, 2)
-						end
-					end
-
-					enemy2.lastHit = musicTime
-
-					if doMustHitSectionCam then	
-						if not mustHitSection then 
 							noteCamTweens[i]()
 						end
-					else
-						noteCamTweens[i]()
-					end
 
-					table.remove(enemy2Note, 1)
+						table.remove(enemy2Note, 1)
+					end
 				end
-			end
 
-			if #boyfriend2Note > 0 then 
-				if (boyfriend2Note[1].y - musicPos <= -400) then
-					voices:setVolume(1)
+				if #boyfriend2Note > 0 then 
+					if (boyfriend2Note[1].y - musicPos <= -400) then
+						voices:setVolume(1)
 
-					if boyfriend2Note[1]:getAnimName() == "hold" or boyfriend2Note[1]:getAnimName() == "end" then
-						if useAltAnims then
-							if (not boyfriend2:isAnimated()) or boyfriend2:getAnimName() == "idle" then self:safeAnimate(boyfriend2, curAnim .. " alt", false, 2) end
+						if boyfriend2Note[1]:getAnimName() == "hold" or boyfriend2Note[1]:getAnimName() == "end" then
+							if useAltAnims then
+								if (not boyfriend2:isAnimated()) or boyfriend2:getAnimName() == "idle" then self:safeAnimate(boyfriend2, curAnim .. " alt", false, 2) end
+							else
+								if (not boyfriend2:isAnimated()) or boyfriend2:getAnimName() == "idle" then self:safeAnimate(boyfriend2, curAnim, false, 2) end
+							end
 						else
-							if (not boyfriend2:isAnimated()) or boyfriend2:getAnimName() == "idle" then self:safeAnimate(boyfriend2, curAnim, false, 2) end
+							if useAltAnims then
+								self:safeAnimate(boyfriend2, curAnim .. " alt", false, 2)
+							else
+								self:safeAnimate(boyfriend2, curAnim, false, 2)
+							end
 						end
-					else
-						if useAltAnims then
-							self:safeAnimate(boyfriend2, curAnim .. " alt", false, 2)
+
+						boyfriend2.lastHit = musicTime
+
+						if doMustHitSectionCam then	
+							if not mustHitSection then 
+								noteCamTweens[i]()
+							end
 						else
-							self:safeAnimate(boyfriend2, curAnim, false, 2)
-						end
-					end
-
-					boyfriend2.lastHit = musicTime
-
-					if doMustHitSectionCam then	
-						if not mustHitSection then 
 							noteCamTweens[i]()
 						end
-					else
-						noteCamTweens[i]()
-					end
 
-					table.remove(boyfriend2Note, 1)
+						table.remove(boyfriend2Note, 1)
+					end
 				end
 			end
 
@@ -1502,6 +1513,10 @@ return {
 		self:drawHealthbar()
 		love.graphics.push()
 			love.graphics.translate(lovesize.getWidth() / 2, lovesize.getHeight() / 2)
+			if song == 3 then 
+				love.graphics.translate(camHUD.x, camHUD.y)
+				love.graphics.rotate(camHUD.angle)
+			end
 			if not settings.downscroll then
 				love.graphics.scale(0.7, 0.7)
 			else
@@ -1539,39 +1554,41 @@ return {
 
 				love.graphics.push()
 					love.graphics.translate(0, -musicPos)
-                    for j = #enemy2Notes[i], 1, -1 do 
-                        if enemy2Notes[i][j].y - musicPos <= 560 then
-                            local animName = enemy2Notes[i][j]:getAnimName()
+					if song == 2 then
+						for j = #enemy2Notes[i], 1, -1 do 
+							if enemy2Notes[i][j].y - musicPos <= 560 then
+								local animName = enemy2Notes[i][j]:getAnimName()
 
-                            if animName == "hold" or animName == "end" then
-                                if settings.middleScroll then
-                                    graphics.setColor(1, 1, 1, 0.1)
-                                else
-                                    graphics.setColor(1, 1, 1, 0.3)
-                                end
-                            else
-                                if settings.middleScroll then
-                                    graphics.setColor(1, 1, 1, 0.3)
-                                else
-                                    graphics.setColor(1, 1, 1, 0.5)
-                                end
-                            end
-                            if not pixel then
-                                enemy2Notes[i][j]:draw()
-                            else
-                                if not settings.downscroll then
-                                    enemy2Notes[i][j]:udraw(8, 8)
-                                else
-                                    if enemy2Notes[i][j]:getAnimName() == "end" then
-                                        enemy2Notes[i][j]:udraw(8, 8)
-                                    else
-                                        enemy2Notes[i][j]:udraw(8, -8)
-                                    end
-                                end
-                            end
-                            graphics.setColor(1, 1, 1)
-                        end
-                    end
+								if animName == "hold" or animName == "end" then
+									if settings.middleScroll then
+										graphics.setColor(1, 1, 1, 0.1)
+									else
+										graphics.setColor(1, 1, 1, 0.3)
+									end
+								else
+									if settings.middleScroll then
+										graphics.setColor(1, 1, 1, 0.3)
+									else
+										graphics.setColor(1, 1, 1, 0.5)
+									end
+								end
+								if not pixel then
+									enemy2Notes[i][j]:draw()
+								else
+									if not settings.downscroll then
+										enemy2Notes[i][j]:udraw(8, 8)
+									else
+										if enemy2Notes[i][j]:getAnimName() == "end" then
+											enemy2Notes[i][j]:udraw(8, 8)
+										else
+											enemy2Notes[i][j]:udraw(8, -8)
+										end
+									end
+								end
+								graphics.setColor(1, 1, 1)
+							end
+						end
+					end
 
 					for j = #enemyNotes[i], 1, -1 do
 						if enemyNotes[i][j].y - musicPos <= 560 then
@@ -1606,31 +1623,33 @@ return {
 							graphics.setColor(1, 1, 1)
 						end
 					end
-                    for j = #boyfriend2Notes[i], 1, -1 do 
-                        if boyfriend2Notes[i][j].y - musicPos <= 560 then
-                            local animName = boyfriend2Notes[i][j]:getAnimName()
+					if song == 2 then
+						for j = #boyfriend2Notes[i], 1, -1 do 
+							if boyfriend2Notes[i][j].y - musicPos <= 560 then
+								local animName = boyfriend2Notes[i][j]:getAnimName()
 
-                            if animName == "hold" or animName == "end" then
-                                graphics.setColor(1, 1, 1, math.min(0.15, (500 + (boyfriend2Notes[i][j].y - musicPos)) / 350))
-                            else
-                                graphics.setColor(1, 1, 1, math.min(0.3, (500 + (boyfriend2Notes[i][j].y - musicPos)) / 200))
-                            end
-                            if not pixel then
-                                boyfriend2Notes[i][j]:draw()
-                            else
-                                if not settings.downscroll then
-                                    boyfriend2Notes[i][j]:udraw(8, 8)
-                                else
-                                    if boyfriend2Notes[i][j]:getAnimName() == "end" then
-                                        boyfriend2Notes[i][j]:udraw(8, 8)
-                                    else
-                                        boyfriend2Notes[i][j]:udraw(8, -8)
-                                    end
-                                end
-                            end
-                            graphics.setColor(1, 1, 1)
-                        end
-                    end
+								if animName == "hold" or animName == "end" then
+									graphics.setColor(1, 1, 1, math.min(0.15, (500 + (boyfriend2Notes[i][j].y - musicPos)) / 350))
+								else
+									graphics.setColor(1, 1, 1, math.min(0.3, (500 + (boyfriend2Notes[i][j].y - musicPos)) / 200))
+								end
+								if not pixel then
+									boyfriend2Notes[i][j]:draw()
+								else
+									if not settings.downscroll then
+										boyfriend2Notes[i][j]:udraw(8, 8)
+									else
+										if boyfriend2Notes[i][j]:getAnimName() == "end" then
+											boyfriend2Notes[i][j]:udraw(8, 8)
+										else
+											boyfriend2Notes[i][j]:udraw(8, -8)
+										end
+									end
+								end
+								graphics.setColor(1, 1, 1)
+							end
+						end
+					end
 					for j = #boyfriendNotes[i], 1, -1 do
 						if boyfriendNotes[i][j].y - musicPos <= 560 then
 							local animName = boyfriendNotes[i][j]:getAnimName()
@@ -1699,6 +1718,10 @@ return {
 	drawHealthbar = function(self, visibility)
 		local visibility = visibility or 1
 		love.graphics.push()
+			if song == 3 then 
+				love.graphics.translate(camHUD.x, camHUD.y)
+				love.graphics.rotate(camHUD.angle)
+			end
 			love.graphics.push()
 				graphics.setColor(0,0,0,settings.scrollUnderlayTrans)
 				if settings.middleScroll and not settings.multiplayer then
