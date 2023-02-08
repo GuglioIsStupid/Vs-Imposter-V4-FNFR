@@ -20,6 +20,8 @@ return {
 			stages["voting-lounge"]:enter()
 		elseif song == 3 then 
 			stages["turbulence"]:enter()
+		else
+			stages["victory"]:enter()
 		end
         
         flashAlpha = 0
@@ -39,16 +41,25 @@ return {
 			stages["voting-lounge"]:load()
 		elseif song == 3 then
 			stages["turbulence"]:load()
+		else
+			stages["victory"]:load()
 		end
 
         if song == 4 then
             inst = love.audio.newSource("songs/victory/Inst.ogg", "stream")
 			voices = love.audio.newSource("songs/victory/Voices.ogg", "stream")
+
+			stages["turbulence"]:leave()
+			stages["victory"]:enter()
 		elseif song == 3 then
 			inst = love.audio.newSource("songs/turbulence/Inst.ogg", "stream")
 			voices = love.audio.newSource("songs/turbulence/Voices.ogg", "stream")
-			camera:addPoint("boyfriend", -boyfriend.x + 100, -boyfriend.y + 75)
-			camera:addPoint("enemy", -enemy.x - 100, -enemy.y + 75)
+			camera.scaleX, camera.scaleY = 0.85, 0.85
+			camera.sizeX, camera.sizeY = 0.85, 0.85
+			camera:removePoint("boyfriend")
+			camera:removePoint("enemy")
+			camera:addPoint("boyfriend", -boyfriend.x + 100, -boyfriend.y + 75, 0.85, 0.85)
+			camera:addPoint("enemy", -enemy.x - 100, -enemy.y + 75, 0.85, 0.85)
 
 			stages["voting-lounge"]:leave()
 			stages["turbulence"]:enter()
@@ -104,6 +115,8 @@ return {
 			stages["voting-lounge"]:update(dt)
 		elseif song == 3 then
 			stages["turbulence"]:update(dt)
+		else
+			stages["victory"]:update(dt)
 		end
 
         -- lerp flashAlpha to 0
@@ -138,7 +151,7 @@ return {
 		end
 
 		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused then
-			if storyMode and song < 3 then
+			if storyMode and song < 4 then
 				song = song + 1
 
 				self:load()
@@ -171,6 +184,8 @@ return {
 				stages["voting-lounge"]:draw()
 			elseif song == 3 then
 				stages["turbulence"]:draw()
+			else
+				stages["victory"]:draw()
 			end
 			
 			weeksJ:drawRating(0.9)
