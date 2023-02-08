@@ -7,6 +7,8 @@ return {
 		weeksOw:enter()
 
 		week = 1
+		weekString = "ow"
+
 
 		song = songNum
 		difficulty = songAppend

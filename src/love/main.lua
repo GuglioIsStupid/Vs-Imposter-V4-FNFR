@@ -327,6 +327,7 @@ function love.load()
 		["nuzzus"] = require "stages.nuzzus",
 		["greyElec"] = require "stages.greyElec",
 		["turbulence"] = require "stages.turbulence",
+		["maroon1"] = require "stages.maroon1",
 	}
 
 	-- Load Menus
@@ -378,6 +379,7 @@ function love.load()
 		require "weeks.crewicide",
 		require "weeks.nuzzus",
 		require "weeks.grey",
+		require "weeks.maroon",
 	}
 
 	weekDesc = { -- Add your week description here
@@ -512,6 +514,14 @@ function love.load()
 				"Blackout",
 				"Neurotic"
 			}
+		},
+		{
+			"Maroon",
+			{
+				"Ashes",
+				"Magmatic",
+				"Boiling Point"
+			}
 		}
 	}
 
@@ -534,7 +544,7 @@ function love.load()
 		["WEEK 1"] = require "weeks.red",
 		["WEEK 2"] = require "weeks.green",
 		["WEEK 3"] = require "weeks.yellow",
-		["WEEK 5"] = require "weeks.orange",
+		["WEEK 5"] = require "weeks.maroon",
 		["WEEK 6"] = require "weeks.grey",
 		["WEEK 7"] = require "weeks.pink",
 		["WEEK J"] = require "weeks.j",

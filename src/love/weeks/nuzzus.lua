@@ -8,6 +8,8 @@ return {
 		stages["nuzzus"]:enter()
 
 		week = 1
+		weekString = "nuzzus"
+
 
 		song = songNum
 		difficulty = songAppend
@@ -19,6 +21,8 @@ return {
 
 		camera:addPoint("boyfriend", 0, 0)
 		camera:addPoint("enemy", 0, 0)
+
+		camera:moveToPoint(0, "boyfriend")
 
 
 

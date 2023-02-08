@@ -15,6 +15,8 @@ return {
 
 
 		week = 1
+		weekString = "UwU"
+
 
 		song = songNum
 		difficulty = songAppend

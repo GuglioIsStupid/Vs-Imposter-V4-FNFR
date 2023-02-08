@@ -14,6 +14,8 @@ return {
 
 		enemyIcon:animate("black", false)
 
+		weekString = "crewicide"
+
 
 
 		self:load()

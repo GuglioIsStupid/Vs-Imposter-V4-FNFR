@@ -8,6 +8,8 @@ return {
 		stages["jerma"]:enter()
 
 		week = 1
+		weekString = "jerma"
+
 
 		song = songNum
 		difficulty = songAppend

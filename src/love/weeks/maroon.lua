@@ -5,10 +5,10 @@ local stageBack, stageFront, curtains
 return {
 	enter = function(self, from, songNum, songAppend)
 		weeks:enter()
-		stages["polus1"]:enter()
+		stages["maroon1"]:enter()
 
 		week = 1
-		weekString = "red"
+		weekString = "maroon"
 
 
 		song = songNum
@@ -16,30 +16,25 @@ return {
 
 		enemyIcon:animate("red impostor 1", false)
 
-        enemy = love.filesystem.load("sprites/characters/boyfriend.lua")()
 
-        flashAlpha = 0
 
-		function ReactorBeep(alpha)
-			flashAlpha = alpha
-		end
 
 		self:load()
 	end,
 
 	load = function(self)
 		weeks:load()
-		stages["polus1"]:load()
+		stages["maroon1"]:load()
 
 		if song == 3 then
-			inst = love.audio.newSource("songs/meltdown/Inst.ogg", "stream")
-			voices = love.audio.newSource("songs/meltdown/Voices.ogg", "stream")
+			inst = love.audio.newSource("songs/boiling-point/Inst.ogg", "stream")
+			voices = love.audio.newSource("songs/boiling-point/Voices.ogg", "stream")
 		elseif song == 2 then
-			inst = love.audio.newSource("songs/sabotage/Inst.ogg", "stream")
-			voices = love.audio.newSource("songs/sabotage/Voices.ogg", "stream")
+			inst = love.audio.newSource("songs/magmatic/Inst.ogg", "stream")
+			voices = love.audio.newSource("songs/magmatic/Voices.ogg", "stream")
 		else
-			inst = love.audio.newSource("songs/sussus-moogus/Inst.ogg", "stream")
-			voices = love.audio.newSource("songs/sussus-moogus/Voices.ogg", "stream")
+			inst = love.audio.newSource("songs/ashes/Inst.ogg", "stream")
+			voices = love.audio.newSource("songs/ashes/Voices.ogg", "stream")
 		end
 
 		self:initUI()
@@ -51,23 +46,21 @@ return {
 		weeks:initUI()
 
 		if song == 3 then
-			weeks:generateNotes("songs/meltdown/meltdown-hard.json")
-			weeks:generateEvents("songs/meltdown/events.json")
+			weeks:generateNotes("songs/boiling-point/boiling-point-hard.json")
+			--weeks:generateEvents("songs/boiling-point/events.json")
 		elseif song == 2 then
-			weeks:generateNotes("songs/sabotage/sabotage-hard.json")
-			weeks:generateEvents("songs/sabotage/events.json")
+			weeks:generateNotes("songs/magmatic/magmatic-hard.json")
+			--weeks:generateEvents("songs/magmatic/events.json")
 		else
-			weeks:generateNotes("songs/sussus-moogus/sussus-moogus-hard.json")
-			weeks:generateEvents("songs/sussus-moogus/events.json")
+			weeks:generateNotes("songs/ashes/ashes-hard.json")
+			--weeks:generateEvents("songs/ashes/events.json")
 		end
 	end,
 
 	update = function(self, dt)
 		weeks:update(dt)
-		stages["polus1"]:update(dt)
+		stages["maroon1"]:update(dt)
 
-        -- lerp flashAlpha to 0
-        flashAlpha = util.lerp(flashAlpha, 0, util.clamp(0, dt * 5, 1))
 
 		if health >= 80 then
 			if enemyIcon:getAnimName() == "red impostor 1" then
@@ -107,14 +100,11 @@ return {
 			love.graphics.scale(camera.esizeX, camera.esizeY)
 			love.graphics.scale(camera.sizeX, camera.sizeY)
 
-			stages["polus1"]:draw()
+			stages["maroon1"]:draw()
 			
 			weeks:drawRating(0.9)
 		love.graphics.pop()
 
-        graphics.setColor(1,0,0,flashAlpha)
-        love.graphics.rectangle("fill", 0, 0, graphics.getWidth(), graphics.getHeight())
-        graphics.setColor(1,1,1,1)
 
 		weeks:drawUI()
 	end,

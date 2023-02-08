@@ -7,6 +7,8 @@ return {
 		weeksJ:enter()
 
 		week = 1
+		weekString = "j"
+
 
 		song = songNum
 
