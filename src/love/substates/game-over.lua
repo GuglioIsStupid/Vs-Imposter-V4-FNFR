@@ -69,6 +69,8 @@ return {
 		local boyfriend = fakeBoyfriend or boyfriend
 
 		if input:pressed("confirm") or pauseRestart then
+			pauseRestart = false
+
 			if inst then inst:stop() end -- In case inst is nil and "confirm" is pressed before game over music starts
 
 
@@ -95,11 +97,12 @@ return {
 				3,
 				function()
 					Gamestate.pop()
-					pauseRestart = false
 
 					fromState:load()
+
 				end
 			)
+
 		elseif input:pressed("gameBack") then
 			status.setLoading(true)
 
