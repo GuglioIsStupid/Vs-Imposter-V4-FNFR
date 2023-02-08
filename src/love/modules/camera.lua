@@ -65,17 +65,21 @@ function camera:removePoint(name)
     camera.points[name] = nil
 end
 
-function camera:addPoint(name, x, y)
-    camera.points[name] = {x = x, y = y}
+function camera:addPoint(name, x, y, sx, sy)
+    camera.points[name] = {x = x, y = y, sx=sx or 1, sy=sy or 1}
 end
 
 function camera:moveToPoint(time, name, mustHit)
     if camTimer then 
         Timer.cancel(camTimer)
     end
-    mustHit = mustHit or true 
-    camera.mustHit = mustHit
-    camTimer = Timer.tween(time, camera, {x = camera.points[name].x, y = camera.points[name].y}, "out-quad")
+    camera.mustHit = mustHit or true
+    camTimer = Timer.tween(time, camera, {
+        x = camera.points[name].x, 
+        y = camera.points[name].y, 
+        sizeX = camera.points[name].sx, 
+        sizeY = camera.points[name].sy
+    }, "out-quad")
 end
 
 function camera:drawCameraPoints()

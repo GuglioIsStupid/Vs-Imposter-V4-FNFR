@@ -17,9 +17,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
 local eventFuncs = {
-	["Add Camera Zoom"] = function(size, sizeHud)
+	["Add Camera Zoom"] = function(size, _)
 		size = tonumber(size) or 0.015
-		sizeHud = tonumber(sizeHud) or 0.03
 
 		Timer.tween(
 			(60/bpm)/4,
@@ -27,15 +26,6 @@ local eventFuncs = {
 			{
 				sizeX = camera.esizeX + size,
 				sizeY = camera.esizeY + size
-			},
-			"out-quad"
-		)
-		Timer.tween(
-			(60/bpm)/4,
-			uiScale,
-			{
-				sizeX = uiScale.sizeX + sizeHud,
-				sizeY = uiScale.sizeY + sizeHud
 			},
 			"out-quad"
 		)
@@ -69,6 +59,30 @@ local eventFuncs = {
     ["Lights Down O2"] = function()
         camera:setColor({0, 0, 0, 1}, 1)
     end,
+	["Cam lock in Voting Time"] = function(close, who)
+		if who == "dad" then 
+			if close == "in" then 
+				camera:moveToPoint(0, "enemy", false)
+				print("DADDY INSIDE ME")
+			elseif close == "close" then 
+				camera:moveToPoint(0, "otherdude", false)
+				print("DADDY CLOSE TO ME")
+			end
+		else
+			if close == "in" then 
+				camera:moveToPoint(0, "boyfriend", false)
+				print("BOYFRIEND INSIDE ME")
+			elseif close == "close" then 
+				camera:moveToPoint(0, "redmungus", false)
+				print("BOYFRIEND CLOSE TO ME")
+			end
+		end
+	end,
+	["Play Animation"] = function(anim, who)
+		if who == "3" then 
+			boyfriend2:animate(anim, false)
+		end
+	end,
 }
 
 local animList = {
@@ -348,7 +362,6 @@ return {
 						eventValue2 = sectionNotesE[j][5] or "",
 					}
 				)
-				--print(songEvents[i].eventTime, songEvents[i].eventName, songEvents[i].eventValue1, songEvents[i].eventValue2)
 			end
 		end
 	end,
@@ -985,7 +998,7 @@ return {
 				end
 
 
-				if camera.mustHit then
+				if camera.mustHit and song ~= 2 then
 					if events[i].mustHitSection then
 						mustHitSection = true
 						--camTimer = Timer.tween(1.25, camera, {x = -boyfriend.x + 100, y = -boyfriend.y + 75}, "out-quad")
@@ -1013,7 +1026,7 @@ return {
 		for i = 1, #songEvents do
 			if songEvents[i].eventTime <= absMusicTime then
 				if eventFuncs[songEvents[i].eventName] then
-					eventFuncs[songEvents[i].eventName](songEvents[i].eventValue1, songEvents.eventValue2)
+					eventFuncs[songEvents[i].eventName](songEvents[i].eventValue1, songEvents[i].eventValue2)
 				else
 					print(songEvents[i].eventName .. " is not implemented!")
 				end
@@ -1023,7 +1036,7 @@ return {
 			end
 		end
 
-		if beatHandler.onBeat() and beatHandler.getBeat() % 4 == 0 then
+		if beatHandler.onBeat() and beatHandler.getBeat() % 4 == 0 and song ~= 2 then
 			if camScaleTimer then Timer.cancel(camScaleTimer) end
 			if uiScaleTimer then Timer.cancel(uiScaleTimer) end
 
@@ -1045,14 +1058,10 @@ return {
 		enemy:update(dt)
         enemy2:update(dt)
 		boyfriend:update(dt)
+		boyfriend2:update(dt)
 
-		if beatHandler.onBeat() and beatHandler.getBeat() % 2 == 0 then
-			if spriteTimers[1] == 0 then
-				self:safeAnimate(girlfriend, "idle", true, 1)
-				girlfriend:setAnimSpeed(14.4 / (60 / bpm))
-			end
-		end
 		boyfriend:beat(beatHandler.getBeat())
+		boyfriend2:beat(beatHandler.getBeat())
 		enemy:beat(beatHandler.getBeat())
         enemy2:beat(beatHandler.getBeat())
 
@@ -1074,7 +1083,9 @@ return {
 			local enemyArrow = enemyArrows[i]
 			local boyfriendArrow = boyfriendArrows[i]
 			local enemyNote = enemyNotes[i]
+			local enemy2Note = enemy2Notes[i]
 			local boyfriendNote = boyfriendNotes[i]
+			local boyfriend2Note = boyfriend2Notes[i]
 			local curAnim = animList[i]
 			local curInput = inputList[i]
 
@@ -1101,18 +1112,18 @@ return {
 					if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
 						if useAltAnims then
 							if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim .. " alt", false, 2) end
-                            if (not enemy2:isAnimated()) or enemy2:getAnimName() == "idle" then self:safeAnimate(enemy2, curAnim .. " alt", false, 2) end
+                            if song ~= 2 and ((not enemy2:isAnimated()) or enemy2:getAnimName() == "idle") then self:safeAnimate(enemy2, curAnim .. " alt", false, 2) end
 						else
 							if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim, false, 2) end
-                            if (not enemy2:isAnimated()) or enemy2:getAnimName() == "idle" then self:safeAnimate(enemy2, curAnim, false, 2) end
+                            if song ~= 2 and ((not enemy2:isAnimated()) or enemy2:getAnimName() == "idle") then self:safeAnimate(enemy2, curAnim, false, 2) end
 						end
 					else
 						if useAltAnims then
 							self:safeAnimate(enemy, curAnim .. " alt", false, 2)
-                            self:safeAnimate(enemy2, curAnim .. " alt", false, 2)
+                            if song ~= 2 then self:safeAnimate(enemy2, curAnim .. " alt", false, 2) end
 						else
 							self:safeAnimate(enemy, curAnim, false, 2)
-                            self:safeAnimate(enemy2, curAnim, false, 2)
+                            if song ~= 2 then self:safeAnimate(enemy2, curAnim, false, 2) end
 						end
 					end
 
@@ -1127,6 +1138,70 @@ return {
 					end
 
 					table.remove(enemyNote, 1)
+				end
+			end
+
+			if #enemy2Note > 0 then 
+				if (enemy2Note[1].y - musicPos <= -400) then
+					voices:setVolume(1)
+
+					if enemy2Note[1]:getAnimName() == "hold" or enemy2Note[1]:getAnimName() == "end" then
+						if useAltAnims then
+							if (not enemy2:isAnimated()) or enemy2:getAnimName() == "idle" then self:safeAnimate(enemy2, curAnim .. " alt", false, 2) end
+						else
+							if (not enemy2:isAnimated()) or enemy2:getAnimName() == "idle" then self:safeAnimate(enemy2, curAnim, false, 2) end
+						end
+					else
+						if useAltAnims then
+							self:safeAnimate(enemy2, curAnim .. " alt", false, 2)
+						else
+							self:safeAnimate(enemy2, curAnim, false, 2)
+						end
+					end
+
+					enemy2.lastHit = musicTime
+
+					if doMustHitSectionCam then	
+						if not mustHitSection then 
+							noteCamTweens[i]()
+						end
+					else
+						noteCamTweens[i]()
+					end
+
+					table.remove(enemy2Note, 1)
+				end
+			end
+
+			if #boyfriend2Note > 0 then 
+				if (boyfriend2Note[1].y - musicPos <= -400) then
+					voices:setVolume(1)
+
+					if boyfriend2Note[1]:getAnimName() == "hold" or boyfriend2Note[1]:getAnimName() == "end" then
+						if useAltAnims then
+							if (not boyfriend2:isAnimated()) or boyfriend2:getAnimName() == "idle" then self:safeAnimate(boyfriend2, curAnim .. " alt", false, 2) end
+						else
+							if (not boyfriend2:isAnimated()) or boyfriend2:getAnimName() == "idle" then self:safeAnimate(boyfriend2, curAnim, false, 2) end
+						end
+					else
+						if useAltAnims then
+							self:safeAnimate(boyfriend2, curAnim .. " alt", false, 2)
+						else
+							self:safeAnimate(boyfriend2, curAnim, false, 2)
+						end
+					end
+
+					boyfriend2.lastHit = musicTime
+
+					if doMustHitSectionCam then	
+						if not mustHitSection then 
+							noteCamTweens[i]()
+						end
+					else
+						noteCamTweens[i]()
+					end
+
+					table.remove(boyfriend2Note, 1)
 				end
 			end
 
@@ -1536,9 +1611,9 @@ return {
                             local animName = boyfriend2Notes[i][j]:getAnimName()
 
                             if animName == "hold" or animName == "end" then
-                                graphics.setColor(1, 1, 1, math.min(0.3, (500 + (boyfriend2Notes[i][j].y - musicPos)) / 200))
+                                graphics.setColor(1, 1, 1, math.min(0.15, (500 + (boyfriend2Notes[i][j].y - musicPos)) / 350))
                             else
-                                graphics.setColor(1, 1, 1, math.min(0.5, (500 + (boyfriend2Notes[i][j].y - musicPos)) / 150))
+                                graphics.setColor(1, 1, 1, math.min(0.3, (500 + (boyfriend2Notes[i][j].y - musicPos)) / 200))
                             end
                             if not pixel then
                                 boyfriend2Notes[i][j]:draw()

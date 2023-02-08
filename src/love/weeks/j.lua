@@ -5,13 +5,18 @@ local stageBack, stageFront, curtains
 return {
 	enter = function(self, from, songNum, songAppend)
 		weeksJ:enter()
-		stages["o2"]:enter()
 
 		week = 1
 
 		song = songNum
 
 		enemyIcon:animate("jorsawsee", false)
+
+		if song == 1 then 
+			stages["o2"]:enter()
+		else
+			stages["voting-lounge"]:enter()
+		end
         
         flashAlpha = 0
 
@@ -24,7 +29,11 @@ return {
 
 	load = function(self)
 		weeksJ:load()
-		stages["o2"]:load()
+		if song == 1 then
+			stages["o2"]:load()
+		else
+			stages["voting-lounge"]:load()
+		end
 
         if song == 4 then
             inst = love.audio.newSource("songs/victory/Inst.ogg", "stream")
@@ -35,6 +44,14 @@ return {
 		elseif song == 2 then
 			inst = love.audio.newSource("songs/voting-time/Inst.ogg", "stream")
 			voices = love.audio.newSource("songs/voting-time/Voices.ogg", "stream")
+
+			stages["o2"]:leave()
+			stages["voting-lounge"]:enter()
+
+			camera:addPoint("boyfriend", -480, 60, 1.25, 1.25)
+			camera:addPoint("redmungus", -420, 100, 1.35, 1.35)
+			camera:addPoint("enemy", 525, 60, 1.25, 1.25)
+			camera:addPoint("otherdude", 440, 100, 1.35, 1.35)
 		else
 			inst = love.audio.newSource("songs/O2/Inst.ogg", "stream")
 			voices = love.audio.newSource("songs/O2/Voices.ogg", "stream")
@@ -57,6 +74,9 @@ return {
 			weeksJ:generateNotes("songs/voting-time/voting-time-hard.json")
             weeksJ:generateOtherNotes("songs/voting-time/voting-time-other.json")
 			weeksJ:generateEvents("songs/voting-time/events.json")
+
+			camera:addPoint("middle", 0, 0)
+			camera:moveToPoint(1, "middle", false)
 		else
 			weeksJ:generateNotes("songs/O2/O2-hard.json")
 			weeksJ:generateEvents("songs/O2/events.json")
@@ -65,7 +85,11 @@ return {
 
 	update = function(self, dt)
 		weeksJ:update(dt)
-		stages["o2"]:update(dt)
+		if song == 1 then
+			stages["o2"]:update(dt)
+		else
+			stages["voting-lounge"]:update(dt)
+		end
 
         -- lerp flashAlpha to 0
         flashAlpha = util.lerp(flashAlpha, 0, util.clamp(0, dt * 5, 1))
@@ -108,7 +132,11 @@ return {
 			love.graphics.scale(camera.esizeX, camera.esizeY)
 			love.graphics.scale(camera.sizeX, camera.sizeY)
 
-			stages["o2"]:draw()
+			if song == 1 then
+				stages["o2"]:draw()
+			else
+				stages["voting-lounge"]:draw()
+			end
 			
 			weeksJ:drawRating(0.9)
 		love.graphics.pop()

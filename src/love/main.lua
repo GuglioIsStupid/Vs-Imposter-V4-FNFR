@@ -323,6 +323,7 @@ function love.load()
 		["jerma"] = require "stages.jerma",
 		["o2"] = require "stages.o2",
 		["crewicide"] = require "stages.crewicide",
+		["voting-lounge"] = require "stages.voting-lounge"
 	}
 
 	-- Load Menus
