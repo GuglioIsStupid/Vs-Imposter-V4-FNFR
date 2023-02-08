@@ -323,7 +323,7 @@ function love.load()
 		["jerma"] = require "stages.jerma",
 		["o2"] = require "stages.o2",
 		["crewicide"] = require "stages.crewicide",
-		["voting-lounge"] = require "stages.voting-lounge"
+		["voting-lounge"] = require "stages.voting-lounge",
 		["nuzzus"] = require "stages.nuzzus",
 		["greyElec"] = require "stages.greyElec",
 	}
