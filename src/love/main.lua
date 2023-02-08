@@ -324,6 +324,8 @@ function love.load()
 		["o2"] = require "stages.o2",
 		["crewicide"] = require "stages.crewicide",
 		["voting-lounge"] = require "stages.voting-lounge"
+		["nuzzus"] = require "stages.nuzzus",
+		["greyElec"] = require "stages.greyElec",
 	}
 
 	-- Load Menus
@@ -350,6 +352,8 @@ function love.load()
 	weeksPink = require "states.weeks.weeksPink"
 	weeksYellow = require "states.weeks.weeksYellow"
 	weeksJ = require "states.weeks.weeksJ"
+	weeksNuzzus = require "states.weeks.weeksNuzzus"
+	weeksGrey = require "states.weeks.weeksGrey"
 
 
 	-- Load substates
@@ -371,6 +375,8 @@ function love.load()
 		require "weeks.insaneStreamer",
 		require "weeks.j",
 		require "weeks.crewicide",
+		require "weeks.nuzzus",
+		require "weeks.grey",
 	}
 
 	weekDesc = { -- Add your week description here
@@ -491,6 +497,20 @@ function love.load()
 			{
 				"Crewicide"
 			}
+		},
+		{
+			"Nuzzus",
+			{
+				"Nuzzus"
+			}
+		},
+		{
+			"Gray",
+			{
+				"Delusion",
+				"Blackout",
+				"Neurotic"
+			}
 		}
 	}
 
@@ -514,7 +534,7 @@ function love.load()
 		["WEEK 2"] = require "weeks.green",
 		["WEEK 3"] = require "weeks.yellow",
 		["WEEK 5"] = require "weeks.orange",
-		["WEEK 6"] = require "weeks.orange",
+		["WEEK 6"] = require "weeks.grey",
 		["WEEK 7"] = require "weeks.pink",
 		["WEEK J"] = require "weeks.j",
 		["BOO!"] = require "weeks.orange",
