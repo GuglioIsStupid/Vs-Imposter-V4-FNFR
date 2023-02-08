@@ -24,7 +24,7 @@ return {
 
         stageImages["snowFront"]:animate("idle", true)
 
-        stageImages["snowBack"].y = -929
+        stageImages["snowBack"].y = -227
         stageImages["snowBack"]:animate("idle", true)
 
         camera.sizeX, camera.sizeY = 0.5, 0.5
@@ -55,15 +55,14 @@ return {
 
             stageImages["sky"]:draw()
             stageImages["cloud"]:draw()
-            love.graphics.setColor(1, 1, 1, 0.5)
-            stageImages["snowBack"]:draw()
-            love.graphics.setColor(1, 1, 1, 1)
+
 
             stageImages["bg"]:draw()
             girlfriend:draw()
 			enemy:draw()
 			boyfriend:draw()
             love.graphics.setColor(1, 1, 1, 0.5)
+            stageImages["snowBack"]:draw()
 
             stageImages["snowFront"]:draw()
             love.graphics.setColor(1, 1, 1, 1)
