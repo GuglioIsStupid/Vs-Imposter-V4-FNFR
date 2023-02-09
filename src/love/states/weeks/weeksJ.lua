@@ -92,6 +92,66 @@ local eventFuncs = {
 	["Turbulence Ending"] = function()
 		turbEnding = true
 	end,
+	["Victory Darkness"] = function(switch)
+		if switch == "on" then 
+			victoryDarkness = true
+		else
+			victoryDarkness = false
+		end
+	end,
+	["Show Victory Guy"] = function(guy, switch)
+		if (guy == "jor") then
+			if switch == "show" then 
+				stageImages["vic_jor"].alpha = 1
+			else
+				stageImages["vic_jor"].alpha = 0
+			end
+		elseif guy == "war" then 
+			if switch == "show" then 
+				stageImages["vic war"].alpha = 1
+				stageImages["vic war"].x, stageImages["vic war"].y = -152, 12
+			else
+				stageImages["vic war"].alpha = 0
+			end
+		elseif guy == "warMid" then 
+			if switch == "show" then 
+				stageImages["vic war"].alpha = 1
+				stageImages["vic war"].x, stageImages["vic war"].y = 7, 12
+			else
+				stageImages["vic war"].alpha = 0
+			end
+		elseif guy == "jelqLeft" then 
+			if switch == "show" then 
+				stageImages["vic jelq"].alpha = 1
+				stageImages["vic jelq"].x, stageImages["vic jelq"].y = -152, 12
+			else
+				stageImages["vic jelq"].alpha = 0
+			end
+		elseif guy == "jelqMid" then 
+			if switch == "show" then 
+				stageImages["vic jelq"].alpha = 1
+				stageImages["vic jelq"].x, stageImages["vic jelq"].y = 7, 12
+			else
+				stageImages["vic jelq"].alpha = 0
+			end
+		elseif guy == "jelqRight" then
+			if switch == "show" then 
+				stageImages["vic jelq"].alpha = 1
+				stageImages["vic jelq"].x, stageImages["vic jelq"].y = 140, 12
+			else
+				stageImages["vic jelq"].alpha = 0
+			end
+		else
+			stageImages["vic_jor"].alpha = 0
+			stageImages["vic war"].alpha = 0
+			stageImages["vic jelq"].alpha = 0
+		end
+	end,
+	["Change Character"] = function(_, name)
+		-- DUMB WORKAROUND LOL
+
+		curChar = name
+	end,
 }
 
 local animList = {
@@ -274,6 +334,7 @@ return {
 
 		enemy:animate("idle")
         if enemy2 then enemy2:animate("idle") end
+		if enemy3 then enemy3:animate("idle") end
 		boyfriend:animate("idle")
         if boyfriend2 then boyfriend2:animate("idle") end
 
@@ -896,9 +957,8 @@ return {
 										musicTime = 0
 										beatHandler.setBeat(0)
 
-										if inst then inst:play() end
-										voices:play()
-
+											if inst then inst:play() end
+											voices:play()
 									end
 								)
 							end
@@ -1066,6 +1126,7 @@ return {
 		girlfriend:update(dt)
 		enemy:update(dt)
         if enemy2 then enemy2:update(dt) end
+		if enemy3 then enemy3:update(dt) end
 		boyfriend:update(dt)
 		if boyfriend2 then boyfriend2:update(dt) end
 
@@ -1073,6 +1134,7 @@ return {
 		if boyfriend2 then boyfriend2:beat(beatHandler.getBeat()) end
 		enemy:beat(beatHandler.getBeat())
         if enemy2 then enemy2:beat(beatHandler.getBeat()) end
+		if enemy3 then enemy3:beat(beatHandler.getBeat()) end
 
 		for i = 1, 3 do
 			local spriteTimer = spriteTimers[i]
@@ -1122,17 +1184,21 @@ return {
 						if useAltAnims then
 							if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim .. " alt", false, 2) end
                             if song ~= 2 and enemy2 and ((not enemy2:isAnimated()) or enemy2:getAnimName() == "idle") then self:safeAnimate(enemy2, curAnim .. " alt", false, 2) end
+							if enemy3 then self:safeAnimate(enemy3, curAnim .. " alt", false, 2) end
 						else
 							if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim, false, 2) end
-                            if song ~= 2 and enemy2 and ((not enemy2:isAnimated()) or enemy2:getAnimName() == "idle") then self:safeAnimate(enemy2, curAnim, false, 2) end
+                            if song ~= 2 and enemy2 and ((not enemy2:isAnimated()) or enemy2:getAnimName() == "idle") then self:safeAnimate(enemy2, curAnim, false, 2) end 
+							if enemy3 then self:safeAnimate(enemy3, curAnim, false, 2) end
 						end
 					else
 						if useAltAnims then
 							self:safeAnimate(enemy, curAnim .. " alt", false, 2)
                             if song ~= 2 and enemy2 then self:safeAnimate(enemy2, curAnim .. " alt", false, 2) end
+							if enemy3 then self:safeAnimate(enemy3, curAnim .. " alt", false, 2) end
 						else
 							self:safeAnimate(enemy, curAnim, false, 2)
                             if song ~= 2 and enemy2 then self:safeAnimate(enemy2, curAnim, false, 2) end
+							if enemy3 then self:safeAnimate(enemy3, curAnim, false, 2) end
 						end
 					end
 
@@ -1735,7 +1801,7 @@ return {
 			love.graphics.scale(0.7, 0.7)
 			love.graphics.scale(uiScale.x, uiScale.y)
 
-            if not fuckerIsDead then
+            if not fuckerIsDead or song ~= 4 then
                 graphics.setColor(1, 1, 1, visibility)
                 graphics.setColor(1, 0, 0)
                 love.graphics.rectangle("fill", -500, 350+downscrollOffset, 1000, 25)
@@ -1762,7 +1828,7 @@ return {
 			if not convertedAcc then
 				convertedAcc = math.floor(additionalAccuracy / (noteCounter + misses)) .. "%"
 			end
-			self:healthbarText("Score: " .. score .. " | Misses: " .. misses .. " | Accuracy: " .. convertedAcc)
+			self:healthbarText("Score: " .. (song ~= 4 and score or "Who cares? You already won!") .. " | Misses: " .. (song ~= 4 and misses or "0") .. " | Accuracy: " .. convertedAcc)
 			if settings.botPlay then
 				botplayY = botplayY + math.sin(love.timer.getTime()) * 0.15
 				uitext("BOTPLAY", -85, botplayY, 0, 2, 2, 0, 0, 0, 0, botplayAlpha[1])

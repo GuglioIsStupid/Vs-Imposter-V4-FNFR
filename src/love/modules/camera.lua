@@ -77,7 +77,9 @@ function camera:moveToPoint(time, name, mustHit)
     camTimer = Timer.tween(time, camera, {
         x = camera.points[name].x, 
         y = camera.points[name].y, 
-        sizeX = camera.points[name].sx, 
+        scaleX = camera.points[name].sx, 
+        scaleY = camera.points[name].sy,
+        sizeX = camera.points[name].sx,
         sizeY = camera.points[name].sy
     }, "out-quad")
 end
