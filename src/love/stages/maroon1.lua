@@ -6,6 +6,7 @@ return {
             ["sky"] = graphics.newImage(graphics.imagePath("maroon/newsky")),
             ["snowFront"] = love.filesystem.load("sprites/maroon/snow.lua")(),
             ["snowBack"] = love.filesystem.load("sprites/maroon/snowback.lua")(),
+            ["overlay"] = graphics.newImage(graphics.imagePath("maroon/overlaythjing")),
         }
 
         enemy = love.filesystem.load("sprites/characters/maroon.lua")()
@@ -18,6 +19,8 @@ return {
         boyfriend.x, boyfriend.y = 633, 407
         stageImages["snowFront"].sizeX, stageImages["snowFront"].sizeY = 2.8, 2.8 
         stageImages["snowBack"].sizeX, stageImages["snowBack"].sizeY = 5.4, 5.4
+
+        stageImages["overlay"].sizeX, stageImages["overlay"].sizeY = 2, 2
 
         enemy.sizeX, enemy.sizeY = 1.3, 1.3
         boyfriend.sizeX, boyfriend.sizeY = 1.3, 1.3
@@ -75,6 +78,7 @@ return {
 
             stageImages["snowFront"]:draw()
             love.graphics.setColor(1, 1, 1, 1)
+            stageImages["overlay"]:draw()
 
 		love.graphics.pop()
     end,
