@@ -328,7 +328,8 @@ function love.load()
 		["greyElec"] = require "stages.greyElec",
 		["turbulence"] = require "stages.turbulence",
 		["maroon1"] = require "stages.maroon1",
-		["victory"] = require "stages.victory"
+		["victory"] = require "stages.victory",
+		["maroon2"] = require "stages.maroon2"
 	}
 
 	-- Load Menus

@@ -5,13 +5,21 @@ local stageBack, stageFront, curtains
 return {
 	enter = function(self, from, songNum, songAppend)
 		weeks:enter()
-		stages["maroon1"]:enter()
+		song = songNum
+
+		if song == 3 then
+			stages["maroon2"]:enter()
+		else
+
+			stages["maroon1"]:enter()
+		end
 
 		week = 1
 		weekString = "maroon"
 
+		gameOverMusic = "normal"
 
-		song = songNum
+
 		difficulty = songAppend
 
 		enemyIcon:animate("red impostor 1", false)
@@ -24,15 +32,20 @@ return {
 
 	load = function(self)
 		weeks:load()
-		stages["maroon1"]:load()
 
 		if song == 3 then
+			stages["maroon1"]:leave()
+			stages["maroon2"]:load()
 			inst = love.audio.newSource("songs/boiling-point/Inst.ogg", "stream")
 			voices = love.audio.newSource("songs/boiling-point/Voices.ogg", "stream")
 		elseif song == 2 then
+			stages["maroon1"]:load()
+
 			inst = love.audio.newSource("songs/magmatic/Inst.ogg", "stream")
 			voices = love.audio.newSource("songs/magmatic/Voices.ogg", "stream")
 		else
+			stages["maroon1"]:load()
+
 			inst = love.audio.newSource("songs/ashes/Inst.ogg", "stream")
 			voices = love.audio.newSource("songs/ashes/Voices.ogg", "stream")
 		end
@@ -59,9 +72,12 @@ return {
 
 	update = function(self, dt)
 		weeks:update(dt)
-		stages["maroon1"]:update(dt)
+		if song == 3 then
+			stages["maroon2"]:update(dt)
+		else
+			stages["maroon1"]:update(dt)
 
-
+		end
 		if health >= 80 then
 			if enemyIcon:getAnimName() == "red impostor 1" then
 				enemyIcon:animate("red impostor 1 losing", false)
@@ -99,8 +115,11 @@ return {
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
 			love.graphics.scale(camera.esizeX, camera.esizeY)
 			love.graphics.scale(camera.sizeX, camera.sizeY)
-
-			stages["maroon1"]:draw()
+			if song == 3 then
+				stages["maroon2"]:draw()
+			else
+				stages["maroon1"]:draw()
+			end
 			
 			weeks:drawRating(0.9)
 		love.graphics.pop()
