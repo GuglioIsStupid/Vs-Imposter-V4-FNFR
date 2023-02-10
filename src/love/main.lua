@@ -329,7 +329,8 @@ function love.load()
 		["turbulence"] = require "stages.turbulence",
 		["maroon1"] = require "stages.maroon1",
 		["victory"] = require "stages.victory",
-		["maroon2"] = require "stages.maroon2"
+		["maroon2"] = require "stages.maroon2",
+		["who"] = require "stages.who"
 	}
 
 	-- Load Menus
@@ -358,6 +359,7 @@ function love.load()
 	weeksJ = require "states.weeks.weeksJ"
 	weeksNuzzus = require "states.weeks.weeksNuzzus"
 	weeksGrey = require "states.weeks.weeksGrey"
+	weeksWho = require "states.weeks.weeksWho"
 
 
 	-- Load substates
@@ -382,6 +384,7 @@ function love.load()
 		require "weeks.nuzzus",
 		require "weeks.grey",
 		require "weeks.maroon",
+		require "weeks.who",
 	}
 
 	weekDesc = { -- Add your week description here
@@ -523,6 +526,12 @@ function love.load()
 				"Ashes",
 				"Magmatic",
 				"Boiling Point"
+			}
+		},
+		{
+			"Who",
+			{
+				"Who"
 			}
 		}
 	}
