@@ -64,7 +64,7 @@ local eventFuncs = {
 			if close == "in" then 
 				camera:moveToPoint(0, "enemy", false)
 				enemyIcon:animate("warchief")
-				print("DADDY INSIDE ME")
+				print("DADDY INSIDE ME")               ---gugwio pls put it in me like i am not even joking guglio i want you inside me pleeeeasse
 			elseif close == "close" then 
 				camera:moveToPoint(0, "otherdude", false)
 				enemyIcon:animate("thejelqer")

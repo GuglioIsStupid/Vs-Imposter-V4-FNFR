@@ -38,7 +38,7 @@ return {
 		weeksWho:initUI()
 
 		weeksWho:generateNotes("songs/who/who-hard.json")
-		--weeksWho:generateEvents("songs/who/events.json")
+		weeksWho:generateEvents("songs/who/events.json")
 
 	end,
 
