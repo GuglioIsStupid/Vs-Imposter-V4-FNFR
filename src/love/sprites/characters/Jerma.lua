@@ -81,6 +81,7 @@ return graphics.newSprite(
 	"idle", -- set to default animation
 	false,
 	{
+		sing_duration = 6.1,
 		sing_duration = 10,
 		isCharacter = true
 	}
