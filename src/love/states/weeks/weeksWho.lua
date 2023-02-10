@@ -25,6 +25,24 @@ local eventFuncs = {
 		print("haiiii")
 		flashAlpha = tonumber(value) or 0.4
 	end,
+	["Cam lock in Who"] = function(value1, value2)
+
+		if value1 == "in" then
+			camera.sizeX, camera.sizeY = 1.3, 1.3
+			camera.scaleX, camera.scaleY = 1.3, 1.3
+			if value2 == "dad" then
+				camera:moveToPoint(0, "enemy")
+			else
+				camera:moveToPoint(0, "boyfriend")
+			end
+		else
+			camera.sizeX, camera.sizeY = 0.7, 0.7
+			camera.scaleX, camera.scaleY = 0.7, 0.7
+		end
+
+
+
+	end,
 }
 
 local animList = {
