@@ -55,7 +55,7 @@ return {
 
 		if song == 3 then
 			weeksPink:generateNotes("songs/pretender/pretender-hard.json")
-			weeksPink:generateEvents("songs/pretender/events.json")
+			--weeksPink:generateEvents("songs/pretender/events.json")
 		elseif song == 2 then
 			weeksPink:generateNotes("songs/pinkwave/pinkwave-hard.json")
 			weeksPink:generateEvents("songs/pinkwave/events.json")
