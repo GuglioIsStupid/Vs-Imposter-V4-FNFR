@@ -28,6 +28,8 @@ return {
 		stages["miraCaf"]:enter()
 
 		week = 1
+		weekString = "green"
+
 
 
 		cutsceneTime, cutsceneTimeThres, oldcutsceneTimeThres = 0, 0, 0

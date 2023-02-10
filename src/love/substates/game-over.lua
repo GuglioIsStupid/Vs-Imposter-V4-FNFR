@@ -29,8 +29,10 @@ return {
 		if inst then inst:stop() end
 		voices:stop()
 
-		audio.playSound(sounds["death"])
+		if not pauseRestart then
 
+			audio.playSound(sounds["death"])
+		end
 		boyfriend:animate("dies", false)
 
 		Timer.clear()
@@ -41,11 +43,20 @@ return {
 			{x = -boyfriend.x, y = -boyfriend.y, sizeX = camera.scaleX, sizeY = camera.scaleY},
 			"out-quad",
 			function()
-				if not pixel then
-					inst = love.audio.newSource("music/game-over.ogg", "stream")
+
+
+				if gameOverMusic == "j" then
+					inst = love.audio.newSource("music/SUSPICIOUS/Jorsawsee_Loop.ogg", "stream")
+				elseif gameOverMusic == "pico" then
+					inst = love.audio.newSource("music/SUSPICIOUS/deathPicoMusicLoop.ogg", "stream")
+				elseif gameOverMusic == "henry" then
+					inst = love.audio.newSource("music/SUSPICIOUS/deathHenryMusicLoop.ogg", "stream")
 				else
-					inst = love.audio.newSource("music/pixel/game-over.ogg", "stream")
+					inst = love.audio.newSource("music/SUSPICIOUS/gameover_v4_LOOP.ogg", "stream")
 				end
+
+
+
 				inst:setLooping(true)
 				inst:play()
 
@@ -59,13 +70,21 @@ return {
 
 		if input:pressed("confirm") or pauseRestart then
 			pauseRestart = false
+
 			if inst then inst:stop() end -- In case inst is nil and "confirm" is pressed before game over music starts
 
-			if not pixel then
-				inst = love.audio.newSource("music/game-over-end.ogg", "stream")
+
+			if gameOverMusic == "j" then
+				inst = love.audio.newSource("music/SUSPICIOUS/Jorsawsee_End.ogg", "stream")
+			elseif gameOverMusic == "pico" then
+				inst = love.audio.newSource("music/SUSPICIOUS/deathPicoMusicEnd.ogg", "stream")
+			elseif gameOverMusic == "henry" then
+				inst = love.audio.newSource("music/SUSPICIOUS/deathHenryMusicEnd.ogg", "stream")
 			else
-				inst = love.audio.newSource("music/pixel/game-over-end.ogg", "stream")
+				inst = love.audio.newSource("music/SUSPICIOUS/gameover_v4_End.ogg", "stream")
 			end
+
+
 			inst:play()
 
 			Timer.clear()
@@ -80,8 +99,10 @@ return {
 					Gamestate.pop()
 
 					fromState:load()
+
 				end
 			)
+
 		elseif input:pressed("gameBack") then
 			status.setLoading(true)
 
@@ -109,11 +130,13 @@ return {
 			love.graphics.push()
 				love.graphics.scale(camera.sizeX, camera.sizeY)
 				love.graphics.translate(camera.x, camera.y)
+				if not pauseRestart then
 
-				if not pixel then
-					boyfriend:draw()
-				else
-					boyfriend:udraw()
+					if not pixel then
+						boyfriend:draw()
+					else
+						boyfriend:udraw()
+					end
 				end
 			love.graphics.pop()
 		love.graphics.pop()

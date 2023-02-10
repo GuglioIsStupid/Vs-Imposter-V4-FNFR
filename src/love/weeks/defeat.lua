@@ -12,6 +12,8 @@ return {
         lolThing = graphics.newImage(graphics.imagePath("defeat/lol thing"))
 		defeat = love.filesystem.load("sprites/defeat/defeat.lua")()
 		week = 1
+		weekString = "defeat"
+
 
 		song = songNum
 

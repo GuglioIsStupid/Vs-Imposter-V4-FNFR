@@ -8,6 +8,8 @@ return {
 		stages["polus1"]:enter()
 
 		week = 1
+		weekString = "red"
+
 
 		song = songNum
 		difficulty = songAppend

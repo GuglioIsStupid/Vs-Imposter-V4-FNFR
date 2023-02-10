@@ -321,7 +321,16 @@ function love.load()
         ["greyMira"] = require "stages.greyMira",
 		["esculent"] = require "stages.esculent",
 		["jerma"] = require "stages.jerma",
+		["o2"] = require "stages.o2",
 		["crewicide"] = require "stages.crewicide",
+		["voting-lounge"] = require "stages.voting-lounge",
+		["nuzzus"] = require "stages.nuzzus",
+		["greyElec"] = require "stages.greyElec",
+		["turbulence"] = require "stages.turbulence",
+		["maroon1"] = require "stages.maroon1",
+		["victory"] = require "stages.victory",
+		["maroon2"] = require "stages.maroon2",
+		["who"] = require "stages.who"
 	}
 
 	-- Load Menus
@@ -347,6 +356,10 @@ function love.load()
 	weeksGreen = require "states.weeks.weeksGreen"
 	weeksPink = require "states.weeks.weeksPink"
 	weeksYellow = require "states.weeks.weeksYellow"
+	weeksJ = require "states.weeks.weeksJ"
+	weeksNuzzus = require "states.weeks.weeksNuzzus"
+	weeksGrey = require "states.weeks.weeksGrey"
+	weeksWho = require "states.weeks.weeksWho"
 
 
 	-- Load substates
@@ -366,7 +379,12 @@ function love.load()
         require "weeks.ow",
 		require "weeks.esculent",
 		require "weeks.insaneStreamer",
+		require "weeks.j",
 		require "weeks.crewicide",
+		require "weeks.nuzzus",
+		require "weeks.grey",
+		require "weeks.maroon",
+		require "weeks.who",
 	}
 
 	weekDesc = { -- Add your week description here
@@ -474,9 +492,46 @@ function love.load()
 			}
 		},
 		{
+			"Week J",
+			{
+				"O2",
+				"Voting Time",
+				"Turbulence",
+				"Victory"
+			},
+		},
+		{
 			"Crewicide",
 			{
 				"Crewicide"
+			}
+		},
+		{
+			"Nuzzus",
+			{
+				"Nuzzus"
+			}
+		},
+		{
+			"Gray",
+			{
+				"Delusion",
+				"Blackout",
+				"Neurotic"
+			}
+		},
+		{
+			"Maroon",
+			{
+				"Ashes",
+				"Magmatic",
+				"Boiling Point"
+			}
+		},
+		{
+			"Who",
+			{
+				"Who"
 			}
 		}
 	}
@@ -500,10 +555,10 @@ function love.load()
 		["WEEK 1"] = require "weeks.red",
 		["WEEK 2"] = require "weeks.green",
 		["WEEK 3"] = require "weeks.yellow",
-		["WEEK 5"] = require "weeks.orange",
-		["WEEK 6"] = require "weeks.orange",
+		["WEEK 5"] = require "weeks.maroon",
+		["WEEK 6"] = require "weeks.grey",
 		["WEEK 7"] = require "weeks.pink",
-		["WEEK J"] = require "weeks.orange",
+		["WEEK J"] = require "weeks.j",
 		["BOO!"] = require "weeks.orange",
 		["TOMONGUS"] = require "weeks.orange",
 		["HENRY"] = require "weeks.henry",
@@ -548,6 +603,7 @@ function love.load()
 	--cam = {x = 0, y = 0, sizeX = 0.9, sizeY = 0.9}
 	--camScale = {x = 0.9, y = 0.9}
 	uiScale = {x = 1, y = 1, sizeX = 1, sizeY = 1}
+	camHUD = {x = 0, y = 0, angle = 0}
 
 	musicTime = 0
 	health = 0

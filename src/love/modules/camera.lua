@@ -13,7 +13,7 @@ camera.esizeX = 1
 camera.esizeY = 1
 
 camera.flash = 0
-camera.col = {1, 1, 1}
+camera.col = {1, 1, 1, 1}
 camera.points = {}
 
 camera.mustHit = true
@@ -50,6 +50,7 @@ function camera:reset()
     camera.ey = 0
     camera.esizeX = 1
     camera.esizeY = 1
+    camera.col = {1, 1, 1, 1}
 end
 
 function camera:flash(time, x, col)
@@ -64,17 +65,23 @@ function camera:removePoint(name)
     camera.points[name] = nil
 end
 
-function camera:addPoint(name, x, y)
-    camera.points[name] = {x = x, y = y}
+function camera:addPoint(name, x, y, sx, sy)
+    camera.points[name] = {x = x, y = y, sx=sx or camera.scaleX, sy=camera.scaleY or 1}
 end
 
 function camera:moveToPoint(time, name, mustHit)
     if camTimer then 
         Timer.cancel(camTimer)
     end
-    mustHit = mustHit or true 
-    camera.mustHit = mustHit
-    camTimer = Timer.tween(time, camera, {x = camera.points[name].x, y = camera.points[name].y}, "out-quad")
+    camera.mustHit = mustHit or true
+    camTimer = Timer.tween(time, camera, {
+        x = camera.points[name].x, 
+        y = camera.points[name].y, 
+        scaleX = camera.points[name].sx, 
+        scaleY = camera.points[name].sy,
+        sizeX = camera.points[name].sx,
+        sizeY = camera.points[name].sy
+    }, "out-quad")
 end
 
 function camera:drawCameraPoints()
@@ -99,6 +106,18 @@ function camera:attach()
     love.graphics.translate(camera.ex, camera.ey)
 
     love.graphics.setColor(camera.col[1], camera.col[2], camera.col[3], camera.flash)
+end
+
+function camera:setColor(color, time)
+    if camTimer then 
+        Timer.cancel(camTimer)
+    end
+    color[4] = color[4] or 1
+    camTimer = Timer.tween(time, camera.col, {[1] = color[1], [2] = color[2], [3] = color[3], [4] = color[4]}, "out-quad")
+end
+
+function camera:getColor()
+    return camera.col[1], camera.col[2], camera.col[3], camera.col[4]
 end
 
 function camera:detach()

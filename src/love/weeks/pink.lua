@@ -8,6 +8,8 @@ return {
 		stages["pinkMira"]:enter()
 
 		week = 1
+		weekString = "pink"
+
 
 		song = songNum
 
