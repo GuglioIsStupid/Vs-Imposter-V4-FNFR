@@ -69,7 +69,7 @@ function camera:addPoint(name, x, y, sx, sy)
     camera.points[name] = {x = x, y = y, sx=sx or camera.scaleX, sy=sy or camera.scaleY}
 end
 
-function camera:moveToPoint(time, name, mustHit)
+function camera:moveToPoint2(time, name, mustHit)
     if camTimer then 
         Timer.cancel(camTimer)
     end
@@ -81,6 +81,19 @@ function camera:moveToPoint(time, name, mustHit)
         scaleY = camera.points[name].sy,
         sizeX = camera.points[name].sx,
         sizeY = camera.points[name].sy
+    }, "out-quad")
+end
+
+function camera:moveToPoint(time, name, mustHit)
+    if camTimer then 
+        Timer.cancel(camTimer)
+    end
+    camera.mustHit = mustHit or true
+    camTimer = Timer.tween(time, camera, {
+        x = camera.points[name].x, 
+        y = camera.points[name].y, 
+        scaleX = camera.points[name].sx, 
+        scaleY = camera.points[name].sy,
     }, "out-quad")
 end
 
