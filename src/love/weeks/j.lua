@@ -93,6 +93,11 @@ return {
 			weeksJ:generateNotes("songs/turbulence/turbulence-hard.json")
 			weeksJ:generateEvents("songs/turbulence/events.json")
 
+			camera:removePoint("boyfriend")
+			camera:removePoint("enemy")
+			camera:addPoint("boyfriend", -boyfriend.x + 100, -boyfriend.y + 75, 0.85, 0.85)
+			camera:addPoint("enemy", -enemy.x - 100, -enemy.y + 75, 0.85, 0.85)
+
 			enemyIcon:animate("redmungus")
 		elseif song == 2 then
 			weeksJ:generateNotes("songs/voting-time/voting-time-hard.json")
