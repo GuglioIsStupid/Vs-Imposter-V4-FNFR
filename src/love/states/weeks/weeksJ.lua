@@ -62,24 +62,24 @@ local eventFuncs = {
 	["Cam lock in Voting Time"] = function(close, who)
 		if who == "dad" then 
 			if close == "in" then 
-				camera:moveToPoint(0, "enemy", false)
+				camera:moveToPoint2(0, "enemy", false)
 				enemyIcon:animate("warchief")
 				print("DADDY INSIDE ME")               ---gugwio pls put it in me like i am not even joking guglio i want you inside me pleeeeasse
 			elseif close == "close" then 
-				camera:moveToPoint(0, "otherdude", false)
+				camera:moveToPoint2(0, "otherdude", false)
 				enemyIcon:animate("thejelqer")
 				print("DADDY CLOSE TO ME")
 			end
 		else
 			if close == "in" then 
-				camera:moveToPoint(0, "boyfriend", false)
+				camera:moveToPoint2(0, "boyfriend", false)
 				print("BOYFRIEND INSIDE ME")
 			elseif close == "close" then 
-				camera:moveToPoint(0, "redmungus", false)
+				camera:moveToPoint2(0, "redmungus", false)
 				enemyIcon:animate("redmungus")
 				print("BOYFRIEND CLOSE TO ME")
 			else
-				camera:moveToPoint(0, "middle", false)
+				camera:moveToPoint2(0, "middle", false)
 				print("BOYFRIEND NOT CLOSE TO ME")
 			end			
 		end

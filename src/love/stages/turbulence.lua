@@ -46,24 +46,25 @@ return {
         if beatHandler.onBeat() and beatHandler.getBeat() % 2 == 0 then 
             stageImages["clowfront"]:animate("anim")
         end
+        
+        stageImages["backclouds"].x = util.lerp(stageImages["backclouds"].x, stageImages["backclouds"].x + 55, util.clamp(dt * 9, 0, 1))
+        stageImages["midclouds"].x = util.lerp(stageImages["midclouds"].x, stageImages["midclouds"].x + 175, util.clamp(dt * 9, 0, 1))
+        stageImages["frontclouds"].x = util.lerp(stageImages["frontclouds"].x, stageImages["frontclouds"].x + 400, util.clamp(dt * 9, 0, 1))
+        stageImages["hotairballoon"].x = util.lerp(stageImages["hotairballoon"].x, stageImages["hotairballoon"].x + 75, util.clamp(dt * 9, 0, 1))
 
-        stageImages["backclouds"].translation.x = stageImages["backclouds"].translation.x + 2000 * dt
-        stageImages["frontclouds"].translation.x = stageImages["frontclouds"].translation.x + 1800 * dt
-        stageImages["hotairballoon"].translation.x = stageImages["hotairballoon"].translation.x + 1000 * dt
-        stageImages["midclouds"].translation.x = stageImages["midclouds"].translation.x + 1700 * dt
+        if stageImages["backclouds"].x > 5140.05 then 
+            stageImages["backclouds"].x = -1352.1
+        end
+        if stageImages["frontclouds"].x > 5140.05 then 
+            stageImages["frontclouds"].x = -3352.1
+        end
+        if stageImages["hotairballoon"].x > 3140.05 then 
+            stageImages["hotairballoon"].x = -1352.1
+        end
+        if stageImages["midclouds"].x > 5140.05 then 
+            stageImages["midclouds"].x = -3352.1
+        end
 
-        if stageImages["backclouds"].translation.x > 4100 then 
-            stageImages["backclouds"].translation.x = -stageImages["backclouds"].translation.x
-        end
-        if stageImages["frontclouds"].translation.x > 4300 then 
-            stageImages["frontclouds"].translation.x = -stageImages["frontclouds"].translation.x
-        end
-        if stageImages["hotairballoon"].translation.x > 2300 then 
-            stageImages["hotairballoon"].translation.x = -stageImages["hotairballoon"].translation.x
-        end
-        if stageImages["midclouds"].translation.x > 3900 then 
-            stageImages["midclouds"].translation.x = -stageImages["midclouds"].translation.x
-        end
 
         --[[
                 if(turbEnding){
@@ -88,6 +89,10 @@ return {
 
         camHUD.y = math.sin((musicTime / 1000) * (bpm / 60) * 1.0) * 15
         camHUD.angle = math.rad(math.sin(musicTime / 1200) * (bpm / 60) * -1.0) * 1.2
+
+        boyfriend.y = math.sin((musicTime / 1000) * (bpm / 60) * 1.0) * 15;
+        stageImages["clowfront"].y = math.sin((musicTime / 1000) * (bpm / 60) * 1.0) * 15;
+        stageImages["clawback"].y = math.sin((musicTime / 1000) * (bpm / 60) * 1.0) * 15;
     end,
 
     draw = function()
