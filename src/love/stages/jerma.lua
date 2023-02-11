@@ -5,7 +5,7 @@ return {
         }
 
 
-        enemy = love.filesystem.load("sprites/characters/jerma.lua")()
+        enemy = love.filesystem.load("sprites/characters/Jerma.lua")()
         boyfriend = love.filesystem.load("sprites/boyfriend.lua")()
 
         boyfriend.x, boyfriend.y = 412, 168
@@ -32,6 +32,7 @@ return {
             if jermaZoom then
                 Timer.cancel(jermaZoom)
             end
+        
             jermaZoom = Timer.tween(1.25, camera, {sizeX = 0.9, sizeY = 0.9, scaleX = 0.9, scaleY = 0.9}, "out-quad")
         end
 
