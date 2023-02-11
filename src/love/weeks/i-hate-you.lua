@@ -21,6 +21,8 @@ local song, difficulty
 
 local LayerOne, LayerZero, text, boo, candle, candleOne, mario
 
+-- Genuinely kill yourself clothing hanger
+
 return {
 	enter = function(self, from, songNum, songAppend)
 		weeksCHEngine:enter()

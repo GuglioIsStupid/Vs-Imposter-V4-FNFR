@@ -2,10 +2,12 @@ return {
     enter = function()
         stageImages = {
             ["bg"] = graphics.newImage(graphics.imagePath("who/deadguy")),
-            ["meeting"] = graphics.newImage(graphics.imagePath("who/emergency")),
+            ["emergency"] = graphics.newImage(graphics.imagePath("who/emergency")),
             ["white"] = graphics.newImage(graphics.imagePath("who/mad mad dude")),
             ["KYS"] = graphics.newImage(graphics.imagePath("who/KILLYOURSELF")),     -- i want to
-            ["redShit"] = love.filesystem.load("sprites/who/meeting.lua")()
+            ["meeting"] = love.filesystem.load("sprites/who/meeting.lua")(),
+            ["starsBG"] = graphics.newImage(graphics.imagePath("impmenu/starBG")),
+            ["starsFG"] = graphics.newImage(graphics.imagePath("impmenu/starFG")),
         }
 
 
@@ -19,18 +21,10 @@ return {
         enemy.sizeX = -1
         enemyTwo.sizeX = -1    --backwards facing fucker just turn around its not that hard
 
-
-
-
-
-
         enemy.x, enemy.y = -512, 430
         enemyTwo.x, enemyTwo.y = enemy.x, enemy.y
         boyfriend.x, boyfriend.y = 476, 430
         boyfriendTwo.x, boyfriendTwo.y = boyfriend.x, boyfriend.y
-
-
-
 
     end,
 
@@ -38,22 +32,20 @@ return {
 
         camera.sizeX, camera.sizeY = 0.7, 0.7
         camera.scaleX, camera.scaleY = 0.7, 0.7
-        camera:addPoint("middle", 0, -200) --0.7
-        camera:addPoint("boyfriend", -420, -389) -- 1.3
-        camera:addPoint("enemy", 371, -389) --1.3
+        camera:addPoint("middle", 0, -200, 0.7, 0.7)
+        camera:addPoint("boyfriend", -420, -389, 1.2, 1.2)
+        camera:addPoint("enemy", 371, -389, 1.2, 1.2)
 
-        camera:moveToPoint(0, "middle")
+        camera:moveToPoint2(0, "middle", false)
+        camera:addPoint("fuckingZoomed", 0, 0, 0.5, 0.5)
+
+        curBoyfriend = "whitewho"
+        curEnemy = "bluewhonormal"
 
     end,
 
     update = function(self, dt)
-
-        if not enemy:isAnimated() and enemy:getAnimName() ~= "idle" then
-            enemy:animate("idle", false)        -- fixed the animation issues
-        end
-
-        
-
+        stageImages["meeting"]:update(dt)
     end,
 
     draw = function()
@@ -65,15 +57,33 @@ return {
 
             stageImages["bg"]:draw()
 
-            if mad then
+            if curEnemy == "bluewhonormal" then 
+                if enemy and enemy.draw then enemy:draw() end
+            elseif curEnemy == "bluewho" then
                 enemyTwo:draw()
+            end
+
+            if curBoyfriend == "whitewho" then
+                if boyfriend and boyfriend.draw then boyfriend:draw() end
+            elseif curBoyfriend == "whitemad" then
                 boyfriendTwo:draw()
-            else
-                enemy:draw()
-                boyfriend:draw()
+            end
+
+            if drawEject then
+                stageImages["starsBG"]:draw()
+                stageImages["starsFG"]:draw()
+                stageImages["white"]:draw()
             end
 
 		love.graphics.pop()
+
+        if meetingLol then
+            stageImages["meeting"]:draw() 
+            if drawEmergency then 
+                stageImages["emergency"]:draw()
+                stageImages["KYS"]:draw()
+            end           
+        end
     end,
 
     leave = function()

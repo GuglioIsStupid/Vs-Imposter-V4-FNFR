@@ -109,15 +109,15 @@ return graphics.newSprite(
 		--To get the animations, look at the number and the name of the frame
 		--Start is the first frame, stop is the last frame, speed is the speed of the animation, offsetX and offsetY are the offset of the animation
 		--Get the offset by using the ingame offset editor and pressing 7
-		["miss down"] = {start = 1, stop = 10, speed = 24, offsetX = 0, offsetY = 0},
-		["miss left"] = {start = 11, stop = 22, speed = 24, offsetX = 0, offsetY = 0},
-		["miss right"] = {start = 23, stop = 34, speed = 24, offsetX = 0, offsetY = 0},
-		["miss up"] = {start = 35, stop = 44, speed = 24, offsetX = 0, offsetY = 0},
-		["singDOWN"] = {start = 45, stop = 52, speed = 24, offsetX = 0, offsetY = 0},
+		["miss singDOWN"] = {start = 1, stop = 10, speed = 24, offsetX = 27, offsetY = 41},
+		["miss singLEFT"] = {start = 11, stop = 22, speed = 24, offsetX = 156, offsetY = 44},
+		["miss singRIGHT"] = {start = 23, stop = 34, speed = 24, offsetX = -46, offsetY = 24},
+		["miss singUP"] = {start = 35, stop = 44, speed = 24, offsetX = 72, offsetY = 92},
+		["singDOWN"] = {start = 45, stop = 52, speed = 24, offsetX = 22, offsetY = -4},
 		["idle"] = {start = 53, stop = 71, speed = 24, offsetX = 0, offsetY = 0},
-		["singLEFT"] = {start = 72, stop = 79, speed = 24, offsetX = 0, offsetY = 0},
-		["singRIGHT"] = {start = 80, stop = 87, speed = 24, offsetX = 0, offsetY = 0},
-		["singUP"] = {start = 88, stop = 95, speed = 24, offsetX = 0, offsetY = 0},
+		["singLEFT"] = {start = 72, stop = 79, speed = 24, offsetX = 166, offsetY = -2},
+		["singRIGHT"] = {start = 80, stop = 87, speed = 24, offsetX = -26, offsetY = -4},
+		["singUP"] = {start = 88, stop = 95, speed = 24, offsetX = 71, offsetY = 91},
 
 	},
 	"idle", -- set to default animation

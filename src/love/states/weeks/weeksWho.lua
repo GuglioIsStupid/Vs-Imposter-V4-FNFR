@@ -25,60 +25,46 @@ local eventFuncs = {
 		print("haiiii")
 		flashAlpha = tonumber(value) or 0.4
 	end,
-	["Cam lock in Who"] = function(value1, value2)
-
-		print("value1: " .. value1)
-		print("value2: " .. value2)
-
-
-		--[[
-
-		if value1 == "in" then
-			camera.sizeX, camera.sizeY = 1.3, 1.3
-			camera.scaleX, camera.scaleY = 1.3, 1.3
-			if value2 == "dad" then
-				camera:moveToPoint(0, "enemy")
-			else
-				camera:moveToPoint(0, "boyfriend")
+	["Cam lock in Who"] = function(zoomed, who)
+		print("im zoinked")
+		if zoomed == "in" then 
+			if who == "dad" then 
+				camera:moveToPoint2(0, "enemy", false)
+				print("howdiy")
+			else 
+				camera:moveToPoint2(0, "boyfriend", false)
 			end
 		else
-			camera.sizeX, camera.sizeY = 0.7, 0.7
-			camera.scaleX, camera.scaleY = 0.7, 0.7
+			camera:moveToPoint2(0, 'middle', false)
 		end
+	end,
 
-
-		--]]
-
-
-		if value2 == "dad" then
-			whoCameraPointsTo = "white"
-		else 
-			whoCameraPointsTo = "blue"
+	["Change Character"] = function(who, char)
+		if who == "1" then 
+			curEnemy = char
+		elseif who == "0" then 
+			curBoyfriend = char
 		end
+	end,
+	["Who Buzz"] = function(haha)
+		haha = tonumber(haha) or 0
 
-		if value1 == "in" then
-			whoCameraZoom = true
-		else
-			whoCameraZoom = false
+		if haha == 0 then 
+			camera:moveToPoint2(0, "fuckingZoomed", false)
+			meetingLol = true
+
+			stageImages["meeting"]:animate("anim", false, function()
+				drawEmergency = true
+			end)
+		elseif haha == 1 then 
+			drawEject = true
+			drawEmergency = false
+
+			Timer.tween(10, stageImages["white"], {x = 3000, orientation = math.rad(720)})
 		end
-
-
-
-
-
-		whoCam = whoCam + 1 
-
-		
-
-
-		print("whoCam: " .. whoCam)
-		print("whoCameraPointsTo: " .. whoCameraPointsTo)
-		print("whoCameraZoom: " .. whoCameraZoom)
-
-
-
 
 	end,
+
 }
 
 local animList = {
@@ -644,6 +630,7 @@ return {
 
 										if inst then inst:play() end
 										voices:play()
+
 									end
 								)
 							end
@@ -770,7 +757,7 @@ return {
 		for i = 1, #songEvents do
 			if songEvents[i].eventTime <= absMusicTime then
 				if eventFuncs[songEvents[i].eventName] then
-					eventFuncs[songEvents[i].eventName](songEvents[i].eventValue1, songEvents.eventValue2)
+					eventFuncs[songEvents[i].eventName](songEvents[i].eventValue1, songEvents[i].eventValue2)
 				else
 					print(songEvents[i].eventName .. " is not implemented!")
 				end
@@ -799,8 +786,8 @@ return {
 		--]]
 
 		girlfriend:update(dt)
-		enemy:update(dt)
-		boyfriend:update(dt)
+		if enemy and enemy.update then enemy:update(dt) end
+		if boyfriend and boyfriend.update then boyfriend:update(dt) end
 		enemyTwo:update(dt)
 		boyfriendTwo:update(dt)
 
@@ -810,8 +797,10 @@ return {
 				girlfriend:setAnimSpeed(14.4 / (60 / bpm))
 			end
 		end
-		boyfriend:beat(beatHandler.getBeat())
-		enemy:beat(beatHandler.getBeat())
+		if boyfriend and boyfriend.beat then boyfriend:beat(beatHandler.getBeat()) end
+		if enemy and enemy.beat then enemy:beat(beatHandler.getBeat()) end
+		boyfriendTwo:beat(beatHandler.getBeat())
+		enemyTwo:beat(beatHandler.getBeat())
 
 		for i = 1, 3 do
 			local spriteTimer = spriteTimers[i]
@@ -1108,7 +1097,7 @@ return {
 				boyfriendIcon:animate("boyfriend (pixel)", false)
 			end
 		elseif health <= 0 then -- Game over
-			Gamestate.push(gameOver)
+			--Gamestate.push(gameOver)
 			health = 0
 		elseif health <= 0.325 and boyfriendIcon:getAnimName() == "boyfriend" then
 			if not pixel then 

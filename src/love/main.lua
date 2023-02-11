@@ -710,6 +710,7 @@ function love.load()
 	health = 0
 
 	music = love.audio.newSource("music/menu/menu.ogg", "stream")
+	music:setLooping(true)
 
 	if curOS == "Web" then
 		Gamestate.switch(clickStart)
