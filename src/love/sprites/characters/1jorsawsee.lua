@@ -53,10 +53,10 @@ return graphics.newSprite(
 		--Start is the first frame, stop is the last frame, speed is the speed of the animation, offsetX and offsetY are the offset of the animation
 		--Get the offset by using the ingame offset editor and pressing 7
 		["idle"] = {start = 9, stop = 22, speed = 24, offsetX = 0, offsetY = 0},
-		["singLEFT"] = {start = 23, stop = 30, speed = 24, offsetX = 0, offsetY = 0},
-		["singRIGHT"] = {start = 31, stop = 38, speed = 24, offsetX = 0, offsetY = 0},
-		["singUP"] = {start = 39, stop = 46, speed = 24, offsetX = 0, offsetY = 0},
-		["singDOWN"] = {start = 1, stop = 8, speed = 24, offsetX = 0, offsetY = 0}
+		["singLEFT"] = {start = 23, stop = 30, speed = 24, offsetX = 42, offsetY = 17},
+		["singRIGHT"] = {start = 31, stop = 38, speed = 24, offsetX = -31, offsetY = 16},
+		["singUP"] = {start = 39, stop = 46, speed = 24, offsetX = 22, offsetY = 38},
+		["singDOWN"] = {start = 1, stop = 8, speed = 24, offsetX = 64, offsetY = 28}
 	},
 	"idle", -- set to default animation
 	false,

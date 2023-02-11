@@ -22,6 +22,13 @@ return {
 		camera:addPoint("boyfriend", 0, 0)
 		camera:addPoint("enemy", 0, 0)
 
+		flashAlpha = 0
+
+
+		function ReactorBeep(alpha)
+			flashAlpha = alpha
+		end
+
 
 
 
@@ -46,13 +53,17 @@ return {
 		weeks:initUI()
 
 		weeks:generateNotes("songs/esculent/esculent-hard.json")
-		--weeks:generateEventsOld("songs/esculent/events.json")
+		weeks:generateEvents("songs/esculent/events.json")
 
 	end,
 
 	update = function(self, dt)
 		weeks:update(dt)
 		stages["esculent"]:update(dt)
+
+
+		flashAlpha = util.lerp(flashAlpha, 0, util.clamp(0, dt * 5, 1))
+
 
 		if health >= 80 then
 			if enemyIcon:getAnimName() == "black" then
@@ -94,6 +105,10 @@ return {
 			stages["esculent"]:draw()
 			weeks:drawRating(0.9)
 		love.graphics.pop()
+
+		graphics.setColor(1,0,0,flashAlpha)
+        love.graphics.rectangle("fill", 0, 0, graphics.getWidth(), graphics.getHeight())
+        graphics.setColor(1,1,1,1)
 		
 		weeks:drawUI()
 	end,

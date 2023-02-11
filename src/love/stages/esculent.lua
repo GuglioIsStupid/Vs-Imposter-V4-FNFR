@@ -19,6 +19,8 @@ return {
 
     update = function(self, dt)
 
+        if not enemy:isAnimated() then enemy:animate("idle", false) end
+
     end,
 
     draw = function()

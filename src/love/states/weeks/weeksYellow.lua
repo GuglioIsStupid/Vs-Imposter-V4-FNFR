@@ -791,8 +791,11 @@ return {
 		end
 
 		--]]
-		boyfriend:beat(beatHandler.getBeat())
-		enemy:beat(beatHandler.getBeat())
+
+		if song ~= 4 then
+			boyfriend:beat(beatHandler.getBeat())
+			enemy:beat(beatHandler.getBeat())
+		end
 
 		--[[
 

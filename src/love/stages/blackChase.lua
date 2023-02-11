@@ -72,6 +72,10 @@ return {
     update = function(self, dt)
 
 
+        if not enemy:isAnimated() then enemy:animate("idle", false) end
+        if not boyfriend:isAnimated() then boyfriend:animate("idle", false) end
+        if not enemyTwo:isAnimated() then enemyTwo:animate("idle", false) end
+
         if musicTime >= 1 and musicTime < 26 then
 
             if zoom1 then Timer.cancel(zoom1) end
