@@ -744,7 +744,7 @@ return {
 			end
 		end
 
-		if beatHandler.onBeat() and beatHandler.getBeat() % 4 == 0 then
+		if beatHandler.onBeat() and beatHandler.getBeat() % 4 == 0 and not zoom1 then
 			if camScaleTimer then Timer.cancel(camScaleTimer) end
 			if uiScaleTimer then Timer.cancel(uiScaleTimer) end
 
