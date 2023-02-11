@@ -167,16 +167,17 @@ function saveSettings()
 end
 
 function saveBeans()
-	love.filesystem.write("beans", beans)
+	love.filesystem.write("beans", beans[1])
 end
 
 function getBeans()
 	if love.filesystem.getInfo("beans") then
 		beans = {love.filesystem.read("beans")}
-		beans[1] = tonumber(beans)
+		beans[1] = tonumber(beans[1])
 	else
 		beans = {0}
 	end
+	print(beans[1])
 end
 
 function love.load()
