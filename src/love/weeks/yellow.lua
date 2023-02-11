@@ -72,11 +72,12 @@ return {
 		if song == 5 then
 			doMustHitSectionCam = true
 			weeksYellow:generateNotes("songs/double-kill/double-kill-hard.json")
-			weeksYellow:generateEventsOld("songs/double-kill/events.json")
+			weeksYellow:generateEvents("songs/double-kill/events.json")
 			weeksYellow:setIcon("enemy", "white")
 		elseif song == 4 then
 			doMustHitSectionCam = false
 			weeksYellow:generateNotes("songs/danger/danger-hard.json")
+			weeksYellow:generateEvents("songs/danger/events.json")
 		elseif song == 3 then
 			doMustHitSectionCam = true
 			weeksYellow:generateNotes("songs/oversight/oversight-hard.json")
@@ -119,6 +120,7 @@ return {
 
 		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused then
 			if storyMode and song < 5 then
+				--[[
 				if score > highscores[weekNum-1][difficulty].scores[song] then
 					highscores[weekNum-1][difficulty].scores[song] = score
 					saveHighscores()
@@ -130,6 +132,7 @@ return {
 					saveHighscores()
 				end
 				song = song + 1
+				--]]
 
 				self:load()
 			else

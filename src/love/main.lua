@@ -581,7 +581,7 @@ function love.load()
 			{"Danger", require "weeks.yellow", 4},
 			{"Double Kill", require "weeks.yellow", 5},
 			{"Defeat", chooseMissCount, 1},
-			{"Indentity Crisis", require "weeks.hi", 1}
+			{"Indentity Crisis", require "states.hi", 1}
 		},
 		[2] = { -- second page, ig still main weeks idfk
 			{"Ashes", require "weeks.maroon", 1},
@@ -593,25 +593,25 @@ function love.load()
 			{"Heartbeat", require "weeks.pink", 1},
 			{"Pinkwave", require "weeks.pink", 2},
 			{"Pretender", require "weeks.pink", 3},
-			{"Sauces Moogus", require "weeks.hi", 1},
+			{"Sauces Moogus", require "states.hi", 1},
 		},
 		[3] = {-- Week J and saxophone dude
 			{"02", require "weeks.j", 1},
 			{"Voting Time", require "weeks.j", 2},
 			{"Turbulence", require "weeks.j", 3},
 			{"Victory", require "weeks.j", 4},
-			{"Roomcode", require "weeks.hi", 1}
+			{"Roomcode", require "states.hi", 1}
 		},
 		[4] = { -- idk this one, pixel shit
-			{"Sussy Bussy", require "weeks.hi", 1},
-			{"Rivals", require "weeks.hi", 2},
-			{"Chewmate", require "weeks.hi", 3},
-			{"Christmas", require "weeks.hi", 4},
-			{"Tomongus Tuesday", "weeks.hi", 1}
+			{"Sussy Bussy", require "states.hi", 1},
+			{"Rivals", require "states.hi", 2},
+			{"Chewmate", require "states.hi", 3},
+			{"Christmas", require "states.hi", 4},
+			{"Tomongus Tuesday", "states.hi", 1}
 		},
 		[5] = { -- Fella
-			{"Christmas", require "weeks.hi", 1},
-			{"Spookpostor", require "weeks.hi", 2},
+			{"Christmas", require "states.hi", 1},
+			{"Spookpostor", require "states.hi", 2},
 		},
 		[6] = { -- Henry
 			{"Titular", require "weeks.henry", 1},
@@ -620,8 +620,8 @@ function love.load()
 			{"Armed", require "weeks.henry", 4},
 		},
 		[7] = { -- alpha moogus
-			{"Alpha Moogus", require "weeks.hi", 1},
-			{"Actin Sus", require "weeks.hi", 2}
+			{"Alpha Moogus", require "states.hi", 1},
+			{"Actin Sus", require "states.hi", 2}
 		},
 		[8] = { -- Other stuff (Idfk)
 			{"Ow", require "weeks.ow", 1},
@@ -630,15 +630,15 @@ function love.load()
 			{"Sussus Nuzzus", require "weeks.nuzzus", 1},
 			{"Idk", require "weeks.idk", 1},
 			{"Esculent", require "weeks.esculent", 1},
-			{"Drippypop", require "weeks.hi", 1},
+			{"Drippypop", require "states.hi", 1},
 			{"Crewicide", require "weeks.crewicide", 1},
-			{"Monotone Attack", require "weeks.hi", 1},
-			{"Top 10", require "weeks.hi", 1}
+			{"Monotone Attack", require "states.hi", 1},
+			{"Top 10", require "states.hi", 1}
 		},
 		[9] = { --chip
-			{"Chippin", require "weeks.hi", 1},
-			{"Chipping", require "weeks.hi", 2},
-			{"Torture", require "weeks.hi", 3}
+			{"Chippin", require "states.hi", 1},
+			{"Chipping", require "states.hi", 2},
+			{"Torture", require "states.hi", 3}
 		}
 	}
 
