@@ -27,6 +27,12 @@ local eventFuncs = {
 	end,
 	["Cam lock in Who"] = function(value1, value2)
 
+		print("value1: " .. value1)
+		print("value2: " .. value2)
+
+
+		--[[
+
 		if value1 == "in" then
 			camera.sizeX, camera.sizeY = 1.3, 1.3
 			camera.scaleX, camera.scaleY = 1.3, 1.3
@@ -39,6 +45,36 @@ local eventFuncs = {
 			camera.sizeX, camera.sizeY = 0.7, 0.7
 			camera.scaleX, camera.scaleY = 0.7, 0.7
 		end
+
+
+		--]]
+
+
+		if value2 == "dad" then
+			whoCameraPointsTo = "white"
+		else 
+			whoCameraPointsTo = "blue"
+		end
+
+		if value1 == "in" then
+			whoCameraZoom = true
+		else
+			whoCameraZoom = false
+		end
+
+
+
+
+
+		whoCam = whoCam + 1 
+
+		
+
+
+		print("whoCam: " .. whoCam)
+		print("whoCameraPointsTo: " .. whoCameraPointsTo)
+		print("whoCameraZoom: " .. whoCameraZoom)
+
 
 
 
@@ -85,6 +121,10 @@ local judgements = {}
 
 return {
 	enter = function(self, option)
+		whoCameraZoom = false
+		whoCameraPointsTo = ""
+		whoCam = 0
+	
 		playMenuMusic = false
 		beatHandler.reset()
 		option = option or "normal"
