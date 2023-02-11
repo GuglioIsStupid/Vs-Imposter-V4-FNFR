@@ -8,7 +8,6 @@ return {
         stageImages[1].y = 0
         stageImages[2].y = 0
 
-
         enemyTwo = love.filesystem.load("sprites/characters/yellow.lua")()
         enemy = love.filesystem.load("sprites/characters/white.lua")()
 
@@ -20,7 +19,7 @@ return {
     end,
 
     load = function()
-        myMassiveCock = {0}
+        myMassiveCock = {0, 0}
     end,
 
     update = function(self, dt)

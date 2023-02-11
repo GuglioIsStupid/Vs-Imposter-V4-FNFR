@@ -74,7 +74,7 @@ return {
 		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused then
 			if storyMode and song < 4 then
 
-
+				campaignScore = campaignScore + score
 				--[[
 				if score > highscores[weekNum-1][difficulty].scores[song] then
 					highscores[weekNum-1][difficulty].scores[song] = score
@@ -92,12 +92,13 @@ return {
 
 				self:load()
 			else
+				campaignScore = campaignScore + score
 				status.setLoading(true)
 
 				graphics.fadeOut(
 					0.5,
 					function()
-						Gamestate.switch(menu)
+						Gamestate.switch(beansCounter)
 
 						status.setLoading(false)
 					end

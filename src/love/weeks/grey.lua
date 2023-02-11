@@ -91,6 +91,7 @@ return {
 
 		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused then
 			if storyMode and song < 5 then
+				--[[
 				if score > highscores[weekNum-1][difficulty].scores[song] then
 					highscores[weekNum-1][difficulty].scores[song] = score
 					saveHighscores()
@@ -101,16 +102,19 @@ return {
 					highscores[weekNum-1][difficulty].accuracys[song] = tonumber(newAccuracy)
 					saveHighscores()
 				end
+				--]]
+				campaignScore = campaignScore + score
 				song = song + 1
 
 				self:load()
 			else
+				campaignScore = campaignScore + score
 				status.setLoading(true)
 
 				graphics.fadeOut(
 					0.5,
 					function()
-						Gamestate.switch(menu)
+						Gamestate.switch(beansCounter)
 
 						status.setLoading(false)
 					end

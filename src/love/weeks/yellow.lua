@@ -26,6 +26,7 @@ return {
 
 	load = function(self)
 		weeksYellow:load()
+		didScream = false
 		if song == 5 then
 			stages["cargo"]:load()
 		elseif song == 4 then
@@ -72,7 +73,7 @@ return {
 		if song == 5 then
 			doMustHitSectionCam = true
 			weeksYellow:generateNotes("songs/double-kill/double-kill-hard.json")
-			weeksYellow:generateEventsOld("songs/double-kill/events.json")
+			weeksYellow:generateEvents("songs/double-kill/events.json")
 			weeksYellow:setIcon("enemy", "white")
 		elseif song == 4 then
 			doMustHitSectionCam = false
@@ -119,6 +120,8 @@ return {
 
 		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused then
 			if storyMode and song < 5 then
+				campaignScore = campaignScore + score
+				--[[
 				if score > highscores[weekNum-1][difficulty].scores[song] then
 					highscores[weekNum-1][difficulty].scores[song] = score
 					saveHighscores()
@@ -130,15 +133,17 @@ return {
 					saveHighscores()
 				end
 				song = song + 1
+				--]]
 
 				self:load()
 			else
+				campaignScore = campaignScore + score
 				status.setLoading(true)
 
 				graphics.fadeOut(
 					0.5,
 					function()
-						Gamestate.switch(menu)
+						Gamestate.switch(beansCounter)
 
 						status.setLoading(false)
 					end
@@ -147,10 +152,45 @@ return {
 		end
 
 		if song == 4 then
-			if musicTime >= 52000 and musicTime < 52025 then 
+			if musicTime >= 52666.6666666667 and musicTime < 52700.6666666667 and not didScream then 
+				didScream = true
 				stageImages[9]:animate("anim", false)
 				enemy:animate("scream", false)
 				ohnoHeAngy = true
+				if zoom1 then 
+					Timer.cancel(zoom1)
+				end
+				zoom1 = Timer.tween(
+					0.25, 
+					camera,
+					{
+						sizeX = 1.45,
+						sizeY = 1.45,
+						scaleX = 1.45,
+						scaleY = 1.45,
+						x = -enemy.x + 15,
+						y = -enemy.y + 90
+					},
+					"out-quad",
+					function()
+						Timer.after(0.5, function()
+							Timer.tween(
+							0.25,
+							camera,
+							{
+								sizeX = 0.33,
+								sizeY = 0.33,
+								scaleX = 0.33,
+								scaleY = 0.33,
+								x = 0,
+								y = 200
+							},
+							"in-quad"
+						)
+						end)
+						
+					end
+				)
 			end
 			if musicTime >= 54666.6666666667 and musicTime < 54691.6666666667 then
 				if gfTween then

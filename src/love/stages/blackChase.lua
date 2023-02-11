@@ -13,13 +13,10 @@ return {
         }
         curEnemy = "both"
 
-        camSize = {2}
-
-
         
 
-        camera.sizeX, camera.sizeY = camSize[1], camSize[1]
-        camera.scaleX, camera.scaleY= camSize[1], camSize[1]
+        camera.sizeX, camera.sizeY = 2, 2
+        camera.scaleX, camera.scaleY = 2, 2
 
         
 
@@ -45,6 +42,9 @@ return {
 
         stageImages[6].y = 619
 
+        stageImages[9].x, stageImages[9].y = enemy.x, enemy.y
+        stageImages[9].sizeX, stageImages[9].sizeY = 2, 2
+
         enemy = love.filesystem.load("sprites/characters/blackrun.lua")()
         enemyTwo = love.filesystem.load("sprites/characters/blackalt.lua")()
 
@@ -58,8 +58,6 @@ return {
     end,
 
     load = function()
-        camSize = {2}
-
         cameraZooms = {false}
 
 
@@ -67,40 +65,18 @@ return {
 
         camera.x, camera.y = 0, 732
 
-        camera:addPoint("one", 0, 0)
+        camera:addPoint("one", 0, 0, true)
 
     end,
 
     update = function(self, dt)
 
 
-        if musicTime >= 1 and musicTime < 51 then
-            if not cameraZooms[1] then
-                Timer.tween(2, camera, {sizeX = 0.6, sizeY = 0.6, scaleX = 0.6, scaleY = 0.6}, "out-expo")
-                camera:moveToPoint(2, "one")
-            end
-            cameraZooms[1] = true
-            print("JHKFDASFHJHFAHFJH")
+        if musicTime >= 1 and musicTime < 26 then
 
+            if zoom1 then Timer.cancel(zoom1) end
+            zoom1 = Timer.tween(2, camera, {sizeX = 0.33, sizeY = 0.33, scaleX = 0.33, scaleY = 0.33, x = 0, y = 200}, "out-expo", function() zoom1 = nil end)
         end
-
-
-        --[[
-
-        FUCK YOU CAMERA BUMP THIS WOULD HAVE WORKED IF YOU DIDNT EXIST
-
-
-        if not inDebug then
-            camera.sizeX, camera.sizeY = camSize[1], camSize[1]
-            camera.scaleX, camera.scaleY = camSize[1], camSize[1]
-        end
-
-        --]]
-
-
-        --print(camera.sizeY)
-
-        print(camSize[1])
 
         stageImages[7]:update(dt)
         stageImages[8]:update(dt)
@@ -135,13 +111,15 @@ return {
             stageImages[8]:animate("run", false)
         end
 
+        print(camera.sizeX, camera.sizeY, camera.scaleX, camera.scaleY)
+
     end,
 
     draw = function()
         love.graphics.push()
 			love.graphics.translate(camera.x * 0.9, camera.y * 0.9)
             love.graphics.translate(camera.ex * 0.9, camera.ey * 0.9)
-            love.graphics.scale(camera.sizeX, camera.sizeY)
+           -- love.graphics.scale(camera.sizeX, camera.sizeY)
 			stageImages[1]:draw()
             love.graphics.push()
             love.graphics.translate(stageImages[2].translation.x, stageImages[2].translation.y)
@@ -160,7 +138,7 @@ return {
             love.graphics.push()
             love.graphics.translate(-camera.x * 0.2, -camera.y * 0.2)
             love.graphics.translate(-camera.ex * 0.2, -camera.ey * 0.2)
-            love.graphics.scale(camera.sizeX, camera.sizeY)
+            --love.graphics.scale(camera.sizeX, camera.sizeY)
 
             stageImages[4]:draw()
             love.graphics.pop()
@@ -177,7 +155,7 @@ return {
 		love.graphics.push()
 			love.graphics.translate(camera.x, camera.y)
             love.graphics.translate(camera.ex, camera.ey)
-            love.graphics.scale(camera.sizeX, camera.sizeY)
+           -- love.graphics.scale(camera.sizeX, camera.sizeY)
 
 
             if stageImages[9]:isAnimated() and musicTime > 10000 then

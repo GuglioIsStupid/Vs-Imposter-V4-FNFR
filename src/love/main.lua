@@ -166,6 +166,19 @@ function saveSettings()
     end
 end
 
+function saveBeans()
+	love.filesystem.write("beans", beans)
+end
+
+function getBeans()
+	if love.filesystem.getInfo("beans") then
+		beans = {love.filesystem.read("beans")}
+		beans[1] = tonumber(beans)
+	else
+		beans = {0}
+	end
+end
+
 function love.load()
 	paused = false
 	settings = {}
@@ -342,6 +355,8 @@ function love.load()
 	menuSettings = require "states.menu.menuSettings"
 	menuCredits = require "states.menu.menuCredits"
 	impWeekMenu = require "states.menu.impWeekMenu"
+
+	beansCounter = require "states.misc.beansCounter"
 
 	chooseMissCount = require "states.misc.chooseMissCount"
 
@@ -565,6 +580,83 @@ function love.load()
 		["..."] = chooseMissCount
 	}
 
+	freeplayWeeks = {
+		[1] = { -- first page, has main weeks and shit
+			    -- format is {song, week, song number}
+			{"Sussus Moogus", require "weeks.red", 1}, 
+			{"Sabotage", require "weeks.red", 2},
+			{"Meltdown", require "weeks.red", 3},
+			{"Sussus Toogus", require "weeks.green", 1},
+			{"Lights Down", require "weeks.green", 2},
+			{"Reactor", require "weeks.green", 3},
+			{"Ejected", require "weeks.green", 4},
+			{"Mando", require "weeks.yellow", 1},
+			{"Dlow", require "weeks.yellow", 2},
+			{"Oversight", require "weeks.yellow", 3},
+			{"Danger", require "weeks.yellow", 4},
+			{"Double Kill", require "weeks.yellow", 5},
+			{"Defeat", chooseMissCount, 1},
+			{"Indentity Crisis", require "states.hi", 1}
+		},
+		[2] = { -- second page, ig still main weeks idfk
+			{"Ashes", require "weeks.maroon", 1},
+			{"Magmatic", require "weeks.maroon", 2},
+			{"Boiling Point", require "weeks.maroon", 3},
+			{"Delusion", require "weeks.grey", 1},
+			{"Blackout", require "weeks.grey", 2},
+			{"Neurotic", require "weeks.grey", 3},
+			{"Heartbeat", require "weeks.pink", 1},
+			{"Pinkwave", require "weeks.pink", 2},
+			{"Pretender", require "weeks.pink", 3},
+			{"Sauces Moogus", require "states.hi", 1},
+		},
+		[3] = {-- Week J and saxophone dude
+			{"02", require "weeks.j", 1},
+			{"Voting Time", require "weeks.j", 2},
+			{"Turbulence", require "weeks.j", 3},
+			{"Victory", require "weeks.j", 4},
+			{"Roomcode", require "states.hi", 1}
+		},
+		[4] = { -- idk this one, pixel shit
+			{"Sussy Bussy", require "states.hi", 1},
+			{"Rivals", require "states.hi", 2},
+			{"Chewmate", require "states.hi", 3},
+			{"Christmas", require "states.hi", 4},
+			{"Tomongus Tuesday", "states.hi", 1}
+		},
+		[5] = { -- Fella
+			{"Christmas", require "states.hi", 1},
+			{"Spookpostor", require "states.hi", 2},
+		},
+		[6] = { -- Henry
+			{"Titular", require "weeks.henry", 1},
+			{"Greatest Plan", require "weeks.henry", 2},
+			{"Reinforcements", require "weeks.henry", 3},
+			{"Armed", require "weeks.henry", 4},
+		},
+		[7] = { -- alpha moogus
+			{"Alpha Moogus", require "states.hi", 1},
+			{"Actin Sus", require "states.hi", 2}
+		},
+		[8] = { -- Other stuff (Idfk)
+			{"Ow", require "weeks.ow", 1},
+			{"Who", require "weeks.who", 1},
+			{"Insane Streamer", require "weeks.insaneStreamer", 1},
+			{"Sussus Nuzzus", require "weeks.nuzzus", 1},
+			{"Idk", require "weeks.idk", 1},
+			{"Esculent", require "weeks.esculent", 1},
+			{"Drippypop", require "states.hi", 1},
+			{"Crewicide", require "weeks.crewicide", 1},
+			{"Monotone Attack", require "states.hi", 1},
+			{"Top 10", require "states.hi", 1}
+		},
+		[9] = { --chip
+			{"Chippin", require "states.hi", 1},
+			{"Chipping", require "states.hi", 2},
+			{"Torture", require "states.hi", 3}
+		}
+	}
+
 	defeatWeekLololol = require "weeks.defeat"
 
 	-- LÖVE init
@@ -615,6 +707,8 @@ function love.load()
 	else
 		Gamestate.switch(menu)
 	end
+
+	getBeans()
 end
 
 function love.resize(width, height)
@@ -723,4 +817,8 @@ end
 
 function love.focus(t)
 	Gamestate.focus(t)
+end
+
+function love.quit()
+	saveBeans()
 end

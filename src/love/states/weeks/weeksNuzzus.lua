@@ -19,7 +19,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 local eventFuncs = {
 	["Add Camera Zoom"] = function(size, sizeHud)
 		size = tonumber(size) or 0.015
-		sizeHud = tonumber(sizeHud) or 0.03
 
 		Timer.tween(
 			(60/bpm)/4,
@@ -27,15 +26,6 @@ local eventFuncs = {
 			{
 				sizeX = camera.esizeX + size,
 				sizeY = camera.esizeY + size
-			},
-			"out-quad"
-		)
-		Timer.tween(
-			(60/bpm)/4,
-			uiScale,
-			{
-				sizeX = uiScale.sizeX + sizeHud,
-				sizeY = uiScale.sizeY + sizeHud
 			},
 			"out-quad"
 		)
@@ -243,6 +233,7 @@ return {
 		judgements = {}
 		health = 1
 		score = 0
+		campaignScore = 0
 		misses = 0
 		additionalAccuracy = 0
 		noteCounter = 0
