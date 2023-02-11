@@ -75,12 +75,13 @@ return {
 
 
         if musicTime >= 1 and musicTime < 51 then
-            if not cameraZooms[1] then
-                Timer.tween(2, camera, {sizeX = 0.6, sizeY = 0.6, scaleX = 0.6, scaleY = 0.6}, "out-expo")
-                camera:moveToPoint(2, "one")
-            end
-            cameraZooms[1] = true
-            print("JHKFDASFHJHFAHFJH")
+
+
+            if zoom1 then Timer.cancel(zoom1) end
+
+            zoom1 = Timer.tween(2, camera, {sizeX = 0.6, sizeY = 0.6, scaleX = 0.6, scaleY = 0.6}, "out-expo")
+            
+
 
         end
 
@@ -141,7 +142,7 @@ return {
         love.graphics.push()
 			love.graphics.translate(camera.x * 0.9, camera.y * 0.9)
             love.graphics.translate(camera.ex * 0.9, camera.ey * 0.9)
-            love.graphics.scale(camera.sizeX, camera.sizeY)
+           -- love.graphics.scale(camera.sizeX, camera.sizeY)
 			stageImages[1]:draw()
             love.graphics.push()
             love.graphics.translate(stageImages[2].translation.x, stageImages[2].translation.y)
@@ -160,7 +161,7 @@ return {
             love.graphics.push()
             love.graphics.translate(-camera.x * 0.2, -camera.y * 0.2)
             love.graphics.translate(-camera.ex * 0.2, -camera.ey * 0.2)
-            love.graphics.scale(camera.sizeX, camera.sizeY)
+            --love.graphics.scale(camera.sizeX, camera.sizeY)
 
             stageImages[4]:draw()
             love.graphics.pop()
@@ -177,7 +178,7 @@ return {
 		love.graphics.push()
 			love.graphics.translate(camera.x, camera.y)
             love.graphics.translate(camera.ex, camera.ey)
-            love.graphics.scale(camera.sizeX, camera.sizeY)
+           -- love.graphics.scale(camera.sizeX, camera.sizeY)
 
 
             if stageImages[9]:isAnimated() and musicTime > 10000 then
