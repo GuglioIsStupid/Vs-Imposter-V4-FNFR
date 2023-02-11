@@ -376,6 +376,7 @@ function love.load()
 	weeksNuzzus = require "states.weeks.weeksNuzzus"
 	weeksGrey = require "states.weeks.weeksGrey"
 	weeksWho = require "states.weeks.weeksWho"
+	weeksCHEngine = require "states.weeks.weeksCHEngine"
 
 
 	-- Load substates
@@ -401,6 +402,7 @@ function love.load()
 		require "weeks.grey",
 		require "weeks.maroon",
 		require "weeks.who",
+		require "weeks.i-hate-you",
 	}
 
 	weekDesc = { -- Add your week description here
@@ -548,6 +550,12 @@ function love.load()
 			"Who",
 			{
 				"Who"
+			}
+		},
+		{
+			"I Hate You",
+			{
+				"I Hate You"
 			}
 		}
 	}
