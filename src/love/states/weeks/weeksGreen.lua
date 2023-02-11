@@ -255,6 +255,7 @@ return {
 		judgements = {}
 		health = 1
 		score = 0
+		campaignScore = 0
 		misses = 0
 		additionalAccuracy = 0
 		noteCounter = 0

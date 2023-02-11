@@ -18,7 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
 
 function love.conf(t)
-	t.identity = "ve-rewrite"
+	t.identity = "v4-impostor-fnfr"
 	t.version = "11.3"
 	t.console = true
 

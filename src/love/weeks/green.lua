@@ -122,16 +122,18 @@ return {
 
 		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused and not inCutscene then
 			if storyMode and song < 4 then
+				campaignScore = campaignScore + score
 				song = song + 1
 
 				self:load()
 			else
+				campaignScore = campaignScore + score
 				status.setLoading(true)
 
 				graphics.fadeOut(
 					0.5,
 					function()
-						Gamestate.switch(menu)
+						Gamestate.switch(beansCounter)
 
 						status.setLoading(false)
 					end

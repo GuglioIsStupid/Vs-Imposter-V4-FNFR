@@ -166,6 +166,19 @@ function saveSettings()
     end
 end
 
+function saveBeans()
+	love.filesystem.write("beans", beans)
+end
+
+function getBeans()
+	if love.filesystem.getInfo("beans") then
+		beans = {love.filesystem.read("beans")}
+		beans[1] = tonumber(beans)
+	else
+		beans = {0}
+	end
+end
+
 function love.load()
 	paused = false
 	settings = {}
@@ -342,6 +355,8 @@ function love.load()
 	menuSettings = require "states.menu.menuSettings"
 	menuCredits = require "states.menu.menuCredits"
 	impWeekMenu = require "states.menu.impWeekMenu"
+
+	beansCounter = require "states.misc.beansCounter"
 
 	chooseMissCount = require "states.misc.chooseMissCount"
 
@@ -692,6 +707,8 @@ function love.load()
 	else
 		Gamestate.switch(menu)
 	end
+
+	getBeans()
 end
 
 function love.resize(width, height)
