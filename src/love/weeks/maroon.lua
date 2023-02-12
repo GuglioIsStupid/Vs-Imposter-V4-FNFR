@@ -48,7 +48,11 @@ return {
 			}
 		]])
 
-		push.setShader(heatwaveShader)
+		effect = moonshine(moonshine.effects.heatwave)
+
+		--push.setShader(heatwaveShader)
+
+		canvas = love.graphics.newCanvas(graphics.getWidth(), graphics.getHeight())
 
 		self:load()
 	end,
@@ -132,23 +136,35 @@ return {
 			end
 		end
 
+		--change effects time setter
+		effect.heatwave.time = love.timer.getTime()
+
 		weeks:updateUI(dt)
 	end,
 
 	draw = function(self)
 		love.graphics.push()
-			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
-			love.graphics.scale(camera.esizeX, camera.esizeY)
-			love.graphics.scale(camera.sizeX, camera.sizeY)
-			if song == 3 then
-				stages["maroon2"]:draw()
-			else
-				stages["maroon1"]:draw()
-			end
-			
-			weeks:drawRating(0.9)
+			--love.graphics.setCanvas(canvas)
+				--love.graphics.clear()
+
+				love.graphics.push()
+					love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
+					love.graphics.scale(camera.esizeX, camera.esizeY)
+					love.graphics.scale(camera.sizeX, camera.sizeY)
+					if song == 3 then
+						effect(function()
+							stages["maroon2"]:draw()
+						end)
+					else
+						stages["maroon1"]:draw()
+					end
+					
+					weeks:drawRating(0.9)
+				love.graphics.pop()
+			--love.graphics.setCanvas()
 		love.graphics.pop()
 
+		--love.graphics.draw(canvas, 0, 0, 0, graphics.getWidth() / canvas:getWidth(), graphics.getHeight() / canvas:getHeight())
 
 		weeks:drawUI()
 	end,

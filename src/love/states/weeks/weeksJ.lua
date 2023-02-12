@@ -1579,7 +1579,7 @@ return {
 		end
 		self:drawHealthbar()
 		love.graphics.push()
-			love.graphics.translate(lovesize.getWidth() / 2, lovesize.getHeight() / 2)
+			love.graphics.translate(push.getWidth() / 2, push.getHeight() / 2)
 			if song == 3 then 
 				love.graphics.translate(camHUD.x, camHUD.y)
 				love.graphics.rotate(camHUD.angle)
@@ -1798,7 +1798,7 @@ return {
 				end
 			graphics.setColor(1,1,1,1)
 			love.graphics.pop()
-			love.graphics.translate(lovesize.getWidth() / 2, lovesize.getHeight() / 2)
+			love.graphics.translate(push.getWidth() / 2, push.getHeight() / 2)
 			love.graphics.scale(0.7, 0.7)
 			love.graphics.scale(uiScale.x, uiScale.y)
 

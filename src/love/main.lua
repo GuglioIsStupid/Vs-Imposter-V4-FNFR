@@ -196,6 +196,7 @@ function love.load()
 	Timer = require "lib.timer"
 	json = require "lib.json"
 	lume = require "lib.lume"
+	moonshine = require "lib.moonshine"
 
 	-- Load modules
 	status = require "modules.status"
@@ -669,7 +670,9 @@ function love.load()
 	end
 
 	--lovesize.set(1280, 720)
-	push.setupScreen(1280, 720, {upscale = "normal"})
+	--push.setupScreen(1280, 720, {upscale = "normal"})
+	-- setup push with canvas
+	push.setupScreen(1280, 720, {fullscreen = false, resizable = true, canvas = true, pixelperfect = true})
 
 	-- Variables
 	font = love.graphics.newFont("fonts/vcr.ttf", 24)
