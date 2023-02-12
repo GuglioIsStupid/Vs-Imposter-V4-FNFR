@@ -723,6 +723,7 @@ end
 function love.resize(width, height)
 	--lovesize.resize(width, height)
 	push.resize(width, height)
+	if Gamestate.resize then Gamestate.resize(width, height) end
 end
 
 function love.keypressed(key)
@@ -786,18 +787,56 @@ end
 
 function love.draw()
 	love.graphics.setFont(font)
-	--graphics.screenBase(lovesize.getWidth(), lovesize.getHeight())
-	graphics.screenBase(push.getWidth(), push.getHeight())
+	if not status.getNoResize() then
+		--graphics.screenBase(lovesize.getWidth(), lovesize.getHeight())
+		graphics.screenBase(push.getWidth(), push.getHeight())
 
-	--lovesize.begin()
-	push.start()
-		graphics.setColor(1, 1, 1) -- Fade effect on
+		--lovesize.begin()
+		push.start()
+			graphics.setColor(1, 1, 1) -- Fade effect on
+			Gamestate.draw()
+			love.graphics.setColor(1, 1, 1) -- Fade effect off
+			love.graphics.setFont(font)
+			if status.getLoading() then
+				--love.graphics.print("Loading...", lovesize.getWidth() - 175, lovesize.getHeight() - 50)
+				love.graphics.print("Loading...", push.getWidth() - 175, push.getHeight() - 50)
+			end
+			love.graphics.setColor(1, 1, 1, volFade)
+			fixVol = tonumber(string.format(
+				"%.1f  ",
+				(love.audio.getVolume())
+			))
+			love.graphics.setColor(0.5, 0.5, 0.5, volFade - 0.3)
+
+			love.graphics.rectangle("fill", 1110, 0, 170, 50)
+
+			love.graphics.setColor(1, 1, 1, volFade)
+
+			if volTween then Timer.cancel(volTween) end
+			volTween = Timer.tween(
+				0.2,
+				volumeWidth,
+				{width = fixVol * 160},
+				"out-quad"
+			)
+			love.graphics.rectangle("fill", 1113, 10, volumeWidth.width, 30)
+			graphics.setColor(1, 1, 1, 1)
+		push.finish()
+		--lovesize.finish()
+
+		graphics.screenBase(love.graphics.getWidth(), love.graphics.getHeight())
+
+		-- Debug output
+		if settings.showDebug then
+			love.graphics.print(status.getDebugStr(settings.showDebug), 5, 5, nil, 0.5, 0.5)
+		end
+	else
+		graphics.screenBase(love.graphics.getWidth(), love.graphics.getHeight())
+		graphics.setColor(1, 1, 1)
 		Gamestate.draw()
-		love.graphics.setColor(1, 1, 1) -- Fade effect off
 		love.graphics.setFont(font)
 		if status.getLoading() then
-			--love.graphics.print("Loading...", lovesize.getWidth() - 175, lovesize.getHeight() - 50)
-			love.graphics.print("Loading...", push.getWidth() - 175, push.getHeight() - 50)
+			love.graphics.print("Loading...", love.graphics.getWidth() - 175, love.graphics.getHeight() - 50)
 		end
 		love.graphics.setColor(1, 1, 1, volFade)
 		fixVol = tonumber(string.format(
@@ -818,16 +857,9 @@ function love.draw()
 			"out-quad"
 		)
 		love.graphics.rectangle("fill", 1113, 10, volumeWidth.width, 30)
-		graphics.setColor(1, 1, 1, 1)
-	push.finish()
-	--lovesize.finish()
-
-	graphics.screenBase(love.graphics.getWidth(), love.graphics.getHeight())
-
-	-- Debug output
-	if settings.showDebug then
-		love.graphics.print(status.getDebugStr(settings.showDebug), 5, 5, nil, 0.5, 0.5)
+		love.graphics.setColor(1, 1, 1, 1)
 	end
+
 end
 
 function love.focus(t)

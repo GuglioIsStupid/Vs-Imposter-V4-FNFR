@@ -14,6 +14,8 @@ return {
 			stages["maroon1"]:enter()
 		end
 
+		status.setNoResize(true)
+
 		week = 1
 		weekString = "maroon"
 
@@ -52,7 +54,7 @@ return {
 
 		--push.setShader(heatwaveShader)
 
-		canvas = love.graphics.newCanvas(graphics.getWidth(), graphics.getHeight())
+		canvas = love.graphics.newCanvas(1280, 720)
 
 		self:load()
 	end,
@@ -98,6 +100,8 @@ return {
 	end,
 
 	update = function(self, dt)
+
+		graphics.screenBase(1280, 720)
 		weeks:update(dt)
 		if song == 3 then
 			stages["maroon2"]:update(dt)
@@ -144,32 +148,44 @@ return {
 
 	draw = function(self)
 		love.graphics.push()
-			--love.graphics.setCanvas(canvas)
-				--love.graphics.clear()
+
+			love.graphics.setCanvas(canvas)
+			effect(function()
+				love.graphics.clear()
 
 				love.graphics.push()
-					love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
+					love.graphics.translate(1280 / 2, 720 / 2)
 					love.graphics.scale(camera.esizeX, camera.esizeY)
 					love.graphics.scale(camera.sizeX, camera.sizeY)
 					if song == 3 then
-						effect(function()
+						
 							stages["maroon2"]:draw()
-						end)
+						
 					else
 						stages["maroon1"]:draw()
 					end
 					
 					weeks:drawRating(0.9)
 				love.graphics.pop()
-			--love.graphics.setCanvas()
+			end)
+
+			weeks:drawUI()
+			love.graphics.setCanvas()
+		
 		love.graphics.pop()
 
-		--love.graphics.draw(canvas, 0, 0, 0, graphics.getWidth() / canvas:getWidth(), graphics.getHeight() / canvas:getHeight())
+		canvasScale = math.min(math.floor(graphics.getWidth() / 1280), math.floor(graphics.getHeight() / 720))
+		if canvasScale < 1 then canvasScale = math.min(graphics.getWidth() / 1280, graphics.getHeight() / 720) end
 
-		weeks:drawUI()
+		love.graphics.draw(canvas, 0, 0, 0, graphics.getWidth() / canvas:getWidth(), graphics.getHeight() / canvas:getHeight())
+
+		print(canvasScale)
+
 	end,
 
 	leave = function(self)
 		weeks:leave()
+
+		status.setNoResize(false)
 	end
 }
