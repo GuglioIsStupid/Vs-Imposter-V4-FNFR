@@ -78,6 +78,14 @@ return {
         currentSelect = "StoryMode"
 
         function changeSelect()
+            lastStoryAnim = story:getAnimName()
+            lastFreeplayAnim = freeplay:getAnimName()
+            lastCreditsAnim = credits:getAnimName()
+            lastGalleryAnim = gallery:getAnimName()
+
+            lastOptionsAnim = options:getAnimName()
+            lastInnerslothAnim = inntersloth:getAnimName()
+            lastShopAnim = shop:getAnimName()
             if currentSelect == "StoryMode" then
                 story:animate("StoryMode Select", true)
                 freeplay:animate("Freeplay", false)
@@ -142,6 +150,10 @@ return {
                 inntersloth:animate("Innersloth", false)
                 shop:animate("Shop Select", true)
             end
+
+            if lastStoryAnim ~= story:getAnimName() or lastFreeplayAnim ~= freeplay:getAnimName() or lastCreditsAnim ~= credits:getAnimName() or lastGalleryAnim ~= gallery:getAnimName() or lastOptionsAnim ~= options:getAnimName() or lastInnerslothAnim ~= inntersloth:getAnimName() or lastShopAnim ~= shop:getAnimName() then
+                audio.playSound(selectSound)
+            end
         end
 
         changeSelect()
@@ -153,10 +165,11 @@ return {
                 redSussy:animate("select", false)
                 greenSussy:animate("select", false)
                 Timer.after(0.25, function()
-                    Timer.tween(1.2, redSussy, {y = 600}, "out-quad")
-                    Timer.tween(1.2, greenSussy, {y = 600}, "out-quad")
+                    Timer.tween(0.85, redSussy, {y = 600}, "out-quad")
+                    Timer.tween(0.85, greenSussy, {y = 600}, "out-quad")
                 end)
-                graphics.fadeOut(1.2, function()
+                -- TODO: Make a fake website for nintendo switch (It can't open links)
+                graphics.fadeOut(1, function()
                     status.setLoading(true)
                     if currentSelect == "StoryMode" then
                         Gamestate.switch(impWeekMenu)
@@ -278,35 +291,85 @@ return {
                 end
             end
 
-            if input:pressed("confirm") then
-                confirmFunc()
-            end
+            if not graphics.isFading() then
+                if input:pressed("confirm") then
+                    confirmFunc()
+                end
 
-            if input:pressed("left") or input:pressed("right") or input:pressed("up") or input:pressed("down") then
-                changeSelect()
-                audio.playSound(selectSound)
+                if input:pressed("left") or input:pressed("right") or input:pressed("up") or input:pressed("down") then
+                    changeSelect()
+                end
             end
         end
 
         starBG.translation.x = starBG.translation.x - 12.5 * dt
-			if starBG.translation.x < -1102 then
-				starBG.translation.x = 0
-			end
+		if starBG.translation.x < -1102 then
+			starBG.translation.x = 0
+		end
 
-			startFG.translation.x = startFG.translation.x - 25 * dt
-			if startFG.translation.x < -1216 then
-				startFG.translation.x = 0
+		startFG.translation.x = startFG.translation.x - 25 * dt
+		if startFG.translation.x < -1216 then
+			startFG.translation.x = 0
+        end
+		starBG.translation.x = starBG.translation.x - 12.5 * dt
+		if starBG.translation.x < -1102 then
+			starBG.translation.x = 0
+		end
+
+		startFG.translation.x = startFG.translation.x - 25 * dt
+		if startFG.translation.x < -1216 then
+			startFG.translation.x = 0
+		end
+
+        mx, my = love.mouse.getPosition()
+
+        if not graphics.isFading() then
+            if push.toGameX(mx) >= 410 and push.toGameX(mx) <= 630 and push.toGameY(my) >= 465 and push.toGameY(my) <= 555 then
+                currentSelect = "StoryMode"
+                changeSelect()
+            elseif push.toGameX(mx) >= 650 and push.toGameX(mx) <= 870 and push.toGameY(my) >= 465 and push.toGameY(my) <= 555 then
+                currentSelect = "Freeplay"
+                changeSelect()
+            elseif push.toGameX(mx) >= 410 and push.toGameX(mx) <= 630 and push.toGameY(my) >= 565 and push.toGameY(my) <= 625 then
+                currentSelect = "Gallery"
+                changeSelect()
+            elseif push.toGameX(mx) >= 650 and push.toGameX(mx) <= 870 and push.toGameY(my) >= 565 and push.toGameY(my) <= 625 then
+                currentSelect = "Credits"
+                changeSelect()
+            elseif push.toGameX(mx) >= 480 and push.toGameX(mx) <= 560 and push.toGameY(my) >= 635 and push.toGameY(my) <= 710 then
+                currentSelect = "Options"
+                changeSelect()
+            elseif push.toGameX(mx) >= 600 and push.toGameX(mx) <= 680 and push.toGameY(my) >= 635 and push.toGameY(my) <= 710 then
+                currentSelect = "Shop"
+                changeSelect()
+            elseif push.toGameX(mx) >= 720 and push.toGameX(mx) <= 800 and push.toGameY(my) >= 635 and push.toGameY(my) <= 710 then
+                currentSelect = "Innersloth"
+                changeSelect()
             end
-			starBG.translation.x = starBG.translation.x - 12.5 * dt
-			if starBG.translation.x < -1102 then
-				starBG.translation.x = 0
-			end
-
-			startFG.translation.x = startFG.translation.x - 25 * dt
-			if startFG.translation.x < -1216 then
-				startFG.translation.x = 0
-			end
+        end
 	end,
+
+    mousepressed = function(self, x, y, button)
+        if button == 1 and not graphics.isFading() then
+            local mx, my = x, y
+
+            if push.toGameX(mx) >= 410 and push.toGameX(mx) <= 630 and push.toGameY(my) >= 465 and push.toGameY(my) <= 555 then
+                confirmFunc()
+            elseif push.toGameX(mx) >= 650 and push.toGameX(mx) <= 870 and push.toGameY(my) >= 465 and push.toGameY(my) <= 555 then
+                confirmFunc()
+            elseif push.toGameX(mx) >= 410 and push.toGameX(mx) <= 630 and push.toGameY(my) >= 565 and push.toGameY(my) <= 625 then
+                confirmFunc()
+            elseif push.toGameX(mx) >= 650 and push.toGameX(mx) <= 870 and push.toGameY(my) >= 565 and push.toGameY(my) <= 625 then
+                confirmFunc()
+            elseif push.toGameX(mx) >= 480 and push.toGameX(mx) <= 560 and push.toGameY(my) >= 635 and push.toGameY(my) <= 710 then
+                confirmFunc()
+            elseif push.toGameX(mx) >= 600 and push.toGameX(mx) <= 680 and push.toGameY(my) >= 635 and push.toGameY(my) <= 710 then
+                confirmFunc()
+            elseif push.toGameX(mx) >= 720 and push.toGameX(mx) <= 800 and push.toGameY(my) >= 635 and push.toGameY(my) <= 710 then
+                confirmFunc()
+            end
+        end
+    end,
 
 	draw = function(self)
 		love.graphics.push()

@@ -190,7 +190,8 @@ function love.load()
 	-- Load libraries
 	baton = require "lib.baton"
 	ini = require "lib.ini"
-	lovesize = require "lib.lovesize"
+	--lovesize = require "lib.lovesize"
+	push = require "lib.push"
 	Gamestate = require "lib.gamestate"
 	Timer = require "lib.timer"
 	json = require "lib.json"
@@ -667,7 +668,8 @@ function love.load()
 		love.window.setIcon(love.image.newImageData("icons/default.png"))
 	end
 
-	lovesize.set(1280, 720)
+	--lovesize.set(1280, 720)
+	push.setupScreen(1280, 720, {upscale = "normal"})
 
 	-- Variables
 	font = love.graphics.newFont("fonts/vcr.ttf", 24)
@@ -710,11 +712,14 @@ function love.load()
 		Gamestate.switch(menu)
 	end
 
+	love.mouse.setCursor(love.mouse.newCursor(graphics.imagePath("cursor"), 3, 0))
+
 	getBeans()
 end
 
 function love.resize(width, height)
-	lovesize.resize(width, height)
+	--lovesize.resize(width, height)
+	push.resize(width, height)
 end
 
 function love.keypressed(key)
@@ -764,7 +769,8 @@ function love.update(dt)
 		Gamestate.update(dt)
 	else
 		love.graphics.setFont(font)
-		graphics.screenBase(lovesize.getWidth(), lovesize.getHeight())
+		--graphics.screenBase(lovesize.getWidth(), lovesize.getHeight())
+		graphics.screenBase(push.getWidth(), push.getHeight())
 		graphics.setColor(1, 1, 1) -- Fade effect on
 		Gamestate.update(dt)
 		love.graphics.setColor(1, 1, 1) -- Fade effect off
@@ -777,15 +783,18 @@ end
 
 function love.draw()
 	love.graphics.setFont(font)
-	graphics.screenBase(lovesize.getWidth(), lovesize.getHeight())
+	--graphics.screenBase(lovesize.getWidth(), lovesize.getHeight())
+	graphics.screenBase(push.getWidth(), push.getHeight())
 
-	lovesize.begin()
+	--lovesize.begin()
+	push.start()
 		graphics.setColor(1, 1, 1) -- Fade effect on
 		Gamestate.draw()
 		love.graphics.setColor(1, 1, 1) -- Fade effect off
 		love.graphics.setFont(font)
 		if status.getLoading() then
-			love.graphics.print("Loading...", lovesize.getWidth() - 175, lovesize.getHeight() - 50)
+			--love.graphics.print("Loading...", lovesize.getWidth() - 175, lovesize.getHeight() - 50)
+			love.graphics.print("Loading...", push.getWidth() - 175, push.getHeight() - 50)
 		end
 		love.graphics.setColor(1, 1, 1, volFade)
 		fixVol = tonumber(string.format(
@@ -807,7 +816,8 @@ function love.draw()
 		)
 		love.graphics.rectangle("fill", 1113, 10, volumeWidth.width, 30)
 		graphics.setColor(1, 1, 1, 1)
-	lovesize.finish()
+	push.finish()
+	--lovesize.finish()
 
 	graphics.screenBase(love.graphics.getWidth(), love.graphics.getHeight())
 

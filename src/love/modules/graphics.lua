@@ -376,6 +376,14 @@ return {
 				end
 			end,
 
+			getFrameWidth = function(self)
+				return frameData[math.floor(frame)].width
+			end,
+
+			getFrameHeight = function(self)
+				return frameData[math.floor(frame)].height
+			end,
+
 			udraw = function(self, sx, sy)
 				local sx = sx or 7
 				local sy = sy or 7
