@@ -672,7 +672,7 @@ function love.load()
 	--lovesize.set(1280, 720)
 	--push.setupScreen(1280, 720, {upscale = "normal"})
 	-- setup push with canvas
-	push.setupScreen(1280, 720, {fullscreen = false, resizable = true, canvas = true, pixelperfect = true})
+	push.setupScreen(1280, 720, {upscale = "normal", canvas = true})
 
 	-- Variables
 	font = love.graphics.newFont("fonts/vcr.ttf", 24)

@@ -56,6 +56,8 @@ moonshine.chain = function(w,h,effect)
     return chain
   end
 
+  screenCanvas = love.graphics.newCanvas(graphics.getWidth(), graphics.getHeight())
+
   chain.draw = function(func, ...)
     -- save state
     local canvas = love.graphics.getCanvas()
