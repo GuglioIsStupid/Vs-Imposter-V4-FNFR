@@ -1209,7 +1209,7 @@ return {
 
 	drawUI = function(self)
 		love.graphics.push()
-			love.graphics.translate(lovesize.getWidth() / 2, lovesize.getHeight() / 2)
+			love.graphics.translate(push.getWidth() / 2, push.getHeight() / 2)
 			love.graphics.scale(0.7, 0.7)
 
 			for i = 1, 4 do

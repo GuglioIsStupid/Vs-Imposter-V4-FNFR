@@ -70,7 +70,7 @@ return {
         end
 
         if beatHandler.onBeat() then 
-            embers[#embers+1] = {x = love.math.random(-lovesize.getWidth()/2, lovesize.getWidth()/2), y = 730, speed = love.math.random(80, 200), scale = 1}
+            embers[#embers+1] = {x = love.math.random(-push.getWidth()/2, push.getWidth()/2), y = 730, speed = love.math.random(80, 200), scale = 1}
         end
         if #embers > 0 then 
             for i, v in ipairs(embers) do
@@ -84,8 +84,6 @@ return {
                 end
             end
         end
-
-
     end,
 
     draw = function()
