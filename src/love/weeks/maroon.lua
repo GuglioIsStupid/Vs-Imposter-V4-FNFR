@@ -26,7 +26,8 @@ return {
 
 		enemyIcon:animate("red impostor 1", false)
 
-		heatwaveShader = love.graphics.newShader([[
+		--[[
+		heatwaveShader = love.graphics.newShader([\[
 			extern number iTime;
 			vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords) {
 				vec2 p_m = texture_coords;
@@ -48,11 +49,10 @@ return {
 				vec2 dist_tex_coord = p_m.st + dst_offset;
 				return Texel(texture, dist_tex_coord);
 			}
-		]])
+		]\])
+		--]]
 
 		effect = moonshine(moonshine.effects.heatwave)
-
-		--push.setShader(heatwaveShader)
 
 		canvas = love.graphics.newCanvas(1280, 720)
 
@@ -149,38 +149,42 @@ return {
 	draw = function(self)
 		love.graphics.push()
 
-			love.graphics.setCanvas(canvas)
-			effect(function()
-				love.graphics.clear()
+			if song == 3 then
+				love.graphics.setCanvas(canvas)
+				effect(function()
+					love.graphics.clear()
 
+					love.graphics.push()
+						love.graphics.translate(1280 / 2, 720 / 2)
+						love.graphics.scale(camera.esizeX, camera.esizeY)
+						love.graphics.scale(camera.sizeX, camera.sizeY)
+						stages["maroon2"]:draw()
+
+						weeks:drawRating(0.9)
+					love.graphics.pop()
+				end)
+
+				weeks:drawUI()
+				love.graphics.setCanvas()
+
+				canvasScale = math.min(math.floor(graphics.getWidth() / 1280), math.floor(graphics.getHeight() / 720))
+				if canvasScale < 1 then canvasScale = math.min(graphics.getWidth() / 1280, graphics.getHeight() / 720) end
+
+				love.graphics.draw(canvas, 0, 0, 0, graphics.getWidth() / canvas:getWidth(), graphics.getHeight() / canvas:getHeight())
+			else
 				love.graphics.push()
 					love.graphics.translate(1280 / 2, 720 / 2)
 					love.graphics.scale(camera.esizeX, camera.esizeY)
 					love.graphics.scale(camera.sizeX, camera.sizeY)
-					if song == 3 then
-						
-							stages["maroon2"]:draw()
-						
-					else
-						stages["maroon1"]:draw()
-					end
+					stages["maroon1"]:draw()
 					
 					weeks:drawRating(0.9)
 				love.graphics.pop()
-			end)
 
-			weeks:drawUI()
-			love.graphics.setCanvas()
+				weeks:drawUI()
+			end
 		
 		love.graphics.pop()
-
-		canvasScale = math.min(math.floor(graphics.getWidth() / 1280), math.floor(graphics.getHeight() / 720))
-		if canvasScale < 1 then canvasScale = math.min(graphics.getWidth() / 1280, graphics.getHeight() / 720) end
-
-		love.graphics.draw(canvas, 0, 0, 0, graphics.getWidth() / canvas:getWidth(), graphics.getHeight() / canvas:getHeight())
-
-		print(canvasScale)
-
 	end,
 
 	leave = function(self)
