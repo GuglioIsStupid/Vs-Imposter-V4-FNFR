@@ -37,6 +37,22 @@ local eventFuncs = {
 		print("haiiii")
 		flashAlpha = tonumber(value) or 0.4
 	end,
+	["Opponent Two"] = function(value1, value2)
+		if value1 == "1" then
+			curEnemy = "black"
+		else
+			curEnemy = "white"
+		end
+		print("Opponent Two")
+		print(curEnemy)
+		print(value1)
+		print(value2)
+	end,
+	["Both Opponents"] = function(value1, value2)
+		curEnemy = "both"
+		print("Both Opponents")
+		print(curEnemy)
+	end,
 }
 
 local animList = {
@@ -853,29 +869,28 @@ return {
 				if (enemyNote[1].y - musicPos <= -400) then
 					voices:setVolume(1)
 
-					enemyArrow:animate("confirm", false)
-
-					if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
-						if useAltAnims then
-							if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim .. " alt", false, 2) end
-							if (not enemyTwo:isAnimated()) or enemyTwo:getAnimName() == "idle" then self:safeAnimate(enemyTwo, curAnim .. " alt", false, 2) end
-
-						else
+					if  curEnemy == "white" then
+						if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
 							if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim, false, 2) end
-							if (not enemyTwo:isAnimated()) or enemyTwo:getAnimName() == "idle" then self:safeAnimate(enemyTwo, curAnim, false, 2) end
-
-						end
-					else
-						if useAltAnims then
-							self:safeAnimate(enemy, curAnim .. " alt", false, 2)
-
-							self:safeAnimate(enemyTwo, curAnim .. " alt", false, 2)
 						else
 							self:safeAnimate(enemy, curAnim, false, 2)
-
+						end
+					elseif curEnemy == "black" then
+						if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
+							if (not enemyTwo:isAnimated()) or enemyTwo:getAnimName() == "idle" then self:safeAnimate(enemyTwo, curAnim, false, 2) end
+						else
+							self:safeAnimate(enemyTwo, curAnim, false, 2)
+						end
+					elseif curEnemy == "both" then
+						if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
+							if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim, false, 2) end
+							if (not enemyTwo:isAnimated()) or enemyTwo:getAnimName() == "idle" then self:safeAnimate(enemyTwo, curAnim, false, 2) end
+						else
+							self:safeAnimate(enemy, curAnim, false, 2)
 							self:safeAnimate(enemyTwo, curAnim, false, 2)
 						end
 					end
+
 
 					enemy.lastHit = musicTime
 

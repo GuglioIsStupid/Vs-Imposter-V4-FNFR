@@ -74,7 +74,7 @@ return {
 			doMustHitSectionCam = true
 			weeksYellow:generateNotes("songs/double-kill/double-kill-hard.json")
 			weeksYellow:generateEvents("songs/double-kill/events.json")
-			weeksYellow:setIcon("enemy", "white")
+			--weeksYellow:setIcon("enemy", "white")
 		elseif song == 4 then
 			doMustHitSectionCam = false
 			weeksYellow:generateNotes("songs/danger/danger-hard.json")
@@ -132,8 +132,9 @@ return {
 					highscores[weekNum-1][difficulty].accuracys[song] = tonumber(newAccuracy)
 					saveHighscores()
 				end
-				song = song + 1
 				--]]
+				song = song + 1
+				
 
 				self:load()
 			else
