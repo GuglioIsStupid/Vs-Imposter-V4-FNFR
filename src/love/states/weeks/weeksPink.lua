@@ -1206,6 +1206,8 @@ return {
 								else
 									graphics.setColor(1, 1, 1, 0.5)
 								end
+								-- only apply scissor for y and height
+								love.graphics.setScissor(-400, 0, 4000, 632) -- too lazy to y'know... do it right...
 							else
 								if settings.middleScroll then
 									graphics.setColor(1, 1, 1, 0.5)
@@ -1228,6 +1230,8 @@ return {
 							end
 							graphics.setColor(1, 1, 1)
 						end
+
+						love.graphics.setScissor()
 					end
 					for j = #boyfriendNotes[i], 1, -1 do
 						if boyfriendNotes[i][j].y - musicPos <= 560 then
@@ -1235,6 +1239,10 @@ return {
 
 							if animName == "hold" or animName == "end" then
 								graphics.setColor(1, 1, 1, math.min(0.5, (500 + (boyfriendNotes[i][j].y - musicPos)) / 150))
+
+									if input:down(inputList[i]) then 
+										love.graphics.setScissor(-400, 0, 4000, 632) -- too lazy to y'know... do it right...
+									end
 							else
 								graphics.setColor(1, 1, 1, math.min(1, (500 + (boyfriendNotes[i][j].y - musicPos)) / 75))
 							end
@@ -1252,6 +1260,8 @@ return {
 								end
 							end
 						end
+						-- reset the scissor
+						love.graphics.setScissor()
 					end
 					graphics.setColor(1, 1, 1)
 				love.graphics.pop()
