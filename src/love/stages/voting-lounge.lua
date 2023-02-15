@@ -34,6 +34,19 @@ return {
 
     update = function(self, dt)
 
+        if not enemy2:isAnimated() then            -- you can remove this if you want, i was just bored
+            if enemyDance == "left" then
+                enemyDance = "right"
+            else
+                enemyDance = "left"
+            end
+            if enemyDance == "left" then
+                enemy2:animate("danceLEFT", false)
+            else
+                enemy2:animate("danceRIGHT", false)
+            end
+        end
+
     end,
 
     draw = function()

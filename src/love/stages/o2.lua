@@ -23,6 +23,10 @@ return {
 
     load = function()
         fuckerIsDead = false
+
+        camera.sizeX, camera.sizeY = 0.9, 0.9
+        camera.scaleX, camera.scaleY = 0.9, 0.9
+
     end,
 
     update = function(self, dt)
@@ -51,7 +55,7 @@ return {
         end
         graphics.setColor(camera:getColor())
 		love.graphics.pop()
-        if fuckerIsDead then 
+        if fuckerIsDead or inDebug then 
             stageImages["light"]:draw()
         end
     end,

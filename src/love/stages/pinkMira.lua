@@ -77,14 +77,21 @@ return {
         stageImages["vignette"].alpha = 0
         stageImages["vignette2"].alpha = 0
 
+        stageImages["littleHearts"]:animate("anim", true)
+
+        camera:addPoint("boyfriend", -40, 18)
+        camera:addPoint("enemy", -3, 18)
+
+        camera:moveToPoint(0, "boyfriend")
+        
+
         hearts = {}
     end,
 
     load = function()
         camera.x, camera.y = -3, 18
 
-        camera:addPoint("boyfriend", -40, 18)
-        camera:addPoint("enemy", -3, 18)
+
 
         pinkToggle = false
     end,
@@ -97,7 +104,7 @@ return {
         stageImages["vines"]:update(dt)
         stageImages["longus"]:update(dt)
         stageImages["hearts"]:update(dt)
-
+        stageImages["littleHearts"]:update(dt)
         if beatHandler.onBeat() and beatHandler.getBeat() % 2 == 0 then 
             stageImages["rhm"]:animate("rhm", false)
             stageImages["grey"]:animate("grey", false)
@@ -112,7 +119,7 @@ return {
                     if vignetteTween then Timer.cancel(vignetteTween) end
                     vignetteTween = Timer.tween(1.2, stageImages["vignette"], {alpha = 0}, "out-sine")
                 end
-                hearts[#hearts+1] = {x = love.math.random(-lovesize.getWidth()/2, lovesize.getWidth()/2), y = 730, speed = love.math.random(80, 200), scale = 1}
+                hearts[#hearts+1] = {x = love.math.random(-1080/2, 1080/2), y = 730, speed = love.math.random(80, 200), scale = 1}
             end
         end
 

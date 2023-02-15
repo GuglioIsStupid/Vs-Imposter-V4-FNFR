@@ -15,6 +15,7 @@ return graphics.newSprite(
 		{x = 2525, y = 0, width = 493, height = 411, offsetX = -18, offsetY = 0, offsetWidth = 512, offsetHeight = 411}, -- 12: jelqer dance left0011
 		{x = 3023, y = 0, width = 493, height = 411, offsetX = -19, offsetY = 0, offsetWidth = 512, offsetHeight = 411}, -- 13: jelqer dance left0012
 		{x = 3023, y = 0, width = 493, height = 411, offsetX = -19, offsetY = 0, offsetWidth = 512, offsetHeight = 411}, -- 14: jelqer dance left0013
+
 		{x = 3521, y = 0, width = 462, height = 405, offsetX = -47, offsetY = -6, offsetWidth = 509, offsetHeight = 411}, -- 15: jelqer dance right0000
 		{x = 3521, y = 0, width = 462, height = 405, offsetX = -47, offsetY = -6, offsetWidth = 509, offsetHeight = 411}, -- 16: jelqer dance right0001
 		{x = 0, y = 416, width = 456, height = 406, offsetX = -50, offsetY = -5, offsetWidth = 509, offsetHeight = 411}, -- 17: jelqer dance right0002
@@ -29,6 +30,7 @@ return graphics.newSprite(
 		{x = 1891, y = 416, width = 494, height = 411, offsetX = -1, offsetY = 0, offsetWidth = 509, offsetHeight = 411}, -- 26: jelqer dance right0011
 		{x = 2390, y = 416, width = 494, height = 411, offsetX = 0, offsetY = 0, offsetWidth = 509, offsetHeight = 411}, -- 27: jelqer dance right0012
 		{x = 2390, y = 416, width = 494, height = 411, offsetX = 0, offsetY = 0, offsetWidth = 509, offsetHeight = 411}, -- 28: jelqer dance right0013
+
 		{x = 2889, y = 416, width = 479, height = 350, offsetX = 0, offsetY = -9, offsetWidth = 479, offsetHeight = 359}, -- 29: jelqer down0000
 		{x = 2889, y = 416, width = 479, height = 350, offsetX = 0, offsetY = -9, offsetWidth = 479, offsetHeight = 359}, -- 30: jelqer down0001
 		{x = 3373, y = 416, width = 479, height = 357, offsetX = 0, offsetY = -2, offsetWidth = 479, offsetHeight = 359}, -- 31: jelqer down0002
@@ -74,11 +76,13 @@ return graphics.newSprite(
 		--To get the animations, look at the number and the name of the frame
 		--Start is the first frame, stop is the last frame, speed is the speed of the animation, offsetX and offsetY are the offset of the animation
 		--Get the offset by using the ingame offset editor and pressing 7
-		["idle"] = {start = 1, stop = 28, speed = 24, offsetX = 0, offsetY = 0},
+		["idle"] = {start = 1, stop = 1, speed = 24, offsetX = 0, offsetY = 0},
 		["singDOWN"] = {start = 29, stop = 42, speed = 24, offsetX = -55, offsetY = -27},
 		["singLEFT"] = {start = 43, stop = 48, speed = 24, offsetX = 0, offsetY = 0},
 		["singRIGHT"] = {start = 49, stop = 54, speed = 24, offsetX = -70, offsetY = -16},
-		["singUP"] = {start = 55, stop = 68, speed = 24, offsetX = -90, offsetY = 16}
+		["singUP"] = {start = 55, stop = 68, speed = 24, offsetX = -90, offsetY = 16},
+		["danceLEFT"] = {start = 1, stop = 14, speed = 24, offsetX = -90, offsetY = 16},
+		["danceRIGHT"] = {start = 15, stop = 28, speed = 24, offsetX = -90, offsetY = 16}
 	},
 	"idle", -- set to default animation
 	false, -- If the sprite repeats

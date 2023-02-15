@@ -10,7 +10,7 @@ return {
 
 
         enemy = love.filesystem.load("sprites/characters/grey.lua")()
-        boyfriend = love.filesystem.load("sprites/boyfriend.lua")()
+        boyfriend = love.filesystem.load("sprites/characters/bfairship.lua")()
         girlfriend = love.filesystem.load("sprites/characters/gfdead.lua")()
 
         boyfriend.x, boyfriend.y = 496, 242

@@ -77,6 +77,9 @@ return {
 		else
 			inst = love.audio.newSource("songs/O2/Inst.ogg", "stream")
 			voices = love.audio.newSource("songs/O2/Voices.ogg", "stream")
+
+			camera.sizeX, camera.sizeY = 0.9, 0.9
+			camera.scaleX, camera.scaleY = 0.9, 0.9
 		end
 
 		self:initUI()
