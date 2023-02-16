@@ -29,8 +29,8 @@ return {
         stageImages["platform"].x, stageImages["platform"].y = 67, 475
         stageImages["bubbles"].x, stageImages["bubbles"].y = 0, 619
 
-        camera:addPoint("boyfriend", -84, -142)  --  0.75
-        camera:addPoint("enemy", 0, -112)  --  0.65
+        camera:addPoint("boyfriend", -84, -142, 0.75, 0.75)  --  0.75
+        camera:addPoint("enemy", 0, -112, 0.65, 0.65)  --  0.65
 
         embers = {}
 
@@ -50,6 +50,8 @@ return {
 
         stageImages["bg"]:update(dt)
         stageImages["bubbles"]:update(dt)
+
+        --[[
         
 
         if mustHitSection then
@@ -64,7 +66,7 @@ return {
             jermaZoom = Timer.tween(1.25, camera, {sizeX = 0.65, sizeY = 0.65, scaleX = 0.65, scaleY = 0.65}, "out-quad")
         end
 
-        
+        --]]
         if not enemy:isAnimated() and enemy:getAnimName() ~= "idle" then
             enemy:animate("idle", false)        -- fixed the animation issues
         end

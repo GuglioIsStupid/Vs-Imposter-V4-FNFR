@@ -22,9 +22,9 @@ return {
 
     load = function()
 
-        camera:addPoint("boyfriend", 0, 0)
-        camera:addPoint("enemy", 0, 0)
-        camera:moveToPoint(0, "enemy")
+        camera:addPoint("boyfriend", 0, 0, 5, 5)
+        camera:addPoint("enemy", 0, 0, 5, 5)
+        camera:moveToPoint(0, "enemy", 5, 5)
 
 
 

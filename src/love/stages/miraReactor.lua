@@ -39,9 +39,9 @@ return {
 
     load = function()
 
-        camera:addPoint("boyfriend", -362, -230)
-        camera:addPoint("enemy", 463, -230)
-        camera:addPoint("middle", 33, -192)
+        camera:addPoint("boyfriend", -362, -230, 0.7, 0.7)
+        camera:addPoint("enemy", 463, -230, 0.7, 0.7)
+        camera:addPoint("middle", 33, -192, 0.7, 0.7)
     end,
 
     update = function(self, dt)

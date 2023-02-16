@@ -48,8 +48,8 @@ return {
         camera.sizeX, camera.sizeY = 0.7, 0.7
         camera.scaleX, camera.scaleY = 0.7, 0.7
 
-        camera:addPoint("enemy", 234, 11)
-        camera:addPoint("boyfriend", -40, 11)
+        camera:addPoint("enemy", 234, 11, 0.7, 0.7)
+        camera:addPoint("boyfriend", -40, 11, 0.7, 0.7)
 
 
         if song == 3 then

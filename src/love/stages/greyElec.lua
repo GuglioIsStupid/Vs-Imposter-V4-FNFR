@@ -24,18 +24,18 @@ return {
 
         camera.sizeX, camera.sizeY = 0.9, 0.9
         camera.scaleX, camera.scaleY = 0.9, 0.9
-        camera:addPoint("boyfriend", -64, -67)
+        camera:addPoint("boyfriend", -64, -67, 0.9, 0.9)
 
-        camera:addPoint("enemy", 182, -67)
+        camera:addPoint("enemy", 182, -67, 0.9, 0.9)
         camera:moveToPoint(0, "boyfriend")
 
     end,
 
     load = function()
 
-        camera:addPoint("boyfriend", -64, -67)
+        camera:addPoint("boyfriend", -64, -67, 0.9, 0.9)
 
-        camera:addPoint("enemy", 182, -67)
+        camera:addPoint("enemy", 182, -67, 0.9, 0.9)
     end,
 
     update = function(self, dt)

@@ -35,8 +35,8 @@ return {
         camera.sizeX, camera.sizeY = 0.5, 0.5
         camera.scaleX, camera.scaleY = 0.5, 0.5
 
-        camera:addPoint("enemy", 66, -157)
-        camera:addPoint("boyfriend", -200, -157)
+        camera:addPoint("enemy", 66, -157, 0.5, 0.5)
+        camera:addPoint("boyfriend", -200, -157, 0.5, 0.5)
 
     end,
 

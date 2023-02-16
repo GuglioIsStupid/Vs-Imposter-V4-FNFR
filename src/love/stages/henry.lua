@@ -29,7 +29,7 @@ return {
         afterEllie = false
 
 
-        camera:addPoint("enemy", 234, 0)
+        camera:addPoint("enemy", 234, 0, 0.85, 0.85)
 
         if song == 4 then
             enemyTwo = love.filesystem.load("sprites/characters/Reginald_Assets.lua")()
@@ -61,7 +61,7 @@ return {
             boyfriendButNotReally:animate("idle", true)
             camera.x, camera.y = -113, 0
             boyfriend:animate("greatestPlanIntro", false)
-            camera:addPoint("enemy", 687, 0)
+            camera:addPoint("enemy", 687, 0, 0.85, 0.85)
             enemy.x, enemy.y = -4000, 0
 
 
@@ -80,7 +80,7 @@ return {
             camera.scaleX, camera.scaleY = 0.85, 0.85
             camera.sizeX, camera.sizeY = 0.85, 0.85
 
-            camera:addPoint("boyfriend", -335, -153)
+            camera:addPoint("boyfriend", -335, -153, 0.85, 0.85)
         end
 
     end,

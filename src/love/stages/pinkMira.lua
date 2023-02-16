@@ -79,8 +79,8 @@ return {
 
         stageImages["littleHearts"]:animate("anim", true)
 
-        camera:addPoint("boyfriend", -40, 18)
-        camera:addPoint("enemy", -3, 18)
+        camera:addPoint("boyfriend", -40, 181, 1, 1)
+        camera:addPoint("enemy", -3, 18, 1, 1)
 
         camera:moveToPoint(0, "boyfriend")
         
@@ -89,7 +89,7 @@ return {
     end,
 
     load = function()
-        camera.x, camera.y = -3, 18
+       -- camera.x, camera.y = -3, 18
 
 
 

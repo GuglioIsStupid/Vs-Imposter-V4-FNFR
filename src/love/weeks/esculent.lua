@@ -19,8 +19,8 @@ return {
 		camera.sizeX, camera.sizeY = 0.65, 0.65
 		camera.scaleX, camera.scaleY = 0.65, 0.65
 
-		camera:addPoint("boyfriend", 0, 0)
-		camera:addPoint("enemy", 0, 0)
+		camera:addPoint("boyfriend", 0, 0, 0.65, 0.65)
+		camera:addPoint("enemy", 0, 0, 0.65, 0.65)
 
 		flashAlpha = 0
 

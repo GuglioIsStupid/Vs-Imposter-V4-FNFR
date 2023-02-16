@@ -48,8 +48,8 @@ return {
 
         stageImages["blue"]:animate("anim", true)
 
-        camera:addPoint("boyfriend", -42, 5)
-        camera:addPoint("enemy", 41, 5)
+        camera:addPoint("boyfriend", -42, 5, 1, 1)
+        camera:addPoint("enemy", 41, 5, 1, 1)
 
 
     end,
@@ -57,8 +57,8 @@ return {
     load = function()
         
         
-        camera:addPoint("boyfriend", -42, 5)
-        camera:addPoint("enemy", 41, 5)
+        camera:addPoint("boyfriend", -42, 5, 1, 1)
+        camera:addPoint("enemy", 41, 5, 1, 1)
         camera:moveToPoint(0, "boyfriend")
 
     end,

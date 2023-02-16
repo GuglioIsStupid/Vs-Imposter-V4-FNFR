@@ -11,8 +11,8 @@ return {
         boyfriend.x, boyfriend.y = 412, 168
         enemy.x, enemy.y = -397, 0
 
-        camera:addPoint("boyfriend", 76, 23)
-        camera:addPoint("enemy", 182, 122)
+        camera:addPoint("boyfriend", 76, 23, 0.9, 0.9)
+        camera:addPoint("enemy", 182, 122, 0.7, 0.7)
 
 
     end,
@@ -22,6 +22,8 @@ return {
     end,
 
     update = function(self, dt)
+
+        --[[
 
         if mustHitSection then
             if jermaZoom then
@@ -35,6 +37,8 @@ return {
         
             jermaZoom = Timer.tween(1.25, camera, {sizeX = 0.9, sizeY = 0.9, scaleX = 0.9, scaleY = 0.9}, "out-quad")
         end
+
+        --]]
 
         
         if not enemy:isAnimated() and enemy:getAnimName() ~= "idle" then
