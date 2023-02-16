@@ -723,15 +723,20 @@ function love.load()
 		Gamestate.switch(menu)
 	end
 
+	scissorScale = 1 -- SCISSOR DOESN'T WORK WITH SCALE SO WE HAVE TO SCALE IT OURSELVES
+
 	love.mouse.setCursor(love.mouse.newCursor(graphics.imagePath("cursor"), 3, 0))
 
 	getBeans()
+
+	scissorScale = love.graphics.getHeight() / 720
 end
 
 function love.resize(width, height)
 	--lovesize.resize(width, height)
 	push.resize(width, height)
 	if Gamestate.resize then Gamestate.resize(width, height) end
+	scissorScale = height / 720
 end
 
 function love.keypressed(key)
