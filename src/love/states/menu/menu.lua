@@ -41,18 +41,24 @@ return {
 		starBG.translation = {x = 0, y = 0}
 		startFG.translation = {x = 0, y = 0}
 
+		shaker = love.filesystem.load("sprites/menu/thug-shake-thug-shaker.lua")()
+		shaker.sizeX, shaker.sizeY = 2, 2
+
 		songNum = 0
 
 		switchMenu(1)
 
 		graphics.setFade(0)
 		graphics.fadeIn(0.5)
+
+		THUGSHAKER = ""
 	end,
 	onBeat = function(self, n)
 		--if logo then logo:animate("anim", false) end
 	end,
 
 	update = function(self, dt)
+		shaker:update(dt)
 		if not graphics.isFading() then
 			if input:pressed("confirm") then
 				
@@ -80,6 +86,15 @@ return {
 			if startFG.translation.x < -1116 then
 				startFG.translation.x = 0
 			end
+
+		if string.lower(THUGSHAKER) == "thug" then
+			THUGSHAKER = ""
+			showthugNotLogo = true
+		end
+	end,
+
+	textinput = function(self, t)
+		THUGSHAKER = THUGSHAKER .. t
 	end,
 
 	draw = function(self)
@@ -102,12 +117,11 @@ return {
 					end
 				love.graphics.pop()
 				love.graphics.push()
-					love.graphics.push()
-						love.graphics.scale(0.9, 0.9)
-					love.graphics.pop()
-					love.graphics.push()
-						love.graphics.scale(0.9, 0.9)
-					love.graphics.pop()
+					if showthugNotLogo then 
+						shaker:draw()
+					else
+
+					end
 				love.graphics.pop()
 
 			love.graphics.pop()

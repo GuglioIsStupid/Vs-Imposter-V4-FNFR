@@ -759,8 +759,10 @@ end
 function love.resize(width, height)
 	--lovesize.resize(width, height)
 	push.resize(width, height)
-	if Gamestate.resize then Gamestate.resize(width, height) end
 	scissorScale = height / 720
+
+	print("scissorScale: " .. scissorScale)
+	if Gamestate.resize then Gamestate.resize(width, height) end
 end
 
 function love.keypressed(key)
@@ -791,6 +793,10 @@ function love.keypressed(key)
     else
 		Gamestate.keypressed(key)
 	end
+end
+
+function love.textinput(text)
+	Gamestate.textinput(text)
 end
 
 function love.mousepressed(x, y, button, istouch, presses)
