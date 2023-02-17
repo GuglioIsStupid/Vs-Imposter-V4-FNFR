@@ -1217,7 +1217,7 @@ return {
 				end
 			end
 
-			if song == 2 then
+			
 				if #enemy2Note > 0 then 
 					if (enemy2Note[1].y - musicPos <= -400) then
 						voices:setVolume(1)
@@ -1281,7 +1281,7 @@ return {
 						table.remove(boyfriend2Note, 1)
 					end
 				end
-			end
+			
 
 			if #boyfriendNote > 0 then
 				if (boyfriendNote[1].y - musicPos < -500) then
@@ -1621,7 +1621,7 @@ return {
 
 				love.graphics.push()
 					love.graphics.translate(0, -musicPos)
-					if song == 2 then
+					
 						for j = #enemy2Notes[i], 1, -1 do 
 							if enemy2Notes[i][j].y - musicPos <= 560 then
 								local animName = enemy2Notes[i][j]:getAnimName()
@@ -1655,7 +1655,7 @@ return {
 								graphics.setColor(1, 1, 1)
 							end
 						end
-					end
+					
 
 					for j = #enemyNotes[i], 1, -1 do
 						if enemyNotes[i][j].y - musicPos <= 560 then
@@ -1693,7 +1693,7 @@ return {
 						-- reset the scissor
 						love.graphics.setScissor()
 					end
-					if song == 2 then
+					
 						for j = #boyfriend2Notes[i], 1, -1 do 
 							if boyfriend2Notes[i][j].y - musicPos <= 560 then
 								local animName = boyfriend2Notes[i][j]:getAnimName()
@@ -1722,7 +1722,7 @@ return {
 							-- reset the scissor
 							love.graphics.setScissor()
 						end
-					end
+					
 					for j = #boyfriendNotes[i], 1, -1 do
 						if boyfriendNotes[i][j].y - musicPos <= 560 then
 							local animName = boyfriendNotes[i][j]:getAnimName()
