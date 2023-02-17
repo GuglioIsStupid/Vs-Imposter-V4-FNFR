@@ -30,9 +30,9 @@ return graphics.newSprite(
 		{x = 3356, y = 0, width = 496, height = 793, offsetX = 0, offsetY = 0, offsetWidth = 513, offsetHeight = 793}, -- 26: fabs idle0011
 		{x = 3356, y = 0, width = 496, height = 793, offsetX = 0, offsetY = 0, offsetWidth = 513, offsetHeight = 793}, -- 27: fabs idle0012
 		{x = 3356, y = 0, width = 496, height = 793, offsetX = 0, offsetY = 0, offsetWidth = 513, offsetHeight = 793}, -- 28: fabs idle0013
+
 		{x = 0, y = 798, width = 713, height = 714, offsetX = 0, offsetY = -9, offsetWidth = 736, offsetHeight = 723}, -- 29: fabs left0000
 		{x = 0, y = 798, width = 713, height = 714, offsetX = 0, offsetY = -9, offsetWidth = 736, offsetHeight = 723}, -- 30: fabs left0001
-
 		{x = 718, y = 798, width = 709, height = 723, offsetX = -27, offsetY = 0, offsetWidth = 736, offsetHeight = 723}, -- 31: fabs left0002
 		{x = 718, y = 798, width = 709, height = 723, offsetX = -27, offsetY = 0, offsetWidth = 736, offsetHeight = 723}, -- 32: fabs left0003
 		{x = 718, y = 798, width = 709, height = 723, offsetX = -27, offsetY = 0, offsetWidth = 736, offsetHeight = 723}, -- 33: fabs left0004
@@ -81,8 +81,8 @@ return graphics.newSprite(
 		--Start is the first frame, stop is the last frame, speed is the speed of the animation, offsetX and offsetY are the offset of the animation
 		--Get the offset by using the ingame offset editor and pressing 7
 		["singDOWN"] = {start = 1, stop = 14, speed = 24, offsetX = 0, offsetY = 0},
-		["idle"] = {start = 15, stop = 30, speed = 24, offsetX = 0, offsetY = 0},
-		["singLEFT"] = {start = 31, stop = 42, speed = 24, offsetX = 0, offsetY = 0},
+		["idle"] = {start = 15, stop = 28, speed = 24, offsetX = 0, offsetY = 0},
+		["singLEFT"] = {start = 29, stop = 42, speed = 24, offsetX = 0, offsetY = 0},
 		["singRIGHT"] = {start = 43, stop = 56, speed = 24, offsetX = 0, offsetY = 0},
 		["singUP"] = {start = 57, stop = 70, speed = 24, offsetX = 0, offsetY = 0},
 
