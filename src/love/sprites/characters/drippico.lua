@@ -220,3 +220,25 @@ return graphics.newSprite(
 	"idle", -- set to default animation
 	false -- If the sprite repeats
 )
+
+
+
+--[[
+
+I LOVE GAY FURRIES
+I LOVE THEM
+I REALLY REALLY LIKE GAY FURRIES
+I WANT FURRY COCK INSIDE ME
+RIGHT NOW
+I HAVE A 9 INCH DILDO INSIDE ME LITERALLY AS IM TYPING THIS
+I WISH IT WAS A FURRY'S COCK
+I LOVE IT
+
+--]]
+
+
+
+
+
+
+
