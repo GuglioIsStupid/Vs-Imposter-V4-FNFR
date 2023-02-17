@@ -349,7 +349,8 @@ function love.load()
 		["who"] = require "stages.who",
 		["sauces"] = require "stages.sauces",
 		["roomcode"] = require "stages.roomcode",
-		["attack"] = require "stages.attack"
+		["attack"] = require "stages.attack",
+		["drip"] = require "stages.drip"
 	}
 
 	-- Load Menus
@@ -408,7 +409,8 @@ function love.load()
 		require "weeks.who",
 		require "weeks.sauces",
 		require "weeks.roomcode",
-		require "weeks.attack"
+		require "weeks.attack",
+		require "weeks.drip"
 	}
 
 	weekDesc = { -- Add your week description here
@@ -574,6 +576,12 @@ function love.load()
 			"Monotone Attack",
 			{
 				"Monotone Attack"
+			}
+		},
+		{
+			"Drippypop",
+			{
+				"Drippypop"
 			}
 		}
 	}

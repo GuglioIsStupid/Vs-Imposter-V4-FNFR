@@ -6,7 +6,11 @@ return {
 
 
         enemy = love.filesystem.load("sprites/characters/drippy.lua")()
-        boyfriend = love.filesystem.load("sprites/DrippyBF.lua")()
+        boyfriend = love.filesystem.load("sprites/characters/DrippyBF.lua")()
+
+        boyfriend2 = love.filesystem.load("sprites/characters/drippico.lua")()
+
+
 
         boyfriend.x, boyfriend.y = 412, 168
         enemy.x, enemy.y = -397, 0
