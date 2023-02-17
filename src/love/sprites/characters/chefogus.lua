@@ -117,5 +117,9 @@ return graphics.newSprite(
 
 	},
 	"idle", -- set to default animation
-	false -- If the sprite repeats
+	false,
+	{
+		sing_duration = 4,
+		isCharacter = true
+	}
 )
