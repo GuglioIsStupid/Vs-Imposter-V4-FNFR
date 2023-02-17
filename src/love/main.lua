@@ -347,7 +347,8 @@ function love.load()
 		["victory"] = require "stages.victory",
 		["maroon2"] = require "stages.maroon2",
 		["who"] = require "stages.who",
-		["sauces"] = require "stages.sauces"
+		["sauces"] = require "stages.sauces",
+		["roomcode"] = require "stages.roomcode"
 	}
 
 	-- Load Menus
@@ -405,6 +406,7 @@ function love.load()
 		require "weeks.maroon",
 		require "weeks.who",
 		require "weeks.sauces",
+		require "weeks.roomcode",
 	}
 
 	weekDesc = { -- Add your week description here
@@ -558,6 +560,12 @@ function love.load()
 			"Sauces Moogus",
 			{
 				"Sauces Moogus"
+			}
+		},
+		{
+			"Roomcode",
+			{
+				"Roomcode"
 			}
 		}
 	}
