@@ -350,7 +350,8 @@ function love.load()
 		["sauces"] = require "stages.sauces",
 		["roomcode"] = require "stages.roomcode",
 		["attack"] = require "stages.attack",
-		["drip"] = require "stages.drip"
+		["drip"] = require "stages.drip",
+		["top"] = require "stages.top"
 	}
 
 	-- Load Menus
@@ -410,7 +411,8 @@ function love.load()
 		require "weeks.sauces",
 		require "weeks.roomcode",
 		require "weeks.attack",
-		require "weeks.drip"
+		require "weeks.drip",
+		require "weeks.top"
 	}
 
 	weekDesc = { -- Add your week description here
@@ -582,6 +584,12 @@ function love.load()
 			"Drippypop",
 			{
 				"Drippypop"
+			}
+		},
+		{
+			"Top 10",
+			{
+				"Top 10"
 			}
 		}
 	}
