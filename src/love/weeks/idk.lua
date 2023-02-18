@@ -3,9 +3,10 @@ local stageBack, stageFront, curtains
 
 return {
 	enter = function(self, from, songNum, songAppend)
+		pixel = true
 		pauseColor = {129, 100, 223}
 		weeks:enter()
-		stages["jerma"]:enter()
+		stages["idk"]:enter()
 
 		week = 1
 		weekString = "jerma"
@@ -23,11 +24,11 @@ return {
 
 	load = function(self)
 		weeks:load()
-		stages["jerma"]:load()
+		stages["idk"]:load()
 
 
-		inst = love.audio.newSource("songs/insane-streamer/Inst.ogg", "stream")
-		voices = love.audio.newSource("songs/insane-streamer/Voices.ogg", "stream")
+		inst = love.audio.newSource("songs/idk/Inst.ogg", "stream")
+		voices = love.audio.newSource("songs/idk/Voices.ogg", "stream")
 
 
 		self:initUI()
@@ -38,14 +39,14 @@ return {
 	initUI = function(self)
 		weeks:initUI()
 
-		weeks:generateNotes("songs/insane-streamer/insane-streamer-hard.json")
-		--weeks:generateEventsOld("songs/insane-streamer/events.json")
+		weeks:generateNotes("songs/idk/idk-hard.json")
+		--weeks:generateEventsOld("songs/idk/events.json")
 
 	end,
 
 	update = function(self, dt)
 		weeks:update(dt)
-		stages["jerma"]:update(dt)
+		stages["idk"]:update(dt)
 
 		if health >= 80 then
 			if enemyIcon:getAnimName() == "black" then
@@ -85,7 +86,7 @@ return {
 			--love.graphics.rectangle("fill", -1000, -1000, 5000, 6000) -- white rectangle :pleasure:      fuck you i hate you stupid ass white rectangle fucking kill yourself lmao you are commented out now haha dumbass stupid fucking white rectangle lmao look at you loser being commented out lmfao fuck you
 		
 
-			stages["jerma"]:draw()
+			stages["idk"]:draw()
 			weeks:drawRating(0.9)
 		love.graphics.pop()
 		
@@ -93,7 +94,8 @@ return {
 	end,
 
 	leave = function(self)
-		stages["jerma"]:leave()
+		stages["idk"]:leave()
 		weeks:leave()
+		pixel = false
 	end
 }

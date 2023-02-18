@@ -351,7 +351,8 @@ function love.load()
 		["roomcode"] = require "stages.roomcode",
 		["attack"] = require "stages.attack",
 		["drip"] = require "stages.drip",
-		["top"] = require "stages.top"
+		["top"] = require "stages.top",
+		["idk"] = require "stages.idk"
 	}
 
 	-- Load Menus
@@ -412,7 +413,8 @@ function love.load()
 		require "weeks.roomcode",
 		require "weeks.attack",
 		require "weeks.drip",
-		require "weeks.top"
+		require "weeks.top",
+		require "weeks.idk"
 	}
 
 	weekDesc = { -- Add your week description here
@@ -590,6 +592,12 @@ function love.load()
 			"Top 10",
 			{
 				"Top 10"
+			}
+		},
+		{
+			"idk",
+			{
+				"idk"
 			}
 		}
 	}

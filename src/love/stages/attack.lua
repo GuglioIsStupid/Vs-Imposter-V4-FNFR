@@ -24,14 +24,21 @@ return {
         boyfriend.x, boyfriend.y = 407, 402
         boyfriend.sizeX, boyfriend.sizeY = 0.7, 0.7
         boyfriend2.x, boyfriend2.y = 618, 150
-        enemy.x, enemy.y = -813, 443
+        enemy.x, enemy.y = -535, 353
         enemy2.x, enemy2.y = -808, 159
 
         enemy2.sizeX, enemy2.sizeY = 0.9, 0.9
 
-        camera:addPoint("boyfriend", 220, -339, 0.9, 0.9)
-        camera:addPoint("enemy", 492, -339, 0.9, 0.9)
+        camera:addPoint("boyfriend", -199, -122, 0.75, 0.75)
+        camera:addPoint("enemy", 243, -122, 0.75, 0.75)
 
+        camera:addPoint("middle", 13 ,-104, 0.65, 0.65)
+
+        camera:addPoint("forehead", 433, -116, 1.15, 1.15)
+        camera:addPoint("shut", 290, -146, 0.95, 0.95)
+
+
+        
 
         stageImages["cooper"].x, stageImages["cooper"].y = 1030, 211
         stageImages["loggo"].x, stageImages["loggo"].y = -42, 222
@@ -48,6 +55,7 @@ return {
 
 
 
+       -- camera:addPoint("enemy", -535, 353, 0.75, 0.75)
 
 
 
@@ -56,6 +64,25 @@ return {
 
     load = function()
 
+
+        --[[
+
+
+        camera.sizeX, camera.sizeY = 0.75, 0.75
+        camera.scaleX, camera.scaleY = 0.75, 0.75
+
+        camera:addPoint("boyfriend", 243, -339, 0.75, 0.75)
+        camera:addPoint("enemy", 492, -339, 0.75, 0.75)
+
+        camera:addPoint("middle", 13 ,-104, 0.65, 0.65)
+
+        camera:addPoint("forehead", 433, -116, 1.15, 1.15)
+        camera:addPoint("shut", 290, -146, 0.95, 0.95)
+
+
+        --]]
+
+        camera:moveToPoint(0, "boyfriend")
     end,
 
     update = function(self, dt)
@@ -72,7 +99,6 @@ return {
         love.graphics.translate(camera.x, camera.y)
         love.graphics.translate(camera.ex, camera.ey)
             stageImages["bg"]:draw()
-            stageImages["backlights"]:draw()  -- i am completely guessing where this goes
             stageImages["fg"]:draw()
             stageImages["cooper"]:draw()
             stageImages["offbi"]:draw()
@@ -96,6 +122,8 @@ return {
             enemy:draw()
             boyfriend2:draw()
             boyfriend:draw()
+            stageImages["backlights"]:draw()  -- i am completely guessing where this goes
+
             stageImages["lamp"]:draw()
             stageImages["frontlight"]:draw()
 		love.graphics.pop()
