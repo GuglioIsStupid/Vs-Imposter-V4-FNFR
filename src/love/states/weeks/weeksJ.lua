@@ -878,19 +878,19 @@ return {
 		end
 
 		for i = 1, 4 do
-			table.sort(enemyNotes[i], function(a, b) return a.y < b.y end)
-			table.sort(boyfriendNotes[i], function(a, b) return a.y < b.y end)
+			table.sort(enemy2Notes[i], function(a, b) return a.y < b.y end)
+			table.sort(boyfriend2Notes[i], function(a, b) return a.y < b.y end)
 		end
 
 		-- Workarounds for bad charts that have multiple notes around the same place
 		for i = 1, 4 do
 			local offset = 0
 
-			for j = 2, #enemyNotes[i] do
+			for j = 2, #enemy2Notes[i] do
 				local index = j - offset
 
-				if enemyNotes[i][index]:getAnimName() == "on" and enemyNotes[i][index - 1]:getAnimName() == "on" and ((enemyNotes[i][index].y - enemyNotes[i][index - 1].y <= 10)) then
-					table.remove(enemyNotes[i], index)
+				if enemy2Notes[i][index]:getAnimName() == "on" and enemy2Notes[i][index - 1]:getAnimName() == "on" and ((enemy2Notes[i][index].y - enemy2Notes[i][index - 1].y <= 10)) then
+					table.remove(enemy2Notes[i], index)
 
 					offset = offset + 1
 				end
@@ -899,11 +899,11 @@ return {
 		for i = 1, 4 do
 			local offset = 0
 
-			for j = 2, #boyfriendNotes[i] do
+			for j = 2, #boyfriend2Notes[i] do
 				local index = j - offset
 
-				if boyfriendNotes[i][index]:getAnimName() == "on" and boyfriendNotes[i][index - 1]:getAnimName() == "on" and ((boyfriendNotes[i][index].y - boyfriendNotes[i][index - 1].y <= 10)) then
-					table.remove(boyfriendNotes[i], index)
+				if boyfriend2Notes[i][index]:getAnimName() == "on" and boyfriend2Notes[i][index - 1]:getAnimName() == "on" and ((boyfriend2Notes[i][index].y - boyfriend2Notes[i][index - 1].y <= 10)) then
+					table.remove(boyfriend2Notes[i], index)
 
 					offset = offset + 1
 				end
@@ -1068,7 +1068,7 @@ return {
 				end
 
 
-				if camera.mustHit and song ~= 2 then
+				if camera.mustHit and (song ~= 2 or weekString == "attack") then
 					if events[i].mustHitSection then
 						mustHitSection = true
 						--camTimer = Timer.tween(1.25, camera, {x = -boyfriend.x + 100, y = -boyfriend.y + 75}, "out-quad")
@@ -1217,7 +1217,7 @@ return {
 				end
 			end
 
-			
+			if song == 2 then
 				if #enemy2Note > 0 then 
 					if (enemy2Note[1].y - musicPos <= -400) then
 						voices:setVolume(1)
@@ -1281,7 +1281,7 @@ return {
 						table.remove(boyfriend2Note, 1)
 					end
 				end
-			
+			end
 
 			if #boyfriendNote > 0 then
 				if (boyfriendNote[1].y - musicPos < -500) then
@@ -1621,7 +1621,7 @@ return {
 
 				love.graphics.push()
 					love.graphics.translate(0, -musicPos)
-					
+					if song == 2 then
 						for j = #enemy2Notes[i], 1, -1 do 
 							if enemy2Notes[i][j].y - musicPos <= 560 then
 								local animName = enemy2Notes[i][j]:getAnimName()
@@ -1655,7 +1655,7 @@ return {
 								graphics.setColor(1, 1, 1)
 							end
 						end
-					
+					end
 
 					for j = #enemyNotes[i], 1, -1 do
 						if enemyNotes[i][j].y - musicPos <= 560 then
@@ -1693,14 +1693,14 @@ return {
 						-- reset the scissor
 						love.graphics.setScissor()
 					end
-					
+					if song == 2 then
 						for j = #boyfriend2Notes[i], 1, -1 do 
 							if boyfriend2Notes[i][j].y - musicPos <= 560 then
 								local animName = boyfriend2Notes[i][j]:getAnimName()
 
 								if animName == "hold" or animName == "end" then
 									graphics.setColor(1, 1, 1, math.min(0.15, (500 + (boyfriend2Notes[i][j].y - musicPos)) / 350))
-									love.graphics.setScissor(-400, (not settings.downscroll and 95*scissorScale or 0), 4000, 632*scissorScale) -- too lazy to y'know... do it right...
+									love.graphics.setScissor(-400, (not settings.downscroll and 95*scissorScale or 0), 4000, 632*(scissorScale)) -- too lazy to y'know... do it right...
 								else
 									graphics.setColor(1, 1, 1, math.min(0.3, (500 + (boyfriend2Notes[i][j].y - musicPos)) / 200))
 								end
@@ -1722,7 +1722,7 @@ return {
 							-- reset the scissor
 							love.graphics.setScissor()
 						end
-					
+					end
 					for j = #boyfriendNotes[i], 1, -1 do
 						if boyfriendNotes[i][j].y - musicPos <= 560 then
 							local animName = boyfriendNotes[i][j]:getAnimName()
@@ -1731,7 +1731,7 @@ return {
 								graphics.setColor(1, 1, 1, math.min(0.5, (500 + (boyfriendNotes[i][j].y - musicPos)) / 150))
 
 									if input:down(inputList[i]) then 
-										love.graphics.setScissor(-400, (not settings.downscroll and 95*scissorScale or 0), 4000, 632*scissorScale) -- too lazy to y'know... do it right...
+										love.graphics.setScissor(-400, (not settings.downscroll and 95*scissorScale or 0), 4000, 632*(scissorScale)) -- too lazy to y'know... do it right...
 									end
 							else
 								graphics.setColor(1, 1, 1, math.min(1, (500 + (boyfriendNotes[i][j].y - musicPos)) / 75))

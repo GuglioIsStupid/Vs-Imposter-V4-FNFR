@@ -10,7 +10,7 @@ return {
 		weekString = "attack"
 
 
-		song = songNum
+		song = 2
 
 		stages["attack"]:enter()
 
@@ -60,12 +60,6 @@ return {
 
 
 		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused then
-			if storyMode and song < 4 then
-				campaignScore = campaignScore + score
-				song = song + 1
-
-				self:load()
-			else
 				campaignScore = campaignScore + score
 				status.setLoading(true)
 
@@ -77,7 +71,6 @@ return {
 						status.setLoading(false)
 					end
 				)
-			end
 		end
 
 		weeksJ:updateUI(dt)
