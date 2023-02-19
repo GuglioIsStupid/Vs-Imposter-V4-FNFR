@@ -197,6 +197,7 @@ function love.load()
 	json = require "lib.json"
 	lume = require "lib.lume"
 	moonshine = require "lib.moonshine"
+	Class = require "lib.class"
 
 	-- Load modules
 	status = require "modules.status"
@@ -207,6 +208,7 @@ function love.load()
 	util = require "modules.util"
 	cutscene = require "modules.cutscene"
 	settings = require "settings"
+	require("modules.classes")
 
 	playMenuMusic = true
 
@@ -384,6 +386,7 @@ function love.load()
 	weeksNuzzus = require "states.weeks.weeksNuzzus"
 	weeksGrey = require "states.weeks.weeksGrey"
 	weeksWho = require "states.weeks.weeksWho"
+	require("states.weeks.weeksOld")
 
 
 	-- Load substates
@@ -599,6 +602,13 @@ function love.load()
 			{
 				"idk"
 			}
+		},
+		{
+			"Alpha Moogus",
+			{
+				"aaaa",
+				"bbbb"
+			}
 		}
 	}
 
@@ -630,6 +640,8 @@ function love.load()
 		["HENRY"] = require "weeks.henry",
 		["..."] = chooseMissCount
 	}
+
+	require("weeks.alpha")
 
 	freeplayWeeks = {
 		[1] = { -- first page, has main weeks and shit
@@ -746,9 +758,9 @@ function love.load()
 	storyMode = false
 	countingDown = false
 
-	--cam = {x = 0, y = 0, sizeX = 0.9, sizeY = 0.9}
-	--camScale = {x = 0.9, y = 0.9}
-	uiScale = {x = 1, y = 1, sizeX = 1, sizeY = 1}
+	cam = {x = 0, y = 0, sizeX = 0.9, sizeY = 0.9}
+	camScale = {x = 0.9, y = 0.9}
+	uiScale = {x = 1, y = 1, sizeX = 1, sizeY = 1, alphax = 0.7, alphay = 0.7}
 	camHUD = {x = 0, y = 0, angle = 0}
 
 	musicTime = 0
@@ -807,16 +819,25 @@ function love.keypressed(key)
 			love.audio.setVolume(love.audio.getVolume() + 0.1)
 		end
     else
-		Gamestate.keypressed(key)
+		if weekString ~= "alpha" then
+			Gamestate.keypressed(key)
+		else
+		end
 	end
 end
 
 function love.textinput(text)
-	Gamestate.textinput(text)
+	if weekString ~= "alpha" then
+		Gamestate.textinput(text)
+	else
+	end
 end
 
 function love.mousepressed(x, y, button, istouch, presses)
-	Gamestate.mousepressed(x, y, button, istouch, presses)
+	if weekString ~= "alpha" then
+		Gamestate.mousepressed(x, y, button, istouch, presses)
+	else
+	end
 end
 
 function love.update(dt)
@@ -829,13 +850,21 @@ function love.update(dt)
 	input:update()
 
 	if status.getNoResize() then
-		Gamestate.update(dt)
+		if weekString ~= "alpha" then
+			Gamestate.update(dt)
+		else
+			alphaMoogus.update(dt)
+		end
 	else
 		love.graphics.setFont(font)
 		--graphics.screenBase(lovesize.getWidth(), lovesize.getHeight())
 		graphics.screenBase(push.getWidth(), push.getHeight())
 		graphics.setColor(1, 1, 1) -- Fade effect on
-		Gamestate.update(dt)
+		if weekString ~= "alpha" then
+			Gamestate.update(dt)
+		else
+			alphaMoogus.update(dt)
+		end
 		love.graphics.setColor(1, 1, 1) -- Fade effect off
 		graphics.screenBase(love.graphics.getWidth(), love.graphics.getHeight())
 		love.graphics.setFont(font)
@@ -853,7 +882,11 @@ function love.draw()
 		--lovesize.begin()
 		push.start()
 			graphics.setColor(1, 1, 1) -- Fade effect on
-			Gamestate.draw()
+			if weekString ~= "alpha" then
+				Gamestate.draw()
+			else
+				alphaMoogus.draw()
+			end
 			love.graphics.setColor(1, 1, 1) -- Fade effect off
 			love.graphics.setFont(font)
 			if status.getLoading() then
@@ -892,7 +925,11 @@ function love.draw()
 	else
 		graphics.screenBase(love.graphics.getWidth(), love.graphics.getHeight())
 		graphics.setColor(1, 1, 1)
-		Gamestate.draw()
+		if weekString ~= "alpha" then
+			Gamestate.draw()
+		else
+			alphaMoogus.draw()
+		end
 		love.graphics.setFont(font)
 		if status.getLoading() then
 			love.graphics.print("Loading...", love.graphics.getWidth() - 175, love.graphics.getHeight() - 50)

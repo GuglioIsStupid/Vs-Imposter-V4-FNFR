@@ -281,10 +281,15 @@ return {
                         songAppend = difficultyStrs[songDifficulty]
     
                         storyMode = false
+                        inGame = true
     
                         music:stop()
     
-                        Gamestate.switch(weekData[weekNum], songNum, songAppend)
+                        if weekMeta[weekNum][1] ~= "Alpha Moogus" then
+                            Gamestate.switch(weekData[weekNum], songNum, songAppend)
+                        else
+                            alphaMoogus.init()
+                        end
     
                         status.setLoading(false)
                     end
