@@ -152,6 +152,19 @@ local eventFuncs = {
 
 		curChar = name
 	end,
+	["Orbyy"] = function()            -- ill let you work on these things guglio
+
+
+		--[[
+		Timer.tween(1, camera, {sizeX = 0.2, sizeY = 0.2, scaleX = 0.2, scaleY = 0.2}, "out-quad", function()
+			orbyy:animate("shut", false, function()      --is orbyy local?
+				Timer.tween(1, camera, {sizeX = 0.65, sizeY = 0.65, scaleX = 0.65, scaleY = 0.65}, "out-quad")
+
+			end)
+		end)
+
+		--]] 
+	end,
 }
 
 local animList = {
