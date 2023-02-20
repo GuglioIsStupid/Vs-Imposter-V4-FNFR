@@ -17,6 +17,12 @@ return {
 		enemyIcon:animate("black", false)
 
 
+		flashAlpha = 0
+
+		function ReactorBeep(alpha)
+			flashAlpha = alpha
+		end
+
 
 		self:load()
 	end,
@@ -39,13 +45,16 @@ return {
 		weeks:initUI()
 
 		weeks:generateNotes("songs/sauces-moogus/sauces-moogus-hard.json")
-		--weeks:generateEventsOld("songs/sauces-moogus/events.json")
+		weeks:generateEvents("songs/sauces-moogus/events.json")
 
 	end,
 
 	update = function(self, dt)
 		weeks:update(dt)
 		stages["sauces"]:update(dt)
+
+		flashAlpha = util.lerp(flashAlpha, 0, util.clamp(0, dt * 5, 1))
+
 
 		if health >= 80 then
 			if enemyIcon:getAnimName() == "black" then
@@ -87,6 +96,10 @@ return {
 			stages["sauces"]:draw()
 			weeks:drawRating(0.9)
 		love.graphics.pop()
+
+		graphics.setColor(1,0,0,flashAlpha)
+        love.graphics.rectangle("fill", 0, 0, graphics.getWidth(), graphics.getHeight())
+        graphics.setColor(1,1,1,1)
 		
 		weeks:drawUI()
 	end,
