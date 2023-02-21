@@ -647,7 +647,7 @@ function love.load()
 		["WEEK 7"] = require "weeks.pink",
 		["WEEK J"] = require "weeks.j",
 		["BOO!"] = require "weeks.orange",
-		["TOMONGUS"] = require "weeks.orange",
+		["TOMONGUS"] = require "weeks.tomongus",
 		["HENRY"] = require "weeks.henry",
 		["..."] = chooseMissCount
 	}

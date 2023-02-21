@@ -76,17 +76,24 @@ return {
 		end
 
 		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused then
-			campaignScore = campaignScore + score
-			status.setLoading(true)
+			if storyMode and song < 3 then
+				campaignScore = campaignScore + score
+				song = song + 1
 
-			graphics.fadeOut(
-				0.5,
-				function()
-					Gamestate.switch(beansCounter)
+				self:load()
+			else
+				campaignScore = campaignScore + score
+				status.setLoading(true)
 
-					status.setLoading(false)
-				end
-			)
+				graphics.fadeOut(
+					0.5,
+					function()
+						Gamestate.switch(beansCounter)
+
+						status.setLoading(false)
+					end
+				)
+			end
 		end
 
 
@@ -98,7 +105,7 @@ return {
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
 			love.graphics.scale(camera.esizeX, camera.esizeY)
 			love.graphics.scale(camera.sizeX, camera.sizeY)
-
+  
 			--love.graphics.rectangle("fill", -1000, -1000, 5000, 6000) -- white rectangle :pleasure:      fuck you i hate you stupid ass white rectangle fucking kill yourself lmao you are commented out now haha dumbass stupid fucking white rectangle lmao look at you loser being commented out lmfao fuck you
 		
 
