@@ -26,6 +26,8 @@ return {
 		weeks:load()
 		stages["skeldPixel"]:load()
 
+		HOLYSHITHESHOTHIM = 0
+
 
 		if song == 3 then
 			inst = love.audio.newSource("songs/chewmate/Inst.ogg", "stream")
@@ -106,10 +108,15 @@ return {
 			love.graphics.scale(camera.esizeX, camera.esizeY)
 			love.graphics.scale(camera.sizeX, camera.sizeY)
   
-			--love.graphics.rectangle("fill", -1000, -1000, 5000, 6000) -- white rectangle :pleasure:      fuck you i hate you stupid ass white rectangle fucking kill yourself lmao you are commented out now haha dumbass stupid fucking white rectangle lmao look at you loser being commented out lmfao fuck you
-		
 
 			stages["skeldPixel"]:draw()
+
+			love.graphics.setColor(1, 1, 1, HOLYSHITHESHOTHIM)
+
+			love.graphics.rectangle("fill", -1000, -1000, 5000, 6000)
+
+			love.graphics.setColor(1, 1, 1, 1)
+
 			weeks:drawRating(0.9)
 		love.graphics.pop()
 		

@@ -23,6 +23,8 @@ return {
         camera.sizeX, camera.sizeY = 0.85, 0.85
         camera.scaleX, camera.scaleY = 0.85, 0.85
 
+        
+
 
 
     end,
@@ -33,6 +35,9 @@ return {
         camera.sizeX, camera.sizeY = 0.85, 0.85
         camera.scaleX, camera.scaleY = 0.85, 0.85
         HOLYSHITBOYFRIENDFROMFRIDAYNIGHTFUNKINISTHEIMPOSTORFROMAMONGUS = false
+        HOLYSHITHESHOTHIM = 0
+
+        
 
 
         if song == 3 then
@@ -66,8 +71,11 @@ return {
             enemy:animate("idle", false)        -- fixed the animation issues
         end
 
+        HOLYSHITHESHOTHIM = HOLYSHITHESHOTHIM - 0.999 * dt
+
         if (song == 2) and (musicTime >= 114888 and musicTime < 114938) then
             print("lmao boyfriend shoots the fucker")
+            HOLYSHITHESHOTHIM = 1
             HOLYSHITBOYFRIENDFROMFRIDAYNIGHTFUNKINISTHEIMPOSTORFROMAMONGUS = true
             sussySound:play()
             SUSBOYFRIENDIMPOSTOR:animate("shoot", false, function()
