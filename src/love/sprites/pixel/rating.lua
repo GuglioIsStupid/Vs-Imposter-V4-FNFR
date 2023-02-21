@@ -18,22 +18,20 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
 
 return graphics.newSprite(
-	images.rating,
+	love.graphics.newImage(graphics.imagePath("pixel/rating")),
 	{
-		{x = 0, y = 20, width = 51, height = 20, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: Sick Plus
-		{x = 0, y = 0, width = 51, height = 20, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: Sick
-		{x = 52, y = 0, width = 39, height = 16, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 3: Good
-		{x = 92, y = 0, width = 28, height = 19, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 4: Bad
-		{x = 121, y = 0, width = 35, height = 20, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 5: Shit
+		{x = 0, y = 0, width = 51, height = 20, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: Sick
+		{x = 52, y = 0, width = 39, height = 16, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: Good
+		{x = 92, y = 0, width = 28, height = 19, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 3: Bad
+		{x = 121, y = 0, width = 35, height = 20, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 4: Shit
     },
 	{
-		["sickPlus"] = {start = 1, stop = 1, speed = 0, offsetX = 0, offsetY = 0},
-		["sick"] = {start = 2, stop = 2, speed = 0, offsetX = 0, offsetY = 0},
-        ["good"] = {start = 3, stop = 3, speed = 0, offsetX = 0, offsetY = 0},
-        ["bad"] = {start = 4, stop = 4, speed = 0, offsetX = 0, offsetY = 0},
-        ["shit"] = {start = 5, stop = 5, speed = 0, offsetX = 0, offsetY = 0}
+		["sick"] = {start = 1, stop = 1, speed = 0, offsetX = 0, offsetY = 0},
+        ["good"] = {start = 2, stop = 2, speed = 0, offsetX = 0, offsetY = 0},
+        ["bad"] = {start = 3, stop = 3, speed = 0, offsetX = 0, offsetY = 0},
+        ["shit"] = {start = 4, stop = 4, speed = 0, offsetX = 0, offsetY = 0}
     },
-	"sickPlus",
+	"sick",
 	false,
     {
 		floored = true

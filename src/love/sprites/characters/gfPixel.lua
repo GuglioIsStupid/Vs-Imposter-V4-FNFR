@@ -1,10 +1,5 @@
---[[----------------------------------------------------------------------------
-This file is part of Friday Night Funkin' DOS by HTV04
-------------------------------------------------------------------------------]]
-
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("pixel/girlfriend")),
-	-- Automatically generated from gfPixel.xml
+	love.graphics.newImage(graphics.imagePath("characters/gfPixel")), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 120, height = 106, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: GF IDLE0000
 		{x = 0, y = 0, width = 120, height = 106, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: GF IDLE0001
@@ -38,8 +33,11 @@ return graphics.newSprite(
 		{x = 0, y = 232, width = 120, height = 106, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0} -- 30: GF IDLE0029
 	},
 	{
-		["idle"] = {start = 1, stop = 30, speed = 24, offsetX = 0, offsetY = 0}
+		--To get the animations, look at the number and the name of the frame
+		--Start is the first frame, stop is the last frame, speed is the speed of the animation, offsetX and offsetY are the offset of the animation
+		--Get the offset by using the ingame offset editor and pressing 7
+		["idle"] = {start = 1, stop = 30, speed = 24, offsetX = 0, offsetY = 0},
 	},
-	"idle",
-	true
+	"idle", -- set to default animation
+	false -- If the sprite repeats
 )

@@ -354,7 +354,8 @@ function love.load()
 		["attack"] = require "stages.attack",
 		["drip"] = require "stages.drip",
 		["top"] = require "stages.top",
-		["idk"] = require "stages.idk"
+		["idk"] = require "stages.idk",
+		["skeldPixel"] = require "stages.skeldPixel"
 	}
 
 	-- Load Menus
@@ -417,7 +418,9 @@ function love.load()
 		require "weeks.attack",
 		require "weeks.drip",
 		require "weeks.top",
-		require "weeks.idk"
+		require "weeks.idk",
+		require "weeks.tomongus",
+		require "weeks.tomongus"
 	}
 
 	weekDesc = { -- Add your week description here
@@ -608,6 +611,14 @@ function love.load()
 			{
 				"aaaa",
 				"bbbb"
+			}
+		},
+		{
+			"Tomongus",
+			{
+				"Sussy Bussy",
+				"Rivals",
+				"Chewmate"
 			}
 		}
 	}
