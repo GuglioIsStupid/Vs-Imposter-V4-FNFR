@@ -10,11 +10,11 @@ return {
 
     }
 
-    embers = {}
+        embers = {}
 
-   stageImages["ember"]:animate("anim", true)
-   stageImages["bg"]:animate("anim", true)
-   stageImages["bubbles"]:animate("anim", true)
+    stageImages["ember"]:animate("anim", true)
+    stageImages["bg"]:animate("anim", true)
+    stageImages["bubbles"]:animate("anim", true)
 
 
 
@@ -51,7 +51,7 @@ return {
         stageImages["bg"]:update(dt)
         stageImages["bubbles"]:update(dt)
 
-        --[[
+        
         
 
         if mustHitSection then

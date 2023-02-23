@@ -23,7 +23,7 @@ return {
 
     update = function(self, dt)
 
-        --[[
+        
 
         if mustHitSection then
             if jermaZoom then
