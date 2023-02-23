@@ -1230,13 +1230,13 @@ return {
 							if animName == "hold" or animName == "end" then
 								graphics.setColor(1, 1, 1, 0.5)
 								-- only apply scissor for y and height
-								love.graphics.setScissor(-400, (not settings.downscroll and 95*scissorScale or 0), 4000, 632*(scissorScale)) -- too lazy to y'know... do it right...
+								 -- too lazy to y'know... do it right...
 							end
 							enemyNotes[i][j]:draw()
 							graphics.setColor(1, 1, 1)
 						end
 
-						love.graphics.setScissor()
+						
 					end
 					for j = #boyfriendNotes[i], 1, -1 do
 						if (not settings.downscroll and boyfriendNotes[i][j].y - musicPos <= 560) or (settings.downscroll and boyfriendNotes[i][j].y - musicPos >= -560) then
@@ -1246,7 +1246,7 @@ return {
 								if animName == "hold" or animName == "end" then
 									graphics.setColor(1, 1, 1, math.min(0.5, (500 - (boyfriendNotes[i][j].y - musicPos)) / 150))
 									if input:down(inputList[i]) then 
-										love.graphics.setScissor(-400, (not settings.downscroll and 95*scissorScale or 0), 4000, 632*(scissorScale)) -- too lazy to y'know... do it right...
+										 -- too lazy to y'know... do it right...
 									end
 								else
 									graphics.setColor(1, 1, 1, math.min(1, (500 - (boyfriendNotes[i][j].y - musicPos)) / 75))
@@ -1256,10 +1256,10 @@ return {
 									graphics.setColor(1, 1, 1, math.min(0.5, (500 + (boyfriendNotes[i][j].y - musicPos)) / 150))
 
 									if input:down(inputList[i]) then 
-										love.graphics.setScissor(-400, (not settings.downscroll and 95*scissorScale or 0), 4000, 632*(scissorScale)) -- too lazy to y'know... do it right...
+										 -- too lazy to y'know... do it right...
 									end
 									if input:down(inputList[i]) then 
-										love.graphics.setScissor(-400, (not settings.downscroll and 95*scissorScale or 0), 4000, 632*(scissorScale)) -- too lazy to y'know... do it right...
+										 -- too lazy to y'know... do it right...
 									end
 								else
 									graphics.setColor(1, 1, 1, math.min(1, (500 + (boyfriendNotes[i][j].y - musicPos)) / 75))
@@ -1273,7 +1273,7 @@ return {
 							boyfriendNotes[i][j]:draw()
 							love.graphics.setColor(1, 1, 1, 1)
 							-- reset the scissor
-							love.graphics.setScissor()
+							
 						end
 					end
 					graphics.setColor(1, 1, 1)
