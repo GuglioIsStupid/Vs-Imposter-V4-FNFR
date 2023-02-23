@@ -137,8 +137,8 @@ return {
 
 			images = {
 				icons = love.graphics.newImage(graphics.imagePath("icons")),
-				notes = love.graphics.newImage(graphics.imagePath("pixel/notes")),
-				numbers = love.graphics.newImage(graphics.imagePath("pixel/numbers"))
+				notes = love.graphics.newImage(graphics.imagePath("pixel/ui/notes")),
+				numbers = love.graphics.newImage(graphics.imagePath("pixel/ui/numbers"))
 			}
 
 			sprites = {
