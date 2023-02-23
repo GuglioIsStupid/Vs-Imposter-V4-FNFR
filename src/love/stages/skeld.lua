@@ -11,25 +11,40 @@ return {
         boyfriend = love.filesystem.load("sprites/characters/bfsusreal.lua")()
         girlfriend = love.filesystem.load("sprites/characters/tuesdaygf.lua")()
 
-        --boyfriend.x, boyfriend.y = 412, 168
+        boyfriend.x, boyfriend.y = 367, 271
         enemy.x, enemy.y = -461, 278
         girlfriend.x, girlfriend.y = -83, 70
 
-        --camera:addPoint("boyfriend", 76, 23, 0.9, 0.9)
-        --camera:addPoint("enemy", 182, 122, 0.7, 0.7)
+        camera:addPoint("boyfriend", -138, -117, 1, 1)
+        camera:addPoint("enemy", 200, -117, 1, 1)
 
 
     end,
 
     load = function()
+        camera:moveToPoint(0, "enemy")
+        lmfaoHeGotShot = false
 
     end,
 
     update = function(self, dt)
 
 
-        if not enemy:isAnimated() and enemy:getAnimName() ~= "idle" then
-            enemy:animate("idle", false)        -- fixed the animation issues
+        if not enemy:isAnimated() and (enemy:getAnimName() ~= "idle" or enemy:getAnimName() == "tomidle") then
+            if lmfaoHeGotShot then
+                enemy:animate("tomidle", false)
+            else
+                enemy:animate("idle", false)        -- fixed the animation issues
+            end
+        end
+
+        if musicTime >= 89772 and musicTime < 89822 then
+            boyfriend:animate("blow?", false)
+        end
+
+        if musicTime >= 90318 and musicTime < 90368 then
+            enemy:animate("anim", false)
+            lmfaoHeGotShot = true
         end
 
     end,
