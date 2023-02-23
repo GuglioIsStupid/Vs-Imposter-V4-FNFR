@@ -37,8 +37,5 @@ return graphics.newSprite(
 		["end"] = {start = 7, stop = 7, speed = 0, offsetX = 0, offsetY = 0}
 	},
 	"off",
-	false,
-	{
-		floored = true
-	}
+	false
 )

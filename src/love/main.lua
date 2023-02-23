@@ -354,7 +354,9 @@ function love.load()
 		["attack"] = require "stages.attack",
 		["drip"] = require "stages.drip",
 		["top"] = require "stages.top",
-		["idk"] = require "stages.idk"
+		["idk"] = require "stages.idk",
+		["skeldPixel"] = require "stages.skeldPixel",
+		["skeld"] = require "stages.skeld"
 	}
 
 	-- Load Menus
@@ -417,7 +419,10 @@ function love.load()
 		require "weeks.attack",
 		require "weeks.drip",
 		require "weeks.top",
-		require "weeks.idk"
+		require "weeks.idk",
+		require "weeks.tomongus",
+		require "weeks.tomongus",
+		require "weeks.tuesday"
 	}
 
 	weekDesc = { -- Add your week description here
@@ -609,6 +614,20 @@ function love.load()
 				"aaaa",
 				"bbbb"
 			}
+		},
+		{
+			"Tomongus",
+			{
+				"Sussy Bussy",
+				"Rivals",
+				"Chewmate"
+			}
+		},
+		{
+			"Tomongus Tuesday",
+			{
+				"Tomongus Tuesday"
+			}
 		}
 	}
 
@@ -636,7 +655,7 @@ function love.load()
 		["WEEK 7"] = require "weeks.pink",
 		["WEEK J"] = require "weeks.j",
 		["BOO!"] = require "weeks.orange",
-		["TOMONGUS"] = require "weeks.orange",
+		["TOMONGUS"] = require "weeks.tomongus",
 		["HENRY"] = require "weeks.henry",
 		["..."] = chooseMissCount
 	}
@@ -777,7 +796,9 @@ function love.load()
 
 	scissorScale = 1 -- SCISSOR DOESN'T WORK WITH SCALE SO WE HAVE TO SCALE IT OURSELVES
 
-	love.mouse.setCursor(love.mouse.newCursor(graphics.imagePath("cursor"), 3, 0))
+	if not curOS == "NX" then
+		love.mouse.setCursor(love.mouse.newCursor(graphics.imagePath("cursor"), 3, 0))
+	end
 
 	getBeans()
 

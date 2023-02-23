@@ -69,8 +69,8 @@ return {
         stageImages["vines"]:animate("anim", true)
         stageImages["hearts"]:animate("anim", true)
 
-        camera.scaleX, camera.scaleY = 0.5, 0.5
-        camera.sizeX, camera.sizeY = 0.5, 0.5
+        camera.scaleX, camera.scaleY = 1, 1
+        camera.sizeX, camera.sizeY = 1, 1
         
         stageImages["littleHearts"].alpha = 0
         stageImages["hearts"].alpha = 0
@@ -79,7 +79,7 @@ return {
 
         stageImages["littleHearts"]:animate("anim", true)
 
-        camera:addPoint("boyfriend", -40, 181, 1, 1)
+        camera:addPoint("boyfriend", -37, -93, 1, 1)
         camera:addPoint("enemy", -3, 18, 1, 1)
 
         camera:moveToPoint(0, "boyfriend")
@@ -90,6 +90,15 @@ return {
 
     load = function()
        -- camera.x, camera.y = -3, 18
+
+       
+        camera.scaleX, camera.scaleY = 1, 1
+        camera.sizeX, camera.sizeY = 1, 1
+
+        camera:addPoint("boyfriend", -37, -93, 1, 1)
+        camera:addPoint("enemy", -3, 18, 1, 1)
+
+        camera:moveToPoint(0, "boyfriend")
 
 
 
@@ -112,6 +121,30 @@ return {
             stageImages["longus"]:animate("tomatomongus", false)
         end
 
+        if song == 2 then
+            if musicTime >= 960 and musicTime < 1010 then
+                if zoom1 then
+                    Timer.cancel(zoom1)
+                end
+                zoom1 = Timer.tween(1, camera, {sizeX = 0.5, sizeY = 0.5, scaleX = 0.5, scaleY = 0.5}, "out-quad")
+                camera:addPoint("boyfriend", -40, 18, 0.5, 0.5)
+                camera:addPoint("enemy", -3, 18, 0.5, 0.5)
+            end
+        else
+            if musicTime >= 5517 and musicTime < 5567 then
+                if zoom1 then
+                    Timer.cancel(zoom1)
+                end
+                zoom1 = Timer.tween(1, camera, {sizeX = 0.5, sizeY = 0.5, scaleX = 0.5, scaleY = 0.5}, "out-quad")
+                camera:addPoint("boyfriend", -40, 18, 0.5, 0.5)
+                camera:addPoint("enemy", -3, 18, 0.5, 0.5)
+            end
+        end
+
+
+
+
+        
         if pinkCanPulse then
             if beatHandler.onBeat() then 
                 if beatHandler.getBeat() % 3 == 1 then 

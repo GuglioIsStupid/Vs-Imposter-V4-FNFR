@@ -5,7 +5,7 @@ return {
 	enter = function(self, from, songNum, songAppend)
 		pixel = true
 		pauseColor = {129, 100, 223}
-		weeks:enter()
+		weeks:enter("pixel")
 		stages["idk"]:enter()
 
 		week = 1
@@ -81,13 +81,12 @@ return {
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
 			love.graphics.scale(camera.esizeX, camera.esizeY)
 			love.graphics.scale(camera.sizeX, camera.sizeY)
-			love.graphics.translate(camera.x, camera.y)
-			love.graphics.translate(camera.ex, camera.ey)
+
 			--love.graphics.rectangle("fill", -1000, -1000, 5000, 6000) -- white rectangle :pleasure:      fuck you i hate you stupid ass white rectangle fucking kill yourself lmao you are commented out now haha dumbass stupid fucking white rectangle lmao look at you loser being commented out lmfao fuck you
 		
 
 			stages["idk"]:draw()
-			weeks:drawRating(0.9)
+			--weeks:drawRating(0.9)
 		love.graphics.pop()
 		
 		weeks:drawUI()

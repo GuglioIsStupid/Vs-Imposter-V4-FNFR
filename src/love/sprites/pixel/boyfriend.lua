@@ -1,14 +1,18 @@
 --[[----------------------------------------------------------------------------
 This file is part of Friday Night Funkin' Rewritten
+
 Copyright (C) 2021  HTV04
+
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
+
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
+
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
@@ -145,16 +149,20 @@ return graphics.newSprite(
 		{x = 166, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0} -- 126: BF UP NOTE instance 10013
 	},
 	{
-		["miss down"] = {start = 1, stop = 14, speed = 24, offsetX = 0, offsetY = 0},
-		["down"] = {start = 15, stop = 28, speed = 24, offsetX = 0, offsetY = 0},
+		["miss singDOWN"] = {start = 1, stop = 14, speed = 24, offsetX = 0, offsetY = 0},
+		["singDOWN"] = {start = 15, stop = 28, speed = 24, offsetX = 0, offsetY = 0},
 		["idle"] = {start = 29, stop = 42, speed = 24, offsetX = 0, offsetY = 0},
-		["miss left"] = {start = 43, stop = 56, speed = 24, offsetX = 0, offsetY = 0},
-		["left"] = {start = 57, stop = 70, speed = 24, offsetX = 0, offsetY = 0},
-		["miss right"] = {start = 71, stop = 84, speed = 24, offsetX = 0, offsetY = 0},
-		["right"] = {start = 85, stop = 98, speed = 24, offsetX = 0, offsetY = 0},
-		["miss up"] = {start = 99, stop = 112, speed = 24, offsetX = 0, offsetY = 0},
-		["up"] = {start = 113, stop = 126, speed = 24, offsetX = 0, offsetY = 0}
+		["miss singLEFT"] = {start = 43, stop = 56, speed = 24, offsetX = 0, offsetY = 0},
+		["singLEFT"] = {start = 57, stop = 70, speed = 24, offsetX = 0, offsetY = 0},
+		["miss singRIGHT"] = {start = 71, stop = 84, speed = 24, offsetX = 0, offsetY = 0},
+		["singRIGHT"] = {start = 85, stop = 98, speed = 24, offsetX = 0, offsetY = 0},
+		["miss singUP"] = {start = 99, stop = 112, speed = 24, offsetX = 0, offsetY = 0},
+		["singUP"] = {start = 113, stop = 126, speed = 24, offsetX = 0, offsetY = 0}
 	},
 	"idle",
-	true
+	true,
+	{
+		sing_duration = 4,
+		isCharacter = true
+	}
 )

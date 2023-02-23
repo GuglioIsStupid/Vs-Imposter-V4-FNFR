@@ -15,7 +15,7 @@ return {
         stageImages["snowFront"]:animate("anim", true)
         boyfriend.x, boyfriend.y = 188, 291
         enemy.x, enemy.y = -661, 186
-        girlfriend.x, girlfriend.y = -246, -94
+        girlfriend.x, girlfriend.y = -249, 100
 
         camera.sizeX, camera.sizeY = 0.75, 0.75
         camera.scaleX, camera.scaleY = 0.75, 0.75
