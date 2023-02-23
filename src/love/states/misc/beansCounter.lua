@@ -4,6 +4,8 @@ return {
         beansCounterSound = love.audio.newSource("sounds/getBeans.ogg", "static")
         beansValue = math.floor(campaignScore / 600)
 
+        graphics.fadeIn(0.1)
+
         if not settings.botPlay then
             beansCounterSound:play()
             Timer.tween(beansCounterSound:getDuration(), beans, {beans[1] + beansValue}, "out-quad", function()
@@ -12,9 +14,11 @@ return {
                 Timer.after(
                     0.33,
                     function()
-                        Gamestate.switch(menu)
+                        graphics.fadeOut(0.3, function()
+                            Gamestate.switch(menu)
 
-                        campaignScore = 0
+                            campaignScore = 0
+                        end)
                     end
                 )
             end)
