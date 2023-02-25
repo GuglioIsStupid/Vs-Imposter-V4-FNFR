@@ -37,6 +37,26 @@ local eventFuncs = {
 		print("haiiii")
 		flashAlpha = tonumber(value) or 0.4
 	end,
+	["chromToggle"] = function(theAmount, theAmount2) -- look, they named the variables this in the source so idk what to call them
+		print(theAmount, theAmount2)
+		theAmount = tonumber(theAmount) or 0
+		theAmount2 = tonumber(theAmount2) or 0
+
+		if theAmount ~= 0 then 
+			isChrom = true
+			chromAmountHard = theAmount
+			chromFreq = theAmount2
+		else
+			isChrom = false
+			chromAmountHard = 0
+		end
+	end,
+	["Alter Camera Bop"] = function(intensity, interveral)
+		intensity = tonumber(intensity) or 1
+		interveral = tonumber(interveral) or 4
+
+
+	end,
 }
 
 local animList = {
@@ -152,6 +172,9 @@ return {
 			girlfriend = love.filesystem.load("sprites/pixel/girlfriend.lua")()
 			boyfriend = love.filesystem.load("sprites/pixel/boyfriend.lua")()
 		end
+
+		camBopIntensity = 1
+		camBopInterval = 4
 
 		numbers = {}
 		for i = 1, 3 do
@@ -728,9 +751,9 @@ return {
 		end
 
 		for i = 1, #songEvents do
-			if songEvents[i].eventTime <= absMusicTime then
+			if songEvents[i].eventTime <= absMusicTime and not countingDown then
 				if eventFuncs[songEvents[i].eventName] then
-					eventFuncs[songEvents[i].eventName](songEvents[i].eventValue1, songEvents.eventValue2)
+					eventFuncs[songEvents[i].eventName](songEvents[i].eventValue1, songEvents[i].eventValue2)
 				else
 					print(songEvents[i].eventName .. " is not implemented!")
 				end
@@ -740,6 +763,7 @@ return {
 			end
 		end
 
+		--[[
 		if beatHandler.onBeat() and beatHandler.getBeat() % 4 == 0 then
 			if camScaleTimer then Timer.cancel(camScaleTimer) end
 			if uiScaleTimer then Timer.cancel(uiScaleTimer) end
@@ -748,6 +772,18 @@ return {
 			if beatHandler.getBeat() % 8 == 0  then
 				uiScaleTimer = Timer.tween((60 / bpm) / 16, uiScale, {x = uiScale.x * 1.03, y = uiScale.y * 1.03}, "out-quad", function() camScaleTimer = Timer.tween((60 / bpm), uiScale, {x = uiScale.sizeX, y = uiScale.sizeY}, "out-quad") end)
 			end
+		end
+		--]]
+
+		if beatHandler.onBeat() and (camZooming and camera.sizeX < 1.35 and beatHandler.getBeat() % camBopInterval == 0 and not cameraLocked) then 
+			camera.sizeX = camera.sizeX + 0.015 * camBopIntensity
+			uiScale.sizeX = uiScale.sizeX + 0.03 * camBopIntensity
+		end
+
+		if camZooming and not cameraLocked then 
+			camera.sizeX, camera.sizeY = util.lerp(defaultCamZoom, camera.sizeX, util.clamp(1 - (dt * 3.125), 0, 1))
+			camera.sizeY = camera.sizeX
+			uiScale.sizeX, uiScale.sizeY = util.lerp(1, uiScale.sizeX, util.clamp(1 - (dt * 3.125), 0, 1))
 		end
 		--[[
 		if beatHandler.onBeat() then 

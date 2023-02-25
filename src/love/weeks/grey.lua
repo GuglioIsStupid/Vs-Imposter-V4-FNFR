@@ -12,6 +12,8 @@ return {
 		week = 1
 		weekString = "grey"
 
+		status.setNoResize(true)
+
 
 		song = songNum
 		difficulty = songAppend
@@ -22,6 +24,49 @@ return {
 		
        -- camera.sizeX, camera.sizeY = 0.7, 0.7
        -- camera.scaleX, camera.scaleY = 0.7, 0.7
+
+	   --[[
+	   ChromaticAbberation = love.graphics.newShader[[
+		uniform float amount;
+
+		vec2 PincushionDistortion(in vec2 uv, float strength) 
+		{
+			vec2 st = uv - 0.5;
+			float uvA = atan(st.x, st.y);
+			float uvD = dot(st, st);
+			return 0.5 + vec2(sin(uvA), cos(uvA)) * sqrt(uvD) * (1.0 - strength * uvD);
+		}
+
+		vec3 ChromaticAbberation(sampler2D tex, in vec2 uv) 
+		{
+			float rChannel = texture(tex, PincushionDistortion(uv, 0.3 * amount)).r;
+			float gChannel = texture(tex, PincushionDistortion(uv, 0.15 * amount)).g;
+			float bChannel = texture(tex, PincushionDistortion(uv, 0.075 * amount)).b;
+			vec3 retColor = vec3(rChannel, gChannel, bChannel);
+			return retColor;
+		}
+
+		vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords)
+		{
+			vec2 uv = texture_coords;
+			vec3 col = ChromaticAbberation(texture, uv);
+		
+			return vec4(col, 1.0);
+		}
+	   ]]
+	   --]]
+
+	   --ChromaticAbberation:send("amount", 0.5)
+
+	   effect = moonshine(moonshine.effects.ChromaticAbberation)
+
+	   canvas = love.graphics.newCanvas(1280, 720)
+
+	   chromFreq = 1
+	   chromAmount = {-0.5}
+	   chromAmountHard = 0
+
+	   defaultCamZoom = 1
 
 	end,
 
@@ -89,6 +134,14 @@ return {
 			end
 		end
 
+		if beatHandler.onBeat() and beatHandler.getBeat() % chromFreq == 0 then 
+			if chromTween then 
+				Timer.cancel(chromTween)
+			end
+			chromAmount = {chromAmountHard}
+			chromTween = Timer.tween(0.45, chromAmount, {0}, "out-quad")
+		end
+
 		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused then
 			if storyMode and song < 5 then
 				--[[
@@ -122,28 +175,45 @@ return {
 			end
 		end
 
+		effect.ChromaticAbberation.amount = chromAmount[1]
+
 		weeksGrey:updateUI(dt)
 	end,
 
 	draw = function(self)
 		love.graphics.push()
-			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
+			love.graphics.setCanvas(canvas)
+			effect(function()
+				love.graphics.clear()
 
-			--love.graphics.scale(camera.esizeX, camera.esizeY)
-			--love.graphics.scale(camera.sizeX, camera.sizeY)
+				love.graphics.push()
+					love.graphics.translate(1280 / 2, 720 / 2)
 
+					--love.graphics.scale(camera.esizeX, camera.esizeY)
+					--love.graphics.scale(camera.sizeX, camera.sizeY)
 
-			stages["greyElec"]:draw()
-			weeksGrey:drawRating(0.9)
+					stages["greyElec"]:draw()
+					weeksGrey:drawRating(0.9)
+				love.graphics.pop()
+			end)
+
+			if not paused then
+				weeksGrey:drawUI()
+			end
+
+			love.graphics.setCanvas()
+
+			canvasScale = math.min(math.floor(graphics.getWidth() / 1280), math.floor(graphics.getHeight() / 720))
+			if canvasScale < 1 then canvasScale = math.min(graphics.getWidth() / 1280, graphics.getHeight() / 720) end
+
+			love.graphics.draw(canvas, 0, 0, 0, graphics.getWidth() / canvas:getWidth(), graphics.getHeight() / canvas:getHeight())
 		love.graphics.pop()
-
-		if not paused then
-			weeksGrey:drawUI()
-		end
 	end,
 
 	leave = function(self)
 		stages["greyElec"]:leave()
 		weeksGrey:leave()
+
+		status.setNoResize(false)
 	end
 }
