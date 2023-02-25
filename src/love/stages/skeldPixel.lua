@@ -2,8 +2,8 @@ return {
     enter = function()
         love.graphics.setDefaultFilter("nearest")
         stageImages = {
-            ["bg"] = graphics.newImage(graphics.imagePath("tomongus/skeld")), -- stage-back
-            ["stars"] = graphics.newImage(graphics.imagePath("tomongus/stars")), -- stage-back
+            ["bg"] = graphics.newImage(graphics.imagePath("pixel/tomongus/skeld")), -- stage-back
+            ["stars"] = graphics.newImage(graphics.imagePath("pixel/tomongus/stars")), -- stage-back
         }
         
 

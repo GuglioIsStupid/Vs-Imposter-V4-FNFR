@@ -40,5 +40,8 @@ for %%f in (*) do (
 	
 	rename ..\dds\%%~nf.DDS %%~nf.dds
 )
+cls
+echo Conversion finished; Please make sure to delete any pixel assets in the dds folder, as they will cause visual issues.
+pause
 
 popd

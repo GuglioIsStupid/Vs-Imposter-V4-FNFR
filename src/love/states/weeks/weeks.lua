@@ -137,8 +137,8 @@ return {
 
 			images = {
 				icons = love.graphics.newImage(graphics.imagePath("icons")),
-				notes = love.graphics.newImage(graphics.imagePath("pixel/notes")),
-				numbers = love.graphics.newImage(graphics.imagePath("pixel/numbers"))
+				notes = love.graphics.newImage(graphics.imagePath("pixel/ui/notes")),
+				numbers = love.graphics.newImage(graphics.imagePath("pixel/ui/numbers"))
 			}
 
 			sprites = {
@@ -1036,7 +1036,7 @@ return {
 				end
 			end
 
-			if notMissed[noteNum] and #boyfriendNote > 0 and input:down(curInput) and ((boyfriendNote[1].y - musicPos <= -400)) and (boyfriendNote[1]:getAnimName() == "hold" or boyfriendNote[1]:getAnimName() == "end") then
+			if #boyfriendNote > 0 and input:down(curInput) and ((boyfriendNote[1].y - musicPos <= -400)) and (boyfriendNote[1]:getAnimName() == "hold" or boyfriendNote[1]:getAnimName() == "end") then
 				voices:setVolume(1)
 
 				boyfriendArrow:animate("confirm", false)
@@ -1187,9 +1187,6 @@ return {
 								else
 									graphics.setColor(1, 1, 1, 0.5)
 								end
-
-								-- only apply scissor for y and height
-								love.graphics.setScissor(-400, (not settings.downscroll and 95*scissorScale or 0), 4000, 632*(scissorScale)) -- too lazy to y'know... do it right...
 							else
 								if settings.middleScroll then
 									graphics.setColor(1, 1, 1, 0.5)
@@ -1211,9 +1208,6 @@ return {
 								end
 							end
 							graphics.setColor(1, 1, 1)
-
-							-- reset the scissor
-							love.graphics.setScissor()
 						end
 					end
 					for j = #boyfriendNotes[i], 1, -1 do
@@ -1222,13 +1216,6 @@ return {
 
 							if animName == "hold" or animName == "end" then
 								graphics.setColor(1, 1, 1, math.min(0.5, (500 + (boyfriendNotes[i][j].y - musicPos)) / 150))
-
-									if input:down(inputList[i]) then 
-										love.graphics.setScissor(-400, (not settings.downscroll and 95*scissorScale or 0), 4000, 632*(scissorScale)) -- too lazy to y'know... do it right...
-									end
-								if input:down(inputList[i]) then 
-									love.graphics.setScissor(-400, (not settings.downscroll and 95*scissorScale or 0), 4000, 632*(scissorScale)) -- too lazy to y'know... do it right...
-								end
 							else
 								graphics.setColor(1, 1, 1, math.min(1, (500 + (boyfriendNotes[i][j].y - musicPos)) / 75))
 							end
@@ -1245,9 +1232,6 @@ return {
 									end
 								end
 							end
-
-							-- reset the scissor
-							love.graphics.setScissor()
 						end
 					end
 					graphics.setColor(1, 1, 1)
