@@ -207,15 +207,15 @@ return graphics.newSprite(
 		--To get the animations, look at the number and the name of the frame
 		--Start is the first frame, stop is the last frame, speed is the speed of the animation, offsetX and offsetY are the offset of the animation
 		--Get the offset by using the ingame offset editor and pressing 7
-		["idle"] = {start = 1, stop = 12, speed = 24, offsetX = 0, offsetY = 0},
-		["mongo"] = {start = 13, stop = 42, speed = 24, offsetX = 0, offsetY = 0},
-		["picomongo"] = {start = 43, stop = 55, speed = 24, offsetX = 0, offsetY = 0},
+		["idle"] = {start = 1, stop = 12, speed = 24, offsetX = -27, offsetY = 141},
+		["mongo"] = {start = 13, stop = 20, speed = 24, offsetX = 0, offsetY = 0},
+		["picomongo"] = {start = 43, stop = 55, speed = 24, offsetX = -145, offsetY = 263},
 		["whopper whopper whopper whopper"] = {start = 56, stop = 76, speed = 24, offsetX = 0, offsetY = 0},
 		["jr double triple whopper"] = {start = 77, stop = 102, speed = 24, offsetX = 0, offsetY = 0},
-		["singDOWN"] = {start = 103, stop = 128, speed = 24, offsetX = 0, offsetY = 0},
-		["singLEFT"] = {start = 129, stop = 150, speed = 24, offsetX = 0, offsetY = 0},
-		["singRIGHT"] = {start = 151, stop = 167, speed = 24, offsetX = 0, offsetY = 0},
-		["singUP"] = {start = 168, stop = 193, speed = 24, offsetX = 0, offsetY = 0},
+		["singDOWN"] = {start = 103, stop = 128, speed = 24, offsetX = -43, offsetY = 91},
+		["singLEFT"] = {start = 129, stop = 150, speed = 24, offsetX = 0, offsetY = 146},
+		["singRIGHT"] = {start = 151, stop = 167, speed = 24, offsetX = 0, offsetY = 149},
+		["singUP"] = {start = 168, stop = 193, speed = 24, offsetX = 0, offsetY = 113},
 	},
 	"idle", -- set to default animation
 	false -- If the sprite repeats

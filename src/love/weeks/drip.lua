@@ -4,12 +4,12 @@ local stageBack, stageFront, curtains
 return {
 	enter = function(self, from, songNum, songAppend)
 		pauseColor = {129, 100, 223}
-		weeks:enter()
+		weeksDripping:enter()
 		stages["drip"]:enter()
 
 		week = 1
 
-		gameOverMusic = "pico"
+		gameOverMusic = "normal"
 
 
 		song = songNum
@@ -23,7 +23,7 @@ return {
 	end,
 
 	load = function(self)
-		weeks:load()
+		weeksDripping:load()
 		stages["drip"]:load()
 
 
@@ -33,19 +33,19 @@ return {
 
 		self:initUI()
 
-		weeks:setupCountdown()
+		weeksDripping:setupCountdown()
 	end,
 
 	initUI = function(self)
-		weeks:initUI()
+		weeksDripping:initUI()
 
-		weeks:generateNotes("songs/drippypop/drippypop-hard.json")
-		--weeks:generateEventsOld("songs/drippypop/events.json")
+		weeksDripping:generateNotes("songs/drippypop/drippypop-hard.json")
+		--weeksDripping:generateEventsOld("songs/drippypop/events.json")
 
 	end,
 
 	update = function(self, dt)
-		weeks:update(dt)
+		weeksDripping:update(dt)
 		stages["drip"]:update(dt)
 
 		if health >= 80 then
@@ -73,7 +73,7 @@ return {
 		end
 
 
-		weeks:updateUI(dt)
+		weeksDripping:updateUI(dt)
 	end,
 
 	draw = function(self)
@@ -86,14 +86,14 @@ return {
 		
 
 			stages["drip"]:draw()
-			weeks:drawRating(0.9)
+			weeksDripping:drawRating(0.9)
 		love.graphics.pop()
 		
-		weeks:drawUI()
+		weeksDripping:drawUI()
 	end,
 
 	leave = function(self)
 		stages["drip"]:leave()
-		weeks:leave()
+		weeksDripping:leave()
 	end
 }

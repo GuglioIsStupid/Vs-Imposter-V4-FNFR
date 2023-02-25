@@ -6,7 +6,6 @@ return {
 
         }
 
-
         enemy = love.filesystem.load("sprites/characters/tuesday.lua")()
         boyfriend = love.filesystem.load("sprites/characters/bfsusreal.lua")()
         girlfriend = love.filesystem.load("sprites/characters/tuesdaygf.lua")()
@@ -17,6 +16,8 @@ return {
 
         camera:addPoint("boyfriend", -138, -117, 1, 1)
         camera:addPoint("enemy", 200, -117, 1, 1)
+
+        shootSound = love.audio.newSource("sounds/tomongus/soundTuesday.ogg", "static")
 
 
     end,
@@ -40,6 +41,7 @@ return {
 
         if musicTime >= 89772 and musicTime < 89822 then
             boyfriend:animate("blow?", false)
+            shootSound:play()
         end
 
         if musicTime >= 90318 and musicTime < 90368 then

@@ -388,6 +388,7 @@ function love.load()
 	weeksNuzzus = require "states.weeks.weeksNuzzus"
 	weeksGrey = require "states.weeks.weeksGrey"
 	weeksWho = require "states.weeks.weeksWho"
+	weeksDripping = require "states.weeks.weeksDripping"
 	require("states.weeks.weeksOld")
 
 
