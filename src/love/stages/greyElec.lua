@@ -29,6 +29,11 @@ return {
         camera:addPoint("enemy", 182, -67, 0.9, 0.9)
         camera:moveToPoint(0, "boyfriend")
 
+        camZooming = true
+        camLocked = false
+        camera.zoom = 1
+        uiScale.zoom = 1
+
     end,
 
     load = function()
@@ -48,6 +53,10 @@ return {
             enemy:animate("idle", false)        -- fixed the animation issues
         end
 
+        if beatHandler.onBeat() and beatHandler.getBeat() % 2 == 0 then 
+            stageImages["black"]:animate("anim", false)
+        end
+
 
     end,
 
@@ -60,7 +69,7 @@ return {
             love.graphics.scale(camera.sizeX, camera.sizeY)
             love.graphics.scale(camera.scaleX, camera.scaleY)
 
-        
+            graphics.setColor(0.4, 0.4, 0.4)
             stageImages["bg"]:draw()
             stageImages["glowy"]:draw()
             stageImages["black"]:draw()
@@ -68,7 +77,7 @@ return {
             boyfriend:draw()
             enemy:draw()
             stageImages["fg"]:draw()
-            love.graphics.setColor(1, 1, 1, 0.3)
+            love.graphics.setColor(0.4, 0.4, 0.4, 0.3)
             stageImages["overlay"]:draw()
             love.graphics.setColor(1, 1, 1, 1)
 
