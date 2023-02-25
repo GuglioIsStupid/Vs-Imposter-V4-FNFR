@@ -797,7 +797,7 @@ function love.load()
 
 	scissorScale = 1 -- SCISSOR DOESN'T WORK WITH SCALE SO WE HAVE TO SCALE IT OURSELVES
 
-	if not curOS == "NX" then
+	if curOS ~= "NX" then
 		love.mouse.setCursor(love.mouse.newCursor(graphics.imagePath("cursor"), 3, 0))
 	end
 

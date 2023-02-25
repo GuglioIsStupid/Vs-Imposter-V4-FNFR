@@ -17,18 +17,19 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
 local eventFuncs = {
-	["Add Camera Zoom"] = function(size, sizeHud)
-		size = tonumber(size) or 0.015
+	["Add Camera Zoom"] = function(v1, v2)
+		--[[
+		if camera.sizeX < 1.35 then 
+			camZoom = tonumber(v1) or (0.015/2)
+			hudZoom = tonumber(v2) or 0.015
 
-		Timer.tween(
-			(60/bpm)/4,
-			camera,
-			{
-				sizeX = camera.esizeX + size,
-				sizeY = camera.esizeY + size
-			},
-			"out-quad"
-		)
+			camera.sizeX = camera.sizeX + camZoom
+			camera.sizeY = camera.sizeX
+
+			uiScale.x = uiScale.x + hudZoom
+			uiScale.y = uiScale.x
+		end
+		--]] -- grrrr i hate camera zoom!!!!!!!!!!!!!
 	end,
 	["Hey!"] = function()
 		weeks:safeAnimate(boyfriend, "hey", false, 3)
@@ -55,7 +56,8 @@ local eventFuncs = {
 		intensity = tonumber(intensity) or 1
 		interveral = tonumber(interveral) or 4
 
-
+		camBopIntensity = intensity
+		camBopInterveral = interveral
 	end,
 }
 
@@ -775,15 +777,17 @@ return {
 		end
 		--]]
 
-		if beatHandler.onBeat() and (camZooming and camera.sizeX < 1.35 and beatHandler.getBeat() % camBopInterval == 0 and not cameraLocked) then 
+		if beatHandler.onBeat() and (camZooming and camera.sizeX < 1.35 and not cameraLocked) then 
 			camera.sizeX = camera.sizeX + 0.015 * camBopIntensity
-			uiScale.sizeX = uiScale.sizeX + 0.03 * camBopIntensity
+			uiScale.x = uiScale.x + 0.03 * camBopIntensity
 		end
 
 		if camZooming and not cameraLocked then 
 			camera.sizeX, camera.sizeY = util.lerp(defaultCamZoom, camera.sizeX, util.clamp(1 - (dt * 3.125), 0, 1))
 			camera.sizeY = camera.sizeX
-			uiScale.sizeX, uiScale.sizeY = util.lerp(1, uiScale.sizeX, util.clamp(1 - (dt * 3.125), 0, 1))
+			
+			uiScale.x = util.lerp(1, uiScale.x, util.clamp(1 - (dt * 3.125), 0, 1))
+			uiScale.y = uiScale.x
 		end
 		--[[
 		if beatHandler.onBeat() then 

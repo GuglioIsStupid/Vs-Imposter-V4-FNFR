@@ -110,6 +110,8 @@ return {
 			weeksGrey:generateEvents("songs/delusion/events.json")
 
 		end
+
+		chromAmount = {-0.5}
 	end,
 
 	update = function(self, dt)
@@ -134,7 +136,7 @@ return {
 			end
 		end
 
-		if beatHandler.onBeat() and beatHandler.getBeat() % chromFreq == 0 then 
+		if beatHandler.onBeat() and beatHandler.getBeat() % chromFreq == 0 and not graphics.isFading() and not countingDown then 
 			if chromTween then 
 				Timer.cancel(chromTween)
 			end
