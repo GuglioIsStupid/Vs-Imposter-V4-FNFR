@@ -33,7 +33,7 @@ return {
         stageImages["snowBack"]:animate("idle", true)
 
         camera.sizeX, camera.sizeY = 0.5, 0.5
-        camera.scaleX, camera.scaleY = 0.5, 0.5
+        defaultCamZoom = 0.5, 0.5
 
         camera:addPoint("enemy", 66, -157, 0.5, 0.5)
         camera:addPoint("boyfriend", -200, -157, 0.5, 0.5)

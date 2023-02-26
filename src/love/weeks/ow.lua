@@ -20,7 +20,7 @@ return {
 		enemyTwo = love.filesystem.load("sprites/characters/bluehit.lua")()
 
 		camera.sizeX, camera.sizeY = 0.7, 0.7
-		camera.scaleX, camera.scaleY = 0.7, 0.7
+		defaultCamZoom = 0.7, 0.7
 
 		enemy.x = -75
 		boyfriend.x = 225

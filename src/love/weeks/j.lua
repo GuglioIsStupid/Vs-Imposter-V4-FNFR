@@ -54,7 +54,7 @@ return {
 		elseif song == 3 then
 			inst = love.audio.newSource("songs/turbulence/Inst.ogg", "stream")
 			voices = love.audio.newSource("songs/turbulence/Voices.ogg", "stream")
-			camera.scaleX, camera.scaleY = 0.85, 0.85
+			defaultCamZoom = 0.85, 0.85
 			camera.sizeX, camera.sizeY = 0.85, 0.85
 			camera:removePoint("boyfriend")
 			camera:removePoint("enemy")
@@ -79,7 +79,7 @@ return {
 			voices = love.audio.newSource("songs/O2/Voices.ogg", "stream")
 
 			camera.sizeX, camera.sizeY = 0.9, 0.9
-			camera.scaleX, camera.scaleY = 0.9, 0.9
+			defaultCamZoom = 0.9, 0.9
 		end
 
 		self:initUI()

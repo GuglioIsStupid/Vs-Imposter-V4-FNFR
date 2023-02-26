@@ -20,7 +20,7 @@ return {
         camera:addPoint("enemy", 312, -238, 0.8, 0.8)
         camera:addPoint("boyfriend", -35, -238, 0.8, 0.8)
         camera.sizeX, camera.sizeY = 0.8, 0.8
-        camera.scaleX, camera.scaleY = 0.8, 0.8
+        defaultCamZoom = 0.8, 0.8
 
         myMassiveCock = {0, 0}
     end,

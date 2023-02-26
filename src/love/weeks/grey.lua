@@ -23,7 +23,7 @@ return {
 
 		
        -- camera.sizeX, camera.sizeY = 0.7, 0.7
-       -- camera.scaleX, camera.scaleY = 0.7, 0.7
+       -- defaultCamZoom = 0.7, 0.7
 
 	   --[[
 	   ChromaticAbberation = love.graphics.newShader[[

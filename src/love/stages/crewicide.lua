@@ -18,7 +18,7 @@ return {
         camera:addPoint("enemy", 62, -114, 0.85, 0.85)
 
         camera.sizeX, camera.sizeY = 0.85, 0.85
-        camera.scaleX, camera.scaleY = 0.85, 0.85
+        defaultCamZoom = 0.85, 0.85
 
 
 

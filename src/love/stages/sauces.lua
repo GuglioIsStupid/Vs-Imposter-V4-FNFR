@@ -36,7 +36,7 @@ return {
 
         camera.sizeX, camera.sizeY = 0.85, 0.85
 
-        camera.scaleX, camera.scaleY = 0.85, 0.85
+        defaultCamZoom = 0.85, 0.85
         stageImages["grey"]:animate("grey", true)
         stageImages["saster"]:animate("saster", true)
 
@@ -49,7 +49,7 @@ return {
 
         camera.sizeX, camera.sizeY = 0.85, 0.85
 
-        camera.scaleX, camera.scaleY = 0.85, 0.85
+        defaultCamZoom = 0.85, 0.85
 
     end,
 

@@ -11,7 +11,7 @@ return {
         boyfriend = love.filesystem.load("sprites/boyfriend.lua")()
 
         camera.sizeX, camera.sizeY = 5, 5
-        camera.scaleX, camera.scaleY = 5, 5
+        defaultCamZoom = 5, 5
 
 
 
@@ -46,7 +46,7 @@ return {
 
     leave = function()
         camera.sizeX, camera.sizeY = 1, 1
-        camera.scaleX, camera.scaleY = 1, 1
+        defaultCamZoom = 1, 1
         stageImages[1] = nil
         enemy = nil
         boyfriend = nil

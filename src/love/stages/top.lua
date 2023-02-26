@@ -18,7 +18,7 @@ return {
         girlfriend.x, girlfriend.y = -249, 100
 
         camera.sizeX, camera.sizeY = 0.75, 0.75
-        camera.scaleX, camera.scaleY = 0.75, 0.75
+        defaultCamZoom = 0.75, 0.75
 
         stageImages["floor"].x, stageImages["floor"].y = -582, 801
 

@@ -804,6 +804,8 @@ function love.load()
 	getBeans()
 
 	scissorScale = love.graphics.getHeight() / 720
+
+	defaultCamZoom = 1
 end
 
 function love.resize(width, height)

@@ -62,7 +62,7 @@ return {
 		end
 
 		camera.sizeX, camera.sizeY = 0.9, 0.9
-		camera.scaleX, camera.scaleY = 0.9, 0.9
+		defaultCamZoom = 0.9, 0.9
 
 		freeColour = {
 			255,255,255

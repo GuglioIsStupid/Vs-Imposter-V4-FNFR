@@ -246,6 +246,8 @@ return {
 		enemy:animate("idle")
 		boyfriend:animate("idle")
 
+		camBopInterval = 4
+		camBopIntensity = 1
 
 		graphics.fadeIn(0.5)
 	end,
@@ -779,18 +781,16 @@ return {
 		end
 		--]]
 
-		if beatHandler.onBeat() and beatHandler.getBeat() % camBopInterval == 0 and (camZooming and camera.sizeX < 1.35 and not cameraLocked) then 
+		if beatHandler.onBeat() and beatHandler.getBeat() % camBopInterval == 0 and (camera.sizeX < 1.35) then 
 			camera.sizeX = camera.sizeX + 0.015 * camBopIntensity
 			uiScale.x = uiScale.x + 0.03 * camBopIntensity
 		end
 
-		if camZooming and not cameraLocked then 
-			camera.sizeX, camera.sizeY = util.lerp(defaultCamZoom, camera.sizeX, util.clamp(1 - (dt * 3.125), 0, 1))
-			camera.sizeY = camera.sizeX
+		camera.sizeX, camera.sizeY = util.lerp(defaultCamZoom, camera.sizeX, util.clamp(1 - (dt * 3.125), 0, 1))
+		camera.sizeY = camera.sizeX
 			
-			uiScale.x = util.lerp(1, uiScale.x, util.clamp(1 - (dt * 3.125), 0, 1))
-			uiScale.y = uiScale.x
-		end
+		uiScale.x = util.lerp(1, uiScale.x, util.clamp(1 - (dt * 3.125), 0, 1))
+		uiScale.y = uiScale.x
 		--[[
 		if beatHandler.onBeat() then 
 			print("beat")

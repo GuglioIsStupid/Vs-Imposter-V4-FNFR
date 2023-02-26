@@ -62,7 +62,7 @@ return {
         currentWeek = ""
 
         camera.sizeX, camera.sizeY = 0.9, 0.9
-		camera.scaleX, camera.scaleY = 0.9, 0.9
+		defaultCamZoom = 0.9, 0.9
     end,
 
     update = function(self, dt)

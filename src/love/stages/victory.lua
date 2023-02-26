@@ -34,7 +34,7 @@ return {
         enemy3.x, enemy3.y = -532, 107
 
         camera.sizeX, camera.sizeY = 0.85, 0.85
-        camera.scaleX, camera.scaleY = 0.85, 0.85
+        defaultCamZoom = 0.85, 0.85
 
         boyfriend.orientation = 0
 

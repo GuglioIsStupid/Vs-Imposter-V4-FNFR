@@ -30,7 +30,7 @@ return {
         boyfriend2:animate("mongo", true)
         camera:moveToPoint(0, "enemy")
         camera.sizeX, camera.sizeY = 1, 1
-        camera.scaleX, camera.scaleY = 1, 1
+        defaultCamZoom = 1, 1
         picoSing = false
     end,
 

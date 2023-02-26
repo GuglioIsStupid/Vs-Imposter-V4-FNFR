@@ -78,7 +78,7 @@ return {
         settingsMenuState = 0
 
 		camera.sizeX, camera.sizeY = 0.9, 0.9
-		camera.scaleX, camera.scaleY = 0.9, 0.9
+		defaultCamZoom = 0.9, 0.9
 
 		switchMenu(1)
 
