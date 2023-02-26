@@ -17,7 +17,7 @@ return {
 		enemyIcon:animate("black", false)
 
 		camera.sizeX, camera.sizeY = 0.65, 0.65
-		camera.scaleX, camera.scaleY = 0.65, 0.65
+		defaultCamZoom = 0.65, 0.65
 
 		camera:addPoint("boyfriend", 0, 0, 0.65, 0.65)
 		camera:addPoint("enemy", 0, 0, 0.65, 0.65)

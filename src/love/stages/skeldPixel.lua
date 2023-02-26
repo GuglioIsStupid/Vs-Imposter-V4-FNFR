@@ -21,7 +21,7 @@ return {
         camera:addPoint("enemy", 214, 0, 0.85, 0.85)
 
         camera.sizeX, camera.sizeY = 0.85, 0.85
-        camera.scaleX, camera.scaleY = 0.85, 0.85
+        defaultCamZoom = 0.85, 0.85
 
         
 
@@ -33,7 +33,7 @@ return {
         camera:moveToPoint(0, "boyfriend")
 
         camera.sizeX, camera.sizeY = 0.85, 0.85
-        camera.scaleX, camera.scaleY = 0.85, 0.85
+        defaultCamZoom = 0.85, 0.85
         HOLYSHITBOYFRIENDFROMFRIDAYNIGHTFUNKINISTHEIMPOSTORFROMAMONGUS = false
         HOLYSHITHESHOTHIM = 0
 

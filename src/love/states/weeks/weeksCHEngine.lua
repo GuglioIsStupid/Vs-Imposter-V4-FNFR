@@ -182,6 +182,9 @@ return {
 		enemyTwo:animate("idle")
 		boyfriend:animate("idle")
 
+		camBopInterval = 4
+		camBopIntensity = 1
+
 		graphics.fadeIn(0.5)
 	end,
 

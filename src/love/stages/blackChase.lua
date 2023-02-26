@@ -16,7 +16,7 @@ return {
         
 
         camera.sizeX, camera.sizeY = 2, 2
-        camera.scaleX, camera.scaleY = 2, 2
+        defaultCamZoom = 2, 2
 
         
 

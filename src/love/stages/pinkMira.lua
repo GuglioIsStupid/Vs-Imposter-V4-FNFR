@@ -69,7 +69,7 @@ return {
         stageImages["vines"]:animate("anim", true)
         stageImages["hearts"]:animate("anim", true)
 
-        camera.scaleX, camera.scaleY = 1, 1
+        defaultCamZoom = 1, 1
         camera.sizeX, camera.sizeY = 1, 1
         
         stageImages["littleHearts"].alpha = 0
@@ -92,7 +92,7 @@ return {
        -- camera.x, camera.y = -3, 18
 
        
-        camera.scaleX, camera.scaleY = 1, 1
+        defaultCamZoom = 1, 1
         camera.sizeX, camera.sizeY = 1, 1
 
         camera:addPoint("boyfriend", -37, -93, 1, 1)

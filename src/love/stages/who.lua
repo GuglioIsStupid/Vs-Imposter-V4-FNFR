@@ -31,7 +31,7 @@ return {
     load = function()
 
         camera.sizeX, camera.sizeY = 0.7, 0.7
-        camera.scaleX, camera.scaleY = 0.7, 0.7
+        defaultCamZoom = 0.7, 0.7
         camera:addPoint("middle", 0, -200, 0.7, 0.7)
         camera:addPoint("boyfriend", -420, -389, 1.2, 1.2)
         camera:addPoint("enemy", 371, -389, 1.2, 1.2)

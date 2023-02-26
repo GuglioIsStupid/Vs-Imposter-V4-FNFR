@@ -17,18 +17,19 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
 local eventFuncs = {
-	["Add Camera Zoom"] = function(size, sizeHud)
-		size = tonumber(size) or 0.015
+	["Add Camera Zoom"] = function(v1, v2)
+		--[[
+		if camera.sizeX < 1.35 then 
+			camZoom = tonumber(v1) or 0.015
+			hudZoom = tonumber(v2) or 0.015
 
-		Timer.tween(
-			(60/bpm)/4,
-			camera,
-			{
-				sizeX = camera.esizeX + size,
-				sizeY = camera.esizeY + size
-			},
-			"out-quad"
-		)
+			camera.sizeX = camera.sizeX + camZoom
+			camera.sizeY = camera.sizeX
+
+			uiScale.x = uiScale.x + hudZoom
+			uiScale.y = uiScale.x
+		end
+		--]] -- grrrr i hate camera zoom!!!!!!!!!!!!!
 	end,
 	["Hey!"] = function()
 		weeks:safeAnimate(boyfriend, "hey", false, 3)
@@ -37,25 +38,28 @@ local eventFuncs = {
 		print("haiiii")
 		flashAlpha = tonumber(value) or 0.4
 	end,
-	["chromToggle"] = function(theAmount, theAmount2) -- look, they named the variables this in the source so idk what to call them
-		print(theAmount, theAmount2)
-		theAmount = tonumber(theAmount) or 0
-		theAmount2 = tonumber(theAmount2) or 0
+	["chromToggle"] = function(_enabled, _amount) -- look, they named the variables this in the source so idk what to call them
+		local _enabled, _amount
+		print(_enabled, _amount)
+		_enabled = tonumber(_enabled) or 0
+		_amount = tonumber(_amount) or 0
 
-		if theAmount ~= 0 then 
+		if _enabled ~= 0 then 
 			isChrom = true
-			chromAmountHard = theAmount
-			chromFreq = theAmount2
+			chromAmountHard = _enabled
+			chromFreq = _amount
 		else
 			isChrom = false
 			chromAmountHard = 0
 		end
 	end,
-	["Alter Camera Bop"] = function(intensity, interveral)
-		intensity = tonumber(intensity) or 1
-		interveral = tonumber(interveral) or 4
+	["Alter Camera Bop"] = function(_intensity, _interveral)
+		local _intensity, _interveral
+		_intensity = tonumber(_intensity) or 1
+		_interveral = tonumber(_interveral) or 4
 
-
+		camBopIntensity = _intensity
+		camBopInterval = _interveral
 	end,
 }
 
@@ -242,6 +246,8 @@ return {
 		enemy:animate("idle")
 		boyfriend:animate("idle")
 
+		camBopInterval = 4
+		camBopIntensity = 1
 
 		graphics.fadeIn(0.5)
 	end,
@@ -775,16 +781,16 @@ return {
 		end
 		--]]
 
-		if beatHandler.onBeat() and (camZooming and camera.sizeX < 1.35 and beatHandler.getBeat() % camBopInterval == 0 and not cameraLocked) then 
+		if beatHandler.onBeat() and beatHandler.getBeat() % camBopInterval == 0 and (camera.sizeX < 1.35) then 
 			camera.sizeX = camera.sizeX + 0.015 * camBopIntensity
-			uiScale.sizeX = uiScale.sizeX + 0.03 * camBopIntensity
+			uiScale.x = uiScale.x + 0.03 * camBopIntensity
 		end
 
-		if camZooming and not cameraLocked then 
-			camera.sizeX, camera.sizeY = util.lerp(defaultCamZoom, camera.sizeX, util.clamp(1 - (dt * 3.125), 0, 1))
-			camera.sizeY = camera.sizeX
-			uiScale.sizeX, uiScale.sizeY = util.lerp(1, uiScale.sizeX, util.clamp(1 - (dt * 3.125), 0, 1))
-		end
+		camera.sizeX, camera.sizeY = util.lerp(defaultCamZoom, camera.sizeX, util.clamp(1 - (dt * 3.125), 0, 1))
+		camera.sizeY = camera.sizeX
+			
+		uiScale.x = util.lerp(1, uiScale.x, util.clamp(1 - (dt * 3.125), 0, 1))
+		uiScale.y = uiScale.x
 		--[[
 		if beatHandler.onBeat() then 
 			print("beat")

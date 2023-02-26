@@ -25,7 +25,7 @@ return {
         stageImages["table"].y = 122
 
         camera.sizeX, camera.sizeY = 1.25, 1.25
-		camera.scaleX, camera.scaleY = 1.25, 1.25
+		defaultCamZoom = 1.25, 1.25
     end,
 
     load = function()

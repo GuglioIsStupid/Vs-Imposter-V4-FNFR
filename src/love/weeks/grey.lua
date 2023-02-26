@@ -23,7 +23,7 @@ return {
 
 		
        -- camera.sizeX, camera.sizeY = 0.7, 0.7
-       -- camera.scaleX, camera.scaleY = 0.7, 0.7
+       -- defaultCamZoom = 0.7, 0.7
 
 	   --[[
 	   ChromaticAbberation = love.graphics.newShader[[
@@ -88,6 +88,10 @@ return {
 		self:initUI()
 
 		weeksGrey:setupCountdown()
+
+		camBopInterval = 4
+		camBopIntensity = 1
+		flashAlpha = 0
 	end,
 
 	initUI = function(self)
@@ -110,11 +114,15 @@ return {
 			weeksGrey:generateEvents("songs/delusion/events.json")
 
 		end
+
+		chromAmount = {-0.5}
 	end,
 
 	update = function(self, dt)
 		weeksGrey:update(dt)
 		stages["greyElec"]:update(dt)
+
+		flashAlpha = util.lerp(flashAlpha, 0, util.clamp(0, dt * 5, 1))
 
 		if health >= 80 then
 			if enemyIcon:getAnimName() == "yellow" then
@@ -134,7 +142,7 @@ return {
 			end
 		end
 
-		if beatHandler.onBeat() and beatHandler.getBeat() % chromFreq == 0 then 
+		if beatHandler.onBeat() and beatHandler.getBeat() % chromFreq == 0 and not graphics.isFading() and not countingDown then 
 			if chromTween then 
 				Timer.cancel(chromTween)
 			end
@@ -143,7 +151,7 @@ return {
 		end
 
 		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused then
-			if storyMode and song < 5 then
+			if storyMode and song < 3 then
 				--[[
 				if score > highscores[weekNum-1][difficulty].scores[song] then
 					highscores[weekNum-1][difficulty].scores[song] = score
@@ -207,6 +215,10 @@ return {
 			if canvasScale < 1 then canvasScale = math.min(graphics.getWidth() / 1280, graphics.getHeight() / 720) end
 
 			love.graphics.draw(canvas, 0, 0, 0, graphics.getWidth() / canvas:getWidth(), graphics.getHeight() / canvas:getHeight())
+
+			graphics.setColor(0.6,0,0,flashAlpha)
+			love.graphics.rectangle("fill", 0, 0, graphics.getWidth(), graphics.getHeight())
+			graphics.setColor(1,1,1,1)
 		love.graphics.pop()
 	end,
 

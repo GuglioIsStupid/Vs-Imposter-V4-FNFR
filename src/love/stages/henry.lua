@@ -12,7 +12,7 @@ return {
 
 
 
-        camera.scaleX, camera.scaleY = 0.85, 0.85
+        defaultCamZoom = 0.85, 0.85
         camera.sizeX, camera.sizeY = 0.85, 0.85
 
         enemy.x, enemy.y = -275, 84
@@ -37,7 +37,7 @@ return {
             enemy.x, enemy.y = -259, 69
             enemyTwo.x, enemyTwo.y = -574, 67
             
-            camera.scaleX, camera.scaleY = 0.85, 0.85
+            defaultCamZoom = 0.85, 0.85
             camera.sizeX, camera.sizeY = 0.85, 0.85
 
         elseif song == 3 then
@@ -49,7 +49,7 @@ return {
             girlfriend.x, girlfriend.y = 144, 53
             enemyTwo.x, enemyTwo.y = -602, 148
             
-            camera.scaleX, camera.scaleY = 0.85, 0.85
+            defaultCamZoom = 0.85, 0.85
             camera.sizeX, camera.sizeY = 0.85, 0.85
         elseif song == 2 then
             enemy = love.filesystem.load("sprites/characters/charles.lua")()
@@ -67,7 +67,7 @@ return {
 
             zoom1Num = 0.95
             zoom2Num = 1.05
-            camera.scaleX, camera.scaleY = 0.85, 0.85
+            defaultCamZoom = 0.85, 0.85
             camera.sizeX, camera.sizeY = 0.85, 0.85
 
         else
@@ -77,7 +77,7 @@ return {
             enemy.x, enemy.y = -275, 84
             boyfriend.x, boyfriend.y = 571, 252
             girlfriend.x, girlfriend.y = 144, 53
-            camera.scaleX, camera.scaleY = 0.85, 0.85
+            defaultCamZoom = 0.85, 0.85
             camera.sizeX, camera.sizeY = 0.85, 0.85
 
             camera:addPoint("boyfriend", -335, -153, 0.85, 0.85)
@@ -108,12 +108,12 @@ return {
 
             if musicTime >= 3333 and musicTime < 3383 then
                 camera.sizeX, camera.sizeY = zoom1Num, zoom1Num
-                camera.scaleX, camera.scaleY = zoom1Num, zoom1Num
+                defaultCamZoom = zoom1Num, zoom1Num
             end
 
             if musicTime >= 3500 and musicTime < 3550 then
                 camera.sizeX, camera.sizeY = zoom2Num, zoom2Num
-                camera.scaleX, camera.scaleY = zoom2Num, zoom2Num
+                defaultCamZoom = zoom2Num, zoom2Num
             end
 
             if musicTime >= 4333 and musicTime < 4383 then

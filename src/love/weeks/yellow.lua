@@ -42,7 +42,7 @@ return {
 			voices = love.audio.newSource("songs/double-kill/Voices.ogg", "stream")
 			thefunnyjudgmentsgoleftabit = false
 			camera.sizeX, camera.sizeY = 0.8, 0.8
-			camera.scaleX, camera.scaleY = 0.8, 0.8
+			defaultCamZoom = 0.8, 0.8
 
 		elseif song == 4 then
 			stages["yellowAirship"]:leave()
@@ -78,7 +78,7 @@ return {
 			weeksYellow:generateEvents("songs/double-kill/events.json")
 			--weeksYellow:setIcon("enemy", "white")
 			camera.sizeX, camera.sizeY = 0.8, 0.8
-			camera.scaleX, camera.scaleY = 0.8, 0.8
+			defaultCamZoom = 0.8, 0.8
 		elseif song == 4 then
 			doMustHitSectionCam = false
 			weeksYellow:generateNotes("songs/danger/danger-hard.json")
