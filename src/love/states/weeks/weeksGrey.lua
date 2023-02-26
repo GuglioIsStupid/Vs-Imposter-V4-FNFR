@@ -20,7 +20,7 @@ local eventFuncs = {
 	["Add Camera Zoom"] = function(v1, v2)
 		--[[
 		if camera.sizeX < 1.35 then 
-			camZoom = tonumber(v1) or (0.015/2)
+			camZoom = tonumber(v1) or 0.015
 			hudZoom = tonumber(v2) or 0.015
 
 			camera.sizeX = camera.sizeX + camZoom
@@ -38,26 +38,28 @@ local eventFuncs = {
 		print("haiiii")
 		flashAlpha = tonumber(value) or 0.4
 	end,
-	["chromToggle"] = function(theAmount, theAmount2) -- look, they named the variables this in the source so idk what to call them
-		print(theAmount, theAmount2)
-		theAmount = tonumber(theAmount) or 0
-		theAmount2 = tonumber(theAmount2) or 0
+	["chromToggle"] = function(_enabled, _amount) -- look, they named the variables this in the source so idk what to call them
+		local _enabled, _amount
+		print(_enabled, _amount)
+		_enabled = tonumber(_enabled) or 0
+		_amount = tonumber(_amount) or 0
 
-		if theAmount ~= 0 then 
+		if _enabled ~= 0 then 
 			isChrom = true
-			chromAmountHard = theAmount
-			chromFreq = theAmount2
+			chromAmountHard = _enabled
+			chromFreq = _amount
 		else
 			isChrom = false
 			chromAmountHard = 0
 		end
 	end,
-	["Alter Camera Bop"] = function(intensity, interveral)
-		intensity = tonumber(intensity) or 1
-		interveral = tonumber(interveral) or 4
+	["Alter Camera Bop"] = function(_intensity, _interveral)
+		local _intensity, _interveral
+		_intensity = tonumber(_intensity) or 1
+		_interveral = tonumber(_interveral) or 4
 
-		camBopIntensity = intensity
-		camBopInterveral = interveral
+		camBopIntensity = _intensity
+		camBopInterval = _interveral
 	end,
 }
 
@@ -777,7 +779,7 @@ return {
 		end
 		--]]
 
-		if beatHandler.onBeat() and (camZooming and camera.sizeX < 1.35 and not cameraLocked) then 
+		if beatHandler.onBeat() and beatHandler.getBeat() % camBopInterval == 0 and (camZooming and camera.sizeX < 1.35 and not cameraLocked) then 
 			camera.sizeX = camera.sizeX + 0.015 * camBopIntensity
 			uiScale.x = uiScale.x + 0.03 * camBopIntensity
 		end
