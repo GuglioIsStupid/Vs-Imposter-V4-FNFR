@@ -31,6 +31,8 @@ return {
         stageImages["boppers"]:animate("idle", true)
         stageImages["boppers"].x, stageImages["boppers"].y = -177, 662
 
+        ghostGF = love.filesystem.load("sprites/characters/ghostgf.lua")()
+        ghostGF.x, ghostGF.y = 80, -107
     end,
 
     load = function()
@@ -40,6 +42,7 @@ return {
             boyfriend = love.filesystem.load("sprites/boyfriend.lua")()
             enemy.x, enemy.y = -338, 298
             boyfriend.x, boyfriend.y = 524, 303
+            showGhostGF = false
         elseif song == 2 then
             enemy = love.filesystem.load("sprites/characters/impostor.lua")()
             boyfriend = love.filesystem.load("sprites/boyfriend.lua")()
@@ -47,6 +50,7 @@ return {
             fuckingSpeaker.x, fuckingSpeaker.y = 59, 266
             enemy.x, enemy.y = -338, 298
             boyfriend.x, boyfriend.y = 524, 303
+            showGhostGF = false
         else
             enemy = love.filesystem.load("sprites/characters/impostor2.lua")()
             boyfriend = love.filesystem.load("sprites/characters/bfghost.lua")()
@@ -54,6 +58,7 @@ return {
             fuckingSpeaker.x, fuckingSpeaker.y = 59, 266
             enemy.x, enemy.y = -390, 364
             boyfriend.x, boyfriend.y = 524, 303
+            showGhostGF = true
         end
         camera:addPoint("boyfriend", -274, -162, 0.75, 0.75)
         camera:addPoint("enemy", 373, -162, 0.75, 0.75)
@@ -62,6 +67,7 @@ return {
 
     update = function(self, dt)
         stageImages["boppers"]:update(dt)
+        ghostGF:update(dt)
         if song ~= 1 then 
             fuckingSpeaker:update(dt) 
 
@@ -78,6 +84,14 @@ return {
             boyfriend:animate("idle", false)
         end
 
+        if song == 2 and musicTime >= 71996 and musicTime < 72046 then
+            showGhostGF = true
+            ghostGF:animate("fade", false)
+        end
+
+        if not ghostGF:isAnimated() then
+            ghostGF:animate("idle", false)
+        end
     end,
 
     draw = function()
@@ -107,26 +121,23 @@ return {
                     girlfriend:draw()
                 else 
                     fuckingSpeaker:draw() 
+                    if showGhostGF then
+                        ghostGF:draw()
+                    end
+                end
+                
+			    enemy:draw()
+			    boyfriend:draw()
+            love.graphics.pop()
+            love.graphics.push()
+                love.graphics.translate(camera.x * 1.5, camera.y * 1.5)
+                love.graphics.translate(camera.ex * 1.5, camera.ey * 1.5)
+                if song == 3 then
+                    stageImages["boppers"]:draw()
                 end
             love.graphics.pop()
-            
 		love.graphics.pop()
-		love.graphics.push()
-			love.graphics.translate(camera.x, camera.y)
-            love.graphics.translate(camera.ex, camera.ey)
-
-			enemy:draw()
-			boyfriend:draw()
-		love.graphics.pop()
-        love.graphics.push()
-        love.graphics.translate(camera.x * 1.5, camera.y * 1.5)
-        love.graphics.translate(camera.ex * 1.5, camera.ey * 1.5)
-        if song == 3 then
-        stageImages["boppers"]:draw()
-        end
-        love.graphics.pop()
-
-        
+    
     end,
 
     leave = function()
