@@ -39,8 +39,6 @@ local eventFuncs = {
 		flashAlpha = tonumber(value) or 0.4
 	end,
 	["chromToggle"] = function(_enabled, _amount) -- look, they named the variables this in the source so idk what to call them
-		local _enabled, _amount
-		print(_enabled, _amount)
 		_enabled = tonumber(_enabled) or 0
 		_amount = tonumber(_amount) or 0
 
@@ -54,7 +52,6 @@ local eventFuncs = {
 		end
 	end,
 	["Alter Camera Bop"] = function(_intensity, _interveral)
-		local _intensity, _interveral
 		_intensity = tonumber(_intensity) or 1
 		_interveral = tonumber(_interveral) or 4
 
