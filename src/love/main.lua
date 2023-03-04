@@ -979,6 +979,11 @@ function love.draw()
 		)
 		love.graphics.rectangle("fill", 1113, 10, volumeWidth.width, 30)
 		love.graphics.setColor(1, 1, 1, 1)
+
+		-- Debug output
+		if settings.showDebug then
+			love.graphics.print(status.getDebugStr(settings.showDebug), 5, 5, nil, 0.5, 0.5)
+		end
 	end
 
 end

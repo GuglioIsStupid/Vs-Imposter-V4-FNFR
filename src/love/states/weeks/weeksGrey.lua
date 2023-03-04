@@ -18,10 +18,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
 local eventFuncs = {
 	["Add Camera Zoom"] = function(v1, v2)
-		--[[
 		if camera.sizeX < 1.35 then 
 			camZoom = tonumber(v1) or 0.015
-			hudZoom = tonumber(v2) or 0.015
+			hudZoom = tonumber(v2) or 0.03
 
 			camera.sizeX = camera.sizeX + camZoom
 			camera.sizeY = camera.sizeX
@@ -29,7 +28,6 @@ local eventFuncs = {
 			uiScale.x = uiScale.x + hudZoom
 			uiScale.y = uiScale.x
 		end
-		--]] -- grrrr i hate camera zoom!!!!!!!!!!!!!
 	end,
 	["Hey!"] = function()
 		weeks:safeAnimate(boyfriend, "hey", false, 3)
@@ -320,7 +318,7 @@ return {
 			for j = 1, #ec["notes"][i]["sectionNotes"] do
 				sectionNotesE = ec["notes"][i]["sectionNotes"]
 				table.insert(
-					songEvents,
+					songEvents, -- Add Camera Zoom
 					{
 						eventTime = sectionNotesE[j][1] or 0,
 						-- 2 is just the noteType (psych is strange)

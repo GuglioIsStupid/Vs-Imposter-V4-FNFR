@@ -18,16 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
 local eventFuncs = {
 	["Add Camera Zoom"] = function(size, sizeHud)
-		size = tonumber(size) or 0.015
-		Timer.tween(
-			(60/bpm)/4,
-			camera,
-			{
-				sizeX = camera.esizeX + size,
-				sizeY = camera.esizeY + size
-			},
-			"out-quad"
-		)
+		-- No worky :(
 	end,
 	["Hey!"] = function()
 		weeks:safeAnimate(boyfriend, "hey", false, 3)
