@@ -105,7 +105,7 @@ return {
 
 		elseif song == 2 then
 			doMustHitSectionCam = true
-			--weeksGrey:generateNotes("songs/blackout/blackout-hard.json")
+			weeksGrey:generateNotes("songs/blackout/blackout-hard.json")
 			-- these events dont line up with the music time so uhhh
 			-- just not use them...
 			weeksGrey:generateEvents("songs/blackout/events.json")

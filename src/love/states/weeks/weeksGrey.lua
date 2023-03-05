@@ -330,6 +330,7 @@ return {
 				--print(songEvents[i].eventTime, songEvents[i].eventName, songEvents[i].eventValue1, songEvents[i].eventValue2)
 			end
 		end
+		table.sort(songEvents, function(a, b) return a.eventTime < b.eventTime end)
 	end,
 
 	generateNotes = function(self, chart)
