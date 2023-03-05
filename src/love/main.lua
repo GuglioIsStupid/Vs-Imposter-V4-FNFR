@@ -393,6 +393,8 @@ function love.load()
 	weeksFinale = require "states.weeks.weeksFinale"
 	require("states.weeks.weeksOld")
 
+	countBeans = true
+
 
 	-- Load substates
 	gameOver = require "substates.game-over"

@@ -328,6 +328,8 @@ return {
 		camZooming = true
 
 		graphics.fadeIn(0.5)
+
+		countBeans = true
 	end,
 
 	initUI = function(self, option)
@@ -767,6 +769,7 @@ return {
 					if inst then inst:stop() end
 					storyMode = false
 					quitPressed = true
+					countBeans = false
 				end
 			end
 			return

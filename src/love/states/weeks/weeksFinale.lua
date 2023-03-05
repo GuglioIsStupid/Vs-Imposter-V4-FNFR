@@ -226,6 +226,8 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 		camZooming = true
 
 		graphics.fadeIn(0.5)
+
+		countBeans = true
 	end,
 
 	initUI = function(self, option)
@@ -664,6 +666,7 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 					if inst then inst:stop() end
 					storyMode = false
 					quitPressed = true
+					countBeans = false
 				end
 			end
 			return
