@@ -1,13 +1,13 @@
 return {
     enter = function()
         stageImages = {
-            ["BG"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("finale/bg"))),
-            ["bgg"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("finale/bgg"))),
-            ["dark"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("finale/dark"))),
-            ["dead"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("finale/dead"))),
-            ["fore"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("finale/fore"))),
-            ["lamp"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("finale/lamp"))),
-            ["splat"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("finale/splat"))),
+            ["BG"] = graphics.newImage(graphics.imagePath("finale/bg")),
+            ["bgg"] = graphics.newImage(graphics.imagePath("finale/bgg")),
+            ["dark"] = graphics.newImage(graphics.imagePath("finale/dark")),
+            ["dead"] = graphics.newImage(graphics.imagePath("finale/dead")),
+            ["fore"] = graphics.newImage(graphics.imagePath("finale/fore")),
+            ["lamp"] = graphics.newImage(graphics.imagePath("finale/lamp")),
+            ["splat"] = graphics.newImage(graphics.imagePath("finale/splat")),
             ["finaleFlashback"] = love.filesystem.load("sprites/finale/finaleFlashback.lua")(),
             ["light"] = love.filesystem.load("sprites/finale/light.lua")(),
             ["defeat"] = love.filesystem.load("sprites/defeat/defeat.lua")(),
@@ -32,8 +32,8 @@ return {
         boyfriend.sizeX, boyfriend.sizeY = 0.65, 0.65
         boyfriend.x, boyfriend.y = 456, 209
 
-        cam.sizeX, cam.sizeY = 0.4, 0.4
-        camScale.sizeX, camScale.sizeY = 0.4, 0.4
+        camera.sizeX, camera.sizeY = 0.4, 0.4
+        camera.scaleX, camera.scaleY = 0.4, 0.4
 
         cock = 0
 
@@ -43,7 +43,7 @@ return {
         flash.alpha = 0
         flash.colour = {1, 1, 1}
         cam.sizeX, cam.sizeY = 0.4, 0.4
-        camScale.x, camScale.y = 0.4, 0.4
+        cam.scaleX, cam.scaleY = 0.4, 0.4
         curStage = "finalem"
     end,
 
@@ -109,12 +109,16 @@ return {
     draw = function()
         if curStage == "finalem" then
             love.graphics.push()
-                love.graphics.translate(cam.x * 0.8, cam.y * 0.8)
+                love.graphics.translate(camera.x * 0.8, camera.y * 0.8)
+                love.graphics.translate(camera.ex * 0.8, camera.ey * 0.8)
+
 
                 stageImages["defeat"]:draw()
             love.graphics.pop()
             love.graphics.push()
-                love.graphics.translate(cam.x, cam.y)
+            love.graphics.translate(camera.x, camera.y)
+            love.graphics.translate(camera.ex, camera.ey)
+
 
                 enemy:draw()
                 boyfriend:draw()
@@ -122,7 +126,9 @@ return {
             love.graphics.pop()
         elseif curStage == "finale" then
             love.graphics.push()
-                love.graphics.translate(cam.x * 0.9, cam.y * 0.9)
+                love.graphics.translate(camera.x * 0.9, camera.y * 0.9)
+                love.graphics.translate(camera.ex * 0.9, camera.ey * 0.9)
+
                 stageImages["bgg"]:draw()
                 stageImages["BG"]:draw()
                 stageImages["dead"]:draw()

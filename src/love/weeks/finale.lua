@@ -14,7 +14,7 @@ return {
 		song = songNum
 		difficulty = songAppend
 
-		weeksFinale:setIcon("enemy", "daddy dearest")
+		--weeksFinale:setIcon("enemy", "daddy dearest")
 
 		self:load()
 	end,
@@ -35,7 +35,7 @@ return {
 		weeksFinale:initUI()
 
 		weeksFinale:generateNotes("songs/finale/finale-hard.json")
-		weeksFinale:generateEventsOld("songs/finale/events.json")
+		weeksFinale:generateEvents("songs/finale/events.json")
 	end,
 
 	update = function(self, dt)
@@ -89,8 +89,8 @@ return {
 	draw = function(self)
 		love.graphics.push()
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
-			love.graphics.scale(extraCamZoom.sizeX, extraCamZoom.sizeY)
-			love.graphics.scale(cam.sizeX, cam.sizeY)
+			love.graphics.scale(camera.esizeX, camera.esizeY)
+			love.graphics.scale(camera.sizeX, camera.sizeY)
 			stages["finale"]:draw()
 			weeksFinale:drawRating(0.9)
 			
@@ -104,8 +104,8 @@ return {
 			graphics.setColor(1,1,1)
 		love.graphics.pop()
 		
-		weeksFinale:drawTimeLeftBar()
-		weeksFinale:drawHealthBar()
+		--weeksFinale:drawTimeLeftBar()
+		--weeksFinale:drawHealthBar()
 		if not paused then
 			weeksFinale:drawUI()
 		end
