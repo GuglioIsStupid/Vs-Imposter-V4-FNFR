@@ -30,6 +30,10 @@ beatHandler.bpm = 100
 beatHandler.crochet = (60/beatHandler.bpm) * 1000
 beatHandler.stepCrochet = beatHandler.crochet / 4
 
+beatHandler.lastBeat = 0
+beatHandler.curBeat = 0
+beatHandler.isBeatHit = false
+
 function beatHandler.setBPM(bpm)
     bpm = bpm or 100
     beatHandler.bpm = bpm
@@ -54,26 +58,38 @@ function beatHandler.getStepCrochet()
 end
 
 function beatHandler.update(dt)
-    beatHandler.beatTime = beatHandler.beatTime + dt
-    if beatHandler.beatTime >= 60 / beatHandler.bpm then
-        beatHandler.beat = beatHandler.beat + 1
-        beatHandler.beatTime = 0
-    end
+    beatHandler.isBeatHit = false
+    beatHandler.curBeat = math.abs(math.floor((musicTime / 1000) * (beatHandler.bpm / 60)))
 
-    if beatHandler.reseted then
-        beatHandler.reseted = false
-        beatHandler.beat = 0
+    
+
+    if math.floor((musicTime / 1000) * (beatHandler.bpm / 60)) > 0 then
+        print(beatHandler.curBeat, beatHandler.lastBeat)
+        if beatHandler.curBeat > beatHandler.lastBeat then
+            beatHandler.isBeatHit = true
+            beatHandler.beat = beatHandler.beat + 1
+            beatHandler.lastBeat = beatHandler.curBeat
+        end
+    else
+        print(beatHandler.curBeat, beatHandler.lastBeat)
+        if beatHandler.curBeat < beatHandler.lastBeat then
+            beatHandler.isBeatHit = true
+            beatHandler.beat = beatHandler.beat + 1
+            beatHandler.lastBeat = beatHandler.curBeat
+        end
     end
 end
 
 function beatHandler.reset()
     beatHandler.beat = 0
     beatHandler.beatTime = 0
-    beatHandler.reseted = true
+    beatHandler.lastBeat = 0
+    beatHandler.curBeat = 0
+    beatHandler.isBeatHit = false
 end
 
 function beatHandler.onBeat()
-    return beatHandler.beatTime == 0
+    return beatHandler.isBeatHit
 end
 
 function beatHandler.setBeat(beat)

@@ -574,6 +574,7 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 	setupCountdown = function(self)
 		lastReportedPlaytime = 0
 		musicTime = (240 / bpm) * -1000
+		beatHandler.lastBeat = math.abs(math.floor((musicTime / 1000) * (beatHandler.bpm / 60)))
 
 		musicThres = 0
 		musicPos = 0
@@ -615,7 +616,7 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 
 										previousFrameTime = love.timer.getTime() * 1000
 										musicTime = 0
-										beatHandler.setBeat(0)
+										beatHandler.reset()
 
 										if inst then inst:play() end
 										voices:play()
