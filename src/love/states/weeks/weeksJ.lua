@@ -461,6 +461,8 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 				)
 			end
 		end
+
+		table.sort(songEvents, function(a, b) return a.eventTime < b.eventTime end)
 	end,
 
 	generateNotes = function(self, chart)

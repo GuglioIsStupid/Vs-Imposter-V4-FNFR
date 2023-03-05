@@ -53,7 +53,7 @@ function camera:reset()
     camera.col = {1, 1, 1, 1}
 end
 
-function camera:flash(time, x, col)
+function camera:flashz(time, x, col)
     camera.color = col or {1, 1, 1}
     if camTimer then 
         Timer.cancel(camTimer)

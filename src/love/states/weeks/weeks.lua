@@ -44,6 +44,94 @@ local eventFuncs = {
 		camBopIntensity = _intensity
 		camBopInterval = _interveral
 	end,
+	["Identity Crisis Events"] = function(v)
+		charType = tonumber(v) or 0
+		if charType == 0 then
+			stageImages.plagueBGBLUE.visible = true
+			stageImages.plagueBGRED.visible = false
+			stageImages.plagueBGPURPLE.visible = false
+			stageImages.plagueBGGREEN.visible = false
+		elseif charType == 1 then
+			stageImages.plagueBGBLUE.visible = false
+			stageImages.plagueBGRED.visible = true
+			stageImages.plagueBGPURPLE.visible = false
+			stageImages.plagueBGGREEN.visible = false
+		elseif charType == 2 then
+			stageImages.plagueBGBLUE.visible = false
+			stageImages.plagueBGRED.visible = false
+			stageImages.plagueBGPURPLE.visible = true
+			stageImages.plagueBGGREEN.visible = false
+		elseif charType == 3 then
+			stageImages.plagueBGBLUE.visible = false
+			stageImages.plagueBGRED.visible = false
+			stageImages.plagueBGPURPLE.visible = false
+			stageImages.plagueBGGREEN.visible = true
+		end
+	end,
+	["flash"] = function(v1)
+		charType = tonumber(v1) or 0
+		if charType == 0 then
+			camera.flash = 1
+			Timer.tween(
+				0.35,
+				camera,
+				{
+					flash = 0
+				},
+				"out-quad"
+			)
+		elseif charType == 1 then
+			camera.flash = 1
+			Timer.tween(
+				0.35,
+				camera,
+				{
+					flash = 0
+				},
+				"out-quad"
+			)
+		elseif charType == 2 then
+			camera.flash = 1
+			Timer.tween(
+				0.55,
+				camera,
+				{
+					flash = 0
+				},
+				"out-quad"
+			)
+			darkMono = true
+		elseif charType == 3 then
+			camera.flash = 1
+			Timer.tween(
+				0.55,
+				camera,
+				{
+					flash = 0
+				},
+				"out-quad"
+			)
+			darkMono = false
+			saxguy.visible = false
+		end
+	end,
+	["Change Character"] = function(who, char)
+		print(who, char)
+		if who == "0" or who == "BF" then 
+			curBF = char
+		elseif who == "1" then 
+			curEnemy = char
+		elseif who == "2" then 
+			curGF = char
+		elseif who == "3" then 
+			curEnemy2 = char
+		end
+	end,
+	["Identity Crisis line"] = function()
+		saxguy.visible = true
+		saxguy.sizeX, saxguy.sizeY = 0.6, 0.6
+		saxguy:animate("anim", false)
+	end,
 }
 
 local animList = {
@@ -225,9 +313,14 @@ return {
 
 		enemy:animate("idle")
 		boyfriend:animate("idle")
+		if enemy2 then enemy2:animate("idle") end
+		if enemy3 then enemy3:animate("idle") end
+		if enemy4 then enemy4:animate("idle") end
+		if enemyBF then enemyBF:animate("idle") end
+		if boyfriend2 then boyfriend2:animate("idle") end
 
 		if not camera.points["boyfriend"] then camera:addPoint("boyfriend", -boyfriend.x + 100, -boyfriend.y + 75) end
-if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -enemy.y + 75) end
+		if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -enemy.y + 75) end
 
 		camBopInterval = 4
 		camBopIntensity = 1
@@ -744,7 +837,7 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 		for i = 1, #songEvents do
 			if songEvents[i].eventTime <= absMusicTime then
 				if eventFuncs[songEvents[i].eventName] then
-					eventFuncs[songEvents[i].eventName](songEvents[i].eventValue1, songEvents.eventValue2)
+					eventFuncs[songEvents[i].eventName](songEvents[i].eventValue1, songEvents[i].eventValue2)
 				else
 					print(songEvents[i].eventName .. " is not implemented!")
 				end
@@ -786,7 +879,12 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 			end
 		end
 		boyfriend:beat(beatHandler.getBeat())
+		if boyfriend2 then boyfriend2:beat(beatHandler.getBeat()) end
 		enemy:beat(beatHandler.getBeat())
+		if enemy2 then enemy2:beat(beatHandler.getBeat()) end
+		if enemy3 then enemy3:beat(beatHandler.getBeat()) end
+		if enemy4 then enemy4:beat(beatHandler.getBeat()) end
+		if enemyBF then enemyBF:beat(beatHandler.getBeat()) end
 
 		for i = 1, 3 do
 			local spriteTimer = spriteTimers[i]
@@ -833,14 +931,30 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 					if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
 						if useAltAnims then
 							if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim .. " alt", false, 2) end
+							if enemy2 then if (not enemy2:isAnimated()) or enemy2:getAnimName() == "idle" then self:safeAnimate(enemy2, curAnim .. " alt", false, 2) end end
+							if enemy3 then if (not enemy3:isAnimated()) or enemy3:getAnimName() == "idle" then self:safeAnimate(enemy3, curAnim .. " alt", false, 2) end end
+							if enemy4 then if (not enemy4:isAnimated()) or enemy4:getAnimName() == "idle" then self:safeAnimate(enemy4, curAnim .. " alt", false, 2) end end
+							if enemyBF then if (not enemyBF:isAnimated()) or enemyBF:getAnimName() == "idle" then self:safeAnimate(enemyBF, curAnim .. " alt", false, 2) end end
 						else
 							if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim, false, 2) end
+							if enemy2 then if (not enemy2:isAnimated()) or enemy2:getAnimName() == "idle" then self:safeAnimate(enemy2, curAnim, false, 2) end end
+							if enemy3 then if (not enemy3:isAnimated()) or enemy3:getAnimName() == "idle" then self:safeAnimate(enemy3, curAnim, false, 2) end end
+							if enemy4 then if (not enemy4:isAnimated()) or enemy4:getAnimName() == "idle" then self:safeAnimate(enemy4, curAnim, false, 2) end end
+							if enemyBF then if (not enemyBF:isAnimated()) or enemyBF:getAnimName() == "idle" then self:safeAnimate(enemyBF, curAnim, false, 2) end end
 						end
 					else
 						if useAltAnims then
 							self:safeAnimate(enemy, curAnim .. " alt", false, 2)
+							if enemy2 then self:safeAnimate(enemy2, curAnim .. " alt", false, 2) end
+							if enemy3 then self:safeAnimate(enemy3, curAnim .. " alt", false, 2) end
+							if enemy4 then self:safeAnimate(enemy4, curAnim .. " alt", false, 2) end
+							if enemyBF then self:safeAnimate(enemyBF, curAnim .. " alt", false, 2) end
 						else
 							self:safeAnimate(enemy, curAnim, false, 2)
+							if enemy2 then self:safeAnimate(enemy2, curAnim, false, 2) end
+							if enemy3 then self:safeAnimate(enemy3, curAnim, false, 2) end
+							if enemy4 then self:safeAnimate(enemy4, curAnim, false, 2) end
+							if enemyBF then self:safeAnimate(enemyBF, curAnim, false, 2) end
 						end
 					end
 
@@ -890,8 +1004,10 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 
 						if boyfriendNote[1]:getAnimName() == "hold" or boyfriendNote[1]:getAnimName() == "end" then
 							if (not boyfriend:isAnimated()) or boyfriend:getAnimName() == "idle" then self:safeAnimate(boyfriend, curAnim, false, 2) end
+							if boyfriend2 then if (not boyfriend2:isAnimated()) or boyfriend2:getAnimName() == "idle" then self:safeAnimate(boyfriend2, curAnim, false, 2) end end
 						else
 							self:safeAnimate(boyfriend, curAnim, false, 2)
+							if boyfriend2 then self:safeAnimate(boyfriend2, curAnim, false, 2) end
 						end
 
 						boyfriend.lastHit = musicTime
@@ -1017,6 +1133,7 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 									boyfriendArrow:animate("confirm", false)
 
 									self:safeAnimate(boyfriend, curAnim, false, 3)
+									if boyfriend2 then self:safeAnimate(boyfriend2, curAnim, false, 3) end
 
 									if boyfriendNote[j]:getAnimName() ~= "hold" and boyfriendNote[j]:getAnimName() ~= "end" then
 										health = health + 0.095
@@ -1043,6 +1160,7 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 					if combo >= 5 then self:safeAnimate(girlfriend, "sad", true, 1) end
 
 					self:safeAnimate(boyfriend, "miss " .. curAnim, false, 3)
+					if boyfriend2 then self:safeAnimate(boyfriend2, "miss " .. curAnim, false, 3) end
 
 					score = score - 10
 					combo = 0
@@ -1060,6 +1178,7 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 				health = health + 0.0125
 
 				if (not boyfriend:isAnimated()) or boyfriend:getAnimName() == "idle" then self:safeAnimate(boyfriend, curAnim, false, 3) end
+				if boyfriend2 and (not boyfriend2:isAnimated()) or boyfriend2:getAnimName() == "idle" then self:safeAnimate(boyfriend2, curAnim, false, 3) end
 
 				table.remove(boyfriendNote, 1)
 			end

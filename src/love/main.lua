@@ -356,7 +356,8 @@ function love.load()
 		["top"] = require "stages.top",
 		["idk"] = require "stages.idk",
 		["skeldPixel"] = require "stages.skeldPixel",
-		["skeld"] = require "stages.skeld"
+		["skeld"] = require "stages.skeld",
+		["monotone"] = require "stages.monotone"
 	}
 
 	-- Load Menus
@@ -424,7 +425,8 @@ function love.load()
 		require "weeks.idk",
 		require "weeks.tomongus",
 		require "weeks.tomongus",
-		require "weeks.tuesday"
+		require "weeks.tuesday",
+		require "weeks.identity"
 	}
 
 	weekDesc = { -- Add your week description here
@@ -629,6 +631,12 @@ function love.load()
 			"Tomongus Tuesday",
 			{
 				"Tomongus Tuesday"
+			}
+		},
+		{
+			"Identity Crisis",
+			{
+				"Identity Crisis"
 			}
 		}
 	}
