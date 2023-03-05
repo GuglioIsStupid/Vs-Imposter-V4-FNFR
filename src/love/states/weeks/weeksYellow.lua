@@ -177,6 +177,7 @@ return {
 			boyfriend = love.filesystem.load("sprites/pixel/boyfriend.lua")()
 		end
 
+
 		numbers = {}
 		for i = 1, 3 do
 			numbers[i] = sprites.numbers()
@@ -925,14 +926,14 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 					notMissed[noteNum] = false
 
 					if boyfriendNote[1]:getAnimName() ~= "hold" and boyfriendNote[1]:getAnimName() ~= "end" then 
-						health = health - 0.095
+						--health = health - 0.095
 						misses = misses + 1
 						additionalAccuracy = additionalAccuracy + 1.11
 					else
-						health = health - 0.0125
+						--health = health - 0.0125
 					end
 
-					table.remove(boyfriendNote, 1)
+					--table.remove(boyfriendNote, 1)
 
 					if combo >= 5 then self:safeAnimate(girlfriend, "sad", true, 1) end
 

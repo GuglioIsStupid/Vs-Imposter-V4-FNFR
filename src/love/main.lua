@@ -78,6 +78,10 @@ function uitext(text,x,y,r,sx,sy,ox,oy,kx,ky,alpha)
     love.graphics.print(text,x,y,r,sx,sy,a,ox,oy,kx,ky)
 end
 
+function whatNumberIsThis(value)
+	return value
+end
+
 function saveSettings()
     if settings.hardwareCompression ~= settingdata.saveSettingsMoment.hardwareCompression then
         settingdata = {}
