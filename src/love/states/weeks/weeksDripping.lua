@@ -36,14 +36,6 @@ local eventFuncs = {
 		print("haiiii")
 		flashAlpha = tonumber(value) or 0.4
 	end,
-	["Alter Camera Bop"] = function(_intensity, _interveral)
-		local _intensity, _interveral
-		_intensity = tonumber(_intensity) or 1
-		_interveral = tonumber(_interveral) or 4
-
-		camBopIntensity = _intensity
-		camBopInterval = _interveral
-	end,
 }
 
 local animList = {
@@ -227,12 +219,7 @@ return {
 		boyfriend:animate("idle")
 
 		if not camera.points["boyfriend"] then camera:addPoint("boyfriend", -boyfriend.x + 100, -boyfriend.y + 75) end
-if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -enemy.y + 75) end
-
-		camBopInterval = 4
-		camBopIntensity = 1
-		cameraLocked = false
-		camZooming = true
+		if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -enemy.y + 75) end
 
 		graphics.fadeIn(0.5)
 	end,
@@ -723,8 +710,8 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 							camera:moveToPoint(1.25, "boyfriend")
 						else
 							camera:moveToPoint(1.25, "pico")
-						end
-					else
+
+						end						else
 						mustHitSection = false
 						--camTimer = Timer.tween(1.25, camera, {x = -enemy.x - 100, y = -enemy.y + 75}, "out-quad")
 						camera:moveToPoint(1.25, "enemy")
@@ -745,9 +732,9 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 		end
 
 		for i = 1, #songEvents do
-			if songEvents[i].eventTime <= absMusicTime and not countingDown then
+			if songEvents[i].eventTime <= absMusicTime then
 				if eventFuncs[songEvents[i].eventName] then
-					eventFuncs[songEvents[i].eventName](songEvents[i].eventValue1, songEvents[i].eventValue2)
+					eventFuncs[songEvents[i].eventName](songEvents[i].eventValue1, songEvents.eventValue2)
 				else
 					print(songEvents[i].eventName .. " is not implemented!")
 				end
@@ -757,17 +744,14 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 			end
 		end
 
-		if beatHandler.onBeat() and beatHandler.getBeat() % camBopInterval == 0 and (camZooming and camera.sizeX < 1.35 and not cameraLocked) then 
-			camera.sizeX = camera.sizeX + 0.015 * camBopIntensity
-			uiScale.x = uiScale.x + 0.03 * camBopIntensity
-		end
+		if beatHandler.onBeat() and beatHandler.getBeat() % 4 == 0 then
+			if camScaleTimer then Timer.cancel(camScaleTimer) end
+			if uiScaleTimer then Timer.cancel(uiScaleTimer) end
 
-		if camZooming and not cameraLocked then 
-			camera.sizeX, camera.sizeY = util.lerp(defaultCamZoom, camera.sizeX, util.clamp(1 - (dt * 3.125), 0, 1))
-			camera.sizeY = camera.sizeX
-			
-			uiScale.x = util.lerp(1, uiScale.x, util.clamp(1 - (dt * 3.125), 0, 1))
-			uiScale.y = uiScale.x
+			camScaleTimer = Timer.tween((60 / bpm) / 16, camera, {sizeX = camera.scaleX * 1.05, sizeY = camera.scaleY * 1.05}, "out-quad", function() camScaleTimer = Timer.tween((60 / bpm), camera, {sizeX = camera.scaleX, sizeY = camera.scaleY}, "out-quad") end)
+			if beatHandler.getBeat() % 8 == 0  then
+				uiScaleTimer = Timer.tween((60 / bpm) / 16, uiScale, {x = uiScale.x * 1.03, y = uiScale.y * 1.03}, "out-quad", function() camScaleTimer = Timer.tween((60 / bpm), uiScale, {x = uiScale.sizeX, y = uiScale.sizeY}, "out-quad") end)
+			end
 		end
 		--[[
 		if beatHandler.onBeat() then 
@@ -1009,7 +993,6 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 									numbers[i].y = girlfriend.y + 50
 								end
 
-
 								if doMustHitSectionCam then	
 									if mustHitSection then 
 										noteCamTweens[i]()
@@ -1227,6 +1210,9 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 								else
 									graphics.setColor(1, 1, 1, 0.5)
 								end
+
+								-- only apply scissor for y and height
+								love.graphics.setScissor(-400, (not settings.downscroll and 95*scissorScale or 0), 4000, 632*(scissorScale)) -- too lazy to y'know... do it right...
 							else
 								if settings.middleScroll then
 									graphics.setColor(1, 1, 1, 0.5)
@@ -1249,6 +1235,8 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 							end
 							graphics.setColor(1, 1, 1)
 
+							-- reset the scissor
+							love.graphics.setScissor()
 						end
 					end
 					for j = #boyfriendNotes[i], 1, -1 do
@@ -1257,6 +1245,13 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 
 							if animName == "hold" or animName == "end" then
 								graphics.setColor(1, 1, 1, math.min(0.5, (500 + (boyfriendNotes[i][j].y - musicPos)) / 150))
+
+									if input:down(inputList[i]) then 
+										love.graphics.setScissor(-400, (not settings.downscroll and 95*scissorScale or 0), 4000, 632*(scissorScale)) -- too lazy to y'know... do it right...
+									end
+								if input:down(inputList[i]) then 
+									love.graphics.setScissor(-400, (not settings.downscroll and 95*scissorScale or 0), 4000, 632*(scissorScale)) -- too lazy to y'know... do it right...
+								end
 							else
 								graphics.setColor(1, 1, 1, math.min(1, (500 + (boyfriendNotes[i][j].y - musicPos)) / 75))
 							end
@@ -1273,6 +1268,9 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 									end
 								end
 							end
+
+							-- reset the scissor
+							love.graphics.setScissor()
 						end
 					end
 					graphics.setColor(1, 1, 1)
