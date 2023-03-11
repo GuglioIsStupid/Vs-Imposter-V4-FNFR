@@ -121,6 +121,7 @@ return {
 				countingDown = true
 				lastReportedPlaytime = 0
 				musicTime = (240 / bpm) * -1000
+		beatHandler.lastBeat = math.abs(math.floor((musicTime / 1000) * (beatHandler.bpm / 60)))
 		
 				musicThres = 0
 				musicPos = 0

@@ -6,7 +6,7 @@ return {
 
         graphics.fadeIn(0.1)
 
-        if not settings.botPlay then
+        if not settings.botPlay and countBeans then
             beansCounterSound:play()
             Timer.tween(beansCounterSound:getDuration(), beans, {beans[1] + beansValue}, "out-quad", function()
                 beans[1] = math.floor(beans[1])

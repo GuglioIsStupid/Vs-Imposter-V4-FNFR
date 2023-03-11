@@ -78,6 +78,10 @@ function uitext(text,x,y,r,sx,sy,ox,oy,kx,ky,alpha)
     love.graphics.print(text,x,y,r,sx,sy,a,ox,oy,kx,ky)
 end
 
+function whatNumberIsThis(value)
+	return value
+end
+
 function saveSettings()
     if settings.hardwareCompression ~= settingdata.saveSettingsMoment.hardwareCompression then
         settingdata = {}
@@ -356,7 +360,8 @@ function love.load()
 		["top"] = require "stages.top",
 		["idk"] = require "stages.idk",
 		["skeldPixel"] = require "stages.skeldPixel",
-		["skeld"] = require "stages.skeld"
+		["skeld"] = require "stages.skeld",
+		["monotone"] = require "stages.monotone"
 	}
 
 	-- Load Menus
@@ -392,6 +397,8 @@ function love.load()
 	weeksFinale = require "states.weeks.weeksFinale"
 	require("states.weeks.weeksOld")
 
+	countBeans = true
+
 
 	-- Load substates
 	gameOver = require "substates.game-over"
@@ -424,7 +431,8 @@ function love.load()
 		require "weeks.idk",
 		require "weeks.tomongus",
 		require "weeks.tomongus",
-		require "weeks.tuesday"
+		require "weeks.tuesday",
+		require "weeks.identity"
 	}
 
 	weekDesc = { -- Add your week description here
@@ -629,6 +637,12 @@ function love.load()
 			"Tomongus Tuesday",
 			{
 				"Tomongus Tuesday"
+			}
+		},
+		{
+			"Identity Crisis",
+			{
+				"Identity Crisis"
 			}
 		}
 	}
@@ -979,6 +993,11 @@ function love.draw()
 		)
 		love.graphics.rectangle("fill", 1113, 10, volumeWidth.width, 30)
 		love.graphics.setColor(1, 1, 1, 1)
+
+		-- Debug output
+		if settings.showDebug then
+			love.graphics.print(status.getDebugStr(settings.showDebug), 5, 5, nil, 0.5, 0.5)
+		end
 	end
 
 end

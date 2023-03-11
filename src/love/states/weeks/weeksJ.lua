@@ -368,6 +368,8 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 		camZooming = true
 
 		graphics.fadeIn(0.5)
+
+		countBeans = true
 	end,
 
 	initUI = function(self, option)
@@ -461,6 +463,8 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 				)
 			end
 		end
+
+		table.sort(songEvents, function(a, b) return a.eventTime < b.eventTime end)
 	end,
 
 	generateNotes = function(self, chart)
@@ -941,6 +945,7 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 	setupCountdown = function(self)
 		lastReportedPlaytime = 0
 		musicTime = (240 / bpm) * -1000
+		beatHandler.lastBeat = math.abs(math.floor((musicTime / 1000) * (beatHandler.bpm / 60)))
 
 		musicThres = 0
 		musicPos = 0
@@ -982,7 +987,7 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 
 										previousFrameTime = love.timer.getTime() * 1000
 										musicTime = 0
-										beatHandler.setBeat(0)
+										beatHandler.reset()
 
 											if inst then inst:play() end
 											voices:play()
@@ -1050,6 +1055,7 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 					if inst then inst:stop() end
 					storyMode = false
 					quitPressed = true
+					countBeans = false
 				end
 			end
 			return

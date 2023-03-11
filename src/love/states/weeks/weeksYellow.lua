@@ -177,6 +177,7 @@ return {
 			boyfriend = love.filesystem.load("sprites/pixel/boyfriend.lua")()
 		end
 
+
 		numbers = {}
 		for i = 1, 3 do
 			numbers[i] = sprites.numbers()
@@ -254,6 +255,8 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 		camZooming = true
 
 		graphics.fadeIn(0.5)
+
+		countBeans = true
 	end,
 
 	initUI = function(self, option)
@@ -582,6 +585,7 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 	setupCountdown = function(self)
 		lastReportedPlaytime = 0
 		musicTime = (240 / bpm) * -1000
+		beatHandler.lastBeat = math.abs(math.floor((musicTime / 1000) * (beatHandler.bpm / 60)))
 
 		musicThres = 0
 		musicPos = 0
@@ -623,7 +627,7 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 
 										previousFrameTime = love.timer.getTime() * 1000
 										musicTime = 0
-										beatHandler.setBeat(0)
+										beatHandler.reset()
 
 										if inst then inst:play() end
 										voices:play()
@@ -691,6 +695,7 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 					if inst then inst:stop() end
 					storyMode = false
 					quitPressed = true
+					countBeans = false
 				end
 			end
 			return
@@ -925,14 +930,14 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 					notMissed[noteNum] = false
 
 					if boyfriendNote[1]:getAnimName() ~= "hold" and boyfriendNote[1]:getAnimName() ~= "end" then 
-						health = health - 0.095
+						--health = health - 0.095
 						misses = misses + 1
 						additionalAccuracy = additionalAccuracy + 1.11
 					else
-						health = health - 0.0125
+						--health = health - 0.0125
 					end
 
-					table.remove(boyfriendNote, 1)
+					--table.remove(boyfriendNote, 1)
 
 					if combo >= 5 then self:safeAnimate(girlfriend, "sad", true, 1) end
 

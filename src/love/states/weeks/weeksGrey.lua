@@ -18,10 +18,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
 local eventFuncs = {
 	["Add Camera Zoom"] = function(v1, v2)
-		--[[
 		if camera.sizeX < 1.35 then 
 			camZoom = tonumber(v1) or 0.015
-			hudZoom = tonumber(v2) or 0.015
+			hudZoom = tonumber(v2) or 0.03
 
 			camera.sizeX = camera.sizeX + camZoom
 			camera.sizeY = camera.sizeX
@@ -29,7 +28,6 @@ local eventFuncs = {
 			uiScale.x = uiScale.x + hudZoom
 			uiScale.y = uiScale.x
 		end
-		--]] -- grrrr i hate camera zoom!!!!!!!!!!!!!
 	end,
 	["Hey!"] = function()
 		weeks:safeAnimate(boyfriend, "hey", false, 3)
@@ -320,7 +318,7 @@ return {
 			for j = 1, #ec["notes"][i]["sectionNotes"] do
 				sectionNotesE = ec["notes"][i]["sectionNotes"]
 				table.insert(
-					songEvents,
+					songEvents, -- Add Camera Zoom
 					{
 						eventTime = sectionNotesE[j][1] or 0,
 						-- 2 is just the noteType (psych is strange)
@@ -332,6 +330,7 @@ return {
 				--print(songEvents[i].eventTime, songEvents[i].eventName, songEvents[i].eventValue1, songEvents[i].eventValue2)
 			end
 		end
+		table.sort(songEvents, function(a, b) return a.eventTime < b.eventTime end)
 	end,
 
 	generateNotes = function(self, chart)
@@ -575,6 +574,7 @@ return {
 	setupCountdown = function(self)
 		lastReportedPlaytime = 0
 		musicTime = (240 / bpm) * -1000
+		beatHandler.lastBeat = math.abs(math.floor((musicTime / 1000) * (beatHandler.bpm / 60)))
 
 		musicThres = 0
 		musicPos = 0
@@ -616,7 +616,7 @@ return {
 
 										previousFrameTime = love.timer.getTime() * 1000
 										musicTime = 0
-										beatHandler.setBeat(0)
+										beatHandler.reset()
 
 										if inst then inst:play() end
 										voices:play()
@@ -684,6 +684,7 @@ return {
 					if inst then inst:stop() end
 					storyMode = false
 					quitPressed = true
+					countBeans = false
 				end
 			end
 			return

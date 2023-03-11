@@ -1,0 +1,142 @@
+return graphics.newSprite(
+	love.graphics.newImage(graphics.imagePath("monotone/dialogue")), -- Do not add the .png extension
+	{
+		{x = 0, y = 0, width = 644, height = 306, offsetX = -124, offsetY = 0, offsetWidth = 908, offsetHeight = 731}, -- 1: dialogue0000
+		{x = 0, y = 0, width = 644, height = 306, offsetX = -124, offsetY = 0, offsetWidth = 908, offsetHeight = 731}, -- 2: dialogue0001
+		{x = 649, y = 0, width = 645, height = 268, offsetX = -118, offsetY = -20, offsetWidth = 908, offsetHeight = 731}, -- 3: dialogue0002
+		{x = 649, y = 0, width = 645, height = 268, offsetX = -118, offsetY = -20, offsetWidth = 908, offsetHeight = 731}, -- 4: dialogue0003
+		{x = 1299, y = 0, width = 629, height = 277, offsetX = -130, offsetY = -11, offsetWidth = 908, offsetHeight = 731}, -- 5: dialogue0004
+		{x = 1299, y = 0, width = 629, height = 277, offsetX = -130, offsetY = -11, offsetWidth = 908, offsetHeight = 731}, -- 6: dialogue0005
+		{x = 0, y = 0, width = 644, height = 306, offsetX = -124, offsetY = 0, offsetWidth = 908, offsetHeight = 731}, -- 7: dialogue0006
+		{x = 0, y = 0, width = 644, height = 306, offsetX = -124, offsetY = 0, offsetWidth = 908, offsetHeight = 731}, -- 8: dialogue0007
+		{x = 649, y = 0, width = 645, height = 268, offsetX = -118, offsetY = -20, offsetWidth = 908, offsetHeight = 731}, -- 9: dialogue0008
+		{x = 649, y = 0, width = 645, height = 268, offsetX = -118, offsetY = -20, offsetWidth = 908, offsetHeight = 731}, -- 10: dialogue0009
+		{x = 1299, y = 0, width = 629, height = 277, offsetX = -130, offsetY = -11, offsetWidth = 908, offsetHeight = 731}, -- 11: dialogue0010
+		{x = 1299, y = 0, width = 629, height = 277, offsetX = -130, offsetY = -11, offsetWidth = 908, offsetHeight = 731}, -- 12: dialogue0011
+		{x = 0, y = 0, width = 644, height = 306, offsetX = -124, offsetY = 0, offsetWidth = 908, offsetHeight = 731}, -- 13: dialogue0012
+		{x = 1933, y = 0, width = 645, height = 513, offsetX = -118, offsetY = -20, offsetWidth = 908, offsetHeight = 731}, -- 14: dialogue0013
+		{x = 1933, y = 0, width = 645, height = 513, offsetX = -118, offsetY = -20, offsetWidth = 908, offsetHeight = 731}, -- 15: dialogue0014
+		{x = 2583, y = 0, width = 629, height = 525, offsetX = -130, offsetY = -11, offsetWidth = 908, offsetHeight = 731}, -- 16: dialogue0015
+		{x = 2583, y = 0, width = 629, height = 525, offsetX = -130, offsetY = -11, offsetWidth = 908, offsetHeight = 731}, -- 17: dialogue0016
+		{x = 3217, y = 0, width = 644, height = 520, offsetX = -124, offsetY = 0, offsetWidth = 908, offsetHeight = 731}, -- 18: dialogue0017
+		{x = 3217, y = 0, width = 644, height = 520, offsetX = -124, offsetY = 0, offsetWidth = 908, offsetHeight = 731}, -- 19: dialogue0018
+		{x = 1933, y = 0, width = 645, height = 513, offsetX = -118, offsetY = -20, offsetWidth = 908, offsetHeight = 731}, -- 20: dialogue0019
+		{x = 1933, y = 0, width = 645, height = 513, offsetX = -118, offsetY = -20, offsetWidth = 908, offsetHeight = 731}, -- 21: dialogue0020
+		{x = 2583, y = 0, width = 629, height = 525, offsetX = -130, offsetY = -11, offsetWidth = 908, offsetHeight = 731}, -- 22: dialogue0021
+		{x = 2583, y = 0, width = 629, height = 525, offsetX = -130, offsetY = -11, offsetWidth = 908, offsetHeight = 731}, -- 23: dialogue0022
+		{x = 3217, y = 0, width = 644, height = 520, offsetX = -124, offsetY = 0, offsetWidth = 908, offsetHeight = 731}, -- 24: dialogue0023
+		{x = 3217, y = 0, width = 644, height = 520, offsetX = -124, offsetY = 0, offsetWidth = 908, offsetHeight = 731}, -- 25: dialogue0024
+		{x = 0, y = 530, width = 908, height = 709, offsetX = 0, offsetY = -20, offsetWidth = 908, offsetHeight = 731}, -- 26: dialogue0025
+		{x = 0, y = 530, width = 908, height = 709, offsetX = 0, offsetY = -20, offsetWidth = 908, offsetHeight = 731}, -- 27: dialogue0026
+		{x = 913, y = 530, width = 898, height = 713, offsetX = -9, offsetY = -11, offsetWidth = 908, offsetHeight = 731}, -- 28: dialogue0027
+		{x = 913, y = 530, width = 898, height = 713, offsetX = -9, offsetY = -11, offsetWidth = 908, offsetHeight = 731}, -- 29: dialogue0028
+		{x = 1816, y = 530, width = 900, height = 731, offsetX = -2, offsetY = 0, offsetWidth = 908, offsetHeight = 731}, -- 30: dialogue0029
+		{x = 1816, y = 530, width = 900, height = 731, offsetX = -2, offsetY = 0, offsetWidth = 908, offsetHeight = 731}, -- 31: dialogue0030
+		{x = 0, y = 530, width = 908, height = 709, offsetX = 0, offsetY = -20, offsetWidth = 908, offsetHeight = 731}, -- 32: dialogue0031
+		{x = 0, y = 530, width = 908, height = 709, offsetX = 0, offsetY = -20, offsetWidth = 908, offsetHeight = 731}, -- 33: dialogue0032
+		{x = 913, y = 530, width = 898, height = 713, offsetX = -9, offsetY = -11, offsetWidth = 908, offsetHeight = 731}, -- 34: dialogue0033
+		{x = 913, y = 530, width = 898, height = 713, offsetX = -9, offsetY = -11, offsetWidth = 908, offsetHeight = 731}, -- 35: dialogue0034
+		{x = 1816, y = 530, width = 900, height = 731, offsetX = -2, offsetY = 0, offsetWidth = 908, offsetHeight = 731}, -- 36: dialogue0035
+		{x = 1816, y = 530, width = 900, height = 731, offsetX = -2, offsetY = 0, offsetWidth = 908, offsetHeight = 731}, -- 37: dialogue0036
+		{x = 0, y = 530, width = 908, height = 709, offsetX = 0, offsetY = -20, offsetWidth = 908, offsetHeight = 731}, -- 38: dialogue0037
+		{x = 0, y = 530, width = 908, height = 709, offsetX = 0, offsetY = -20, offsetWidth = 908, offsetHeight = 731}, -- 39: dialogue0038
+		{x = 913, y = 530, width = 898, height = 713, offsetX = -9, offsetY = -11, offsetWidth = 908, offsetHeight = 731}, -- 40: dialogue0039
+		{x = 913, y = 530, width = 898, height = 713, offsetX = -9, offsetY = -11, offsetWidth = 908, offsetHeight = 731}, -- 41: dialogue0040
+		{x = 1816, y = 530, width = 900, height = 731, offsetX = -2, offsetY = 0, offsetWidth = 908, offsetHeight = 731}, -- 42: dialogue0041
+		{x = 1816, y = 530, width = 900, height = 731, offsetX = -2, offsetY = 0, offsetWidth = 908, offsetHeight = 731}, -- 43: dialogue0042
+		{x = 0, y = 530, width = 908, height = 709, offsetX = 0, offsetY = -20, offsetWidth = 908, offsetHeight = 731}, -- 44: dialogue0043
+		{x = 0, y = 530, width = 908, height = 709, offsetX = 0, offsetY = -20, offsetWidth = 908, offsetHeight = 731}, -- 45: dialogue0044
+		{x = 913, y = 530, width = 898, height = 713, offsetX = -9, offsetY = -11, offsetWidth = 908, offsetHeight = 731}, -- 46: dialogue0045
+		{x = 913, y = 530, width = 898, height = 713, offsetX = -9, offsetY = -11, offsetWidth = 908, offsetHeight = 731}, -- 47: dialogue0046
+		{x = 1816, y = 530, width = 900, height = 731, offsetX = -2, offsetY = 0, offsetWidth = 908, offsetHeight = 731}, -- 48: dialogue0047
+		{x = 1816, y = 530, width = 900, height = 731, offsetX = -2, offsetY = 0, offsetWidth = 908, offsetHeight = 731}, -- 49: dialogue0048
+		{x = 0, y = 530, width = 908, height = 709, offsetX = 0, offsetY = -20, offsetWidth = 908, offsetHeight = 731}, -- 50: dialogue0049
+		{x = 0, y = 530, width = 908, height = 709, offsetX = 0, offsetY = -20, offsetWidth = 908, offsetHeight = 731}, -- 51: dialogue0050
+		{x = 913, y = 530, width = 898, height = 713, offsetX = -9, offsetY = -11, offsetWidth = 908, offsetHeight = 731}, -- 52: dialogue0051
+		{x = 913, y = 530, width = 898, height = 713, offsetX = -9, offsetY = -11, offsetWidth = 908, offsetHeight = 731}, -- 53: dialogue0052
+		{x = 1816, y = 530, width = 900, height = 731, offsetX = -2, offsetY = 0, offsetWidth = 908, offsetHeight = 731}, -- 54: dialogue0053
+		{x = 1816, y = 530, width = 900, height = 731, offsetX = -2, offsetY = 0, offsetWidth = 908, offsetHeight = 731}, -- 55: dialogue0054
+		{x = 0, y = 530, width = 908, height = 709, offsetX = 0, offsetY = -20, offsetWidth = 908, offsetHeight = 731}, -- 56: dialogue0055
+		{x = 0, y = 530, width = 908, height = 709, offsetX = 0, offsetY = -20, offsetWidth = 908, offsetHeight = 731}, -- 57: dialogue0056
+		{x = 2721, y = 530, width = 898, height = 704, offsetX = -9, offsetY = -20, offsetWidth = 908, offsetHeight = 731}, -- 58: dialogue0057
+		{x = 3624, y = 530, width = 160, height = 210, offsetX = -347, offsetY = -323, offsetWidth = 908, offsetHeight = 731}, -- 59: dialogue0058
+		{x = 3624, y = 530, width = 160, height = 210, offsetX = -347, offsetY = -323, offsetWidth = 908, offsetHeight = 731}, -- 60: dialogue0059
+		{x = 3789, y = 530, width = 155, height = 206, offsetX = -341, offsetY = -329, offsetWidth = 908, offsetHeight = 731}, -- 61: dialogue0060
+		{x = 3789, y = 530, width = 155, height = 206, offsetX = -341, offsetY = -329, offsetWidth = 908, offsetHeight = 731}, -- 62: dialogue0061
+		{x = 0, y = 1266, width = 167, height = 207, offsetX = -350, offsetY = -330, offsetWidth = 908, offsetHeight = 731}, -- 63: dialogue0062
+		{x = 0, y = 1266, width = 167, height = 207, offsetX = -350, offsetY = -330, offsetWidth = 908, offsetHeight = 731}, -- 64: dialogue0063
+		{x = 3624, y = 530, width = 160, height = 210, offsetX = -347, offsetY = -323, offsetWidth = 908, offsetHeight = 731}, -- 65: dialogue0064
+		{x = 3624, y = 530, width = 160, height = 210, offsetX = -347, offsetY = -323, offsetWidth = 908, offsetHeight = 731}, -- 66: dialogue0065
+		{x = 3789, y = 530, width = 155, height = 206, offsetX = -341, offsetY = -329, offsetWidth = 908, offsetHeight = 731}, -- 67: dialogue0066
+		{x = 3789, y = 530, width = 155, height = 206, offsetX = -341, offsetY = -329, offsetWidth = 908, offsetHeight = 731}, -- 68: dialogue0067
+		{x = 0, y = 1266, width = 167, height = 207, offsetX = -350, offsetY = -330, offsetWidth = 908, offsetHeight = 731}, -- 69: dialogue0068
+		{x = 0, y = 1266, width = 167, height = 207, offsetX = -350, offsetY = -330, offsetWidth = 908, offsetHeight = 731}, -- 70: dialogue0069
+		{x = 3624, y = 530, width = 160, height = 210, offsetX = -347, offsetY = -323, offsetWidth = 908, offsetHeight = 731}, -- 71: dialogue0070
+		{x = 3624, y = 530, width = 160, height = 210, offsetX = -347, offsetY = -323, offsetWidth = 908, offsetHeight = 731}, -- 72: dialogue0071
+		{x = 172, y = 1266, width = 502, height = 236, offsetX = -159, offsetY = -323, offsetWidth = 908, offsetHeight = 731}, -- 73: dialogue0072
+		{x = 172, y = 1266, width = 502, height = 236, offsetX = -159, offsetY = -323, offsetWidth = 908, offsetHeight = 731}, -- 74: dialogue0073
+		{x = 679, y = 1266, width = 503, height = 233, offsetX = -157, offsetY = -320, offsetWidth = 908, offsetHeight = 731}, -- 75: dialogue0074
+		{x = 679, y = 1266, width = 503, height = 233, offsetX = -157, offsetY = -320, offsetWidth = 908, offsetHeight = 731}, -- 76: dialogue0075
+		{x = 1187, y = 1266, width = 493, height = 215, offsetX = -151, offsetY = -332, offsetWidth = 908, offsetHeight = 731}, -- 77: dialogue0076
+		{x = 1187, y = 1266, width = 493, height = 215, offsetX = -151, offsetY = -332, offsetWidth = 908, offsetHeight = 731}, -- 78: dialogue0077
+		{x = 172, y = 1266, width = 502, height = 236, offsetX = -159, offsetY = -323, offsetWidth = 908, offsetHeight = 731}, -- 79: dialogue0078
+		{x = 172, y = 1266, width = 502, height = 236, offsetX = -159, offsetY = -323, offsetWidth = 908, offsetHeight = 731}, -- 80: dialogue0079
+		{x = 679, y = 1266, width = 503, height = 233, offsetX = -157, offsetY = -320, offsetWidth = 908, offsetHeight = 731}, -- 81: dialogue0080
+		{x = 679, y = 1266, width = 503, height = 233, offsetX = -157, offsetY = -320, offsetWidth = 908, offsetHeight = 731}, -- 82: dialogue0081
+		{x = 1187, y = 1266, width = 493, height = 215, offsetX = -151, offsetY = -332, offsetWidth = 908, offsetHeight = 731}, -- 83: dialogue0082
+		{x = 1187, y = 1266, width = 493, height = 215, offsetX = -151, offsetY = -332, offsetWidth = 908, offsetHeight = 731}, -- 84: dialogue0083
+		{x = 172, y = 1266, width = 502, height = 236, offsetX = -159, offsetY = -323, offsetWidth = 908, offsetHeight = 731}, -- 85: dialogue0084
+		{x = 1685, y = 1266, width = 431, height = 230, offsetX = -214, offsetY = -320, offsetWidth = 908, offsetHeight = 731}, -- 86: dialogue0085
+		{x = 1685, y = 1266, width = 431, height = 230, offsetX = -214, offsetY = -320, offsetWidth = 908, offsetHeight = 731}, -- 87: dialogue0086
+		{x = 2121, y = 1266, width = 422, height = 227, offsetX = -214, offsetY = -325, offsetWidth = 908, offsetHeight = 731}, -- 88: dialogue0087
+		{x = 2121, y = 1266, width = 422, height = 227, offsetX = -214, offsetY = -325, offsetWidth = 908, offsetHeight = 731}, -- 89: dialogue0088
+		{x = 2548, y = 1266, width = 436, height = 232, offsetX = -216, offsetY = -325, offsetWidth = 908, offsetHeight = 731}, -- 90: dialogue0089
+		{x = 2548, y = 1266, width = 436, height = 232, offsetX = -216, offsetY = -325, offsetWidth = 908, offsetHeight = 731}, -- 91: dialogue0090
+		{x = 1685, y = 1266, width = 431, height = 230, offsetX = -214, offsetY = -320, offsetWidth = 908, offsetHeight = 731}, -- 92: dialogue0091
+		{x = 1685, y = 1266, width = 431, height = 230, offsetX = -214, offsetY = -320, offsetWidth = 908, offsetHeight = 731}, -- 93: dialogue0092
+		{x = 2121, y = 1266, width = 422, height = 227, offsetX = -214, offsetY = -325, offsetWidth = 908, offsetHeight = 731}, -- 94: dialogue0093
+		{x = 2121, y = 1266, width = 422, height = 227, offsetX = -214, offsetY = -325, offsetWidth = 908, offsetHeight = 731}, -- 95: dialogue0094
+		{x = 2548, y = 1266, width = 436, height = 232, offsetX = -216, offsetY = -325, offsetWidth = 908, offsetHeight = 731}, -- 96: dialogue0095
+		{x = 2548, y = 1266, width = 436, height = 232, offsetX = -216, offsetY = -325, offsetWidth = 908, offsetHeight = 731}, -- 97: dialogue0096
+		{x = 1685, y = 1266, width = 431, height = 230, offsetX = -214, offsetY = -320, offsetWidth = 908, offsetHeight = 731}, -- 98: dialogue0097
+		{x = 1685, y = 1266, width = 431, height = 230, offsetX = -214, offsetY = -320, offsetWidth = 908, offsetHeight = 731}, -- 99: dialogue0098
+		{x = 2989, y = 1266, width = 522, height = 480, offsetX = -154, offsetY = -155, offsetWidth = 908, offsetHeight = 731}, -- 100: dialogue0099
+		{x = 2989, y = 1266, width = 522, height = 480, offsetX = -154, offsetY = -155, offsetWidth = 908, offsetHeight = 731}, -- 101: dialogue0100
+		{x = 3516, y = 1266, width = 511, height = 463, offsetX = -156, offsetY = -170, offsetWidth = 908, offsetHeight = 731}, -- 102: dialogue0101
+		{x = 3516, y = 1266, width = 511, height = 463, offsetX = -156, offsetY = -170, offsetWidth = 908, offsetHeight = 731}, -- 103: dialogue0102
+		{x = 0, y = 1751, width = 507, height = 456, offsetX = -158, offsetY = -174, offsetWidth = 908, offsetHeight = 731}, -- 104: dialogue0103
+		{x = 0, y = 1751, width = 507, height = 456, offsetX = -158, offsetY = -174, offsetWidth = 908, offsetHeight = 731}, -- 105: dialogue0104
+		{x = 2989, y = 1266, width = 522, height = 480, offsetX = -154, offsetY = -155, offsetWidth = 908, offsetHeight = 731}, -- 106: dialogue0105
+		{x = 2989, y = 1266, width = 522, height = 480, offsetX = -154, offsetY = -155, offsetWidth = 908, offsetHeight = 731}, -- 107: dialogue0106
+		{x = 3516, y = 1266, width = 511, height = 463, offsetX = -156, offsetY = -170, offsetWidth = 908, offsetHeight = 731}, -- 108: dialogue0107
+		{x = 3516, y = 1266, width = 511, height = 463, offsetX = -156, offsetY = -170, offsetWidth = 908, offsetHeight = 731}, -- 109: dialogue0108
+		{x = 0, y = 1751, width = 507, height = 456, offsetX = -158, offsetY = -174, offsetWidth = 908, offsetHeight = 731}, -- 110: dialogue0109
+		{x = 0, y = 1751, width = 507, height = 456, offsetX = -158, offsetY = -174, offsetWidth = 908, offsetHeight = 731}, -- 111: dialogue0110
+		{x = 2989, y = 1266, width = 522, height = 480, offsetX = -154, offsetY = -155, offsetWidth = 908, offsetHeight = 731}, -- 112: dialogue0111
+		{x = 2989, y = 1266, width = 522, height = 480, offsetX = -154, offsetY = -155, offsetWidth = 908, offsetHeight = 731}, -- 113: dialogue0112
+		{x = 3516, y = 1266, width = 511, height = 463, offsetX = -156, offsetY = -170, offsetWidth = 908, offsetHeight = 731}, -- 114: dialogue0113
+		{x = 3516, y = 1266, width = 511, height = 463, offsetX = -156, offsetY = -170, offsetWidth = 908, offsetHeight = 731}, -- 115: dialogue0114
+		{x = 0, y = 1751, width = 507, height = 456, offsetX = -158, offsetY = -174, offsetWidth = 908, offsetHeight = 731}, -- 116: dialogue0115
+		{x = 0, y = 1751, width = 507, height = 456, offsetX = -158, offsetY = -174, offsetWidth = 908, offsetHeight = 731}, -- 117: dialogue0116
+		{x = 2989, y = 1266, width = 522, height = 480, offsetX = -154, offsetY = -155, offsetWidth = 908, offsetHeight = 731}, -- 118: dialogue0117
+		{x = 2989, y = 1266, width = 522, height = 480, offsetX = -154, offsetY = -155, offsetWidth = 908, offsetHeight = 731}, -- 119: dialogue0118
+		{x = 3516, y = 1266, width = 511, height = 463, offsetX = -156, offsetY = -170, offsetWidth = 908, offsetHeight = 731}, -- 120: dialogue0119
+		{x = 3516, y = 1266, width = 511, height = 463, offsetX = -156, offsetY = -170, offsetWidth = 908, offsetHeight = 731}, -- 121: dialogue0120
+		{x = 0, y = 1751, width = 507, height = 456, offsetX = -158, offsetY = -174, offsetWidth = 908, offsetHeight = 731}, -- 122: dialogue0121
+		{x = 0, y = 1751, width = 507, height = 456, offsetX = -158, offsetY = -174, offsetWidth = 908, offsetHeight = 731}, -- 123: dialogue0122
+		{x = 2989, y = 1266, width = 522, height = 480, offsetX = -154, offsetY = -155, offsetWidth = 908, offsetHeight = 731}, -- 124: dialogue0123
+		{x = 2989, y = 1266, width = 522, height = 480, offsetX = -154, offsetY = -155, offsetWidth = 908, offsetHeight = 731}, -- 125: dialogue0124
+		{x = 3516, y = 1266, width = 511, height = 463, offsetX = -156, offsetY = -170, offsetWidth = 908, offsetHeight = 731}, -- 126: dialogue0125
+		{x = 3516, y = 1266, width = 511, height = 463, offsetX = -156, offsetY = -170, offsetWidth = 908, offsetHeight = 731}, -- 127: dialogue0126
+		{x = 0, y = 1751, width = 507, height = 456, offsetX = -158, offsetY = -174, offsetWidth = 908, offsetHeight = 731}, -- 128: dialogue0127
+		{x = 0, y = 1751, width = 507, height = 456, offsetX = -158, offsetY = -174, offsetWidth = 908, offsetHeight = 731} -- 129: dialogue0128
+	},
+	{
+		--To get the animations, look at the number and the name of the frame
+		--Start is the first frame, stop is the last frame, speed is the speed of the animation, offsetX and offsetY are the offset of the animation
+		--Get the offset by using the ingame offset editor and pressing 7
+		["anim"] = {start = 1, stop = 129, speed = 24, offsetX = 0, offsetY = 0},
+	},
+	"anim", -- set to default animation
+	false -- If the sprite repeats
+)
