@@ -53,6 +53,10 @@ return {
             enemy:animate("idle", false)        -- fixed the animation issues
         end
 
+        if not boyfriend:isAnimated() and boyfriend:getAnimName() ~= "idle" then
+            boyfriend:animate("idle", false)
+        end
+
         if beatHandler.onBeat() and beatHandler.getBeat() % 2 == 0 then 
             stageImages["black"]:animate("anim", false)
         end
