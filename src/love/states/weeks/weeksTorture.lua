@@ -36,6 +36,102 @@ local eventFuncs = {
 		print("haiiii")
 		flashAlpha = tonumber(value) or 0.4
 	end,
+	["Alter Camera Bop"] = function(_intensity, _interveral)
+		local _intensity, _interveral
+		_intensity = tonumber(_intensity) or 1
+		_interveral = tonumber(_interveral) or 4
+
+		camBopIntensity = _intensity
+		camBopInterval = _interveral
+	end,
+	["Identity Crisis Events"] = function(v)
+		charType = tonumber(v) or 0
+		if charType == 0 then
+			stageImages.plagueBGBLUE.visible = true
+			stageImages.plagueBGRED.visible = false
+			stageImages.plagueBGPURPLE.visible = false
+			stageImages.plagueBGGREEN.visible = false
+		elseif charType == 1 then
+			stageImages.plagueBGBLUE.visible = false
+			stageImages.plagueBGRED.visible = true
+			stageImages.plagueBGPURPLE.visible = false
+			stageImages.plagueBGGREEN.visible = false
+		elseif charType == 2 then
+			stageImages.plagueBGBLUE.visible = false
+			stageImages.plagueBGRED.visible = false
+			stageImages.plagueBGPURPLE.visible = true
+			stageImages.plagueBGGREEN.visible = false
+		elseif charType == 3 then
+			stageImages.plagueBGBLUE.visible = false
+			stageImages.plagueBGRED.visible = false
+			stageImages.plagueBGPURPLE.visible = false
+			stageImages.plagueBGGREEN.visible = true
+		end
+	end,
+	["flash"] = function(v1)
+		charType = tonumber(v1) or 0
+		if charType == 0 then
+			camera.flash = 1
+			Timer.tween(
+				0.35,
+				camera,
+				{
+					flash = 0
+				},
+				"out-quad"
+			)
+		elseif charType == 1 then
+			camera.flash = 1
+			Timer.tween(
+				0.35,
+				camera,
+				{
+					flash = 0
+				},
+				"out-quad"
+			)
+		elseif charType == 2 then
+			camera.flash = 1
+			Timer.tween(
+				0.55,
+				camera,
+				{
+					flash = 0
+				},
+				"out-quad"
+			)
+			darkMono = true
+		elseif charType == 3 then
+			camera.flash = 1
+			Timer.tween(
+				0.55,
+				camera,
+				{
+					flash = 0
+				},
+				"out-quad"
+			)
+			darkMono = false
+			saxguy.visible = false
+		end
+	end,
+	["Change Character"] = function(who, char)
+		print(who, char)
+		if who == "0" or who == "BF" then 
+			curBF = char
+		elseif who == "1" then 
+			curEnemy = char
+		elseif who == "2" then 
+			curGF = char
+		elseif who == "3" then 
+			curEnemy2 = char
+		end
+	end,
+	["Identity Crisis line"] = function()
+		saxguy.visible = true
+		saxguy.sizeX, saxguy.sizeY = 0.6, 0.6
+		saxguy:animate("anim", false)
+	end,
 }
 
 local animList = {
@@ -137,8 +233,8 @@ return {
 
 			images = {
 				icons = love.graphics.newImage(graphics.imagePath("icons")),
-				notes = love.graphics.newImage(graphics.imagePath("pixel/notes")),
-				numbers = love.graphics.newImage(graphics.imagePath("pixel/numbers"))
+				notes = love.graphics.newImage(graphics.imagePath("pixel/ui/notes")),
+				numbers = love.graphics.newImage(graphics.imagePath("pixel/ui/numbers"))
 			}
 
 			sprites = {
@@ -217,9 +313,19 @@ return {
 
 		enemy:animate("idle")
 		boyfriend:animate("idle")
+		if enemy2 then enemy2:animate("idle") end
+		if enemy3 then enemy3:animate("idle") end
+		if enemy4 then enemy4:animate("idle") end
+		if enemyBF then enemyBF:animate("idle") end
+		if boyfriend2 then boyfriend2:animate("idle") end
 
 		if not camera.points["boyfriend"] then camera:addPoint("boyfriend", -boyfriend.x + 100, -boyfriend.y + 75) end
 		if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -enemy.y + 75) end
+
+		camBopInterval = 4
+		camBopIntensity = 1
+		cameraLocked = false
+		camZooming = true
 
 		graphics.fadeIn(0.5)
 
@@ -309,6 +415,7 @@ return {
 				--print(songEvents[i].eventTime, songEvents[i].eventName, songEvents[i].eventValue1, songEvents[i].eventValue2)
 			end
 		end
+		table.sort(songEvents, function(a, b) return a.eventTime < b.eventTime end)
 	end,
 
 	generateNotes = function(self, chart)
@@ -354,7 +461,7 @@ return {
 				sectionNotes[j][3] = tonumber(sectionNotes[j][3]) or 0
 
 				if j == 1 then
-					table.insert(events, {eventTime = sectionNotes[1][1], mustHitSection = mustHitSection, bpm = bpm, altAnim = altAnim})
+					table.insert(events, {eventTime = sectionNotes[1][1], mustHitSection = mustHitSection, bpm = eventBpm, altAnim = altAnim})
 				end
 
 				if noteType == 0 or noteType == 4 then
@@ -376,11 +483,6 @@ return {
 					   	table.insert(enemyNotes[id], sprite())
 					   	enemyNotes[id][c].x = x
 					   	enemyNotes[id][c].y = -400 + noteTime * 0.6 * speed
-						enemyNotes[id][c].row = beatHandler.beatToRow((noteTime / 1000) * (bpm / 60))
-						if (noteRows[2][enemyNotes[id][c].row] == nil) then 
-							noteRows[2][enemyNotes[id][c].row] = {}
-						end
-						noteRows[2][enemyNotes[id][c].row][#noteRows[2][enemyNotes[id][c].row] + 1] = enemyNotes[id][c]
 						if settings.downscroll then
 							enemyNotes[id][c].sizeY = -1
 						end
@@ -415,11 +517,6 @@ return {
 					   	boyfriendNotes[id][c].x = x
 					   	boyfriendNotes[id][c].y = -400 + noteTime * 0.6 * speed
 						boyfriendNotes[id][c].time = noteTime
-						boyfriendNotes[id][c].row = beatHandler.beatToRow(noteTime)
-						if (noteRows[1][boyfriendNotes[id][c].row] == nil) then 
-							noteRows[1][boyfriendNotes[id][c].row] = {}
-						end
-						noteRows[1][boyfriendNotes[id][c].row][#noteRows[1][boyfriendNotes[id][c].row] + 1] = boyfriendNotes[id][c]
 						if settings.downscroll then
 							boyfriendNotes[id][c].sizeY = -1
 						end
@@ -456,11 +553,6 @@ return {
 					   	boyfriendNotes[id][c].x = x
 					   	boyfriendNotes[id][c].y = -400 + noteTime * 0.6 * speed
 						boyfriendNotes[id][c].time = noteTime
-						boyfriendNotes[id][c].row = beatHandler.beatToRow(noteTime)
-						if (noteRows[1][boyfriendNotes[id][c].row] == nil) then 
-							noteRows[1][boyfriendNotes[id][c].row] = {}
-						end
-						noteRows[1][boyfriendNotes[id][c].row][#noteRows[1][boyfriendNotes[id][c].row] + 1] = boyfriendNotes[id][c]
 						if settings.downscroll then
 							boyfriendNotes[id][c].sizeY = -1
 						end
@@ -494,12 +586,6 @@ return {
 					   	table.insert(enemyNotes[id], sprite())
 					   	enemyNotes[id][c].x = x
 					   	enemyNotes[id][c].y = -400 + noteTime * 0.6 * speed
-						enemyNotes[id][c].time = noteTime
-						enemyNotes[id][c].row = beatHandler.beatToRow(noteTime)
-						if (noteRows[2][enemyNotes[id][c].row] == nil) then 
-							noteRows[2][enemyNotes[id][c].row] = {}
-						end
-						noteRows[2][enemyNotes[id][c].row][#noteRows[2][enemyNotes[id][c].row] + 1] = enemyNotes[id][c]
 						if settings.downscroll then
 							enemyNotes[id][c].sizeY = -1
 						end
@@ -569,33 +655,11 @@ return {
 		end
 	end,
 
-	doGhostAnim = function(self, who, animToPlay)
-		if who == "bf" then 
-			-- make a copy of boyfriend to bfghost
-			bfghost.alpha = 0.8
-			bfghost.color = {255, 0, 0}
-			if bfGhostTween then 
-				Timer.cancel(bfGhostTween)
-			end
-			bfGhostTween = Timer.tween(0.75, bfghost, {alpha = 0}, "linear", function() bfGhostTween = nil end)
-
-			bfghost:animate(animToPlay, false)
-		else
-			enemyghost.alpha = 0.8
-			enemyghost.color = {255, 0, 0}
-			if enemyGhostTween then 
-				Timer.cancel(enemyGhostTween)
-			end
-			enemyGhostTween = Timer.tween(0.75, enemyghost, {alpha = 0}, "linear", function() enemyGhostTween = nil end)
-
-			enemyghost:animate(animToPlay, false)
-		end
-	end,
-
 	-- Gross countdown script
 	setupCountdown = function(self)
 		lastReportedPlaytime = 0
 		musicTime = (240 / bpm) * -1000
+		beatHandler.lastBeat = math.abs(math.floor((musicTime / 1000) * (beatHandler.bpm / 60)))
 		beatHandler.lastBeat = math.abs(math.floor((musicTime / 1000) * (beatHandler.bpm / 60)))
 
 		musicThres = 0
@@ -754,12 +818,9 @@ return {
 				if camera.mustHit then
 					if events[i].mustHitSection then
 						mustHitSection = true
-						if not picoSing then
-							camera:moveToPoint(1.25, "boyfriend")
-						else
-							camera:moveToPoint(1.25, "pico")
-
-						end						else
+						--camTimer = Timer.tween(1.25, camera, {x = -boyfriend.x + 100, y = -boyfriend.y + 75}, "out-quad")
+						camera:moveToPoint(1.25, "boyfriend")
+					else
 						mustHitSection = false
 						--camTimer = Timer.tween(1.25, camera, {x = -enemy.x - 100, y = -enemy.y + 75}, "out-quad")
 						camera:moveToPoint(1.25, "enemy")
@@ -782,7 +843,7 @@ return {
 		for i = 1, #songEvents do
 			if songEvents[i].eventTime <= absMusicTime then
 				if eventFuncs[songEvents[i].eventName] then
-					eventFuncs[songEvents[i].eventName](songEvents[i].eventValue1, songEvents.eventValue2)
+					eventFuncs[songEvents[i].eventName](songEvents[i].eventValue1, songEvents[i].eventValue2)
 				else
 					print(songEvents[i].eventName .. " is not implemented!")
 				end
@@ -792,14 +853,17 @@ return {
 			end
 		end
 
-		if beatHandler.onBeat() and beatHandler.getBeat() % 4 == 0 then
-			if camScaleTimer then Timer.cancel(camScaleTimer) end
-			if uiScaleTimer then Timer.cancel(uiScaleTimer) end
+		if beatHandler.onBeat() and beatHandler.getBeat() % camBopInterval == 0 and (camZooming and camera.sizeX < 1.35 and not cameraLocked) then 
+			camera.sizeX = camera.sizeX + 0.015 * camBopIntensity
+			uiScale.x = uiScale.x + 0.03 * camBopIntensity
+		end
 
-			camScaleTimer = Timer.tween((60 / bpm) / 16, camera, {sizeX = camera.scaleX * 1.05, sizeY = camera.scaleY * 1.05}, "out-quad", function() camScaleTimer = Timer.tween((60 / bpm), camera, {sizeX = camera.scaleX, sizeY = camera.scaleY}, "out-quad") end)
-			if beatHandler.getBeat() % 8 == 0  then
-				uiScaleTimer = Timer.tween((60 / bpm) / 16, uiScale, {x = uiScale.x * 1.03, y = uiScale.y * 1.03}, "out-quad", function() camScaleTimer = Timer.tween((60 / bpm), uiScale, {x = uiScale.sizeX, y = uiScale.sizeY}, "out-quad") end)
-			end
+		if camZooming and not cameraLocked then 
+			camera.sizeX, camera.sizeY = util.lerp(defaultCamZoom, camera.sizeX, util.clamp(1 - (dt * 3.125), 0, 1))
+			camera.sizeY = camera.sizeX
+			
+			uiScale.x = util.lerp(1, uiScale.x, util.clamp(1 - (dt * 3.125), 0, 1))
+			uiScale.y = uiScale.x
 		end
 		--[[
 		if beatHandler.onBeat() then 
@@ -821,7 +885,12 @@ return {
 			end
 		end
 		boyfriend:beat(beatHandler.getBeat())
+		if boyfriend2 then boyfriend2:beat(beatHandler.getBeat()) end
 		enemy:beat(beatHandler.getBeat())
+		if enemy2 then enemy2:beat(beatHandler.getBeat()) end
+		if enemy3 then enemy3:beat(beatHandler.getBeat()) end
+		if enemy4 then enemy4:beat(beatHandler.getBeat()) end
+		if enemyBF then enemyBF:beat(beatHandler.getBeat()) end
 
 		for i = 1, 3 do
 			local spriteTimer = spriteTimers[i]
@@ -868,14 +937,30 @@ return {
 					if enemyNote[1]:getAnimName() == "hold" or enemyNote[1]:getAnimName() == "end" then
 						if useAltAnims then
 							if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim .. " alt", false, 2) end
+							if enemy2 then if (not enemy2:isAnimated()) or enemy2:getAnimName() == "idle" then self:safeAnimate(enemy2, curAnim .. " alt", false, 2) end end
+							if enemy3 then if (not enemy3:isAnimated()) or enemy3:getAnimName() == "idle" then self:safeAnimate(enemy3, curAnim .. " alt", false, 2) end end
+							if enemy4 then if (not enemy4:isAnimated()) or enemy4:getAnimName() == "idle" then self:safeAnimate(enemy4, curAnim .. " alt", false, 2) end end
+							if enemyBF then if (not enemyBF:isAnimated()) or enemyBF:getAnimName() == "idle" then self:safeAnimate(enemyBF, curAnim .. " alt", false, 2) end end
 						else
 							if (not enemy:isAnimated()) or enemy:getAnimName() == "idle" then self:safeAnimate(enemy, curAnim, false, 2) end
+							if enemy2 then if (not enemy2:isAnimated()) or enemy2:getAnimName() == "idle" then self:safeAnimate(enemy2, curAnim, false, 2) end end
+							if enemy3 then if (not enemy3:isAnimated()) or enemy3:getAnimName() == "idle" then self:safeAnimate(enemy3, curAnim, false, 2) end end
+							if enemy4 then if (not enemy4:isAnimated()) or enemy4:getAnimName() == "idle" then self:safeAnimate(enemy4, curAnim, false, 2) end end
+							if enemyBF then if (not enemyBF:isAnimated()) or enemyBF:getAnimName() == "idle" then self:safeAnimate(enemyBF, curAnim, false, 2) end end
 						end
 					else
 						if useAltAnims then
 							self:safeAnimate(enemy, curAnim .. " alt", false, 2)
+							if enemy2 then self:safeAnimate(enemy2, curAnim .. " alt", false, 2) end
+							if enemy3 then self:safeAnimate(enemy3, curAnim .. " alt", false, 2) end
+							if enemy4 then self:safeAnimate(enemy4, curAnim .. " alt", false, 2) end
+							if enemyBF then self:safeAnimate(enemyBF, curAnim .. " alt", false, 2) end
 						else
 							self:safeAnimate(enemy, curAnim, false, 2)
+							if enemy2 then self:safeAnimate(enemy2, curAnim, false, 2) end
+							if enemy3 then self:safeAnimate(enemy3, curAnim, false, 2) end
+							if enemy4 then self:safeAnimate(enemy4, curAnim, false, 2) end
+							if enemyBF then self:safeAnimate(enemyBF, curAnim, false, 2) end
 						end
 					end
 
@@ -922,19 +1007,13 @@ return {
 						ratingVisibility = {1}
 
 						boyfriendArrow:animate("confirm", false)
-						if not picoSing then
 
-							if boyfriendNote[1]:getAnimName() == "hold" or boyfriendNote[1]:getAnimName() == "end" then
-								if (not boyfriend:isAnimated()) or boyfriend:getAnimName() == "idle" then self:safeAnimate(boyfriend, curAnim, false, 2) end
-							else
-								self:safeAnimate(boyfriend, curAnim, false, 2)
-							end
+						if boyfriendNote[1]:getAnimName() == "hold" or boyfriendNote[1]:getAnimName() == "end" then
+							if (not boyfriend:isAnimated()) or boyfriend:getAnimName() == "idle" then self:safeAnimate(boyfriend, curAnim, false, 2) end
+							if boyfriend2 then if (not boyfriend2:isAnimated()) or boyfriend2:getAnimName() == "idle" then self:safeAnimate(boyfriend2, curAnim, false, 2) end end
 						else
-							if boyfriendNote[1]:getAnimName() == "hold" or boyfriendNote[1]:getAnimName() == "end" then
-								if (not boyfriend2:isAnimated()) or boyfriend2:getAnimName() == "idle" then self:safeAnimate(boyfriend2, curAnim, false, 2) end
-							else
-								self:safeAnimate(boyfriend2, curAnim, false, 2)
-							end
+							self:safeAnimate(boyfriend, curAnim, false, 2)
+							if boyfriend2 then self:safeAnimate(boyfriend2, curAnim, false, 2) end
 						end
 
 						boyfriend.lastHit = musicTime
@@ -1059,11 +1138,8 @@ return {
 								if not settings.ghostTapping or success then
 									boyfriendArrow:animate("confirm", false)
 
-									if not picoSing then
-										self:safeAnimate(boyfriend, curAnim, false, 3)
-									else
-										self:safeAnimate(boyfriend2, curAnim, false, 3)
-									end
+									self:safeAnimate(boyfriend, curAnim, false, 3)
+									if boyfriend2 then self:safeAnimate(boyfriend2, curAnim, false, 3) end
 
 									if boyfriendNote[j]:getAnimName() ~= "hold" and boyfriendNote[j]:getAnimName() ~= "end" then
 										health = health + 0.095
@@ -1088,10 +1164,9 @@ return {
 					notMissed[noteNum] = false
 
 					if combo >= 5 then self:safeAnimate(girlfriend, "sad", true, 1) end
-					if not picoSing then
 
-						self:safeAnimate(boyfriend, "miss " .. curAnim, false, 3)
-					end
+					self:safeAnimate(boyfriend, "miss " .. curAnim, false, 3)
+					if boyfriend2 then self:safeAnimate(boyfriend2, "miss " .. curAnim, false, 3) end
 
 					score = score - 10
 					combo = 0
@@ -1101,20 +1176,15 @@ return {
 				end
 			end
 
-			if notMissed[noteNum] and #boyfriendNote > 0 and input:down(curInput) and ((boyfriendNote[1].y - musicPos <= -400)) and (boyfriendNote[1]:getAnimName() == "hold" or boyfriendNote[1]:getAnimName() == "end") then
+			if #boyfriendNote > 0 and input:down(curInput) and ((boyfriendNote[1].y - musicPos <= -400)) and (boyfriendNote[1]:getAnimName() == "hold" or boyfriendNote[1]:getAnimName() == "end") then
 				voices:setVolume(1)
 
 				boyfriendArrow:animate("confirm", false)
 
 				health = health + 0.0125
 
-				if not picoSing then
-
-					if (not boyfriend:isAnimated()) or boyfriend:getAnimName() == "idle" then self:safeAnimate(boyfriend, curAnim, false, 3) end
-				else
-					if (not boyfriend2:isAnimated()) or boyfriend2:getAnimName() == "idle" then self:safeAnimate(boyfriend2, curAnim, false, 3) end
-				end
-
+				if (not boyfriend:isAnimated()) or boyfriend:getAnimName() == "idle" then self:safeAnimate(boyfriend, curAnim, false, 3) end
+				if boyfriend2 and (not boyfriend2:isAnimated()) or boyfriend2:getAnimName() == "idle" then self:safeAnimate(boyfriend2, curAnim, false, 3) end
 
 				table.remove(boyfriendNote, 1)
 			end
@@ -1258,9 +1328,6 @@ return {
 								else
 									graphics.setColor(1, 1, 1, 0.5)
 								end
-
-								-- only apply scissor for y and height
-								love.graphics.setScissor(-400, (not settings.downscroll and 95*scissorScale or 0), 4000, 632*(scissorScale)) -- too lazy to y'know... do it right...
 							else
 								if settings.middleScroll then
 									graphics.setColor(1, 1, 1, 0.5)
@@ -1282,9 +1349,6 @@ return {
 								end
 							end
 							graphics.setColor(1, 1, 1)
-
-							-- reset the scissor
-							love.graphics.setScissor()
 						end
 					end
 					for j = #boyfriendNotes[i], 1, -1 do
@@ -1293,13 +1357,6 @@ return {
 
 							if animName == "hold" or animName == "end" then
 								graphics.setColor(1, 1, 1, math.min(0.5, (500 + (boyfriendNotes[i][j].y - musicPos)) / 150))
-
-									if input:down(inputList[i]) then 
-										love.graphics.setScissor(-400, (not settings.downscroll and 95*scissorScale or 0), 4000, 632*(scissorScale)) -- too lazy to y'know... do it right...
-									end
-								if input:down(inputList[i]) then 
-									love.graphics.setScissor(-400, (not settings.downscroll and 95*scissorScale or 0), 4000, 632*(scissorScale)) -- too lazy to y'know... do it right...
-								end
 							else
 								graphics.setColor(1, 1, 1, math.min(1, (500 + (boyfriendNotes[i][j].y - musicPos)) / 75))
 							end
@@ -1316,9 +1373,6 @@ return {
 									end
 								end
 							end
-
-							-- reset the scissor
-							love.graphics.setScissor()
 						end
 					end
 					graphics.setColor(1, 1, 1)
