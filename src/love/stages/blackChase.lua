@@ -67,20 +67,74 @@ return {
 
         camera:addPoint("one", 0, 0, true)
 
+        camera:addPoint("zoomedOut", 0, 0, 0.35, 0.35)
+        camera:addPoint("enemyZoomOne", 433, -251, 0.55, 0.55)
+        camera:addPoint("boyfriendZoomOne", -35, -252, 0.55, 0.55)
+        camera:addPoint("enemyZoomTwo", 479, -165, 0.65, 0.65)
+        camera:addPoint("boyfriendZoomTwo", 41, -165, 0.65, 0.65)
+        camera:addPoint("blackAfterTacoBell", 855, -165, 0.85, 0.85)
+        
+
+        dangerCameraMode = 0
+
+        doMustHitSectionCam = true
+
+        cameraLocked = true
+
     end,
 
     update = function(self, dt)
+
+
+
+        if musicTime >= 21333 and musicTime < 21383 then
+            dangerCameraMode = 1
+        end
+
+        if musicTime >= 31999 and musicTime < 32049 then
+            dangerCameraMode = 2
+        end
+
+        if musicTime >= 42666 and musicTime < 42716 then
+            dangerCameraMode = 1
+        end
+
+        if musicTime >= 52000 and musicTime < 52050 then
+            dangerCameraMode = 3
+        end
+
+        if musicTime >= 53333 and musicTime < 53383 then
+            dangerCameraMode = 2
+        end
+
+        if musicTime >= 85333 and musicTime < 85383 then
+            dangerCameraMode = 1
+        end
+
+        if musicTime >= 95999 and musicTime < 96049 then
+            dangerCameraMode = 2
+        end
+
+        if musicTime >= 106666 and musicTime < 106716 then
+            dangerCameraMode = 0
+        end
+
+        if musicTime >= 127999 and musicTime < 128049 then
+            dangerCameraMode = 2
+        end
+
+
 
 
         if not enemy:isAnimated() then enemy:animate("idle", false) end
         if not boyfriend:isAnimated() then boyfriend:animate("idle", false) end
         if not enemyTwo:isAnimated() then enemyTwo:animate("idle", false) end
 
-        if musicTime >= 1 and musicTime < 26 then
-
-            if zoom1 then Timer.cancel(zoom1) end
-            zoom1 = Timer.tween(2, camera, {sizeX = 0.33, sizeY = 0.33, scaleX = 0.33, scaleY = 0.33, x = 0, y = 200}, "out-expo", function() zoom1 = nil end)
-        end
+       -- if musicTime >= 1 and musicTime < 26 then
+--
+       --     if zoom1 then Timer.cancel(zoom1) end
+       --     zoom1 = Timer.tween(2, camera, {sizeX = 0.33, sizeY = 0.33, scaleX = 0.33, scaleY = 0.33, x = 0, y = 200}, "out-expo", function() zoom1 = nil end)
+      --  end
 
         stageImages[7]:update(dt)
         stageImages[8]:update(dt)
@@ -123,7 +177,7 @@ return {
         love.graphics.push()
 			love.graphics.translate(camera.x * 0.9, camera.y * 0.9)
             love.graphics.translate(camera.ex * 0.9, camera.ey * 0.9)
-           -- love.graphics.scale(camera.sizeX, camera.sizeY)
+            love.graphics.scale(camera.sizeX, camera.sizeY)
 			stageImages[1]:draw()
             love.graphics.push()
             love.graphics.translate(stageImages[2].translation.x, stageImages[2].translation.y)
@@ -142,7 +196,7 @@ return {
             love.graphics.push()
             love.graphics.translate(-camera.x * 0.2, -camera.y * 0.2)
             love.graphics.translate(-camera.ex * 0.2, -camera.ey * 0.2)
-            --love.graphics.scale(camera.sizeX, camera.sizeY)
+            love.graphics.scale(camera.sizeX, camera.sizeY)
 
             stageImages[4]:draw()
             love.graphics.pop()
@@ -159,7 +213,7 @@ return {
 		love.graphics.push()
 			love.graphics.translate(camera.x, camera.y)
             love.graphics.translate(camera.ex, camera.ey)
-           -- love.graphics.scale(camera.sizeX, camera.sizeY)
+            love.graphics.scale(camera.sizeX, camera.sizeY)
 
 
             if stageImages[9]:isAnimated() and musicTime > 10000 then
