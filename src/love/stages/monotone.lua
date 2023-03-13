@@ -60,19 +60,19 @@ return {
         bfghost = love.filesystem.load("sprites/boyfriend.lua")()
         boyfriend2ghost = love.filesystem.load("sprites/characters/bfFly.lua")()
 
-        enemyBFghost.colors = {1,1,1}
+        enemyBFghost.colors = {0,0,1}
         enemyBFghost.alpha = 0
-        enemyghost.colors = {1,1,1}
+        enemyghost.colors = {1,0,0}
         enemyghost.alpha = 0
-        enemy2ghost.colors = {1,1,1}
+        enemy2ghost.colors = {1,0,0}
         enemy2ghost.alpha = 0
-        enemy3ghost.colors = {1,1,1}
+        enemy3ghost.colors = {1,0,0}
         enemy3ghost.alpha = 0
-        enemy4ghost.colors = {1,1,1}
+        enemy4ghost.colors = {1,0,0}
         enemy4ghost.alpha = 0
-        bfghost.colors = {1,1,1}
+        bfghost.colors = {0,0,1}
         bfghost.alpha = 0
-        boyfriend2ghost.colors = {1,1,1}
+        boyfriend2ghost.colors = {0,0,1}
         boyfriend2ghost.alpha = 0
 
         boyfriend.x, boyfriend.y = 545, 425

@@ -669,10 +669,10 @@ return {
 		if who == "bf" then 
 			-- make a copy of boyfriend to bfghost
 			bfghost.alpha = 0.8
-			bfghost.color = {0, 1, 0}
+			bfghost.color = {0, 0, 1}
 			if boyfriend2ghost then 
 				boyfriend2ghost.alpha = 0.8
-				boyfriend2ghost.color = {0, 1, 0}
+				boyfriend2ghost.color = {0, 0, 1}
 			end
 			if bfGhostTween then 
 				Timer.cancel(bfGhostTween)
