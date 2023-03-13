@@ -1,33 +1,33 @@
 local difficulty
-
 local stageBack, stageFront, curtains
 
 return {
 	enter = function(self, from, songNum, songAppend)
+		pauseColor = {129, 100, 223}
 		weeks:enter()
+		stages["chip"]:enter()
 
 		week = 1
-		weekString = "red"
+		weekString = "chip"
+		gameOverMusic = "normal"
 
 
 		song = songNum
 		difficulty = songAppend
 
-		enemyIcon:animate("red impostor 1", false)
+		enemyIcon:animate("black", false)
 
-        enemy = love.filesystem.load("sprites/characters/boyfriend.lua")()
+		boyfriend2 = boyfriend
 
-        flashAlpha = 0
 
-		function ReactorBeep(alpha)
-			flashAlpha = alpha
-		end
 
 		self:load()
 	end,
 
 	load = function(self)
 		weeks:load()
+		stages["chip"]:load()
+
 
 		if song == 3 then
 			inst = love.audio.newSource("songs/torture/Inst.ogg", "stream")
@@ -39,6 +39,7 @@ return {
 			inst = love.audio.newSource("songs/chippin/Inst.ogg", "stream")
 			voices = love.audio.newSource("songs/chippin/Voices.ogg", "stream")
 		end
+
 
 		self:initUI()
 
@@ -58,44 +59,37 @@ return {
 			weeks:generateNotes("songs/chippin/chippin-hard.json")
 			weeks:generateEvents("songs/chippin/events.json")
 		end
+
 	end,
 
 	update = function(self, dt)
 		weeks:update(dt)
-
-        -- lerp flashAlpha to 0
-        --flashAlpha = util.lerp(flashAlpha, 0, util.clamp(0, dt * 5, 1))
+		stages["chip"]:update(dt)
 
 		if health >= 80 then
-			if enemyIcon:getAnimName() == "red impostor 1" then
-				enemyIcon:animate("red impostor 1 losing", false)
+			if enemyIcon:getAnimName() == "black" then
+				enemyIcon:animate("black losing", false)
 			end
 		else
-			if enemyIcon:getAnimName() == "red impostor 1 losing" then
-				enemyIcon:animate("red impostor 1", false)
+			if enemyIcon:getAnimName() == "black losing" then
+				enemyIcon:animate("black", false)
 			end
 		end
 
 		if not (countingDown or graphics.isFading()) and not (inst:isPlaying() and voices:isPlaying()) and not paused then
-			if storyMode and song < 3 then
-				campaignScore = campaignScore + score
-				song = song + 1
+			campaignScore = campaignScore + score
+			status.setLoading(true)
 
-				self:load()
-			else
-				campaignScore = campaignScore + score
-				status.setLoading(true)
+			graphics.fadeOut(
+				0.5,
+				function()
+					Gamestate.switch(beansCounter)
 
-				graphics.fadeOut(
-					0.5,
-					function()
-						Gamestate.switch(beansCounter)
-
-						status.setLoading(false)
-					end
-				)
-			end
+					status.setLoading(false)
+				end
+			)
 		end
+
 
 		weeks:updateUI(dt)
 	end,
@@ -105,19 +99,19 @@ return {
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
 			love.graphics.scale(camera.esizeX, camera.esizeY)
 			love.graphics.scale(camera.sizeX, camera.sizeY)
+			love.graphics.translate(camera.x, camera.y)
+			love.graphics.translate(camera.ex, camera.ey)
+		
 
-			
+			stages["chip"]:draw()
 			weeks:drawRating(0.9)
 		love.graphics.pop()
-
-        graphics.setColor(1,0,0,flashAlpha)
-        love.graphics.rectangle("fill", 0, 0, graphics.getWidth(), graphics.getHeight())
-        graphics.setColor(1,1,1,1)
-
+		
 		weeks:drawUI()
 	end,
 
 	leave = function(self)
+		stages["chip"]:leave()
 		weeks:leave()
 	end
 }
