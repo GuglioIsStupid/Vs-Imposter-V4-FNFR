@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("sauces/Boppers")), -- Do not add the .png extension
+	graphics.imagePath("sauces/Boppers"), -- Do not add the .png extension
 	{
 		{x = 0, y = 590, width = 303, height = 570, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: grey0000
 		{x = 0, y = 590, width = 303, height = 570, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: grey0001

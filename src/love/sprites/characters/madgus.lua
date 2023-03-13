@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/madgus")), -- Do not add the .png extension
+	graphics.imagePath("characters/madgus"), -- Do not add the .png extension
 	{
 		{x = 5, y = 5, width = 243, height = 321, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: DANCELEFT0000
 		{x = 253, y = 5, width = 243, height = 321, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: DANCELEFT0001

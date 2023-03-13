@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("henry/henry/Sock_Puppet_Option")), -- Do not add the .png extension
+	graphics.imagePath("henry/henry/Sock_Puppet_Option"), -- Do not add the .png extension
 	{
 		{x = 13, y = 13, width = 449, height = 436, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: Sock Puppet0000
 		{x = 475, y = 13, width = 453, height = 437, offsetX = 0, offsetY = -17, offsetWidth = 464, offsetHeight = 454}, -- 2: Sock Puppet Select0000

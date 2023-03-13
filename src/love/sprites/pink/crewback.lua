@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("mira/crewback")), -- Do not add the .png extension
+	graphics.imagePath("mira/crewback"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 1588, height = 363, offsetX = 0, offsetY = -22, offsetWidth = 1588, offsetHeight = 385}, -- 1: crewback0000
 		{x = 0, y = 0, width = 1588, height = 363, offsetX = 0, offsetY = -22, offsetWidth = 1588, offsetHeight = 385}, -- 2: crewback0001

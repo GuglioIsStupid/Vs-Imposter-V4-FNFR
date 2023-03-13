@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("pink/longus_leave")), -- Do not add the .png extension
+	graphics.imagePath("pink/longus_leave"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 1227, height = 530, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: longus anim0000
 		{x = 0, y = 0, width = 1227, height = 530, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: longus anim0001

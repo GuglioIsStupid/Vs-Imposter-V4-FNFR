@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("nuzzus/nuzzus")), -- Do not add the .png extension
+	graphics.imagePath("nuzzus/nuzzus"), -- Do not add the .png extension
 	{
 		{x = 30, y = 30, width = 256, height = 224, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: bg0000
 		{x = 30, y = 30, width = 256, height = 224, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: bg0001

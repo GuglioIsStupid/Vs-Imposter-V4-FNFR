@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("pink/mirascaredmates")), -- Do not add the .png extension
+	graphics.imagePath("pink/mirascaredmates"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 308, height = 163, offsetX = 0, offsetY = -5, offsetWidth = 308, offsetHeight = 168}, -- 1: 1body0000
 		{x = 0, y = 0, width = 308, height = 163, offsetX = 0, offsetY = -5, offsetWidth = 308, offsetHeight = 168}, -- 2: 1body0001

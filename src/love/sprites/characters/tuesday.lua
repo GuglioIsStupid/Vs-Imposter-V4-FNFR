@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/tuesday")), -- Do not add the .png extension
+	graphics.imagePath("characters/tuesday"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 297, height = 346, offsetX = -1, offsetY = -2, offsetWidth = 299, offsetHeight = 348}, -- 1: anim 10000
 		{x = 0, y = 0, width = 297, height = 346, offsetX = -1, offsetY = -2, offsetWidth = 299, offsetHeight = 348}, -- 2: anim 10001

@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/HENRY_ASSS")), -- Do not add the .png extension
+	graphics.imagePath("characters/HENRY_ASSS"), -- Do not add the .png extension
 	{
 		{x = 0, y = 2139, width = 561, height = 582, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: Henry Down0000
 		{x = 0, y = 2139, width = 561, height = 582, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: Henry Down0001

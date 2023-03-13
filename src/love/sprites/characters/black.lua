@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/black")), -- Do not add the .png extension                 seriously dont, if you add the .png extension you will turn into a mega femboy (more femboy than any of us could handle being (oh and the game would also stop working which isnt fun so uhh yeah dont))
+	graphics.imagePath("characters/black"), -- Do not add the .png extension                 seriously dont, if you add the .png extension you will turn into a mega femboy (more femboy than any of us could handle being (oh and the game would also stop working which isnt fun so uhh yeah dont))
 	{
 		{x = 0, y = 0, width = 956, height = 1076, offsetX = -29, offsetY = -37, offsetWidth = 1010, offsetHeight = 1140}, -- 1: black down0000
 		{x = 986, y = 0, width = 1000, height = 1110, offsetX = -5, offsetY = -6, offsetWidth = 1010, offsetHeight = 1140}, -- 2: black down0001

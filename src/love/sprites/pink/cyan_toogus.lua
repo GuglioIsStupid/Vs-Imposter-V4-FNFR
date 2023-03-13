@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("pink/cyan_toogus")), -- Do not add the .png extension
+	graphics.imagePath("pink/cyan_toogus"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 591, height = 946, offsetX = 0, offsetY = -241, offsetWidth = 1011, offsetHeight = 1187}, -- 1: Cyan Dancy0000
 		{x = 0, y = 0, width = 591, height = 946, offsetX = 0, offsetY = -241, offsetWidth = 1011, offsetHeight = 1187}, -- 2: Cyan Dancy0001

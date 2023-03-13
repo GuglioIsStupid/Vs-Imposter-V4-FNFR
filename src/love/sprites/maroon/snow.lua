@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("maroon/snow")), -- Do not add the .png extension
+	graphics.imagePath("maroon/snow"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 1312, height = 579, offsetX = -74, offsetY = -13, offsetWidth = 1439, offsetHeight = 627}, -- 1: cum0000
 		{x = 0, y = 0, width = 1312, height = 579, offsetX = -74, offsetY = -13, offsetWidth = 1439, offsetHeight = 627}, -- 2: cum0001

@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/gffall")), -- Do not add the .png extension
+	graphics.imagePath("characters/gffall"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 311, height = 698, offsetX = -551, offsetY = -14, offsetWidth = 937, offsetHeight = 712}, -- 1: GF Dancing Beat0000
 		{x = 316, y = 0, width = 295, height = 684, offsetX = -567, offsetY = -28, offsetWidth = 937, offsetHeight = 712}, -- 2: GF Dancing Beat0001

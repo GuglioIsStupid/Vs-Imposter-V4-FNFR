@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/bfrun_death")), -- Do not add the .png extension
+	graphics.imagePath("characters/bfrun_death"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 508, height = 379, offsetX = 0, offsetY = -15, offsetWidth = 508, offsetHeight = 394}, -- 1: confirm death0000
 		{x = 528, y = 0, width = 508, height = 376, offsetX = 0, offsetY = -18, offsetWidth = 508, offsetHeight = 394}, -- 2: confirm death0001

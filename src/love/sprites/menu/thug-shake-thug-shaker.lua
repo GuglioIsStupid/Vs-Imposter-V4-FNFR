@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("menu/thug-shake-thug-shaker")), -- Do not add the .png extension
+	graphics.imagePath("menu/thug-shake-thug-shaker"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 56, height = 90, offsetX = 0, offsetY = 0, offsetWidth = 56, offsetHeight = 90}, -- 1: thug-shake-thug-shaker0000
 		{x = 56, y = 0, width = 56, height = 90, offsetX = 0, offsetY = 0, offsetWidth = 56, offsetHeight = 90}, -- 2: thug-shake-thug-shaker0001

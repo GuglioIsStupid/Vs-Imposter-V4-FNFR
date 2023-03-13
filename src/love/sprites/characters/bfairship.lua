@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/bfairship")), -- Do not add the .png extension
+	graphics.imagePath("characters/bfairship"), -- Do not add the .png extension
 	{
 		{x = 30, y = 30, width = 439, height = 435, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: BF Dead Loop0000
 		{x = 494, y = 30, width = 439, height = 435, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: BF Dead Loop0001

@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/drippico")), -- Do not add the .png extension
+	graphics.imagePath("characters/drippico"), -- Do not add the .png extension
 	{
 		{x = 6785, y = 2557, width = 742, height = 711, offsetX = 0, offsetY = -41, offsetWidth = 752, offsetHeight = 752}, -- 1: idleshit0000
 		{x = 0, y = 3288, width = 752, height = 752, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: idleshit0001

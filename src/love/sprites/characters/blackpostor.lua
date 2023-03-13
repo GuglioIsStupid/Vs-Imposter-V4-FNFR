@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/blackpostor")), -- Do not add the .png extension
+	graphics.imagePath("characters/blackpostor"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 698, height = 373, offsetX = -10, offsetY = 0, offsetWidth = 717, offsetHeight = 373}, -- 1: imposter left0000
 		{x = 0, y = 0, width = 698, height = 373, offsetX = -10, offsetY = 0, offsetWidth = 717, offsetHeight = 373}, -- 2: imposter left0001

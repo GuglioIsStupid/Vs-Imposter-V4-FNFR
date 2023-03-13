@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/henry_i_phone")), -- Do not add the .png extension
+	graphics.imagePath("characters/henry_i_phone"), -- Do not add the .png extension
 	{
 		{x = 6744, y = 2510, width = 397, height = 674, offsetX = -22, offsetY = 0, offsetWidth = 481, offsetHeight = 674}, -- 1: Henry Death loop0000
 		{x = 30, y = 30, width = 419, height = 674, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: Henry Death loop0001

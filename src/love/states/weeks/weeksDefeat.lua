@@ -34,7 +34,6 @@ local eventFuncs = {
 		weeks:safeAnimate(boyfriend, "hey", false, 3)
 	end,
 	["Reactor Beep"] = function(value)
-		print("haiiii")
 		flashAlpha = tonumber(value) or 0.4
 	end,
     ["flash"] = function(time)
@@ -250,6 +249,7 @@ return {
 	initUI = function(self, option)
 		events = {}
 		songEvents = {}
+		noteRows = {{}, {}}
 		enemyNotes = {}
 		boyfriendNotes = {}
 		judgements = {}
@@ -375,7 +375,7 @@ return {
 				sectionNotes[j][3] = tonumber(sectionNotes[j][3]) or 0
 
 				if j == 1 then
-					table.insert(events, {eventTime = sectionNotes[1][1], mustHitSection = mustHitSection, bpm = eventBpm, altAnim = altAnim})
+					table.insert(events, {eventTime = sectionNotes[1][1], mustHitSection = mustHitSection, bpm = bpm, altAnim = altAnim})
 				end
 
 				if noteType == 0 or noteType == 4 then
@@ -397,6 +397,11 @@ return {
 					   	table.insert(enemyNotes[id], sprite())
 					   	enemyNotes[id][c].x = x
 					   	enemyNotes[id][c].y = -400 + noteTime * 0.6 * speed
+						enemyNotes[id][c].row = beatHandler.beatToRow((noteTime / 1000) * (bpm / 60))
+						if (noteRows[2][enemyNotes[id][c].row] == nil) then 
+							noteRows[2][enemyNotes[id][c].row] = {}
+						end
+						noteRows[2][enemyNotes[id][c].row][#noteRows[2][enemyNotes[id][c].row] + 1] = enemyNotes[id][c]
 						if settings.downscroll then
 							enemyNotes[id][c].sizeY = -1
 						end
@@ -431,6 +436,11 @@ return {
 					   	boyfriendNotes[id][c].x = x
 					   	boyfriendNotes[id][c].y = -400 + noteTime * 0.6 * speed
 						boyfriendNotes[id][c].time = noteTime
+						boyfriendNotes[id][c].row = beatHandler.beatToRow(noteTime)
+						if (noteRows[1][boyfriendNotes[id][c].row] == nil) then 
+							noteRows[1][boyfriendNotes[id][c].row] = {}
+						end
+						noteRows[1][boyfriendNotes[id][c].row][#noteRows[1][boyfriendNotes[id][c].row] + 1] = boyfriendNotes[id][c]
 						if settings.downscroll then
 							boyfriendNotes[id][c].sizeY = -1
 						end
@@ -467,6 +477,11 @@ return {
 					   	boyfriendNotes[id][c].x = x
 					   	boyfriendNotes[id][c].y = -400 + noteTime * 0.6 * speed
 						boyfriendNotes[id][c].time = noteTime
+						boyfriendNotes[id][c].row = beatHandler.beatToRow(noteTime)
+						if (noteRows[1][boyfriendNotes[id][c].row] == nil) then 
+							noteRows[1][boyfriendNotes[id][c].row] = {}
+						end
+						noteRows[1][boyfriendNotes[id][c].row][#noteRows[1][boyfriendNotes[id][c].row] + 1] = boyfriendNotes[id][c]
 						if settings.downscroll then
 							boyfriendNotes[id][c].sizeY = -1
 						end
@@ -500,6 +515,12 @@ return {
 					   	table.insert(enemyNotes[id], sprite())
 					   	enemyNotes[id][c].x = x
 					   	enemyNotes[id][c].y = -400 + noteTime * 0.6 * speed
+						enemyNotes[id][c].time = noteTime
+						enemyNotes[id][c].row = beatHandler.beatToRow(noteTime)
+						if (noteRows[2][enemyNotes[id][c].row] == nil) then 
+							noteRows[2][enemyNotes[id][c].row] = {}
+						end
+						noteRows[2][enemyNotes[id][c].row][#noteRows[2][enemyNotes[id][c].row] + 1] = enemyNotes[id][c]
 						if settings.downscroll then
 							enemyNotes[id][c].sizeY = -1
 						end
@@ -566,6 +587,50 @@ return {
 					offset = offset + 1
 				end
 			end
+		end
+	end,
+
+	doGhostAnim = function(self, who, animToPlay)
+		if who == "bf" then 
+			-- make a copy of boyfriend to bfghost
+			bfghost.alpha = 0.8
+			bfghost.color = {0, 0, 1}
+			bfScaredghost.alpha = 0.8
+			bfScaredghost.color = {0, 0, 1}
+			bfOtherghost.alpha = 0.8
+			bfOtherghost.color = {0, 0, 1}
+			if bfGhostTween then 
+				Timer.cancel(bfGhostTween)
+			end
+			if bfScaredGhostTween then 
+				Timer.cancel(bfScaredGhostTween)
+			end
+			if bfOtherGhostTween then 
+				Timer.cancel(bfOtherGhostTween)
+			end
+			bfGhostTween = Timer.tween(0.75, bfghost, {alpha = 0}, "linear", function() bfGhostTween = nil end)
+			bfScaredGhostTween = Timer.tween(0.75, bfScaredghost, {alpha = 0}, "linear", function() bfScaredGhostTween = nil end)
+			bfOtherGhostTween = Timer.tween(0.75, bfOtherghost, {alpha = 0}, "linear", function() bfOtherGhostTween = nil end)
+
+			bfghost:animate(animToPlay, false)
+			bfScaredghost:animate(animToPlay, false)
+			bfOtherghost:animate(animToPlay, false)
+		else
+			enemyghost.alpha = 0.8
+			blackoldghost.alpha = 0.8
+			enemyghost.color = {1, 0, 0}
+			blackoldghost.color = {1, 0, 0}
+			if enemyGhostTween then 
+				Timer.cancel(enemyGhostTween)
+			end
+			if blackoldGhostTween then 
+				Timer.cancel(blackoldGhostTween)
+			end
+			enemyGhostTween = Timer.tween(0.75, enemyghost, {alpha = 0}, "linear", function() enemyGhostTween = nil end)
+			blackoldGhostTween = Timer.tween(0.75, blackoldghost, {alpha = 0}, "linear", function() blackoldGhostTween = nil end)
+
+			enemyghost:animate(animToPlay, false)
+			blackoldghost:animate(animToPlay, false)
 		end
 	end,
 
@@ -727,7 +792,6 @@ return {
 				if events[i].bpm then
 					bpm = events[i].bpm
 					if not bpm then bpm = oldBpm end
-					print(bpm)
 					beatHandler.setBPM(bpm)
 				end
 
@@ -791,10 +855,15 @@ return {
 
 		girlfriend:update(dt)
 		enemy:update(dt)
+		enemyghost:update(dt)
 		boyfriend:update(dt)
         bfScared:update(dt)
         bfOther:update(dt)
         blackold:update(dt)
+		bfghost:update(dt)
+		bfOtherghost:update(dt)
+		bfScaredghost:update(dt)
+		blackoldghost:update(dt)
 
 		if beatHandler.onBeat() and beatHandler.getBeat() % 2 == 0 then
 			if spriteTimers[1] == 0 then
@@ -806,6 +875,10 @@ return {
         bfScared:beat(beatHandler.getBeat())
         bfOther:beat(beatHandler.getBeat())
 		enemy:beat(beatHandler.getBeat())
+		bfghost:beat(beatHandler.getBeat())
+		bfScaredghost:beat(beatHandler.getBeat())
+		bfOtherghost:beat(beatHandler.getBeat())
+		enemyghost:beat(beatHandler.getBeat())
 
 		for i = 1, 3 do
 			local spriteTimer = spriteTimers[i]
@@ -869,12 +942,16 @@ return {
                             if (not blackold:isAnimated()) or blackold:getAnimName() == "idle" then self:safeAnimate(blackold, curAnim, false, 2) end
 						end
 					else
-						if useAltAnims then
-							self:safeAnimate(enemy, curAnim .. " alt", false, 2)
-                            self:safeAnimate(blackold, curAnim .. " alt", false, 2)
-						else
-							self:safeAnimate(enemy, curAnim, false, 2)
-                            self:safeAnimate(blackold, curAnim, false, 2)
+						if #noteRows[2][enemyNote[1].row] > 0 then
+							if (enemy.mostRecentRow ~= enemyNote[1].row) then
+								self:safeAnimate(enemy, curAnim, false, 2)
+                            	self:safeAnimate(blackold, curAnim, false, 2)
+							elseif (enemy.mostRecentRow == enemyNote[1].row) then
+								self:safeAnimate(enemy, curAnim, false, 2)
+								self:safeAnimate(blackold, curAnim, false, 2)
+								self:doGhostAnim("enemy", curAnim)
+							end
+							enemy.mostRecentRow = enemyNote[1].row
 						end
 					end
 
@@ -918,7 +995,14 @@ return {
 						if boyfriendNote[1]:getAnimName() == "hold" or boyfriendNote[1]:getAnimName() == "end" then
 							if (not boyfriend:isAnimated()) or boyfriend:getAnimName() == "idle" then self:safeAnimate(boyfriend, curAnim, false, 2) end
 						else
-							self:safeAnimate(boyfriend, curAnim, false, 2)
+							if #noteRows[1][boyfriendNote[1].row] > 0 then
+								if (boyfriend.mostRecentRow ~= boyfriendNote[1].row) then
+									self:safeAnimate(boyfriend, curAnim, false, 2)
+								else
+									self:safeAnimate(boyfriend, curAnim, false, 2)
+									self:doGhostAnim("bf", curAnim)
+								end
+							end
 						end
 
 						boyfriend.lastHit = musicTime
@@ -1040,9 +1124,21 @@ return {
 								if not settings.ghostTapping or success then
 									boyfriendArrow:animate("confirm", false)
 
-									self:safeAnimate(boyfriend, curAnim, false, 3)
-                                    self:safeAnimate(bfOther, curAnim, false, 3)
-                                    self:safeAnimate(bfScared, curAnim, false, 3)
+									if #noteRows[1][boyfriendNote[1].row] > 0 then
+										if (boyfriend.mostRecentRow ~= boyfriendNote[1].row) then
+											self:safeAnimate(boyfriend, curAnim, false, 2)
+											self:safeAnimate(bfOther, curAnim, false, 2)
+											self:safeAnimate(bfScared, curAnim, false, 2)
+										else
+											self:safeAnimate(boyfriend, curAnim, false, 2)
+											self:safeAnimate(bfOther, curAnim, false, 2)
+											self:safeAnimate(bfScared, curAnim, false, 2)
+											self:doGhostAnim("bf", curAnim)
+										end
+
+										boyfriend.mostRecentRow = boyfriendNote[1].row
+									end
+									
 
 									success = true
 								end

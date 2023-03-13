@@ -41,8 +41,27 @@ function beatHandler.setBPM(bpm)
     beatHandler.stepCrochet = beatHandler.crochet / 4
 end
 
+local ROWS_PER_BEAT = 48 -- From stepmania
+
+function beatHandler.beatToRow(sex)
+    -- Find what row the sex given is on
+    -- There is 48 rows per beat
+    -- 1 beat = 60 / bpm
+    return util.round(sex * ROWS_PER_BEAT)
+end
+
 function beatHandler.getBeat()
     return beatHandler.beat
+end
+
+function beatHandler.getBeat2(time)
+    local curSongBpm = beatHandler.bpm
+    for i = 1, #events do 
+        if events[i].eventTime < time then
+            curSongBpm = events[i].bpm or curSongBpm
+        end
+    end
+    return math.floor((time / 1000) * (curSongBpm / 60))
 end
 
 function beatHandler.getBeatTime()

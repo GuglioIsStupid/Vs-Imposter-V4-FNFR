@@ -1,5 +1,5 @@
 return graphics.newSprite(
-    love.graphics.newImage(graphics.imagePath("menu/menu_credits")),
+    graphics.imagePath("menu/menu_credits"),
     	-- Automatically generated from menu_credits.xml
 	{
 		{x = 4, y = 4, width = 474, height = 126, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: credits basic0000

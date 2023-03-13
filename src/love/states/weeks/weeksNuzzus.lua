@@ -368,7 +368,7 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 				sectionNotes[j][3] = tonumber(sectionNotes[j][3]) or 0
 
 				if j == 1 then
-					table.insert(events, {eventTime = sectionNotes[1][1], mustHitSection = mustHitSection, bpm = eventBpm, altAnim = altAnim})
+					table.insert(events, {eventTime = sectionNotes[1][1], mustHitSection = mustHitSection, bpm = bpm, altAnim = altAnim})
 				end
 
 				if noteType == 0 or noteType == 4 then
@@ -390,6 +390,11 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 					   	table.insert(enemyNotes[id], sprite())
 					   	enemyNotes[id][c].x = x
 					   	enemyNotes[id][c].y = -400 + noteTime * 0.6 * speed
+						enemyNotes[id][c].row = beatHandler.beatToRow((noteTime / 1000) * (bpm / 60))
+						if (noteRows[2][enemyNotes[id][c].row] == nil) then 
+							noteRows[2][enemyNotes[id][c].row] = {}
+						end
+						noteRows[2][enemyNotes[id][c].row][#noteRows[2][enemyNotes[id][c].row] + 1] = enemyNotes[id][c]
 						if settings.downscroll then
 							enemyNotes[id][c].sizeY = -1
 						end
@@ -424,6 +429,11 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 					   	boyfriendNotes[id][c].x = x
 					   	boyfriendNotes[id][c].y = -400 + noteTime * 0.6 * speed
 						boyfriendNotes[id][c].time = noteTime
+						boyfriendNotes[id][c].row = beatHandler.beatToRow(noteTime)
+						if (noteRows[1][boyfriendNotes[id][c].row] == nil) then 
+							noteRows[1][boyfriendNotes[id][c].row] = {}
+						end
+						noteRows[1][boyfriendNotes[id][c].row][#noteRows[1][boyfriendNotes[id][c].row] + 1] = boyfriendNotes[id][c]
 						if settings.downscroll then
 							boyfriendNotes[id][c].sizeY = -1
 						end
@@ -460,6 +470,11 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 					   	boyfriendNotes[id][c].x = x
 					   	boyfriendNotes[id][c].y = -400 + noteTime * 0.6 * speed
 						boyfriendNotes[id][c].time = noteTime
+						boyfriendNotes[id][c].row = beatHandler.beatToRow(noteTime)
+						if (noteRows[1][boyfriendNotes[id][c].row] == nil) then 
+							noteRows[1][boyfriendNotes[id][c].row] = {}
+						end
+						noteRows[1][boyfriendNotes[id][c].row][#noteRows[1][boyfriendNotes[id][c].row] + 1] = boyfriendNotes[id][c]
 						if settings.downscroll then
 							boyfriendNotes[id][c].sizeY = -1
 						end
@@ -493,6 +508,12 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 					   	table.insert(enemyNotes[id], sprite())
 					   	enemyNotes[id][c].x = x
 					   	enemyNotes[id][c].y = -400 + noteTime * 0.6 * speed
+						enemyNotes[id][c].time = noteTime
+						enemyNotes[id][c].row = beatHandler.beatToRow(noteTime)
+						if (noteRows[2][enemyNotes[id][c].row] == nil) then 
+							noteRows[2][enemyNotes[id][c].row] = {}
+						end
+						noteRows[2][enemyNotes[id][c].row][#noteRows[2][enemyNotes[id][c].row] + 1] = enemyNotes[id][c]
 						if settings.downscroll then
 							enemyNotes[id][c].sizeY = -1
 						end
@@ -620,6 +641,29 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 				)
 			end
 		)
+	end,
+
+	doGhostAnim = function(self, who, animToPlay)
+		if who == "bf" then 
+			-- make a copy of boyfriend to bfghost
+			bfghost.alpha = 0.8
+			bfghost.color = {255, 0, 0}
+			if bfGhostTween then 
+				Timer.cancel(bfGhostTween)
+			end
+			bfGhostTween = Timer.tween(0.75, bfghost, {alpha = 0}, "linear", function() bfGhostTween = nil end)
+
+			bfghost:animate(animToPlay, false)
+		else
+			enemyghost.alpha = 0.8
+			enemyghost.color = {255, 0, 0}
+			if enemyGhostTween then 
+				Timer.cancel(enemyGhostTween)
+			end
+			enemyGhostTween = Timer.tween(0.75, enemyghost, {alpha = 0}, "linear", function() enemyGhostTween = nil end)
+
+			enemyghost:animate(animToPlay, false)
+		end
 	end,
 
 	safeAnimate = function(self, sprite, animName, loopAnim, timerID)

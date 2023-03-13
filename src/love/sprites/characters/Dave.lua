@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/Dave")), -- Do not add the .png extension
+	graphics.imagePath("characters/Dave"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 1204, height = 804, offsetX = 0, offsetY = 0, offsetWidth = 1204, offsetHeight = 804}, -- 1: Dave Idle0000
 		{x = 1204, y = 0, width = 1204, height = 804, offsetX = 0, offsetY = 0, offsetWidth = 1204, offsetHeight = 804}, -- 2: Dave Idle0001

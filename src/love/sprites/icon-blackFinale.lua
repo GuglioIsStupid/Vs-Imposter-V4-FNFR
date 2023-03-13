@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("icon-blackFinale")), -- Do not add the .png extension
+	graphics.imagePath("icon-blackFinale"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 435, height = 495, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: black icon mad0000
 		{x = 445, y = 0, width = 435, height = 495, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: black icon mad0001

@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("attack/loggoattack")), -- Do not add the .png extension
+	graphics.imagePath("attack/loggoattack"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 510, height = 581, offsetX = 0, offsetY = -21, offsetWidth = 510, offsetHeight = 602}, -- 1: loggfriend0000
 		{x = 515, y = 0, width = 510, height = 581, offsetX = 0, offsetY = -21, offsetWidth = 510, offsetHeight = 602}, -- 2: loggfriend0001

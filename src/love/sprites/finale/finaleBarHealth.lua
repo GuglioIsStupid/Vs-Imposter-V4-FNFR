@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("finale/finaleBarHealth")), -- Do not add the .png extension
+	graphics.imagePath("finale/finaleBarHealth"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 1232, height = 356, offsetX = 0, offsetY = 0, offsetWidth = 1232, offsetHeight = 356}, -- 1: finaleBarHealth 100000
 		{x = 1232, y = 0, width = 1232, height = 356, offsetX = 0, offsetY = 0, offsetWidth = 1232, offsetHeight = 356}, -- 2: finaleBarHealth 200000

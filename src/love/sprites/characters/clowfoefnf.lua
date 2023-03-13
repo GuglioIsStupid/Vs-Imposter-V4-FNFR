@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/clowfoefnf")), -- Do not add the .png extension
+	graphics.imagePath("characters/clowfoefnf"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 418, height = 415, offsetX = 0, offsetY = -13, offsetWidth = 426, offsetHeight = 428}, -- 1: down0000
 		{x = 0, y = 0, width = 418, height = 415, offsetX = 0, offsetY = -13, offsetWidth = 426, offsetHeight = 428}, -- 2: down0001

@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/blackold")), -- Do not add the .png extension
+	graphics.imagePath("characters/blackold"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 839, height = 682, offsetX = -304, offsetY = -250, offsetWidth = 1969, offsetHeight = 1084}, -- 1: BLACK DEATH0000
 		{x = 869, y = 0, width = 832, height = 683, offsetX = -311, offsetY = -249, offsetWidth = 1969, offsetHeight = 1084}, -- 2: BLACK DEATH0001

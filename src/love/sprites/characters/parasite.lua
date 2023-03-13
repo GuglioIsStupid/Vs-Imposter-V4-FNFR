@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/parasite")), -- Do not add the .png extension
+	graphics.imagePath("characters/parasite"), -- Do not add the .png extension
 	{
 		{x = 5, y = 5, width = 604, height = 497, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: down instance 10000
 		{x = 614, y = 5, width = 604, height = 497, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: down instance 10001

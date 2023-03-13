@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("finale/finaleFlashback")), -- Do not add the .png extension
+	graphics.imagePath("finale/finaleFlashback"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 1924, height = 1084, offsetX = 0, offsetY = 0, offsetWidth = 1924, offsetHeight = 1084}, -- 1: finaleFlashback moog0000
 		{x = 0, y = 1084, width = 1924, height = 1084, offsetX = 0, offsetY = 0, offsetWidth = 1924, offsetHeight = 1084}, -- 2: finaleFlashback toog0000

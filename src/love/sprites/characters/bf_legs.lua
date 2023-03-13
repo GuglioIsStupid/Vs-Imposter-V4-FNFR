@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/bf_legs")), -- Do not add the .png extension
+	graphics.imagePath("characters/bf_legs"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 186, height = 203, offsetX = -96, offsetY = -66, offsetWidth = 414, offsetHeight = 269}, -- 1: miss run legs0000
 		{x = 0, y = 0, width = 186, height = 203, offsetX = -96, offsetY = -66, offsetWidth = 414, offsetHeight = 269}, -- 2: miss run legs0001

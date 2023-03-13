@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("impmenu/ship")), -- Do not add the .png extension
+	graphics.imagePath("impmenu/ship"), -- Do not add the .png extension
 	{
 		{x = 0, y = 169, width = 159, height = 210, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: down0000
 		{x = 169, y = 220, width = 210, height = 159, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: left0000

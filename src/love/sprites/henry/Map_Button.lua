@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("henry/henry/Map_Button")), -- Do not add the .png extension
+	graphics.imagePath("henry/henry/Map_Button"), -- Do not add the .png extension
 	{
 		{x = 13, y = 13, width = 272, height = 157, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: Map Button0000
 		{x = 298, y = 13, width = 272, height = 157, offsetX = -28, offsetY = -19, offsetWidth = 300, offsetHeight = 177}, -- 2: Map Button Select0000

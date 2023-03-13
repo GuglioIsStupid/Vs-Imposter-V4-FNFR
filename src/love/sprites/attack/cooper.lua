@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("attack/cooper")), -- Do not add the .png extension
+	graphics.imagePath("attack/cooper"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 679, height = 641, offsetX = 0, offsetY = -2, offsetWidth = 679, offsetHeight = 643}, -- 1: bg seat 1 instance 10000
 		{x = 0, y = 0, width = 679, height = 641, offsetX = 0, offsetY = -2, offsetWidth = 679, offsetHeight = 643}, -- 2: bg seat 1 instance 10001

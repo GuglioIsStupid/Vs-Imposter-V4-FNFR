@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("pink/crewfront")), -- Do not add the .png extension
+	graphics.imagePath("pink/crewfront"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 2453, height = 406, offsetX = 0, offsetY = -16, offsetWidth = 2453, offsetHeight = 422}, -- 1: crewfront0000
 		{x = 0, y = 0, width = 2453, height = 406, offsetX = 0, offsetY = -16, offsetWidth = 2453, offsetHeight = 422}, -- 2: crewfront0001

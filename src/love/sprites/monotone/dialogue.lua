@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("monotone/dialogue")), -- Do not add the .png extension
+	graphics.imagePath("monotone/dialogue"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 644, height = 306, offsetX = -124, offsetY = 0, offsetWidth = 908, offsetHeight = 731}, -- 1: dialogue0000
 		{x = 0, y = 0, width = 644, height = 306, offsetX = -124, offsetY = 0, offsetWidth = 908, offsetHeight = 731}, -- 2: dialogue0001

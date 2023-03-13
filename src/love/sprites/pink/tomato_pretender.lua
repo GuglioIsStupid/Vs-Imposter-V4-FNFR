@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("pink/tomato_pretender")), -- Do not add the .png extension
+	graphics.imagePath("pink/tomato_pretender"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 492, height = 385, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: tomatongus anim0000
 		{x = 0, y = 0, width = 492, height = 385, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: tomatongus anim0001

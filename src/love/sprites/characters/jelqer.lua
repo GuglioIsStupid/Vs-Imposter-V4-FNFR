@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/jelqer")), -- Do not add the .png extension
+	graphics.imagePath("characters/jelqer"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 500, height = 406, offsetX = 0, offsetY = -5, offsetWidth = 512, offsetHeight = 411}, -- 1: jelqer dance left0000
 		{x = 0, y = 0, width = 500, height = 406, offsetX = 0, offsetY = -5, offsetWidth = 512, offsetHeight = 411}, -- 2: jelqer dance left0001

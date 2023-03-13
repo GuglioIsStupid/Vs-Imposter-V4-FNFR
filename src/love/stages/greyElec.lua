@@ -56,8 +56,6 @@ return {
         if beatHandler.onBeat() and beatHandler.getBeat() % 2 == 0 then 
             stageImages["black"]:animate("anim", false)
         end
-
-
     end,
 
     draw = function()

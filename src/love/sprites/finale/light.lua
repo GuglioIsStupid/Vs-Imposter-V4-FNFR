@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("finale/light")), -- Do not add the .png extension
+	graphics.imagePath("finale/light"), -- Do not add the .png extension
 	{
 		{x = 10, y = 10, width = 2355, height = 1780, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: light0000
 		{x = 2375, y = 10, width = 2355, height = 1780, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: light0001

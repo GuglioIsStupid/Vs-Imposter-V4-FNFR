@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("pink/stereo_taken")), -- Do not add the .png extension
+	graphics.imagePath("pink/stereo_taken"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 736, height = 356, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: stereo boom0000
 		{x = 0, y = 0, width = 736, height = 356, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: stereo boom0001

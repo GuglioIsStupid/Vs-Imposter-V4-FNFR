@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("henry/henry/Menu_button")), -- Do not add the .png extension
+	graphics.imagePath("henry/henry/Menu_button"), -- Do not add the .png extension
 	{
 		{x = 13, y = 13, width = 174, height = 90, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: Menu Button0000
 		{x = 200, y = 13, width = 174, height = 90, offsetX = -15, offsetY = -13, offsetWidth = 189, offsetHeight = 103}, -- 2: Menu Button Select0000

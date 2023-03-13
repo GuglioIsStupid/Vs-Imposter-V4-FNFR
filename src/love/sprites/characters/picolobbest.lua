@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/picolobbest")), -- Do not add the .png extension
+	graphics.imagePath("characters/picolobbest"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 507, height = 394, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: Pico Down Note0000
 		{x = 0, y = 0, width = 507, height = 394, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: Pico Down Note0001

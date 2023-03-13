@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/tuesdaygf")), -- Do not add the .png extension
+	graphics.imagePath("characters/tuesdaygf"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 636, height = 606, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: idle0000
 		{x = 0, y = 0, width = 636, height = 606, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: idle0001

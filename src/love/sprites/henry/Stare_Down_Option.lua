@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("henry/henry/Stare_Down_Option")), -- Do not add the .png extension
+	graphics.imagePath("henry/henry/Stare_Down_Option"), -- Do not add the .png extension
 	{
 		{x = 13, y = 13, width = 342, height = 311, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: Stare Down0000
 		{x = 368, y = 13, width = 342, height = 308, offsetX = 0, offsetY = -1, offsetWidth = 342, offsetHeight = 309}, -- 2: Stare Down Select0000

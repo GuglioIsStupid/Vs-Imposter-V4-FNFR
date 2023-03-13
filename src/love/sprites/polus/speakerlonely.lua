@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("polus/speakerlonely")), -- Do not add the .png extension
+	graphics.imagePath("polus/speakerlonely"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 699, height = 388, offsetX = -2, offsetY = 0, offsetWidth = 703, offsetHeight = 389}, -- 1: speakers lonely0000
 		{x = 729, y = 0, width = 703, height = 388, offsetX = 0, offsetY = 0, offsetWidth = 703, offsetHeight = 389}, -- 2: speakers lonely0001

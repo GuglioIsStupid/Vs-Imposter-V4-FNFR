@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("maroonStage2/ember")), -- Do not add the .png extension
+	graphics.imagePath("maroonStage2/ember"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 81, height = 81, offsetX = -3, offsetY = -1, offsetWidth = 87, offsetHeight = 85}, -- 1: ember0000
 		{x = 0, y = 0, width = 81, height = 81, offsetX = -3, offsetY = -1, offsetWidth = 87, offsetHeight = 85}, -- 2: ember0001

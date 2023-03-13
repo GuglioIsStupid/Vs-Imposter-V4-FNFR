@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/fabs")), -- Do not add the .png extension
+	graphics.imagePath("characters/fabs"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 707, height = 365, offsetX = 0, offsetY = -41, offsetWidth = 707, offsetHeight = 406}, -- 1: fabs down0000
 		{x = 0, y = 0, width = 707, height = 365, offsetX = 0, offsetY = -41, offsetWidth = 707, offsetHeight = 406}, -- 2: fabs down0001

@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("maroon/snowback")), -- Do not add the .png extension
+	graphics.imagePath("maroon/snowback"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 910, height = 337, offsetX = -60, offsetY = -3, offsetWidth = 1025, offsetHeight = 383}, -- 1: Snow group instance 10000
 		{x = 940, y = 0, width = 910, height = 337, offsetX = -60, offsetY = -3, offsetWidth = 1025, offsetHeight = 383}, -- 2: Snow group instance 10001

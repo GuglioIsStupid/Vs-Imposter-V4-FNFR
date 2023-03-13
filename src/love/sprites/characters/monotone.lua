@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/monotone")), -- Do not add the .png extension
+	graphics.imagePath("characters/monotone"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 946, height = 541, offsetX = 0, offsetY = -169, offsetWidth = 953, offsetHeight = 796}, -- 1: Sdown0000
 		{x = 966, y = 0, width = 946, height = 554, offsetX = 0, offsetY = -162, offsetWidth = 953, offsetHeight = 796}, -- 2: Sdown0001

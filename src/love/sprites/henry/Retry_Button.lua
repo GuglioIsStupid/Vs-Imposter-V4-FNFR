@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("henry/henry/Retry_Button")), -- Do not add the .png extension
+	graphics.imagePath("henry/henry/Retry_Button"), -- Do not add the .png extension
 	{
 		{x = 13, y = 13, width = 191, height = 118, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: Retry Button0000
 		{x = 217, y = 13, width = 191, height = 118, offsetX = -11, offsetY = 0, offsetWidth = 202, offsetHeight = 118}, -- 2: Retry Button Select0000

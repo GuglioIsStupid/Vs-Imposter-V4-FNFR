@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("attack/orbyy")), -- Do not add the .png extension
+	graphics.imagePath("attack/orbyy"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 310, height = 658, offsetX = 0, offsetY = -16, offsetWidth = 310, offsetHeight = 675}, -- 1: orbyy0000
 		{x = 0, y = 0, width = 310, height = 658, offsetX = 0, offsetY = -16, offsetWidth = 310, offsetHeight = 675}, -- 2: orbyy0001

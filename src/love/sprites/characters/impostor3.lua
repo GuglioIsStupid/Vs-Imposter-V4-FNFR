@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/impostor3")), -- Do not add the .png extension
+	graphics.imagePath("characters/impostor3"), -- Do not add the .png extension
 	{
 		{x = 1673, y = 2700, width = 622, height = 485, offsetX = -267, offsetY = 0, offsetWidth = 911, offsetHeight = 546}, -- 1: bwomp0000
 		{x = 1683, y = 3595, width = 720, height = 410, offsetX = -169, offsetY = -75, offsetWidth = 911, offsetHeight = 546}, -- 2: bwomp0001

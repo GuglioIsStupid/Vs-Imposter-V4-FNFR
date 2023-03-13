@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/jorsawsee")), -- Do not add the .png extension
+	graphics.imagePath("characters/jorsawsee"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 745, height = 504, offsetX = -22, offsetY = -19, offsetWidth = 779, offsetHeight = 524}, -- 1: down0000
 		{x = 775, y = 0, width = 746, height = 504, offsetX = -21, offsetY = -19, offsetWidth = 779, offsetHeight = 524}, -- 2: down0001

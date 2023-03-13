@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("victory/vic_war")), -- Do not add the .png extension
+	graphics.imagePath("victory/vic_war"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 320, height = 443, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: warchiefbganim 0000
 		{x = 329, y = 0, width = 320, height = 443, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: warchiefbganim 0001

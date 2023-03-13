@@ -18,7 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
 
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("menu/girlfriend-title")),
+	graphics.imagePath("menu/girlfriend-title"),
 	-- Automatically generated from gfDanceTitle.xml
 	{
 		{x = 0, y = 0, width = 717, height = 648, offsetX = -2, offsetY = -14, offsetWidth = 721, offsetHeight = 662}, -- 1: gfDance0000
