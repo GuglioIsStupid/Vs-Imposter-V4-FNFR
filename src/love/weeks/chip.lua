@@ -51,13 +51,13 @@ return {
 
 		if song == 3 then
 			weeks:generateNotes("songs/torture/torture-hard.json")
-			weeks:generateEvents("songs/torture/events.json")
+			--weeks:generateEvents("songs/torture/events.json")
 		elseif song == 2 then
 			weeks:generateNotes("songs/chipping/chipping-hard.json")
-			weeks:generateEvents("songs/chipping/events.json")
+			--weeks:generateEvents("songs/chipping/events.json")
 		else
 			weeks:generateNotes("songs/chippin/chippin-hard.json")
-			weeks:generateEvents("songs/chippin/events.json")
+			--weeks:generateEvents("songs/chippin/events.json")
 		end
 
 	end,
@@ -97,10 +97,10 @@ return {
 	draw = function(self)
 		love.graphics.push()
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
-			love.graphics.scale(camera.esizeX, camera.esizeY)
-			love.graphics.scale(camera.sizeX, camera.sizeY)
-			love.graphics.translate(camera.x, camera.y)
-			love.graphics.translate(camera.ex, camera.ey)
+			--love.graphics.scale(camera.esizeX, camera.esizeY)
+			--love.graphics.scale(camera.sizeX, camera.sizeY)
+			--love.graphics.translate(camera.x, camera.y)
+			--love.graphics.translate(camera.ex, camera.ey)
 		
 
 			stages["chip"]:draw()

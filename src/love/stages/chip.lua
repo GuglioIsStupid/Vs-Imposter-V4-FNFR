@@ -8,19 +8,37 @@ return {
         }
 
 
-        enemy = love.filesystem.load("sprites/characters/Jerma.lua")()
-        boyfriend = love.filesystem.load("sprites/boyfriend.lua")()
+        enemy = love.filesystem.load("sprites/characters/cval.lua")()
+        boyfriend = love.filesystem.load("sprites/characters/pip.lua")()
 
-        --boyfriend.x, boyfriend.y = 412, 168
-        --enemy.x, enemy.y = -397, 0
+        boyfriend.x, boyfriend.y = 222, 350
+        enemy.x, enemy.y = -654, 288
 
-        --camera:addPoint("boyfriend", 76, 23, 0.9, 0.9)
-        --camera:addPoint("enemy", 182, 122, 0.7, 0.7)
+        boyfriend.sizeX = -1
+
+        camera:addPoint("boyfriend", 132, -232, 0.75, 0.75)
+        camera:addPoint("enemy", 381, -232, 0.75, 0.75)
+
+        camera.sizeX, camera.sizeY = 0.75, 0.75
+
+        defaultCamZoom = 0.75, 0.75
+        --camera.scaleX, camera.scaleY = 0.75, 0.75
 
 
     end,
 
     load = function()
+
+        camera:addPoint("boyfriend", 132, -232, 0.75, 0.75)
+        camera:addPoint("enemy", 381, -232, 0.75, 0.75)
+
+        
+        camera.sizeX, camera.sizeY = 0.75, 0.75
+       -- camera.scaleX, camera.scaleY = 0.75, 0.75
+
+        defaultCamZoom = 0.75, 0.75
+
+
 
     end,
 
@@ -34,19 +52,23 @@ return {
 
     draw = function()
         love.graphics.push()
-        love.graphics.translate(camera.x * 0.7, camera.y * 0.7)
-            stageImages["back"]:draw()
-            stageImages["backBuildings"]:draw()
-        love.graphics.pop()
-        love.graphics.push()
-        love.graphics.translate(camera.x * 0.8, camera.y * 0.8)
-            stageImages["mainBuildings"]:draw()
-        love.graphics.pop()
-        love.graphics.push()
-        love.graphics.translate(camera.x, camera.y)
-            stageImages["balcony"]:draw()
-            enemy:draw()
-            boyfriend:draw()
+        love.graphics.scale(camera.esizeX, camera.esizeY)
+        love.graphics.scale(camera.sizeX, camera.sizeY)
+            love.graphics.push()
+            love.graphics.translate(camera.x * 0.7, camera.y * 0.7)
+                stageImages["back"]:draw()
+                stageImages["backBuildings"]:draw()
+            love.graphics.pop()
+            love.graphics.push()
+            love.graphics.translate(camera.x * 0.8, camera.y * 0.8)
+                stageImages["mainBuildings"]:draw()
+            love.graphics.pop()
+            love.graphics.push()
+            love.graphics.translate(camera.x, camera.y)
+                stageImages["balcony"]:draw()
+                enemy:draw()
+                boyfriend:draw()
+            love.graphics.pop()
         love.graphics.pop()
     end,
 
