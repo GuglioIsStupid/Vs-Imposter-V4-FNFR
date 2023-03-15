@@ -324,6 +324,7 @@ return {
 		events = {}
 		songEvents = {}
 		noteRows = {{}, {}}
+		noteRows = {{}, {}}
 		enemyNotes = {}
 		boyfriendNotes = {}
 		judgements = {}
