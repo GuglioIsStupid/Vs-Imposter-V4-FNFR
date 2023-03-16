@@ -17,10 +17,6 @@ return {
 
 		enemyIcon:animate("black", false)
 
-		boyfriend2 = boyfriend
-
-
-
 		self:load()
 	end,
 

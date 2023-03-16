@@ -305,7 +305,7 @@ return {
 		if enemy3 then enemy3:animate("idle") end
 		if enemy4 then enemy4:animate("idle") end
 		if enemyBF then enemyBF:animate("idle") end
-		if boyfriend2 then boyfriend2:animate("idle") end
+		if boyfriendCount == 2 then boyfriend2:animate("idle") end
 
 		if not camera.points["boyfriend"] then camera:addPoint("boyfriend", -boyfriend.x + 100, -boyfriend.y + 75) end
 		if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -enemy.y + 75) end
@@ -964,7 +964,7 @@ return {
 			end
 		end
 		boyfriend:beat(beatHandler.getBeat())
-		if boyfriend2 then boyfriend2:beat(beatHandler.getBeat()) end
+		if boyfriendCount == 2 then boyfriend2:beat(beatHandler.getBeat()) end
 		enemy:beat(beatHandler.getBeat())
 		if enemy2 then enemy2:beat(beatHandler.getBeat()) end
 		if enemy3 then enemy3:beat(beatHandler.getBeat()) end
@@ -1051,6 +1051,12 @@ return {
 									if enemy3 then self:safeAnimate(enemy3, curAnim .. " alt", false, 2) end
 									if enemy4 then self:safeAnimate(enemy4, curAnim .. " alt", false, 2) end
 									if enemyBF then self:safeAnimate(enemyBF, curAnim .. " alt", false, 2) end
+									-- make it do the opposite anim, up is down, down is up, left is right, right is left
+									if curAnim == "singUP" then curAnim = "singDOWN" 
+									elseif curAnim == "singDOWN" then curAnim = "singUP"
+									elseif curAnim == "singLEFT" then curAnim = "singRIGHT"
+									elseif curAnim == "singRIGHT" then curAnim = "singLEFT"
+									end
 									self:doGhostAnim("enemy", curAnim .. " alt")
 								else
 									self:safeAnimate(enemy, curAnim, false, 2)
@@ -1058,6 +1064,11 @@ return {
 									if enemy3 then self:safeAnimate(enemy3, curAnim, false, 2) end
 									if enemy4 then self:safeAnimate(enemy4, curAnim, false, 2) end
 									if enemyBF then self:safeAnimate(enemyBF, curAnim, false, 2) end
+									if curAnim == "singUP" then curAnim = "singDOWN" 
+									elseif curAnim == "singDOWN" then curAnim = "singUP"
+									elseif curAnim == "singLEFT" then curAnim = "singRIGHT"
+									elseif curAnim == "singRIGHT" then curAnim = "singLEFT"
+									end
 									self:doGhostAnim("enemy", curAnim)
 								end
 							end
@@ -1111,15 +1122,20 @@ return {
 
 						if boyfriendNote[1]:getAnimName() == "hold" or boyfriendNote[1]:getAnimName() == "end" then
 							if (not boyfriend:isAnimated()) or boyfriend:getAnimName() == "idle" then self:safeAnimate(boyfriend, curAnim, false, 2) end
-							if boyfriend2 then if (not boyfriend2:isAnimated()) or boyfriend2:getAnimName() == "idle" then self:safeAnimate(boyfriend2, curAnim, false, 2) end end
+							if boyfriendCount == 2 then if (not boyfriend2:isAnimated()) or boyfriend2:getAnimName() == "idle" then self:safeAnimate(boyfriend2, curAnim, false, 2) end end
 						else
 							if #noteRows[1][boyfriendNote[1].row] > 0 then
 								if (boyfriend.mostRecentRow ~= boyfriendNote[1].row) then
 									self:safeAnimate(boyfriend, curAnim, false, 2)
-									if boyfriend2 then self:safeAnimate(boyfriend2, curAnim, false, 2) end
+									if boyfriendCount == 2 then self:safeAnimate(boyfriend2, curAnim, false, 2) end
 								else
 									self:safeAnimate(boyfriend, curAnim, false, 2)
-									if boyfriend2 then self:safeAnimate(boyfriend2, curAnim, false, 2) end
+									if boyfriendCount == 2 then self:safeAnimate(boyfriend2, curAnim, false, 2) end
+									if curAnim == "singUP" then curAnim = "singDOWN" 
+									elseif curAnim == "singDOWN" then curAnim = "singUP"
+									elseif curAnim == "singLEFT" then curAnim = "singRIGHT"
+									elseif curAnim == "singRIGHT" then curAnim = "singLEFT"
+									end
 									self:doGhostAnim("bf", curAnim)
 								end
 							end
@@ -1252,10 +1268,15 @@ return {
 									if #noteRows[1][boyfriendNote[1].row] > 0 then
 										if (boyfriend.mostRecentRow ~= boyfriendNote[1].row) then
 											self:safeAnimate(boyfriend, curAnim, false, 2)
-											if boyfriend2 then self:safeAnimate(boyfriend2, curAnim, false, 2) end
+											if boyfriendCount == 2 then self:safeAnimate(boyfriend2, curAnim, false, 2) end
 										else
 											self:safeAnimate(boyfriend, curAnim, false, 2)
-											if boyfriend2 then self:safeAnimate(boyfriend2, curAnim, false, 2) end
+											if boyfriendCount == 2 then self:safeAnimate(boyfriend2, curAnim, false, 2) end
+											if curAnim == "singUP" then curAnim = "singDOWN" 
+											elseif curAnim == "singDOWN" then curAnim = "singUP"
+											elseif curAnim == "singLEFT" then curAnim = "singRIGHT"
+											elseif curAnim == "singRIGHT" then curAnim = "singLEFT"
+											end
 											self:doGhostAnim("bf", curAnim)
 										end
 									end
@@ -1287,7 +1308,7 @@ return {
 					if combo >= 5 then self:safeAnimate(girlfriend, "sad", true, 1) end
 
 					self:safeAnimate(boyfriend, "miss " .. curAnim, false, 3)
-					if boyfriend2 then self:safeAnimate(boyfriend2, "miss " .. curAnim, false, 3) end
+					if boyfriendCount == 2 then self:safeAnimate(boyfriend2, "miss " .. curAnim, false, 3) end
 
 					score = score - 10
 					combo = 0
@@ -1305,7 +1326,7 @@ return {
 				health = health + 0.0125
 
 				if (not boyfriend:isAnimated()) or boyfriend:getAnimName() == "idle" then self:safeAnimate(boyfriend, curAnim, false, 3) end
-				if boyfriend2 and (not boyfriend2:isAnimated()) or boyfriend2:getAnimName() == "idle" then self:safeAnimate(boyfriend2, curAnim, false, 3) end
+				if boyfriendCount == 2 then if (not boyfriend2:isAnimated()) or boyfriend2:getAnimName() == "idle" then self:safeAnimate(boyfriend2, curAnim, false, 3) end end
 
 				table.remove(boyfriendNote, 1)
 			end

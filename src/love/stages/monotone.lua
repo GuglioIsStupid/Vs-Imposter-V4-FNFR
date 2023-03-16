@@ -43,6 +43,8 @@ return {
         floor.sizeX, floor.sizeY = 2, 2
         wires.sizeX, wires.sizeY = 2, 2
 
+        boyfriendCount = 2
+
         enemyBF = love.filesystem.load("sprites/characters/bfscary.lua")()
         enemy = love.filesystem.load("sprites/characters/monotone.lua")()
         enemy2 = love.filesystem.load("sprites/characters/impostor.lua")()
@@ -78,8 +80,8 @@ return {
         boyfriend.x, boyfriend.y = 545, 425
         enemy.x, enemy.y = -500, 300
 
-        enemy2.x, enemy2.y = enemy.x, enemy.y
-        enemy3.x, enemy3.y = enemy.x, enemy.y + 80
+        enemy2.x, enemy2.y = enemy.x, enemy.y + 80
+        enemy3.x, enemy3.y = enemy.x, enemy.y
         enemy4.x, enemy4.y = enemy.x, enemy.y
         enemyBF.x, enemyBF.y = enemy.x, enemy.y + 125
 
@@ -135,6 +137,7 @@ return {
         enemy4:update(dt)
         enemyBF:update(dt)
 
+        enemyghost:update(dt)
         enemy2ghost:update(dt)
         enemy3ghost:update(dt)
         enemy4ghost:update(dt)
@@ -142,6 +145,7 @@ return {
 
         boyfriend2:update(dt)
 
+        bfghost:update(dt)
         boyfriend2ghost:update(dt)
     end,
 
@@ -234,5 +238,6 @@ return {
         stageImages[1] = nil
         enemy = nil
         boyfriend = nil
+        boyfriendCount = 1
     end
 }
