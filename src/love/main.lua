@@ -651,8 +651,7 @@ function love.load()
 			"Chip",
 			{
 				"Chippin",
-				"Chipping",
-				"Torture"
+				"Chipping"
 			}
 		}
 	}
