@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("attack/crowd")), -- Do not add the .png extension
+	graphics.imagePath("attack/crowd"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 657, height = 202, offsetX = -4, offsetY = -6, offsetWidth = 661, offsetHeight = 209}, -- 1: tess n gus fring instance 10000
 		{x = 0, y = 0, width = 657, height = 202, offsetX = -4, offsetY = -6, offsetWidth = 661, offsetHeight = 209}, -- 2: tess n gus fring instance 10001

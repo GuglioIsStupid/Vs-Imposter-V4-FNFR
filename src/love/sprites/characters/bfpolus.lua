@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/bfpolus")), -- Do not add the .png extension
+	graphics.imagePath("characters/bfpolus"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 379, height = 375, offsetX = -1, offsetY = -5, offsetWidth = 380, offsetHeight = 380}, -- 1: BF NOTE DOWN0000
 		{x = 409, y = 0, width = 379, height = 375, offsetX = -1, offsetY = -5, offsetWidth = 380, offsetHeight = 380}, -- 2: BF NOTE DOWN0001

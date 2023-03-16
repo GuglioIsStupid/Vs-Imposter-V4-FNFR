@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("yellowWeek/airship/newAirship/white_awkward")), -- Do not add the .png extension
+	graphics.imagePath("yellowWeek/airship/newAirship/white_awkward"), -- Do not add the .png extension
 	{
 		{x = 1311, y = 339, width = 419, height = 249, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: fetal position 0000
 		{x = 1311, y = 598, width = 419, height = 249, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: fetal position 0001

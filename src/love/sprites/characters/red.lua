@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/red")), -- Do not add the .png extension
+	graphics.imagePath("characters/red"), -- Do not add the .png extension
 	{
 		{x = 10, y = 10, width = 450, height = 410, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: red down0000
 		{x = 10, y = 10, width = 450, height = 410, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: red down0001

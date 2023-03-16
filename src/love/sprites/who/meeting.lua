@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("who/meeting")), -- Do not add the .png extension
+	graphics.imagePath("who/meeting"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 941, height = 453, offsetX = 0, offsetY = 0, offsetWidth = 941, offsetHeight = 453}, -- 1: meeting buzz0000
 		{x = 0, y = 453, width = 941, height = 453, offsetX = 0, offsetY = 0, offsetWidth = 941, offsetHeight = 453}, -- 2: meeting buzz0002

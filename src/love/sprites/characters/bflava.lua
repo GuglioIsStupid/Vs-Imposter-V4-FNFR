@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/bflava")), -- Do not add the .png extension
+	graphics.imagePath("characters/bflava"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 411, height = 440, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: BF Dead Loop0000
 		{x = 416, y = 0, width = 411, height = 440, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: BF Dead Loop0001

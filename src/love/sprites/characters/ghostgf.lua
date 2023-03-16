@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/ghostgf")), -- Do not add the .png extension
+	graphics.imagePath("characters/ghostgf"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 318, height = 385, offsetX = -3, offsetY = 0, offsetWidth = 323, offsetHeight = 399}, -- 1: gf cheer0000
 		{x = 0, y = 0, width = 318, height = 385, offsetX = -3, offsetY = 0, offsetWidth = 323, offsetHeight = 399}, -- 2: gf cheer0001

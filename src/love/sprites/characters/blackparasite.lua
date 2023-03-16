@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/blackparasite")), -- Do not add the .png extension
+	graphics.imagePath("characters/blackparasite"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 804, height = 989, offsetX = 0, offsetY = -18, offsetWidth = 804, offsetHeight = 1007}, -- 1: BLACK UP instance 10000
 		{x = 809, y = 0, width = 804, height = 989, offsetX = 0, offsetY = -18, offsetWidth = 804, offsetHeight = 1007}, -- 2: BLACK UP instance 10001

@@ -20,12 +20,6 @@ return {
         starBG = graphics.newImage(graphics.imagePath("impmenu/starBG"))
 		startFG = graphics.newImage(graphics.imagePath("impmenu/starFG"))
 
-        images = {
-            bigButtons = love.graphics.newImage(graphics.imagePath("impmenu/Big_Buttons_UI")),
-            buttons = love.graphics.newImage(graphics.imagePath("impmenu/Buttons_UI")),
-        }
-
-
         story = love.filesystem.load("sprites/impmenu/Big_Buttons_UI.lua")()
         freeplay = love.filesystem.load("sprites/impmenu/Big_Buttons_UI.lua")()
         credits = love.filesystem.load("sprites/impmenu/Big_Buttons_UI.lua")()

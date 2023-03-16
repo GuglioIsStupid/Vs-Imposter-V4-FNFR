@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/BF_Defeat_Scared")), -- Do not add the .png extension
+	graphics.imagePath("characters/BF_Defeat_Scared"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 420, height = 401, offsetX = 0, offsetY = -18, offsetWidth = 421, offsetHeight = 419}, -- 1: BF idle dance afraid0000
 		{x = 425, y = 0, width = 420, height = 401, offsetX = 0, offsetY = -18, offsetWidth = 421, offsetHeight = 419}, -- 2: BF idle dance afraid0001

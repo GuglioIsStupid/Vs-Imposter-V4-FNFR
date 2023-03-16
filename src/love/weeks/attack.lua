@@ -16,8 +16,6 @@ return {
 
 		enemyIcon:animate("black", false)
 
-        
-
 		self:load()
 	end,
 

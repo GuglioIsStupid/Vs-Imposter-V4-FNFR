@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/whitewho")), -- Do not add the .png extension
+	graphics.imagePath("characters/whitewho"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 441, height = 528, offsetX = 0, offsetY = 0, offsetWidth = 457, offsetHeight = 528}, -- 1: miss down0000
 		{x = 0, y = 0, width = 441, height = 528, offsetX = 0, offsetY = 0, offsetWidth = 457, offsetHeight = 528}, -- 2: miss down0001

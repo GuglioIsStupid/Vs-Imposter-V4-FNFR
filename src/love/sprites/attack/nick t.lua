@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("attack/nick t")), -- Do not add the .png extension
+	graphics.imagePath("attack/nick t"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 215, height = 568, offsetX = -12, offsetY = -9, offsetWidth = 227, offsetHeight = 577}, -- 1: nick t animation0000
 		{x = 0, y = 0, width = 215, height = 568, offsetX = -12, offsetY = -9, offsetWidth = 227, offsetHeight = 577}, -- 2: nick t animation0001

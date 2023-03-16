@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("maroonStage2/bubbles")), -- Do not add the .png extension
+	graphics.imagePath("maroonStage2/bubbles"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 15, height = 13, offsetX = -146, offsetY = -14, offsetWidth = 1735, offsetHeight = 190}, -- 1: Lava Bubbles0000
 		{x = 0, y = 0, width = 15, height = 13, offsetX = -146, offsetY = -14, offsetWidth = 1735, offsetHeight = 190}, -- 2: Lava Bubbles0001

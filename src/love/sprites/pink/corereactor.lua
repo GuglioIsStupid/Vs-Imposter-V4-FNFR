@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("pink/corereactor")), -- Do not add the .png extension
+	graphics.imagePath("pink/corereactor"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 1468, height = 1297, offsetX = 0, offsetY = 0, offsetWidth = 1468, offsetHeight = 1298}, -- 1: core0000
 		{x = 1473, y = 0, width = 1468, height = 1260, offsetX = 0, offsetY = 0, offsetWidth = 1468, offsetHeight = 1298}, -- 2: core0001

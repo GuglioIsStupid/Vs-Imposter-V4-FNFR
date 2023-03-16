@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("pink/grey_pretender")), -- Do not add the .png extension
+	graphics.imagePath("pink/grey_pretender"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 555, height = 507, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: gray anim0000
 		{x = 0, y = 0, width = 555, height = 507, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: gray anim0001

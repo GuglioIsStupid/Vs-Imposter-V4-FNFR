@@ -18,7 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
 
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("i-hate-you/boo")),
+	graphics.imagePath("i-hate-you/boo"),
 	-- Automatically generated from Luigi_IHY_Background_Assets_Boo.xml
 	{
 		{x = 0, y = 0, width = 154, height = 133, offsetX = -1, offsetY = -12, offsetWidth = 155, offsetHeight = 145}, -- 1: Boo0000

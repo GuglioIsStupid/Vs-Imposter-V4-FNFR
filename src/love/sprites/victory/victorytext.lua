@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("victory/victorytext")), -- Do not add the .png extension
+	graphics.imagePath("victory/victorytext"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 1057, height = 218, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: VICTORY instance 10000
 		{x = 1066, y = 0, width = 1057, height = 218, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: VICTORY instance 10001

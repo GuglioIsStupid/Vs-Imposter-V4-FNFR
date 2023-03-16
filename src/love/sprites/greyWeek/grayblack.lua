@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("greyWeek/grayblack")), -- Do not add the .png extension
+	graphics.imagePath("greyWeek/grayblack"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 779, height = 642, offsetX = 0, offsetY = -1, offsetWidth = 798, offsetHeight = 643}, -- 1: whoisthismf0000
 		{x = 0, y = 0, width = 779, height = 642, offsetX = 0, offsetY = -1, offsetWidth = 798, offsetHeight = 643}, -- 2: whoisthismf0001

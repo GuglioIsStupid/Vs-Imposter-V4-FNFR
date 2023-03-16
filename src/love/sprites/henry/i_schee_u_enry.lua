@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("henry/henry/i_schee_u_enry")), -- Do not add the .png extension
+	graphics.imagePath("henry/henry/i_schee_u_enry"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 1786, height = 1313, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: rhm intro shadow0000
 		{x = 1796, y = 0, width = 1786, height = 1313, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: rhm intro shadow0001

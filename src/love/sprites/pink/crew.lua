@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("pink/crew")), -- Do not add the .png extension
+	graphics.imagePath("pink/crew"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 717, height = 976, offsetX = -4, offsetY = -21, offsetWidth = 721, offsetHeight = 1004}, -- 1: RHM0000
 		{x = 0, y = 0, width = 717, height = 976, offsetX = -4, offsetY = -21, offsetWidth = 721, offsetHeight = 1004}, -- 2: RHM0001

@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("polus/boppers_meltdown")), -- Do not add the .png extension
+	graphics.imagePath("polus/boppers_meltdown"), -- Do not add the .png extension
 	{
 		{x = 13, y = 13, width = 2967, height = 885, offsetX = 0, offsetY = -28, offsetWidth = 2967, offsetHeight = 913}, -- 1: BoppersMeltdown0000
 		{x = 2993, y = 13, width = 2967, height = 885, offsetX = 0, offsetY = -28, offsetWidth = 2967, offsetHeight = 913}, -- 2: BoppersMeltdown0001

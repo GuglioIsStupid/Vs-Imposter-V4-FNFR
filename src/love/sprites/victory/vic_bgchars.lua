@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("victory/vic_bgchars")), -- Do not add the .png extension
+	graphics.imagePath("victory/vic_bgchars"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 2158, height = 488, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: lol thing 0000
 		{x = 0, y = 0, width = 2158, height = 488, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: lol thing 0001

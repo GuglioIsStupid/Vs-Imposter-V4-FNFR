@@ -265,6 +265,7 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 	initUI = function(self, option)
 		events = {}
 		songEvents = {}
+		noteRows = {{}, {}}
 		enemyNotes = {}
 		boyfriendNotes = {}
 		judgements = {}
@@ -644,6 +645,29 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 				)
 			end
 		)
+	end,
+
+	doGhostAnim = function(self, who, animToPlay)
+		if who == "bf" then 
+			-- make a copy of boyfriend to bfghost
+			bfghost.alpha = 0.8
+			bfghost.color = {255, 0, 0}
+			if bfGhostTween then 
+				Timer.cancel(bfGhostTween)
+			end
+			bfGhostTween = Timer.tween(0.75, bfghost, {alpha = 0}, "linear", function() bfGhostTween = nil end)
+
+			bfghost:animate(animToPlay, false)
+		else
+			enemyghost.alpha = 0.8
+			enemyghost.color = {255, 0, 0}
+			if enemyGhostTween then 
+				Timer.cancel(enemyGhostTween)
+			end
+			enemyGhostTween = Timer.tween(0.75, enemyghost, {alpha = 0}, "linear", function() enemyGhostTween = nil end)
+
+			enemyghost:animate(animToPlay, false)
+		end
 	end,
 
     setupEjectCountdown = function(self)

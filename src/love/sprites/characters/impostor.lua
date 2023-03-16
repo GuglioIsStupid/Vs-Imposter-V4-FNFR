@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/impostor")), -- Do not add the .png extension
+	graphics.imagePath("characters/impostor"), -- Do not add the .png extension
 	{
 		{x = 1, y = 1, width = 657, height = 354, offsetX = 0, offsetY = 0, offsetWidth = 673, offsetHeight = 354}, -- 1: imposter left0000
 		{x = 1, y = 1, width = 657, height = 354, offsetX = 0, offsetY = 0, offsetWidth = 673, offsetHeight = 354}, -- 2: imposter left0001
@@ -49,11 +49,11 @@ return graphics.newSprite(
 		--To get the animations, look at the number and the name of the frame
 		--Start is the first frame, stop is the last frame, speed is the speed of the animation, offsetX and offsetY are the offset of the animation
 		--Get the offset by using the ingame offset editor and pressing 7
-		["singLEFT"] = {start = 1, stop = 10, speed = 24, offsetX = 0, offsetY = 0},
-		["singDOWN"] = {start = 11, stop = 16, speed = 24, offsetX = 0, offsetY = 0},
+		["singLEFT"] = {start = 1, stop = 10, speed = 24, offsetX = 71, offsetY = -6},
+		["singDOWN"] = {start = 11, stop = 16, speed = 24, offsetX = -8, offsetY = 9},
 		["idle"] = {start = 17, stop = 27, speed = 24, offsetX = 0, offsetY = 0},
-		["singRIGHT"] = {start = 28, stop = 33, speed = 24, offsetX = 0, offsetY = 0},
-		["singUP"] = {start = 34, stop = 39, speed = 24, offsetX = 0, offsetY = 0},
+		["singRIGHT"] = {start = 28, stop = 33, speed = 24, offsetX = -23, offsetY = -19},
+		["singUP"] = {start = 34, stop = 39, speed = 24, offsetX = -1, offsetY = 18},
 
 	},
 	"idle", -- set to default animation

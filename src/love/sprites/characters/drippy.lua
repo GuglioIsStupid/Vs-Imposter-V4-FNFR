@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/drippy")), -- Do not add the .png extension
+	graphics.imagePath("characters/drippy"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 492, height = 533, offsetX = 0, offsetY = -9, offsetWidth = 492, offsetHeight = 542}, -- 1: DripDown0000
 		{x = 0, y = 0, width = 492, height = 533, offsetX = 0, offsetY = -9, offsetWidth = 492, offsetHeight = 542}, -- 2: DripDown0001

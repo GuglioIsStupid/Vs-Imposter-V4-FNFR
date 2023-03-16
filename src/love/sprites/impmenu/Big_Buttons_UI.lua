@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	images.bigButtons, -- Do not add the .png extension
+	graphics.imagePath("impmenu/Big_Buttons_UI"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 439, height = 112, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: Credits Button0000
 		{x = 440, y = 0, width = 441, height = 114, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: Credits Select0000

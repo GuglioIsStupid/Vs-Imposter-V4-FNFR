@@ -154,6 +154,11 @@ return {
 	end,
 
 	newSprite = function(imageData, frameData, animData, animName, loopAnim, optionsTable)
+		local pathStr = imageData
+		if not graphics.cache[pathStr] then 
+			graphics.cache[pathStr] = love.graphics.newImage(pathStr)
+		end
+		local imageData = graphics.cache[pathStr]
 		local sheet, sheetWidth, sheetHeight
 
 		local frames = {}
@@ -183,6 +188,7 @@ return {
 			offsetY = 0,
 			shearX = 0,
 			shearY = 0,
+			imageData = imageData,
 
 			scrollX = 1,
 			scrollY = 1,
@@ -197,8 +203,8 @@ return {
 			isCharacter = optionsTable and optionsTable.isCharacter or false,
 			danceSpeed = optionsTable and optionsTable.danceSpeed or 2,
 
-			setSheet = function(self, imageData)
-				sheet = imageData
+			setSheet = function(self)
+				sheet = self.imageData
 				sheetWidth = sheet:getWidth()
 				sheetHeight = sheet:getHeight()
 			end,

@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/bluewhonormal")), -- Do not add the .png extension
+	graphics.imagePath("characters/bluewhonormal"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 399, height = 432, offsetX = 0, offsetY = -23, offsetWidth = 424, offsetHeight = 457}, -- 1: blue idle normal0000
 		{x = 0, y = 0, width = 399, height = 432, offsetX = 0, offsetY = -23, offsetWidth = 424, offsetHeight = 457}, -- 2: blue idle normal0001

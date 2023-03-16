@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("pink/littleheart")), -- Do not add the .png extension
+	graphics.imagePath("pink/littleheart"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 95, height = 87, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: littleheart0000
 		{x = 0, y = 0, width = 95, height = 87, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: littleheart0001

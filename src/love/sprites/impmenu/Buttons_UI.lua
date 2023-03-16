@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	images.buttons, -- Do not add the .png extension
+	graphics.imagePath("impmenu/Buttons_UI"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 150, height = 151, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: Innersloth Button0000
 		{x = 0, y = 152, width = 150, height = 151, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: Innersloth Select0000

@@ -18,9 +18,28 @@ return {
 		song = songNum
 
         enemy = love.filesystem.load("sprites/characters/black.lua")()
+		enemyghost = love.filesystem.load("sprites/characters/black.lua")()
+		enemyghost.colors = {1,1,1}
+		enemyghost.alpha = 0
+
+		blackoldghost = love.filesystem.load("sprites/characters/blackold.lua")()
+		blackoldghost.colors = {1,1,1}
+		blackoldghost.alpha = 0
 
 		bfScared = love.filesystem.load("sprites/characters/BF_Defeat_Scared.lua")()
 		bfOther = love.filesystem.load("sprites/characters/BF_Defeat_Nomal.lua")()
+		
+		bfghost = love.filesystem.load("sprites/characters/BF_Defeat_Nomal.lua")()
+		bfghost.colors = {1,1,1}
+		bfghost.alpha = 0
+
+		bfScaredghost = love.filesystem.load("sprites/characters/BF_Defeat_Scared.lua")()
+		bfScaredghost.colors = {1,1,1}
+		bfScaredghost.alpha = 0
+
+		bfOtherghost = love.filesystem.load("sprites/characters/BF_Defeat_Nomal.lua")()
+		bfOtherghost.colors = {1,1,1}
+		bfOtherghost.alpha = 0
 
 		enemyIcon:animate("black", false)
 
@@ -44,6 +63,13 @@ return {
 
 		bfScared.x, bfScared.y = boyfriend.x, boyfriend.y
 		bfOther.x, bfOther.y = boyfriend.x, boyfriend.y
+
+		bfScaredghost.x, bfScaredghost.y = boyfriend.x, boyfriend.y
+		bfOtherghost.x, bfOtherghost.y = boyfriend.x, boyfriend.y
+		bfghost.x, bfghost.y = boyfriend.x, boyfriend.y
+
+		enemyghost.x, enemyghost.y = enemy.x, enemy.y
+		blackoldghost.x, blackoldghost.y = blackold.x, blackold.y
 	end,
 
 	load = function(self)
@@ -140,17 +166,31 @@ return {
             graphics.setColor(1,1,1, lolAlpha[1])
             lolThing:draw()
             deadBG:draw()
-            graphics.setColor(1,1,1, 1)
 			if curPlayer == "BF" then 
+				graphics.setColor(bfghost.colors[1], bfghost.colors[2], bfghost.colors[3], bfghost.alpha)
+				bfghost:draw()
+				graphics.setColor(1,1,1, 1)
             	boyfriend:draw()
 			elseif curPlayer == "BF-Scared" then
+				graphics.setColor(bfScaredghost.colors[1], bfScaredghost.colors[2], bfScaredghost.colors[3], bfScaredghost.alpha)
+				bfScaredghost:draw()
+				graphics.setColor(1,1,1, 1)
 				bfScared:draw()
 			elseif curPlayer == "BF-Other" then
+				graphics.setColor(bfOtherghost.colors[1], bfOtherghost.colors[2], bfOtherghost.colors[3], bfOtherghost.alpha)
+				bfOtherghost:draw()
+				graphics.setColor(1,1,1, 1)
 				bfOther:draw()
 			end
             if curEnemy == "black" then
+				graphics.setColor(enemyghost.colors[1], enemyghost.colors[2], enemyghost.colors[3], enemyghost.alpha)
+				enemyghost:draw()
+				graphics.setColor(1,1,1, 1)
                 enemy:draw()
             elseif curEnemy == "blackold" then
+				graphics.setColor(blackoldghost.colors[1], blackoldghost.colors[2], blackoldghost.colors[3], blackoldghost.alpha)
+				blackoldghost:draw()
+				graphics.setColor(1,1,1, 1)
                 blackold:draw()
             end
             graphics.setColor(1,1,1, lolAlpha[1])

@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("victory/vic_jor")), -- Do not add the .png extension
+	graphics.imagePath("victory/vic_jor"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 328, height = 453, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: jorsawseebganim 0000
 		{x = 337, y = 0, width = 328, height = 453, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: jorsawseebganim 0001

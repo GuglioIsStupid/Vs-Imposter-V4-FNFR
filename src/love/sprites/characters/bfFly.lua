@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/bfFly")), -- Do not add the .png extension
+	graphics.imagePath("characters/bfFly"), -- Do not add the .png extension
 	{
 		{x = 1897, y = 6370, width = 422, height = 470, offsetX = 0, offsetY = -5, offsetWidth = 432, offsetHeight = 472}, -- 1: MISS 0left0000
 		{x = 0, y = 0, width = 418, height = 475, offsetX = -21, offsetY = 0, offsetWidth = 439, offsetHeight = 475}, -- 2: MISS 0left0001

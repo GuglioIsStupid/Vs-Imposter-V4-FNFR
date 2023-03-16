@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/Ellie_Assets")), -- Do not add the .png extension
+	graphics.imagePath("characters/Ellie_Assets"), -- Do not add the .png extension
 	{
 		{x = 3799, y = 6336, width = 460, height = 637, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: Ellie Down0000
 		{x = 3799, y = 6336, width = 460, height = 637, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: Ellie Down0001

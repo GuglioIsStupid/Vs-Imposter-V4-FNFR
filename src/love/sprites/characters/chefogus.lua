@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/chefogus")), -- Do not add the .png extension
+	graphics.imagePath("characters/chefogus"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 379, height = 600, offsetX = -16, offsetY = -8, offsetWidth = 395, offsetHeight = 621}, -- 1: Idle0000
 		{x = 0, y = 0, width = 379, height = 600, offsetX = -16, offsetY = -8, offsetWidth = 395, offsetHeight = 621}, -- 2: Idle0001

@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("impmenu/greenmenu")), -- Do not add the .png extension
+	graphics.imagePath("impmenu/greenmenu"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 865, height = 938, offsetX = 0, offsetY = 0, offsetWidth = 1092, offsetHeight = 1281}, -- 1: green idle0000
 		{x = 866, y = 0, width = 867, height = 937, offsetX = 1, offsetY = 0, offsetWidth = 1092, offsetHeight = 1281}, -- 2: green idle0001

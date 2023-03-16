@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("pink/pretender/blued")), -- Do not add the .png extension
+	graphics.imagePath("pink/pretender/blued"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 702, height = 435, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: bob bop0000
 		{x = 0, y = 0, width = 702, height = 435, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: bob bop0001

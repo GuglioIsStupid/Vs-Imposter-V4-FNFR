@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/bfghost")), -- Do not add the .png extension
+	graphics.imagePath("characters/bfghost"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 412, height = 378, offsetX = -2, offsetY = -2, offsetWidth = 434, offsetHeight = 380}, -- 1: BF HEY!!0000
 		{x = 442, y = 0, width = 412, height = 378, offsetX = -2, offsetY = -2, offsetWidth = 434, offsetHeight = 380}, -- 2: BF HEY!!0001

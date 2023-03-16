@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/rhm")), -- Do not add the .png extension
+	graphics.imagePath("characters/rhm"), -- Do not add the .png extension
 	{
 		{x = 30, y = 30, width = 510, height = 799, offsetX = -8, offsetY = -21, offsetWidth = 519, offsetHeight = 820}, -- 1: RHM Idle0000
 		{x = 30, y = 30, width = 510, height = 799, offsetX = -8, offsetY = -21, offsetWidth = 519, offsetHeight = 820}, -- 2: RHM Idle0001

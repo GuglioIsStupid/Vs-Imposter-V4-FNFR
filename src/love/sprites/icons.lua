@@ -18,7 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
 
 return graphics.newSprite(
-    images.icons,
+    graphics.imagePath("icons"),
 	{
 		{x = 0, y = 119, width = 138, height = 82, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: Boyfriend
 		{x = 139, y = 117, width = 137, height = 90, offsetX = 0, offsetY = -3, offsetWidth = 137, offsetHeight = 90}, -- 2: Boyfriend Losing

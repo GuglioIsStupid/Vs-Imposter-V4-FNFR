@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/blackalt")), -- Do not add the .png extension
+	graphics.imagePath("characters/blackalt"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 1246, height = 636, offsetX = 0, offsetY = -37, offsetWidth = 1246, offsetHeight = 673}, -- 1: down alt0000
 		{x = 1266, y = 0, width = 1121, height = 640, offsetX = -20, offsetY = -13, offsetWidth = 1246, offsetHeight = 673}, -- 2: down alt0001

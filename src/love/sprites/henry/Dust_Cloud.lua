@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("henry/henry/Dust_Clouds")), -- Do not add the .png extension
+	graphics.imagePath("henry/henry/Dust_Clouds"), -- Do not add the .png extension
 	{
 		{x = 30, y = 30, width = 507, height = 433, offsetX = -50, offsetY = -97, offsetWidth = 611, offsetHeight = 568}, -- 1: dust clouds0000
 		{x = 567, y = 30, width = 507, height = 434, offsetX = -50, offsetY = -96, offsetWidth = 611, offsetHeight = 568}, -- 2: dust clouds0001

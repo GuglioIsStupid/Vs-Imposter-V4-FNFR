@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("yellowWeek/airship/screamsky")), -- Do not add the .png extension
+	graphics.imagePath("yellowWeek/airship/screamsky"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 2059, height = 1116, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: scream sky  instance 10000
 		{x = 2079, y = 0, width = 2059, height = 1116, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: scream sky  instance 10001

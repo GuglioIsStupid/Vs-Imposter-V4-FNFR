@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("maroonStage2/wallBP")), -- Do not add the .png extension
+	graphics.imagePath("maroonStage2/wallBP"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 4286, height = 1969, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: Back wall and lava0000
 		{x = 0, y = 0, width = 4286, height = 1969, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: Back wall and lava0001

@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("henry/henry/Microphone_Option")), -- Do not add the .png extension
+	graphics.imagePath("henry/henry/Microphone_Option"), -- Do not add the .png extension
 	{
 		{x = 13, y = 13, width = 399, height = 336, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: Microphone0000
 		{x = 425, y = 13, width = 399, height = 324, offsetX = 0, offsetY = -7, offsetWidth = 399, offsetHeight = 331}, -- 2: Microphone Select0000

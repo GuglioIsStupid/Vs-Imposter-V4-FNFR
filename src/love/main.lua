@@ -437,6 +437,8 @@ function love.load()
 		require "weeks.chip"
 	}
 
+	boyfriendCount = 1
+
 	weekDesc = { -- Add your week description here
 		"LEARN TO FUNK",
 		"DADDY DEAREST",

@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/blackdk")), -- Do not add the .png extension
+	graphics.imagePath("characters/blackdk"), -- Do not add the .png extension
 	{
 		{x = 10, y = 10, width = 1271, height = 738, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: down0000
 		{x = 1291, y = 10, width = 1271, height = 738, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: down0001
@@ -76,11 +76,11 @@ return graphics.newSprite(
 		--To get the animations, look at the number and the name of the frame
 		--Start is the first frame, stop is the last frame, speed is the speed of the animation, offsetX and offsetY are the offset of the animation
 		--Get the offset by using the ingame offset editor and pressing 7
-		["singDOWN"] = {start = 1, stop = 10, speed = 24, offsetX = 0, offsetY = 0},
+		["singDOWN"] = {start = 1, stop = 10, speed = 24, offsetX = 21, offsetY = -111},
 		["idle"] = {start = 11, stop = 36, speed = 24, offsetX = 0, offsetY = 0},
-		["singLEFT"] = {start = 37, stop = 47, speed = 24, offsetX = 0, offsetY = 0},
-		["singRIGHT"] = {start = 48, stop = 56, speed = 24, offsetX = 0, offsetY = 0},
-		["singUP"] = {start = 57, stop = 66, speed = 24, offsetX = 0, offsetY = 0},
+		["singLEFT"] = {start = 37, stop = 47, speed = 24, offsetX = 231, offsetY = 45},
+		["singRIGHT"] = {start = 48, stop = 56, speed = 24, offsetX = -253, offsetY = 11},
+		["singUP"] = {start = 57, stop = 66, speed = 24, offsetX = 11, offsetY = 46},
 
 	},
 	"idle", -- set to default animation
