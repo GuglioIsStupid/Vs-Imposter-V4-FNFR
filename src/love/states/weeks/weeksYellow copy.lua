@@ -595,7 +595,7 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 				local index = j - offset
 
 				if boyfriendNotes[i][index]:getAnimName() == "on" and boyfriendNotes[i][index - 1]:getAnimName() == "on" and ((boyfriendNotes[i][index].y - boyfriendNotes[i][index - 1].y <= 10)) then
-					--table.remove(boyfriendNotes[i], index)
+					table.remove(boyfriendNotes[i], index)
 
 					offset = offset + 1
 				end
@@ -985,7 +985,7 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 						health = health - 0.0125
 					end
 
-					--table.remove(boyfriendNote, 1)
+					table.remove(boyfriendNote, 1)
 
 					if combo >= 5 then self:safeAnimate(girlfriend, "sad", true, 1) end
 
@@ -1039,7 +1039,7 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 							health = health + 0.0125
 						end
 
-						--table.remove(boyfriendNote, 1)
+						table.remove(boyfriendNote, 1)
 					end
 				end
 			end
@@ -1133,7 +1133,7 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 									success = true
 								end
 
-								--table.remove(boyfriendNote, j)
+								table.remove(boyfriendNote, j)
 							else
 								break
 							end
@@ -1167,7 +1167,7 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 
 				if (not boyfriend:isAnimated()) or boyfriend:getAnimName() == "idle" then self:safeAnimate(boyfriend, curAnim, false, 3) end
 
-				--table.remove(boyfriendNote, 1)
+				table.remove(boyfriendNote, 1)
 			end
 
 			if input:released(curInput) then
@@ -1184,8 +1184,8 @@ if not camera.points["enemy"] then camera:addPoint("enemy", -enemy.x - 100, -ene
 				boyfriendIcon:animate("boyfriend (pixel)", false)
 			end
 		elseif health <= 0 then -- Game over
-			--Gamestate.push(gameOver)
-			--health = 0
+			Gamestate.push(gameOver)
+			health = 0
 		elseif health <= 0.325 and boyfriendIcon:getAnimName() == "boyfriend" then
 			if not pixel then 
 				boyfriendIcon:animate("boyfriend losing", false)
