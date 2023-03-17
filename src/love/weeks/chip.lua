@@ -17,10 +17,6 @@ return {
 
 		enemyIcon:animate("black", false)
 
-		boyfriend2 = boyfriend
-
-
-
 		self:load()
 	end,
 
@@ -97,11 +93,6 @@ return {
 	draw = function(self)
 		love.graphics.push()
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
-			--love.graphics.scale(camera.esizeX, camera.esizeY)
-			--love.graphics.scale(camera.sizeX, camera.sizeY)
-			--love.graphics.translate(camera.x, camera.y)
-			--love.graphics.translate(camera.ex, camera.ey)
-		
 
 			stages["chip"]:draw()
 			weeks:drawRating(0.9)
