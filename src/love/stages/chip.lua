@@ -18,6 +18,7 @@ return {
 
         camera:addPoint("boyfriend", 132, -232, 0.75, 0.75)
         camera:addPoint("enemy", 381, -232, 0.75, 0.75)
+        camera:addPoint("zoomed", 151, 2, 0.65, 0.65)
 
         camera.sizeX, camera.sizeY = 0.75, 0.75
 
@@ -31,6 +32,8 @@ return {
 
         camera:addPoint("boyfriend", 132, -232, 0.75, 0.75)
         camera:addPoint("enemy", 381, -232, 0.75, 0.75)
+        camera:addPoint("zoomed", 151, 2, 0.40, 0.40)
+
 
         
         camera.sizeX, camera.sizeY = 0.75, 0.75
@@ -38,6 +41,8 @@ return {
 
         defaultCamZoom = 0.75, 0.75
 
+
+        zoomOut = false
 
 
     end,
@@ -48,6 +53,19 @@ return {
             enemy:animate("idle", false)        -- fixed the animation issues
         end
 
+
+        if song == 1 then
+            --if musicTime >= 48000 and musicTime < 48050 then
+            if musicTime >= 1000 and musicTime < 1050 then
+                camera:moveToPoint(8, "zoomed")
+                zoomOut = true
+                if zoomingCam then
+                   -- Timer.cancel(zoomingCam)
+                end
+                zoomingCam = Timer.tween(8, camera, {sizeX = 0.40, sizeY = 0.40, scaleX = 0.40, scaleY = 0.40}, "out-quad")
+                camera.zooming = false
+            end
+        end
     end,
 
     draw = function()
