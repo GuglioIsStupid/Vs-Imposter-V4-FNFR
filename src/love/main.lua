@@ -396,6 +396,7 @@ function love.load()
 	weeksWho = require "states.weeks.weeksWho"
 	weeksDripping = require "states.weeks.weeksDripping"
 	weeksFinale = require "states.weeks.weeksFinale"
+	weeksChip = require "states.weeks.weeksChip"
 	require("states.weeks.weeksOld")
 
 	countBeans = true

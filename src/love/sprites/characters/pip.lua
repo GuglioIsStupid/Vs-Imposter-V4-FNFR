@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/pip")), -- Do not add the .png extension
+	graphics.imagePath("characters/pip"), -- Do not add the .png extension
 	{
 		{x = 13, y = 13, width = 703, height = 671, offsetX = 0, offsetY = -13, offsetWidth = 703, offsetHeight = 684}, -- 1: Pip Down0000
 		{x = 13, y = 13, width = 703, height = 671, offsetX = 0, offsetY = -13, offsetWidth = 703, offsetHeight = 684}, -- 2: Pip Down0001

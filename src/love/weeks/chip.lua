@@ -4,7 +4,7 @@ local stageBack, stageFront, curtains
 return {
 	enter = function(self, from, songNum, songAppend)
 		pauseColor = {129, 100, 223}
-		weeks:enter()
+		weeksChip:enter()
 		stages["chip"]:enter()
 
 		week = 1
@@ -21,7 +21,7 @@ return {
 	end,
 
 	load = function(self)
-		weeks:load()
+		weeksChip:load()
 		stages["chip"]:load()
 
 
@@ -39,27 +39,27 @@ return {
 
 		self:initUI()
 
-		weeks:setupCountdown()
+		weeksChip:setupCountdown()
 	end,
 
 	initUI = function(self)
-		weeks:initUI()
+		weeksChip:initUI()
 
 		if song == 3 then
-			weeks:generateNotes("songs/torture/torture-hard.json")
-			--weeks:generateEvents("songs/torture/events.json")
+			weeksChip:generateNotes("songs/torture/torture-hard.json")
+			--weeksChip:generateEvents("songs/torture/events.json")
 		elseif song == 2 then
-			weeks:generateNotes("songs/chipping/chipping-hard.json")
-			--weeks:generateEvents("songs/chipping/events.json")
+			weeksChip:generateNotes("songs/chipping/chipping-hard.json")
+			--weeksChip:generateEvents("songs/chipping/events.json")
 		else
-			weeks:generateNotes("songs/chippin/chippin-hard.json")
-			--weeks:generateEvents("songs/chippin/events.json")
+			weeksChip:generateNotes("songs/chippin/chippin-hard.json")
+			--weeksChip:generateEvents("songs/chippin/events.json")
 		end
 
 	end,
 
 	update = function(self, dt)
-		weeks:update(dt)
+		weeksChip:update(dt)
 		stages["chip"]:update(dt)
 
 		if health >= 80 then
@@ -87,7 +87,7 @@ return {
 		end
 
 
-		weeks:updateUI(dt)
+		weeksChip:updateUI(dt)
 	end,
 
 	draw = function(self)
@@ -95,14 +95,14 @@ return {
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
 
 			stages["chip"]:draw()
-			weeks:drawRating(0.9)
+			weeksChip:drawRating(0.9)
 		love.graphics.pop()
 		
-		weeks:drawUI()
+		weeksChip:drawUI()
 	end,
 
 	leave = function(self)
 		stages["chip"]:leave()
-		weeks:leave()
+		weeksChip:leave()
 	end
 }
