@@ -32,7 +32,7 @@ return {
 
         camera:addPoint("boyfriend", 132, -232, 0.75, 0.75)
         camera:addPoint("enemy", 381, -232, 0.75, 0.75)
-        camera:addPoint("zoomed", 151, 2, 0.40, 0.40)
+        camera:addPoint("zoomed", 151, -129, 0.40, 0.40)
 
 
         
@@ -50,21 +50,33 @@ return {
     update = function(self, dt)
   
         if not enemy:isAnimated() and enemy:getAnimName() ~= "idle" then
-            enemy:animate("idle", false)        -- fixed the animation issues
+            enemy:animate("idle", false)        -- fixed the animation issues  
         end
 
-
-        if song == 1 then
-            --if musicTime >= 48000 and musicTime < 48050 then
-            if musicTime >= 1000 and musicTime < 1050 then
+            if musicTime >= 48000 and musicTime < 48050 then
+            --                           if musicTime >= 1000 and musicTime < 1050 then
                 camera:moveToPoint(8, "zoomed")
                 zoomOut = true
                 if zoomingCam then
-                   -- Timer.cancel(zoomingCam)
+                    Timer.cancel(zoomingCam)
                 end
-                zoomingCam = Timer.tween(8, camera, {sizeX = 0.40, sizeY = 0.40, scaleX = 0.40, scaleY = 0.40}, "out-quad")
+                doingZoom = true
+                zoomingCam = Timer.tween(8, camera, {sizeX = 0.35, sizeY = 0.35, scaleX = 0.35, scaleY = 0.35}, "out-quad", function()
+                    doingZoom = false
+                end)
                 camera.zooming = false
             end
+        
+
+
+        if zoomOut and doingZoom then
+            defaultCamZoom = camera.sizeX, camera.sizeY
+        end
+
+
+
+        if enemy:getAnimName() == "hi" then
+            print("FAGGOT")
         end
     end,
 
