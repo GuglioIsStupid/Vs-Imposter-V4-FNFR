@@ -75,9 +75,6 @@ return {
 
 
 
-        if enemy:getAnimName() == "hi" then
-            print("FAGGOT")
-        end
     end,
 
     draw = function()
