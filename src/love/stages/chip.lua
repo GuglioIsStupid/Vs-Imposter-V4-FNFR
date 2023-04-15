@@ -18,6 +18,7 @@ return {
 
         camera:addPoint("boyfriend", 132, -232, 0.75, 0.75)
         camera:addPoint("enemy", 381, -232, 0.75, 0.75)
+        camera:addPoint("zoomed", 231, -71, 0.65, 0.65)
 
         camera.sizeX, camera.sizeY = 0.75, 0.75
 
@@ -31,6 +32,7 @@ return {
 
         camera:addPoint("boyfriend", 132, -232, 0.75, 0.75)
         camera:addPoint("enemy", 381, -232, 0.75, 0.75)
+        camera:addPoint("zoomed", 231, -71, 0.65, 0.65)
 
         
         camera.sizeX, camera.sizeY = 0.75, 0.75
@@ -46,6 +48,10 @@ return {
   
         if not enemy:isAnimated() and enemy:getAnimName() ~= "idle" then
             enemy:animate("idle", false)        -- fixed the animation issues
+        end
+
+        if musicTime >= 48000 and musicTime < 48050 then
+            camera:moveToPoint(8, "zoomed")
         end
 
     end,

@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("characters/cval")), -- Do not add the .png extension
+	graphics.imagePath("characters/cval"), -- Do not add the .png extension
 	{
 		{x = 13, y = 13, width = 739, height = 640, offsetX = 0, offsetY = -19, offsetWidth = 742, offsetHeight = 659}, -- 1: Cval Down0000
 		{x = 13, y = 13, width = 739, height = 640, offsetX = 0, offsetY = -19, offsetWidth = 742, offsetHeight = 659}, -- 2: Cval Down0001
