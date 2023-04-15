@@ -32,7 +32,7 @@ return {
 
         camera:addPoint("boyfriend", 132, -232, 0.75, 0.75)
         camera:addPoint("enemy", 381, -232, 0.75, 0.75)
-        camera:addPoint("zoomed", 151, -129, 0.40, 0.40)
+        camera:addPoint("zoomed", 151, 2, 0.65, 0.65)
 
 
         
@@ -50,56 +50,38 @@ return {
     update = function(self, dt)
   
         if not enemy:isAnimated() and enemy:getAnimName() ~= "idle" then
-            enemy:animate("idle", false)        -- fixed the animation issues  
+            enemy:animate("idle", false)        -- fixed the animation issues
         end
 
-            if musicTime >= 48000 and musicTime < 48050 then
-            --                           if musicTime >= 1000 and musicTime < 1050 then
-                camera:moveToPoint(8, "zoomed")
+
+        --[[
+
+        if song == 1 then
+            if musicTime >= 1000 and not zoomOut then
                 zoomOut = true
-                if zoomingCam then
-                    Timer.cancel(zoomingCam)
-                end
-                doingZoom = true
-                zoomingCam = Timer.tween(8, camera, {sizeX = 0.35, sizeY = 0.35, scaleX = 0.35, scaleY = 0.35}, "out-quad", function()
-                    doingZoom = false
-                end)
-                camera.zooming = false
+                camera:moveToPoint(8, "zoomed")
+                Timer.tween(8, cam, {sizeX = 0.65, sizeY = 0.65}, "out-quad") 
+                cam.zooming = false       
+            end
+        end
+
+--]]
+
+        if mustHitSection then
+            if jermaZoom then
+                Timer.cancel(jermaZoom)
+            end
+            jermaZoom = Timer.tween(1.25, camera, {sizeX = 0.7, sizeY = 0.7, scaleX = 0.7, scaleY = 0.7}, "out-quad")
+        else
+            if jermaZoom then
+                Timer.cancel(jermaZoom)
             end
         
-
-
-        if zoomOut and doingZoom then
-            defaultCamZoom = camera.sizeX, camera.sizeY
+            jermaZoom = Timer.tween(1.25, camera, {sizeX = 0.9, sizeY = 0.9, scaleX = 0.9, scaleY = 0.9}, "out-quad")
         end
 
-
-
-            if musicTime >= 48000 and musicTime < 48050 then
-            --                           if musicTime >= 1000 and musicTime < 1050 then
-                camera:moveToPoint(8, "zoomed")
-                zoomOut = true
-                if zoomingCam then
-                    Timer.cancel(zoomingCam)
-                end
-                doingZoom = true
-                zoomingCam = Timer.tween(8, camera, {sizeX = 0.35, sizeY = 0.35, scaleX = 0.35, scaleY = 0.35}, "out-quad", function()
-                    doingZoom = false
-                end)
-                camera.zooming = false
-            end
-        
-
-
-        if zoomOut and doingZoom then
-            defaultCamZoom = camera.sizeX, camera.sizeY
-        end
-
-
-
-        if musicTime >= 48000 and musicTime < 48050 then
-            camera:moveToPoint(8, "zoomed")
-        end
+        if song == 1 then
+            if musicTime =
 
     end,
 
