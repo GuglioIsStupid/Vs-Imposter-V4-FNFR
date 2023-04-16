@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	love.graphics.newImage(graphics.imagePath("o2/wtf")), -- Do not add the .png extension
+	graphics.imagePath("o2/wtf"), -- Do not add the .png extension
 	{
 		{x = 0, y = 0, width = 249, height = 76, offsetX = 0, offsetY = 0, offsetWidth = 509, offsetHeight = 212}, -- 1: wtf what0000
 		{x = 0, y = 0, width = 505, height = 76, offsetX = 0, offsetY = 0, offsetWidth = 509, offsetHeight = 212}, -- 2: wtf the0000

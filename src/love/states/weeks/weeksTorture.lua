@@ -668,51 +668,17 @@ return {
 
 		countingDown = true
 		countdownFade[1] = 0
-		audio.playSound(sounds.countdown.three)
 		Timer.after(
 			(60 / bpm),
 			function()
-				countdown:animate("ready")
-				countdownFade[1] = 1
-				audio.playSound(sounds.countdown.two)
-				Timer.tween(
-					(60 / bpm),
-					countdownFade,
-					{0},
-					"linear",
-					function()
-						countdown:animate("set")
-						countdownFade[1] = 1
-						audio.playSound(sounds.countdown.one)
-						Timer.tween(
-							(60 / bpm),
-							countdownFade,
-							{0},
-							"linear",
-							function()
-								countdown:animate("go")
-								countdownFade[1] = 1
-								audio.playSound(sounds.countdown.go)
-								Timer.tween(
-									(60 / bpm),
-									countdownFade,
-									{0},
-									"linear",
-									function()
-										countingDown = false
+				countingDown = false
 
-										previousFrameTime = love.timer.getTime() * 1000
-										musicTime = 0
-										beatHandler.reset()
+				previousFrameTime = love.timer.getTime() * 1000
+				musicTime = 0
+				beatHandler.reset()
 
-										if inst then inst:play() end
-										voices:play()
-									end
-								)
-							end
-						)
-					end
-				)
+				if inst then inst:play() end
+				voices:play()
 			end
 		)
 	end,

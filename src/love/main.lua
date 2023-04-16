@@ -362,7 +362,8 @@ function love.load()
 		["skeldPixel"] = require "stages.skeldPixel",
 		["skeld"] = require "stages.skeld",
 		["monotone"] = require "stages.monotone",
-		["chip"] = require "stages.chip"
+		["chip"] = require "stages.chip",
+		["torture"] = require "stages.torture"
 	}
 
 	-- Load Menus
@@ -398,6 +399,7 @@ function love.load()
 	weeksFinale = require "states.weeks.weeksFinale"
 	weeksChip = require "states.weeks.weeksChip"
 	require("states.weeks.weeksOld")
+	weeksTorture = require "states.weeks.weeksTorture"
 
 	countBeans = true
 
@@ -435,7 +437,8 @@ function love.load()
 		require "weeks.tomongus",
 		require "weeks.tuesday",
 		require "weeks.identity",
-		require "weeks.chip"
+		require "weeks.chip",
+		require "weeks.torture",
 	}
 
 	boyfriendCount = 1
@@ -655,6 +658,12 @@ function love.load()
 			{
 				"Chippin",
 				"Chipping"
+			}
+		},
+		{
+			"Torture",
+			{
+				"Torture"
 			}
 		}
 	}
