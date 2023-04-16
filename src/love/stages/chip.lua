@@ -10,8 +10,10 @@ return {
 
         enemy = love.filesystem.load("sprites/characters/cval.lua")()
         boyfriend = love.filesystem.load("sprites/characters/pip.lua")()
+        boyfriend2 = love.filesystem.load("sprites/characters/pip")
 
         boyfriend.x, boyfriend.y = 222, 350
+        boyfriend2.x, boyfriend2.y = boyfriend.x, boyfriend.y
         enemy.x, enemy.y = -654, 288
 
         boyfriend.sizeX = -1
@@ -34,6 +36,8 @@ return {
         camera:addPoint("enemy", 381, -232, 0.75, 0.75)
         camera:addPoint("zoomed", 151, -129, 0.40, 0.40)
 
+
+        pipMad = false
 
         
         camera.sizeX, camera.sizeY = 0.75, 0.75
@@ -101,6 +105,17 @@ return {
             camera:moveToPoint(8, "zoomed")
         end
 
+        
+
+
+			if song == 1 then
+				if musicTime >= 30428 and musicTime < 30478 then
+					enemy:animate("idle")
+				end
+                if musicTime >= 33857 and musicTime < 33907 then
+                    pipMad = true
+                end
+
     end,
 
     draw = function()
@@ -120,7 +135,11 @@ return {
             love.graphics.translate(camera.x, camera.y)
                 stageImages["balcony"]:draw()
                 enemy:draw()
-                boyfriend:draw()
+                if not pipMad then
+                    boyfriend:draw()
+                else
+                    boyfriend2:draw()
+                end
             love.graphics.pop()
         love.graphics.pop()
     end,
