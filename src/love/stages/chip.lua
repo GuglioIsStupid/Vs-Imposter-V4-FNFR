@@ -108,13 +108,15 @@ return {
         
 
 
-			if song == 1 then
-				if musicTime >= 30428 and musicTime < 30478 then
-					enemy:animate("idle")
-				end
-                if musicTime >= 33857 and musicTime < 33907 then
-                    pipMad = true
-                end
+		if song == 1 then
+			if musicTime >= 30428 and musicTime < 30478 then
+				enemy:animate("idle")
+			end
+            if musicTime >= 33857 and musicTime < 33907 then
+                pipMad = true
+            end
+        end
+
 
     end,
 

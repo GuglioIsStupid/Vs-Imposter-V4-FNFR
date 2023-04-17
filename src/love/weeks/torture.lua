@@ -75,14 +75,6 @@ return {
 		end
 
 
-		if musicTime >= 10322 and musicTime < 10372 then
-			doingIntro = false
-			if cutsceneTween then
-				Timer.cancel(cutsceneTween)
-			end
-			cutsceneTween = Timer.tween(3, cutsceneAlpha, {[1] = 0}, "linear")
-		end
-
 
 		weeksTorture:updateUI(dt)
 	end,
@@ -98,9 +90,6 @@ return {
 		love.graphics.pop()
 
 
-		love.graphics.setColor(0,0,0,cutsceneAlpha[1])
-		love.graphics.rectangle("fill", -1000, -1000, 10000, 10000)
-		love.graphics.setColor(1,1,1,1)
 
 
 		if not doingIntro then
