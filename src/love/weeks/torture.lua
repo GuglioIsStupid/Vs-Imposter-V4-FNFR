@@ -4,7 +4,7 @@ local stageBack, stageFront, curtains
 return {
 	enter = function(self, from, songNum, songAppend)
 		pauseColor = {129, 100, 223}
-		weeksTorture:enter()
+		weeksHenry:enter()
 		stages["torture"]:enter()
 
 		week = 1
@@ -23,8 +23,8 @@ return {
 	end,
 
 	load = function(self)
-		weeksTorture:load()
-		stages["torture"]:load()
+		weeksHenry:load()
+		stages["torture"]:load() 
 
 		cutsceneAlpha = {1}
 		doingIntro = true
@@ -35,19 +35,19 @@ return {
 
 		self:initUI()
 
-		weeksTorture:setupCountdown()
+		weeksHenry:setupCountdown()
 	end,
 
 	initUI = function(self)
-		weeksTorture:initUI()
+		weeksHenry:initUI()
 
-		weeksTorture:generateNotes("songs/torture/torture-hard.json")
-		weeksTorture:generateEvents("songs/torture/events.json")
+		weeksHenry:generateNotes("songs/torture/torture-hard.json")
+		weeksHenry:generateEvents("songs/torture/events.json")
 
 	end,
 
 	update = function(self, dt)
-		weeksTorture:update(dt)
+		weeksHenry:update(dt)
 		stages["torture"]:update(dt)
 
 		if health >= 80 then
@@ -76,7 +76,7 @@ return {
 
 
 
-		weeksTorture:updateUI(dt)
+		weeksHenry:updateUI(dt)
 	end,
 
 	draw = function(self)
@@ -86,20 +86,20 @@ return {
 		
 
 			stages["torture"]:draw()
-			weeksTorture:drawRating(0.9)
+			weeksHenry:drawRating(0.9)
 		love.graphics.pop()
 
 
 
 
 		if not doingIntro then
-			weeksTorture:drawUI()
+			weeksHenry:drawUI()
 		end
 
 	end,
 
 	leave = function(self)
 		stages["torture"]:leave()
-		weeksTorture:leave()
+		weeksHenry:leave()
 	end
 }

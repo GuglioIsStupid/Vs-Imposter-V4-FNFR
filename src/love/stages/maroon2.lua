@@ -32,6 +32,10 @@ return {
         camera:addPoint("boyfriend", -84, -142, 0.75, 0.75)  --  0.75
         camera:addPoint("enemy", 0, -112, 0.65, 0.65)  --  0.65
 
+
+        enemyghost = love.filesystem.load("sprites/characters/maroonP.lua")()
+        bfghost = love.filesystem.load("sprites/characters/bfpolus.lua")()
+
         embers = {}
 
 

@@ -14,12 +14,12 @@ return {
         boyfriend = love.filesystem.load("sprites/characters/ziffytorture.lua")()
         boyfriend2 = boyfriend
         enemy = love.filesystem.load("sprites/characters/piptorture.lua")()
-        enemy2 = love.filesystem.load("sprites/characters/cvaltorture.lua")()
+        enemyTwo = love.filesystem.load("sprites/characters/cvaltorture.lua")()
 
         boyfriend.x, boyfriend.y = -17, 218
         enemy.x, enemy.y = -710, 383
-        enemy2.x, enemy2.y = 830, 297
-        enemy2.sizeX = -1
+        enemyTwo.x, enemyTwo.y = 830, 297
+        enemyTwo.sizeX = -1
         stageImages[2].x, stageImages[2].y = -17, 519
 
 
@@ -33,7 +33,7 @@ return {
 
         camera:addPoint("boyfriend", 0, -221, 1.1, 1.1)
         camera:addPoint("enemy", 44, -226, 0.95, 0.95)
-        camera:addPoint("enemy2", -28, -226, 0.95, 0.95)
+        camera:addPoint("enemyTwo", -28, -226, 0.95, 0.95)
         camera:addPoint("roze", 0, -121, 0.9, 0.9)
         defaultCamZoom = 0.95, 0.95
 		camera.sizeX, camera.sizeY = 0.95, 0.95
@@ -55,7 +55,7 @@ return {
 
         camera:addPoint("boyfriend", 0, -221, 1.1, 1.1)
         camera:addPoint("enemy", 44, -226, 0.95, 0.95)
-        camera:addPoint("enemy2", -28, -226, 0.95, 0.95)
+        camera:addPoint("enemyTwo", -28, -226, 0.95, 0.95)
         camera:addPoint("roze", 0, -121, 0.9, 0.9)  -- 0.9
 
 
@@ -73,7 +73,7 @@ return {
     end,
 
     update = function(self, dt)
-        enemy2:update(dt)
+        enemyTwo:update(dt)
         stageImages[5]:update(dt)
         stageImages[4]:update(dt)
 
@@ -188,7 +188,7 @@ return {
         
         if musicTime >= 84274 and musicTime < 84274+50 then
             enemy:animate("rozebud", false)
-            enemy2:animate("rozebud", false)
+            enemyTwo:animate("rozebud", false)
         end
 
 
@@ -216,7 +216,7 @@ return {
 
             enemy:draw()
             --stageImages[4]:draw()
-            enemy2:draw()
+            enemyTwo:draw()
             love.graphics.setColor(1,1,1,0.5)
             stageImages[1]:draw()
 

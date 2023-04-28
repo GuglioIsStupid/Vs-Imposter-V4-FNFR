@@ -682,10 +682,10 @@ return {
 				Timer.cancel(bfGhostTween2)
 			end
 			bfGhostTween = Timer.tween(0.75, bfghost, {alpha = 0}, "linear", function() bfGhostTween = nil end)
-			bfGhostTween2 = Timer.tween(0.75, boyfriend2ghost, {alpha = 0}, "linear", function() bfGhostTween2 = nil end)
+			if boyfriend2ghost then bfGhostTween2 = Timer.tween(0.75, boyfriend2ghost, {alpha = 0}, "linear", function() bfGhostTween2 = nil end) end
 
 			bfghost:animate(animToPlay, false)
-			boyfriend2ghost:animate(animToPlay, false)
+			if boyfriend2ghost then boyfriend2ghost:animate(animToPlay, false) end
 		else
 			enemyghost.alpha = 0.8
 			enemyghost.color = {255, 0, 0}
@@ -721,16 +721,16 @@ return {
 				Timer.cancel(enemyGhostTween5)
 			end
 			enemyGhostTween = Timer.tween(0.75, enemyghost, {alpha = 0}, "linear", function() enemyGhostTween = nil end)
-			enemyGhostTween2 = Timer.tween(0.75, enemy2ghost, {alpha = 0}, "linear", function() enemyGhostTween2 = nil end)
-			enemyGhostTween3 = Timer.tween(0.75, enemy3ghost, {alpha = 0}, "linear", function() enemyGhostTween3 = nil end)
-			enemyGhostTween4 = Timer.tween(0.75, enemy4ghost, {alpha = 0}, "linear", function() enemyGhostTween4 = nil end)
-			enemyGhostTween5 = Timer.tween(0.75, enemyBFghost, {alpha = 0}, "linear", function() enemyGhostTween5 = nil end)
+			if enemy2ghost then enemyGhostTween2 = Timer.tween(0.75, enemy2ghost, {alpha = 0}, "linear", function() enemyGhostTween2 = nil end) end
+			if enemy3ghost then enemyGhostTween3 = Timer.tween(0.75, enemy3ghost, {alpha = 0}, "linear", function() enemyGhostTween3 = nil end) end
+			if enemy4ghost then enemyGhostTween4 = Timer.tween(0.75, enemy4ghost, {alpha = 0}, "linear", function() enemyGhostTween4 = nil end) end
+			if enemy5ghost then enemyGhostTween5 = Timer.tween(0.75, enemyBFghost, {alpha = 0}, "linear", function() enemyGhostTween5 = nil end) end
 
 			enemyghost:animate(animToPlay, false)
-			enemy2ghost:animate(animToPlay, false)
-			enemy3ghost:animate(animToPlay, false)
-			enemy4ghost:animate(animToPlay, false)
-			enemyBFghost:animate(animToPlay, false)
+			if enemy2ghost then enemy2ghost:animate(animToPlay, false) end
+			if enemy2ghost then enemy3ghost:animate(animToPlay, false) end
+			if enemy2ghost then enemy4ghost:animate(animToPlay, false) end
+			if enemy2ghost then enemyBFghost:animate(animToPlay, false) end
 		end
 	end,
 

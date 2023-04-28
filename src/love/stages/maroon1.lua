@@ -12,6 +12,9 @@ return {
         enemy = love.filesystem.load("sprites/characters/maroon.lua")()
         boyfriend = love.filesystem.load("sprites/characters/bfpolus.lua")()
 
+        enemyghost = love.filesystem.load("sprites/characters/maroon.lua")()
+        bfghost = love.filesystem.load("sprites/characters/bfpolus.lua")()
+
         girlfriend = love.filesystem.load("sprites/characters/gfpolus.lua")()
 
         enemy.x, enemy.y = -451, 361

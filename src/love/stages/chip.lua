@@ -10,13 +10,15 @@ return {
 
         enemy = love.filesystem.load("sprites/characters/cval.lua")()
         boyfriend = love.filesystem.load("sprites/characters/pip.lua")()
-        boyfriend2 = love.filesystem.load("sprites/characters/pip")
+        boyfriend2 = love.filesystem.load("sprites/characters/pip_evil.lua")()
+        boyfriendCount = 2
 
         boyfriend.x, boyfriend.y = 222, 350
         boyfriend2.x, boyfriend2.y = boyfriend.x, boyfriend.y
         enemy.x, enemy.y = -654, 288
 
         boyfriend.sizeX = -1
+        boyfriend2.sizeX = -1
 
         camera:addPoint("boyfriend", 132, -232, 0.75, 0.75)
         camera:addPoint("enemy", 381, -232, 0.75, 0.75)
@@ -52,6 +54,10 @@ return {
     end,
 
     update = function(self, dt)
+
+        boyfriend2:update(dt)
+
+        
   
         if not enemy:isAnimated() and enemy:getAnimName() ~= "idle" then
             enemy:animate("idle", false)        -- fixed the animation issues  
@@ -142,6 +148,7 @@ return {
                 else
                     boyfriend2:draw()
                 end
+
             love.graphics.pop()
         love.graphics.pop()
     end,
