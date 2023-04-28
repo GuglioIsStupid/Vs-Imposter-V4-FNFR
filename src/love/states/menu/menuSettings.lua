@@ -45,6 +45,9 @@ settingsDescriptions1 = { -- The big spaces are so it lines up lol
     "Scroll Underlay" ..
     "\n       \"Scroll Underlay\" set a opacity for a scroll underlay\n       0 = Default",
 
+    "Colour By Quantization" .. 
+    "\n       \"Colour By Quantization\" Changes the colour of the arrows\n       based on their quantization",
+
     --"Noteskins" ..
     --"\n       \"Noteskins\" ", -- this one is a maybe
 }
@@ -77,13 +80,11 @@ return {
         settingSelect = 1
         settingsMenuState = 0
 
-		camera.sizeX, camera.sizeY = 0.9, 0.9
-		defaultCamZoom = 0.9, 0.9
+		camera.zoom = 0.9
 
 		switchMenu(1)
 
-		graphics.setFade(0)
-		graphics.fadeIn(0.5)
+		graphics:fadeInWipe(0.6)
 	end,
 
 	update = function(self, dt)
@@ -98,11 +99,9 @@ return {
                             settingSelect = 1
                             settingsMenuState = 2
                         elseif settingSelect == 3 then
-                            graphics.fadeOut(0.3,
+                            graphics:fadeOutWipe(0.7,
                             function()
-                                --Gamestate.switch(settingsKeybinds)
-                                love.window.showMessageBox("lol", "Not implemented yet :P", "error")
-                                Gamestate.switch(menuSettings)
+                                Gamestate.switch(settingsKeybinds)
                             end)
                         elseif settingSelect == 4 then
                             settingSelect = 1
@@ -130,7 +129,9 @@ return {
                             settings.botPlay = not settings.botPlay
                         -- 6 is scroll speed
                         -- 7 is scroll underlay transparency
-                        -- 8 is noteskins -- this one is a maybe
+                        elseif settingSelect == 8 then
+                            settings.colourByQuantization = not settings.colourByQuantization
+                        -- 9 is noteskins -- this one is a maybe
                         end
                     elseif settingsMenuState == 3 then
                         if settingSelect == 1 then
@@ -249,6 +250,7 @@ return {
                     love.graphics.print("\n\n\n\n\n\n\n\nBot Play = " .. tostring(settings.botPlay), -628, -300)
                     love.graphics.print("\n\n\n\n\n\n\n\n\n\nCustom Scroll Speed = " .. tostring(settings.customScrollSpeed), -628, -300)
                     love.graphics.print("\n\n\n\n\n\n\n\n\n\n\n\nScroll Underlay Transparency = " .. tostring(settings.scrollUnderlayTrans), -628, -300)
+                    love.graphics.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\nColour By Quantization = " .. tostring(settings.colourByQuantization), -628, -300)
                     --love.graphics.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNoteskin = " .. tostring(noteskins[settings.noteSkins]), -628, -300)
                 elseif settingsMenuState == 3 then
                     love.graphics.print("Hardware Compression = " .. tostring(settings.hardwareCompression) .. " " .. isRestartNeeded, -628, -300) 
@@ -270,7 +272,7 @@ return {
                     end
                 end
 
-				love.graphics.scale(camera.sizeX, camera.sizeY)
+				love.graphics.scale(camera.zoom, camera.zoom)
 
 				love.graphics.pop()
 		love.graphics.pop()

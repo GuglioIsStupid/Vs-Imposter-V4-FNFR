@@ -16,8 +16,47 @@ function util.endsWith(str, ending)
     return ending == "" or str:sub(-#ending) == ending
 end
 
-function util.round(num)
-    return math.floor(num + 0.5)
+function util.round(x) 
+    return x >= 0 and math.floor(x + .5) or math.ceil(x - .5) 
 end
 
+-- God like coding
+--[[
+function util.🍰(🥰, 🥵)
+    🥰 = 🥰 or 🥵
+    🥵 = 🥵 or 🥰
+    return 🥰 + 🥵
+end
+
+function util.🍩(🥰, 🥵)
+    🥰 = 🥰 or 🥵
+    🥵 = 🥵 or 🥰
+    return 🥰 * 🥵
+end
+
+function util.☠️(🥰, 🥵)
+    🥰 = 🥰 or 🥵
+    🥵 = 🥵 or 🥰
+    return 🥰 / 🥵
+end
+
+function util.😍(☠️)
+    return math.floor(☠️)
+end
+
+function util.❓⌚()
+    local ⌚️= os.time()
+
+    local 🆕📅 = os.date("*t", ⌚️)
+
+    return 🆕📅
+end
+
+function util.📅()
+    local 🆕📅 = util.❓⌚()
+    return 🆕📅.year .. "-" .. 🆕📅.month .. "-" .. 🆕📅.day
+end
+
+print(util.📅())
+--]]
 return util

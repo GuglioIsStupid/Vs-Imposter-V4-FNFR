@@ -18,18 +18,18 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
 
 return graphics.newSprite(
-	graphics.imagePath("rating"),
+	love.graphics.newImage(graphics.imagePath("rating")),
 	{
-		{x = 0, y = 0, width = 430, height = 151, offsetX = 0, offsetY = 0, offsetWidth = 430, offsetHeight = 151}, -- 1: sick0000
-		{x = 197, y = 152, width = 225, height = 107, offsetX = -4, offsetY = -36, offsetWidth = 430, offsetHeight = 151}, -- 2: good0000
-		{x = 423, y = 152, width = 184, height = 123, offsetX = 0, offsetY = -28, offsetWidth = 430, offsetHeight = 151}, -- 3: bad0000
-		{x = 0, y = 152, width = 196, height = 138, offsetX = 0, offsetY = -34, offsetWidth = 430, offsetHeight = 151} -- 4: shit0000
+		{x = 0, y = 0, width = 403, height = 152, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: Sick
+		{x = 404, y = 0, width = 317, height = 126, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: Good
+		{x = 722, y = 0, width = 261, height = 131, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 3: Bad
+		{x = 984, y = 0, width = 285, height = 163, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 4: Shit
 	},
 	{
-		["sick"] = {start = 1, stop = 1, speed = 0, offsetX = -19, offsetY = -4},
-		["good"] = {start = 2, stop = 2, speed = 0, offsetX = -7, offsetY = -2},
-		["bad"] = {start = 3, stop = 3, speed = 0, offsetX = -3, offsetY = -5},
-		["shit"] = {start = 4, stop = 4, speed = 0, offsetX = -3, offsetY = -5}
+		["sick"] = {start = 1, stop = 1, speed = 0, offsetX = 0, offsetY = 0},
+		["good"] = {start = 2, stop = 2, speed = 0, offsetX = 0, offsetY = 0},
+		["bad"] = {start = 3, stop = 3, speed = 0, offsetX = 0, offsetY = 0},
+		["shit"] = {start = 4, stop = 4, speed = 0, offsetX = 0, offsetY = 0}
 	},
 	"sick",
 	false

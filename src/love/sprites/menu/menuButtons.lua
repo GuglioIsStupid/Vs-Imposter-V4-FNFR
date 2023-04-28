@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	graphics.imagePath("menu/FNF_main_menu_assets"),
+	love.graphics.newImage(graphics.imagePath("menu/FNF_main_menu_assets")),
     	-- Automatically generated from FNF_main_menu_assets.xml
 	{
 		{x = 0, y = 0, width = 444, height = 117, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: donate basic0000

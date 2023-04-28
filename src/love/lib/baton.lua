@@ -4,19 +4,15 @@ local baton = {
 	_URL = 'https://github.com/tesselode/baton',
 	_LICENSE = [[
 		MIT License
-
 		Copyright (c) 2020 Andrew Minnich
-
 		Permission is hereby granted, free of charge, to any person obtaining a copy
 		of this software and associated documentation files (the "Software"), to deal
 		in the Software without restriction, including without limitation the rights
 		to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 		copies of the Software, and to permit persons to whom the Software is
 		furnished to do so, subject to the following conditions:
-
 		The above copyright notice and this permission notice shall be included in all
 		copies or substantial portions of the Software.
-
 		THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 		IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 		FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -49,14 +45,12 @@ end
 
 --[[
 	-- source functions --
-
 	each source function checks the state of one type of input
 	and returns a value from 0 to 1. for binary controls, such
 	as keyboard keys and gamepad buttons, they return 1 if the
 	input is held down and 0 if not. for analog controls, such
 	as "leftx+" (the left analog stick held to the right), they
 	return a number from 0 to 1.
-
 	source functions are split into keyboard/mouse functions
 	and joystick/gamepad functions. baton treats these two
 	categories slightly differently.
@@ -66,27 +60,26 @@ local sourceFunction = {keyboardMouse = {}, joystick = {}}
 
 -- checks whether a keyboard key is down or not
 function sourceFunction.keyboardMouse.key(key)
-	return love.keyboard.isDown(key) and 1 or 0
+	return (love.keyboard and love.keyboard.isDown(key)) and 1 or 0
 end
 
 -- checks whether a keyboard key is down or not,
 -- but it takes a scancode as an input
 function sourceFunction.keyboardMouse.sc(sc)
-	return love.keyboard.isScancodeDown(sc) and 1 or 0
+	return (love.keyboard and love.keyboard.isScancodeDown(sc)) and 1 or 0
 end
 
 -- checks whether a mouse buttons is down or not.
 -- note that baton doesn't detect mouse movement, just the buttons
 function sourceFunction.keyboardMouse.mouse(button)
-	return love.mouse.isDown(tonumber(button)) and 1 or 0
+	return (love.mouse and love.mouse.isDown(tonumber(button))) and 1 or 0
 end
 
 -- checks the position of a joystick axis
 function sourceFunction.joystick.axis(joystick, value)
 	local axis, direction = parseAxis(value)
 	-- "a and b or c" is ok here because b will never be boolean
-	value = tonumber(axis) and joystick:getAxis(tonumber(axis))
-	                        or joystick:getGamepadAxis(axis)
+	value = tonumber(axis) and joystick:getAxis(tonumber(axis)) or joystick:getGamepadAxis(axis)
 	if direction == '-' then value = -value end
 	return value > 0 and value or 0
 end
@@ -97,7 +90,7 @@ function sourceFunction.joystick.button(joystick, button)
 	-- i'm intentionally not using the "a and b or c" idiom here
 	-- because joystick.isDown returns a boolean
 	if tonumber(button) then
-		return joystick:isDown(tonumber(button)) and 1 or 0
+		return joystick:down(tonumber(button)) and 1 or 0
 	else
 		return joystick:isGamepadDown(button) and 1 or 0
 	end
@@ -109,9 +102,13 @@ function sourceFunction.joystick.hat(joystick, value)
 	return joystick:getHat(hat) == direction and 1 or 0
 end
 
+-- checks if its belong in joystick or keyboardMouse
+function sourceFunction.checkType(type)
+	return (type == "axis" or type == "button" or type == "hat") and "joystick" or "keyboardMouse"
+end
+
 --[[
 	-- player class --
-
 	the player object takes a configuration table and handles input
 	accordingly. it's called a "player" because it makes sense to use
 	multiple of these for each player in a multiplayer game, but
@@ -122,8 +119,8 @@ end
 local Player = {}
 Player.__index = Player
 
--- internal functions --
 
+-- internal functions --
 -- sets the player's config to a user-defined config table
 -- and sets some defaults if they're not already defined
 function Player:_loadConfig(config)
@@ -142,6 +139,9 @@ end
 -- initializes a control object for each control defined in the config
 function Player:_initControls()
 	self._controls = {}
+	self._sourceControls = {keyboardMouse = {}, joystick = {}}
+	self._pressBinds = {}
+	self._releaseBinds = {}
 	for controlName, sources in pairs(self.config.controls) do
 		self._controls[controlName] = {
 			sources = sources,
@@ -151,8 +151,22 @@ function Player:_initControls()
 			downPrevious = false,
 			pressed = false,
 			released = false,
+			debounce = false,
+			pressBinds = {},
+			releaseBinds = {},
 		}
+		for _, source in pairs(sources) do
+			local type, value = parseSource(source)
+			type = sourceFunction.checkType(type)
+			self._sourceControls[type][value] = self._sourceControls[type][value] or {}
+			table.insert(self._sourceControls[type][value], controlName)
+		end
 	end
+end
+
+function Player:rebindControl(name, control)
+	self.config.controls[name] = control
+	self:_initControls()
 end
 
 -- initializes an axis pair object for each axis pair defined in the config
@@ -168,7 +182,7 @@ function Player:_initPairs()
 			down = false,
 			downPrevious = false,
 			pressed = false,
-			released = false,
+			released = false
 		}
 	end
 end
@@ -185,7 +199,6 @@ end
 	if the keyboard or mouse is currently being used, joystick
 	inputs will be ignored. this is to prevent slight axis movements
 	from adding errant inputs when someone's using the keyboard.
-
 	the active device is saved to player._activeDevice, which is then
 	used throughout the rest of the update loop to check only
 	keyboard or joystick inputs.
@@ -246,8 +259,11 @@ function Player:_updateControls()
 		control.value = control.rawValue >= self.config.deadzone and control.rawValue or 0
 		control.downPrevious = control.down
 		control.down = control.value > 0
-		control.pressed = control.down and not control.downPrevious
-		control.released = control.downPrevious and not control.down
+		if not control.debounce then
+			control.pressed = control.down and not control.downPrevious
+			control.released = control.downPrevious and not control.down
+		end
+		control.debounce = false
 	end
 end
 
@@ -287,6 +303,47 @@ function Player:_updatePairs()
 	end
 end
 
+function Player:_pressControls(names, source, type, ...)
+	for _, bind in pairs(self._pressBinds) do
+		bind(source, type, ...)
+	end
+
+	local control
+	for _, name in pairs(names) do
+		control = self._controls[name]
+		control.rawValue = self:_getControlRawValue(control)
+		control.value = control.rawValue >= self.config.deadzone and control.rawValue or 0
+		control.down = true
+		control.pressed = true
+		control.released = false
+		control.debounce = true
+		for _, bind in pairs(control.pressBinds) do
+			bind(...)
+		end
+	end
+end
+
+function Player:_releaseControls(names, source, type, ...)
+	for _, bind in pairs(self._releaseBinds) do
+		bind(source, type, ...)
+	end
+
+	local control
+	for _, name in pairs(names) do
+		control = self._controls[name]
+		control.rawValue = self:_getControlRawValue(control)
+		control.value = control.rawValue >= self.config.deadzone and control.rawValue or 0
+		control.downPrevious = true
+		control.down = false
+		control.pressed = false
+		control.released = true
+		control.debounce = true
+		for _, bind in pairs(control.pressBinds) do
+			bind(...)
+		end
+	end
+end
+
 -- public API --
 
 -- checks for changes in inputs
@@ -294,6 +351,109 @@ function Player:update()
 	self:_setActiveDevice()
 	self:_updateControls()
 	self:_updatePairs()
+end
+
+-- keyboard presses handler
+function Player:onKeyPress(source, ...)
+	local names = self._sourceControls.keyboardMouse[source]
+	if not names then return end
+	self:_pressControls(names, source, 'key', ...)
+end
+
+-- keyboard releases handler
+function Player:onKeyRelease(source, ...)
+	local names = self._sourceControls.keyboardMouse[source]
+	if not names then return end
+	self:_releaseControls(names, source, 'key', ...)
+end
+
+--[[
+-- joystick presses handler
+function Player:onJoystickPress(joystick, ...)
+	local names = self._sourceControls.joystick[source]
+	if not names then return end
+	self:_pressControls(names, source, 'button', ...)
+end
+-- joystick releases handler
+function Player:onJoystickRelease(source, ...)
+	local names = self._sourceControls.joystick[source]
+	if not names then return end
+	self:_releaseControls(names, source, 'button', ...)
+end
+]]
+
+-- bind presses callback
+function Player:bindPress(bind)
+	table.insert(self._pressBinds, bind)
+end
+
+-- unbind presses callback
+function Player:unbindPress(bind)
+	local i = table.find(self._pressBinds, bind)
+	if i then
+		table.remove(self._pressBinds, i)
+	end
+end
+
+-- bind releases callback
+function Player:bindRelease(bind)
+	table.insert(self._releaseBinds, bind)
+end
+
+-- unbind releases callback
+function Player:unbindRelease(bind)
+	local i = table.find(self._releaseBinds, bind)
+	if i then
+		table.remove(self._releaseBinds, i)
+	end
+end
+
+-- bind control presses callback
+function Player:bindControlPress(name, bind)
+	if self._controls[name] then
+		table.insert(self._controls[name].pressBinds, bind)
+	else
+		error('No control with name "' .. name .. '" defined', 3)
+	end
+end
+
+-- unbind control presses callback
+function Player:unbindControlPressed(name, bind)
+	if self._controls[name] then
+		local i = table.find(self._controls[name].pressBinds, bind)
+		if i then
+			table.remove(self._controls[name].pressBinds, i)
+		end
+	else
+		error('No control with name "' .. name .. '" defined', 3)
+	end
+end
+
+-- bind control releases callback
+function Player:bindControlRelease(name, bind)
+	if self._controls[name] then
+		table.insert(self._controls[name].releaseBinds, bind)
+	else
+		error('No control with name "' .. name .. '" defined', 3)
+	end
+end
+
+-- unbind control releases callback
+function Player:unbindControlPressed(name, bind)
+	if self._controls[name] then
+		local i = table.find(self._controls[name].releaseBinds, bind)
+		if i then
+			table.remove(self._controls[name].releaseBinds, i)
+		end
+	else
+		error('No control with name "' .. name .. '" defined', 3)
+	end
+end
+
+-- gets the controls from key
+function Player:getControlsFromSource(source)
+	local type, value = parseSource(source)
+	return self._sourceControls[sourceFunction.checkType(type)][value]
 end
 
 -- gets the value of a control or axis pair without deadzone applied

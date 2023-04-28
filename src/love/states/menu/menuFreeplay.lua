@@ -24,7 +24,7 @@ return {
         weekStats = graphics.newImage(graphics.imagePath("menu/fp_weekStats"))
         backButton = graphics.newImage(graphics.imagePath("menu/backBtn"))
 
-        graphics.fadeIn(0.3)
+        graphics:fadeInWipe(0.6)
 
         difficultyStrs = {
             "-easy",
@@ -275,21 +275,16 @@ return {
             if menuNum == 2 then
                 status.setLoading(true)
     
-                graphics.fadeOut(
-                    0.5,
+                graphics:fadeOutWipe(
+                    0.7,
                     function()
                         songAppend = difficultyStrs[songDifficulty]
     
                         storyMode = false
-                        inGame = true
     
                         music:stop()
     
-                        if weekMeta[weekNum][1] ~= "Alpha Moogus" then
-                            Gamestate.switch(weekData[weekNum], songNum, songAppend)
-                        else
-                            alphaMoogus.init()
-                        end
+                        Gamestate.switch(weekData[weekNum], songNum, songAppend)
     
                         status.setLoading(false)
                     end
@@ -306,7 +301,7 @@ return {
             if menuNum ~= 1 then
                 menuNum = menuNum - 1
             else
-                graphics.fadeOut(0.3, function()
+                graphics:fadeOutWipe(0.7, function()
                     Gamestate.switch(menuSelect)
                 end)
             end

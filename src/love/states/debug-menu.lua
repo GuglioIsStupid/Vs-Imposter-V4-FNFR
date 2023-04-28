@@ -38,8 +38,6 @@ return {
 		menuID = 1
 		selection = 3
 
-		inDebug = true
-
 		menus = {
 			{
 				1,
@@ -175,7 +173,7 @@ return {
 				graphics.clear(0.5, 0.5, 0.5)
 
 				love.graphics.push()
-					love.graphics.translate(push.getWidth() / 2, push.getHeight() / 2)
+					love.graphics.translate(lovesize.getWidth() / 2, lovesize.getHeight() / 2)
 
 					sprite:draw()
 					graphics.setColor(1, 1, 1, 0.5)

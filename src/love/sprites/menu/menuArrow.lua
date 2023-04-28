@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	graphics.imagePath("menu/menuArrow"),
+	love.graphics.newImage(graphics.imagePath("menu/menuArrow")),
 	{
 		{x = 58, y = 0, width = 42, height = 75, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: arrow
 		{x = 0, y = 0, width = 48, height = 85, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0} -- 2: arrow pressed

@@ -7,7 +7,6 @@ CREDITS
 Vanilla Engine:
 
 GuglioIsStupid - Programming
-c l o t h i n g h a n g e r - Programming
 Getsaa - Menu Designer
 
 
@@ -71,41 +70,38 @@ RiverOaken - Psych Engine credits button
 
 
 Claus - requested furry BF to be added to VE (press UP 10 times)
-
 ]]
 
-
-
--- dumbass doesnt know how to spell miscellaneous :skull: guglio typed miscillaneous
 return {
     enter = function(self)
         credY = {
             250
         }
         selectSound = love.audio.newSource("sounds/menu/select.ogg", "static")
-	    confirmSound = love.audio.newSource("sounds/menu/confirm.ogg", "static")
-        selectSound:setVolume(0.2)
-        confirmSound:setVolume(0.2)
-        graphics.fadeIn(0.5)
+        graphics:fadeInWipe(0.6)
         bg = graphics.newImage(graphics.imagePath("menu/menuBG"))
     end,
     update = function(self, dt)
+        if input:pressed("down") or input:pressed("up") then 
+            audio.playSound(selectSound)
+        end
+        if credTween then 
+            Timer.cancel(credTween)
+        end
         if input:pressed("gameBack") then
-            graphics.fadeOut(0.5,
+            graphics:fadeOutWipe(0.5,
             function()
-                Gamestate.switch(menu)
+                Gamestate.switch(menuSelect)
             end)
         end
-        if input:pressed("down") then
-            --audio.playSound(selectSound)
+        if input:down("down") then
             if credY[1] > -2000 then  
-                Timer.tween(0.3, credY, {[1] = credY[1] - 50}, "out-quad")
-                audio.playSound(selectSound)
+                credTween = Timer.tween(0.1, credY, {[1] = credY[1] - 25}, "out-quad")
+                
             end
-        elseif input:pressed("up") then
-            audio.playSound(selectSound)
+        elseif input:down("up") then
             if credY[1] < 250 then
-                Timer.tween(0.3, credY, {[1] = credY[1] + 50}, "out-quad")
+                credTween = Timer.tween(0.1, credY, {[1] = credY[1] + 25}, "out-quad")
             end
         end
     end,

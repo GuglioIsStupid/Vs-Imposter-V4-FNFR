@@ -18,15 +18,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
 
 return graphics.newSprite(
-	graphics.imagePath("pixel/ui/notes"),
+	images.notes,
 	{
-		{x = 54, y = 0, width = 17, height = 17, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: Right Arrow
-		{x = 54, y = 18, width = 17, height = 17, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: Right Arrow On
-		{x = 54, y = 36, width = 17, height = 17, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 3: Right Arrow Press
-		{x = 54, y = 54, width = 17, height = 17, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 4: Right Arrow Confirm 1
-		{x = 54, y = 72, width = 17, height = 17, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 5: Right Arrow Confirm 2
-		{x = 24, y = 89, width = 7, height = 6, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 6: Right Hold
-		{x = 24, y = 97, width = 7, height = 6, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0} -- 7: Right End
+		{ x = 51, y = 0,  width = 17, height = 17, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0 }, -- 1: Right Arrow
+        { x = 51, y = 17, width = 17, height = 17, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0 }, -- 2: Right Arrow On
+        { x = 51, y = 34, width = 17, height = 17, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0 }, -- 3: Right Arrow Press
+        { x = 51, y = 51, width = 17, height = 17, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0 }, -- 4: Right Arrow Confirm 1
+        { x = 51, y = 68, width = 17, height = 17, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0 }, -- 5: Right Arrow Confirm 2
+        { x = 21, y = 85, width = 7,  height = 7,  offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0 }, -- 10: Right Hold
+        { x = 21, y = 91, width = 7,  height = 7,  offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0 }, -- 11: Right End
 	},
 	{
 		["off"] = {start = 1, stop = 1, speed = 0, offsetX = 0, offsetY = 0},

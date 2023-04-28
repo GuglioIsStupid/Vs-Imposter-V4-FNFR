@@ -1,4 +1,4 @@
-local upFunc, downFunc, confirmFunc, backFunc, drawFunc, musicStop
+local upFunc, downFunc, confirmFunc, drawFunc, musicStop
 
 local menuState
 
@@ -10,22 +10,30 @@ local songDifficulty = 2
 local selectSound = love.audio.newSource("sounds/menu/select.ogg", "static")
 local confirmSound = love.audio.newSource("sounds/menu/confirm.ogg", "static")
 local transparency
-local danceRight
-
-local function switchMenu(menu)
-	function backFunc()
-		graphics.fadeOut(0.5, love.event.quit)
-	end
-
-	menuState = 1
-end
 
 return {
 	enter = function(self, previous)
+		beatHandler.setBPM(102)
 		if not music:isPlaying() then
 			music:play()
 		end
-		danceRight = false
+		function tweenMenu()
+			if logo.y == -300 then 
+				Timer.tween(1, logo, {y = -125}, "out-expo")
+			end
+			if girlfriendTitle.x == 500 then
+				Timer.tween(1, girlfriendTitle, {x = 325}, "out-expo")
+			end
+		end
+
+		function logoRotate()
+			Timer.tween(2, logo, {orientation = 0.15}, "in-out-back", function()
+				Timer.tween(2, logo, {orientation = -0.15}, "in-out-back", function()
+					logoRotate()
+				end)
+			end)
+		end
+
 		transparency = {0}
 		Timer.tween(
 			1,
@@ -33,104 +41,83 @@ return {
 			{[1] = 1},
 			"out-quad"
 		)
+		titleBG = graphics.newImage(graphics.imagePath("menu/titleBG"))
 		changingMenu = false
+		logo = love.filesystem.load("sprites/ve-logo.lua")()
+		
+		girlfriendTitle = love.filesystem.load("sprites/menu/girlfriend-title.lua")()
+		logo:animate("anim", false)
 
-		starBG = graphics.newImage(graphics.imagePath("impmenu/starBG"))
-		startFG = graphics.newImage(graphics.imagePath("impmenu/starFG"))
+		girlfriendTitle:setAnimSpeed(14.4 / (60 / 102))
 
-		starBG.translation = {x = 0, y = 0}
-		startFG.translation = {x = 0, y = 0}
+		girlfriendTitle.x, girlfriendTitle.y = 500, 65
+		logo.x, logo.y = -350, -300
 
-		shaker = love.filesystem.load("sprites/menu/thug-shake-thug-shaker.lua")()
-		shaker.sizeX, shaker.sizeY = 2, 2
+		tweenMenu()
+		logoRotate()
 
 		songNum = 0
 
-		switchMenu(1)
+		if firstStartup then
+			graphics.setFade(0) 
+			graphics.fadeIn(0.5) 
+		else graphics:fadeInWipe(0.6) end
 
-		graphics.setFade(0)
-		graphics.fadeIn(0.5)
-
-		THUGSHAKER = ""
-	end,
-	onBeat = function(self, n)
-		--if logo then logo:animate("anim", false) end
+		firstStartup = false
 	end,
 
 	update = function(self, dt)
-		shaker:update(dt)
+		girlfriendTitle:update(dt)
+		logo:update(dt)
+
+		beatHandler.update(dt)
+
+		if beatHandler.onBeat() then 
+			if logo then logo:animate("anim", false) end
+		end
+
+
 		if not graphics.isFading() then
 			if input:pressed("confirm") then
-				
 				if not changingMenu then
 					audio.playSound(confirmSound)
 					changingMenu = true
-					graphics.fadeOut(0.2, function()
+					graphics:fadeOutWipe(0.7, function()
 						Gamestate.switch(menuSelect)
-						status.setLoading(false)
+						status.setLoading(false)							
 					end)
 				end
 			elseif input:pressed("back") then
 				audio.playSound(selectSound)
-
-				backFunc()
+				love.event.quit()
 			end
 		end
-
-		starBG.translation.x = starBG.translation.x - 12.5 * dt
-			if starBG.translation.x < -1102 then
-				starBG.translation.x = 0
-			end
-
-			startFG.translation.x = startFG.translation.x - 25 * dt
-			if startFG.translation.x < -1116 then
-				startFG.translation.x = 0
-			end
-
-		if string.lower(THUGSHAKER) == "thug" then
-			THUGSHAKER = ""
-			showthugNotLogo = true
-		end
-	end,
-
-	textinput = function(self, t)
-		THUGSHAKER = THUGSHAKER .. t
 	end,
 
 	draw = function(self)
+		love.graphics.push()
+			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
+
 			love.graphics.push()
-				love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
 				love.graphics.push()
-
-					love.graphics.translate(starBG.translation.x, starBG.translation.y)
-					for i = 1, 3 do
-						starBG.x = (i - 1) * 1102
-						starBG:draw()
-					end
+					titleBG:draw()
 				love.graphics.pop()
 				love.graphics.push()
-
-					love.graphics.translate(startFG.translation.x, startFG.translation.y)
-					for i = 1, 3 do
-						startFG.x = (i - 1) * 1216
-						startFG:draw()
-					end
+					love.graphics.scale(0.9, 0.9)
+					logo:draw()
 				love.graphics.pop()
 				love.graphics.push()
-					if showthugNotLogo then 
-						shaker:draw()
-					else
-
-					end
+					love.graphics.scale(0.9, 0.9)
+					girlfriendTitle:draw()
 				love.graphics.pop()
-
 			love.graphics.pop()
+
+		love.graphics.pop()
 	end,
 
 	leave = function(self)
+		girlfriendTitle = nil
 		logo = nil
-		starBG = nil
-		startFG = nil
 
 		Timer.clear()
 	end

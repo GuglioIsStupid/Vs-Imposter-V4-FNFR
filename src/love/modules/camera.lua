@@ -2,10 +2,12 @@ local camera = {}
 local camTimer
 camera.x = 0
 camera.y = 0
-camera.sizeX = 1
-camera.sizeY = 1
-camera.scaleX = 1
-camera.scaleY = 1
+camera.zoom = 1
+camera.defaultZoom = 1
+camera.zooming = true
+camera.locked = false
+camera.camBopIntensity = 1
+camera.camBopInterval = 4
 
 camera.ex = 0
 camera.ey = 0
@@ -13,7 +15,7 @@ camera.esizeX = 1
 camera.esizeY = 1
 
 camera.flash = 0
-camera.col = {1, 1, 1, 1}
+camera.col = {1, 1, 1}
 camera.points = {}
 
 camera.mustHit = true
@@ -27,13 +29,6 @@ function camera:moveToMain(time, x, y)
     camTimer = Timer.tween(time, camera, {x = x, y = y}, "out-quad")
 end
 
-function camera:zoomTo(time, x, y)
-    if camTimer then 
-        Timer.cancel(camTimer)
-    end
-    camTimer = Timer.tween(time, camera, {esizeX = x, esizeY = y}, "in-bounce")
-end
-
 function camera:moveToExtra(time, x, y)
     if camTimerE then 
         Timer.cancel(camTimerE)
@@ -44,16 +39,14 @@ end
 function camera:reset()
     camera.x = 0
     camera.y = 0
-    camera.sizeX = 1
-    camera.sizeY = 1
+    camera.zoom = 1
     camera.ex = 0
     camera.ey = 0
     camera.esizeX = 1
     camera.esizeY = 1
-    camera.col = {1, 1, 1, 1}
 end
 
-function camera:flashz(time, x, col)
+function camera:flash(time, x, col)
     camera.color = col or {1, 1, 1}
     if camTimer then 
         Timer.cancel(camTimer)
@@ -65,36 +58,17 @@ function camera:removePoint(name)
     camera.points[name] = nil
 end
 
-function camera:addPoint(name, x, y, sx, sy)
-    camera.points[name] = {x = x, y = y, sx=sx or camera.scaleX, sy=sy or camera.scaleY}
-end
-
-function camera:moveToPoint2(time, name, mustHit)
-    if camTimer then 
-        Timer.cancel(camTimer)
-    end
-    camera.mustHit = mustHit or true
-    camTimer = Timer.tween(time, camera, {
-        x = camera.points[name].x, 
-        y = camera.points[name].y, 
-        scaleX = camera.points[name].sx, 
-        scaleY = camera.points[name].sy,
-        sizeX = camera.points[name].sx,
-        sizeY = camera.points[name].sy
-    }, "out-quad")
+function camera:addPoint(name, x, y)
+    camera.points[name] = {x = x, y = y}
 end
 
 function camera:moveToPoint(time, name, mustHit)
     if camTimer then 
         Timer.cancel(camTimer)
     end
-    camera.mustHit = mustHit or true
-    camTimer = Timer.tween(time, camera, {
-        x = camera.points[name].x, 
-        y = camera.points[name].y, 
-        scaleX = camera.points[name].sx, 
-        scaleY = camera.points[name].sy,
-    }, "out-quad")
+    mustHit = mustHit or true 
+    camera.mustHit = mustHit
+    camTimer = Timer.tween(time, camera, {x = camera.points[name].x, y = camera.points[name].y}, "out-quad")
 end
 
 function camera:drawCameraPoints()
@@ -109,32 +83,6 @@ function camera:drawPoint(name)
     love.graphics.circle("fill", -camera.points[name].x, -camera.points[name].y, 10)
     -- print the name under the circle
     love.graphics.print(name, -camera.points[name].x, -camera.points[name].y + 10)
-end
-
-function camera:attach()
-    love.graphics.push()
-    love.graphics.scale(camera.sizeX, camera.sizeY)
-    love.graphics.translate(camera.x, camera.y)
-    love.graphics.scale(camera.esizeX, camera.esizeY)
-    love.graphics.translate(camera.ex, camera.ey)
-
-    love.graphics.setColor(camera.col[1], camera.col[2], camera.col[3], camera.flash)
-end
-
-function camera:setColor(color, time)
-    if camTimer then 
-        Timer.cancel(camTimer)
-    end
-    color[4] = color[4] or 1
-    camTimer = Timer.tween(time, camera.col, {[1] = color[1], [2] = color[2], [3] = color[3], [4] = color[4]}, "out-quad")
-end
-
-function camera:getColor()
-    return camera.col[1], camera.col[2], camera.col[3], camera.col[4]
-end
-
-function camera:detach()
-    love.graphics.pop()
 end
 
 return camera

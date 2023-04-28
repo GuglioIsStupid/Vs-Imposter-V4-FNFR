@@ -18,7 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
 
 return graphics.newSprite(
-	graphics.imagePath("menu/ve-logo"),
+	love.graphics.newImage(graphics.imagePath("menu/ve-logo")),
 	-- Automatically generated from logoBumpin.xml
 	{
 		{x = 0, y = 0, width = 894, height = 670, offsetX = -22, offsetY = -16, offsetWidth = 939, offsetHeight = 703}, -- 1: logo bumpin0000

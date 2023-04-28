@@ -29,10 +29,8 @@ return {
 		if inst then inst:stop() end
 		voices:stop()
 
-		if not pauseRestart then
+		audio.playSound(sounds["death"])
 
-			audio.playSound(sounds["death"])
-		end
 		boyfriend:animate("dies", false)
 
 		Timer.clear()
@@ -40,23 +38,14 @@ return {
 		Timer.tween(
 			2,
 			camera,
-			{x = -boyfriend.x, y = -boyfriend.y, sizeX = camera.scaleX, sizeY = camera.scaleY},
+			{x = -boyfriend.x, y = -boyfriend.y, zoom = camera.defaultZoom},
 			"out-quad",
 			function()
-
-
-				if gameOverMusic == "j" then
-					inst = love.audio.newSource("music/SUSPICIOUS/Jorsawsee_Loop.ogg", "stream")
-				elseif gameOverMusic == "pico" then
-					inst = love.audio.newSource("music/SUSPICIOUS/deathPicoMusicLoop.ogg", "stream")
-				elseif gameOverMusic == "henry" then
-					inst = love.audio.newSource("music/SUSPICIOUS/deathHenryMusicLoop.ogg", "stream")
+				if not pixel then
+					inst = love.audio.newSource("music/game-over.ogg", "stream")
 				else
-					inst = love.audio.newSource("music/SUSPICIOUS/gameover_v4_LOOP.ogg", "stream")
+					inst = love.audio.newSource("music/pixel/game-over.ogg", "stream")
 				end
-
-
-
 				inst:setLooping(true)
 				inst:play()
 
@@ -70,21 +59,13 @@ return {
 
 		if input:pressed("confirm") or pauseRestart then
 			pauseRestart = false
-
 			if inst then inst:stop() end -- In case inst is nil and "confirm" is pressed before game over music starts
 
-
-			if gameOverMusic == "j" then
-				inst = love.audio.newSource("music/SUSPICIOUS/Jorsawsee_End.ogg", "stream")
-			elseif gameOverMusic == "pico" then
-				inst = love.audio.newSource("music/SUSPICIOUS/deathPicoMusicEnd.ogg", "stream")
-			elseif gameOverMusic == "henry" then
-				inst = love.audio.newSource("music/SUSPICIOUS/deathHenryMusicEnd.ogg", "stream")
+			if not pixel then
+				inst = love.audio.newSource("music/game-over-end.ogg", "stream")
 			else
-				inst = love.audio.newSource("music/SUSPICIOUS/gameover_v4_End.ogg", "stream")
+				inst = love.audio.newSource("music/pixel/game-over-end.ogg", "stream")
 			end
-
-
 			inst:play()
 
 			Timer.clear()
@@ -99,21 +80,23 @@ return {
 					Gamestate.pop()
 
 					fromState:load()
-
 				end
 			)
-
 		elseif input:pressed("gameBack") then
 			status.setLoading(true)
 
-			graphics.fadeOut(
-				0.5,
+			graphics:fadeOutWipe(
+				0.7,
 				function()
 					Gamestate.pop()
 
-					Gamestate.switch(menu)
+					Gamestate.switch(menuWeek)
 
 					status.setLoading(false)
+
+					if not music:isPlaying() then
+						music:play()
+					end
 				end
 			)
 		end
@@ -128,17 +111,20 @@ return {
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
 
 			love.graphics.push()
-				love.graphics.scale(camera.sizeX, camera.sizeY)
+				love.graphics.scale(camera.zoom, camera.zoom)
 				love.graphics.translate(camera.x, camera.y)
-				if not pauseRestart then
 
-					if not pixel then
-						boyfriend:draw()
-					else
-						boyfriend:udraw()
-					end
+				if not pixel then
+					boyfriend:draw()
+				else
+					boyfriend:udraw()
 				end
 			love.graphics.pop()
 		love.graphics.pop()
+	end,
+
+	leave = function(self)
+		Timer.clear()
+		graphics.setFade(1)
 	end
 }

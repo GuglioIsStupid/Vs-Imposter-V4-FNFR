@@ -245,10 +245,10 @@ return {
 			graphics.fadeOut(0.5, love.event.quit)
 		end
 		if input:pressed("debugZoomOut") then
-			camera.sizeX, camera.sizeY = camera.sizeX - 0.05, camera.sizeY - 0.05
+			camera.zoom = camera.zoom - 0.1
 		end
 		if input:pressed("debugZoomIn") then
-			camera.sizeX, camera.sizeY = camera.sizeX + 0.05, camera.sizeY + 0.05
+			camera.zoom = camera.zoom + 0.1
 		end
 	end,
 
@@ -259,7 +259,7 @@ return {
 
 				love.graphics.push()
 					love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
-					love.graphics.scale(camera.sizeX, camera.sizeY)
+					love.graphics.scale(camera.zoom, camera.zoom)
                     stages[fileStr]:draw()
 				love.graphics.pop()
 
@@ -298,8 +298,8 @@ return {
                     end
                     graphics.setColor(1, 1, 1)
                         
-                    love.graphics.print("\n\n\n\n\n\nCamX: " .. camera.x .. "\nCamY: " .. camera.y .. "\nCamSizeX: " .. camera.sizeX .. "\nCamSizeY: " .. camera.sizeY ..
-						"\n\nPress Esc to exit at any time", 0, (#menus[menuID] + 1) * 20)
+                    love.graphics.print("\n\n\n\n\n\nCamX: " .. camera.x .. "\nCamY: " .. camera.y ..
+					"\n\nPress Esc to exit at any time", 0, (#menus[menuID] + 1) * 20)
                 end
 			else
 				for i = 1, #dirTable do

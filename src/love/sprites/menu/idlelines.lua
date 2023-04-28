@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	graphics.imagePath("menu/campaign_menu_UI_characters"),
+	love.graphics.newImage(graphics.imagePath("menu/campaign_menu_UI_characters")),
     	-- Automatically generated from campaign_menu_UI_characters.xml
 	{
 		{x = 0, y = 0, width = 395, height = 416, offsetX = 0, offsetY = 0, offsetWidth = 415, offsetHeight = 418}, -- 1: BF HEY!!0000

@@ -43,7 +43,7 @@ return {
 			love.graphics.translate(graphics.getWidth() / 2, graphics.getHeight() / 2)
 
 			love.graphics.push()
-				love.graphics.scale(camera.sizeX, camera.sizeY)
+				love.graphics.scale(camera.zoom, camera.zoom)
 
 				love.graphics.printf("Click to start game", -1280, 0, 1280, "center", nil, 2, 2)
 			love.graphics.pop()

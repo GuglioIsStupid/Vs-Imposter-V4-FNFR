@@ -18,20 +18,20 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
 
 return graphics.newSprite(
-	graphics.imagePath("notes"),
+	images.notes,
 	{
-		{x = 784, y = 232, width = 157, height = 153, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: arrowUP0000
-		{x = 1850, y = 0, width = 157, height = 154, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: green0000
-		{x = 1120, y = 442, width = 50, height = 64, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 3: green hold end0000
-		{x = 1320, y = 447, width = 50, height = 44, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 4: green hold piece0000
-		{x = 476, y = 0, width = 236, height = 232, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 5: up confirm0000
-		{x = 712, y = 0, width = 236, height = 232, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 6: up confirm0001
-		{x = 948, y = 231, width = 214, height = 206, offsetX = -11, offsetY = -10, offsetWidth = 236, offsetHeight = 232}, -- 7: up confirm0002
-		{x = 948, y = 231, width = 214, height = 206, offsetX = -11, offsetY = -10, offsetWidth = 236, offsetHeight = 232}, -- 8: up confirm0003
-		{x = 609, y = 389, width = 144, height = 141, offsetX = -5, offsetY = -4, offsetWidth = 153, offsetHeight = 150}, -- 9: up press0000
-		{x = 609, y = 389, width = 144, height = 141, offsetX = -5, offsetY = -4, offsetWidth = 153, offsetHeight = 150}, -- 10: up press0001
-		{x = 1850, y = 308, width = 153, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 11: up press0002
-		{x = 1850, y = 308, width = 153, height = 150, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0} -- 12: up press0003
+		{x = 323, y = 240, width = 157, height = 154, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 4: arrowUP0000
+		{x = 162, y = 240, width = 157, height = 154, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 18: green alone0000
+		{x = 1007, y = 452, width = 51, height = 64, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 16: green tail0000
+		{x = 1227, y = 457, width = 51, height = 44, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 17: green hold0000
+		{x = 488, y = 0, width = 238, height = 234, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 80: up confirm0000
+		{x = 730, y = 0, width = 238, height = 234, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 81: up confirm0001
+		{x = 972, y = 236, width = 216, height = 212, offsetX = -11, offsetY = -11, offsetWidth = 238, offsetHeight = 234}, -- 82: up confirm0002
+		{x = 972, y = 236, width = 216, height = 212, offsetX = -11, offsetY = -11, offsetWidth = 238, offsetHeight = 234}, -- 83: up confirm0003
+		{x = 1898, y = 303, width = 144, height = 142, offsetX = -6, offsetY = -4, offsetWidth = 154, offsetHeight = 151}, -- 84: up press0000
+		{x = 1898, y = 303, width = 144, height = 142, offsetX = -6, offsetY = -4, offsetWidth = 154, offsetHeight = 151}, -- 85: up press0001
+		{x = 158, y = 398, width = 154, height = 151, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 86: up press0002
+		{x = 158, y = 398, width = 154, height = 151, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0} -- 87: up press0003
 	},
 	{
 		["off"] = {start = 1, stop = 1, speed = 0, offsetX = 0, offsetY = 0},

@@ -18,7 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
 
 return graphics.newSprite(
-	graphics.imagePath("pixel/ui/numbers"),
+	images["numbers"],
 	{
 		{x = 0, y = 0, width = 9, height = 12, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: 0
 		{x = 10, y = 0, width = 9, height = 12, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: 1

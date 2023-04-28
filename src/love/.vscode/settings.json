@@ -10,6 +10,5 @@
     "Lua.workspace.library": [
         "E:\\APIs\\lovr-docs\\api",
         "${3rd}/love2d/library"
-    ],
-    "Lua.workspace.checkThirdParty": false
+    ]
 }

@@ -2,8 +2,6 @@ local choice
 return {
     enter = function()
         choice = 1
-
-        inDebug = true
     end,
 
     update = function(self, dt)

@@ -18,7 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
 
 return graphics.newSprite(
-	graphics.imagePath("boyfriend"),
+	love.graphics.newImage(graphics.imagePath("boyfriend")),
 	-- Automatically generated from BOYFRIEND.xml
 	{
 		{x = 0, y = 0, width = 439, height = 435, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: BF Dead Loop0000
@@ -524,13 +524,13 @@ return graphics.newSprite(
 		["dead confirm"] = {start = 35, stop = 68, speed = 24, offsetX = 14, offsetY = 20},
 		["hey"] = {start = 69, stop = 94, speed = 24, offsetX = 0, offsetY = 0},
 		["singDOWN"] = {start = 95, stop = 124, speed = 24, offsetX = -4, offsetY = -24},
-		["miss down"] = {start = 125, stop = 153, speed = 24, offsetX = 6, offsetY = -11},
+		["singDOWN miss"] = {start = 125, stop = 153, speed = 24, offsetX = 6, offsetY = -11},
 		["singLEFT"] = {start = 154, stop = 168, speed = 24, offsetX = 20, offsetY = -4},
-		["miss left"] = {start = 169, stop = 202, speed = 24, offsetX = 20, offsetY = 8},
+		["singLEFT miss"] = {start = 169, stop = 202, speed = 24, offsetX = 20, offsetY = 8},
 		["singRIGHT"] = {start = 203, stop = 264, speed = 24, offsetX = -41, offsetY = -3},
-		["miss right"] = {start = 265, stop = 310, speed = 24, offsetX = -41, offsetY = 10},
+		["singRIGHT miss"] = {start = 265, stop = 310, speed = 24, offsetX = -41, offsetY = 10},
 		["singUP"] = {start = 311, stop = 325, speed = 24, offsetX = -21, offsetY = 13},
-		["miss up"] = {start = 326, stop = 349, speed = 24, offsetX = -18, offsetY = 11},
+		["singUP miss"] = {start = 326, stop = 349, speed = 24, offsetX = -18, offsetY = 11},
 		["dies"] = {start = 350, stop = 407, speed = 24, offsetX = 14, offsetY = -11},
 		["idle"] = {start = 427, stop = 440, speed = 24, offsetX = 0, offsetY = 0},
 		["shaking"] = {start = 441, stop = 444, speed = 24, offsetX = 0, offsetY = 0}

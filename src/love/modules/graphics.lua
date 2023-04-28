@@ -13,12 +13,17 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
+You should have received a copy of1 the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
 
 local imageType = "png"
-local fade = {1}
+fade = {
+	1,
+	height = lovesize.getHeight(),
+	mesh = nil,
+	y = 0,
+}
 local isFading = false
 
 local fadeTimer
@@ -87,6 +92,8 @@ return {
 			scrollX = 1,
 			scrollY = 1,
 
+			visible = true,
+
 			setImage = function(self, image)
 				image = image
 				width = image:getWidth()
@@ -106,18 +113,20 @@ return {
 					y = math.floor(y)
 				end
 
-				love.graphics.draw(
-					image,
-					self.x,
-					self.y,
-					self.orientation,
-					self.sizeX,
-					self.sizeY,
-					math.floor(width / 2) + self.offsetX,
-					math.floor(height / 2) + self.offsetY,
-					self.shearX,
-					self.shearY
-				)
+				if self.visible then
+					love.graphics.draw(
+						image,
+						self.x,
+						self.y,
+						self.orientation,
+						self.sizeX,
+						self.sizeY,
+						math.floor(width / 2) + self.offsetX,
+						math.floor(height / 2) + self.offsetY,
+						self.shearX,
+						self.shearY
+					)
+				end
 			end,
 
 			udraw = function(self, sx, sy)
@@ -154,11 +163,6 @@ return {
 	end,
 
 	newSprite = function(imageData, frameData, animData, animName, loopAnim, optionsTable)
-		local pathStr = imageData
-		if not graphics.cache[pathStr] then 
-			graphics.cache[pathStr] = love.graphics.newImage(pathStr)
-		end
-		local imageData = graphics.cache[pathStr]
 		local sheet, sheetWidth, sheetHeight
 
 		local frames = {}
@@ -188,23 +192,33 @@ return {
 			offsetY = 0,
 			shearX = 0,
 			shearY = 0,
-			imageData = imageData,
 
 			scrollX = 1,
 			scrollY = 1,
 
-			holdTimer = 0,
+			holdTimer = 2,
 			lastHit = 0,
 
 			heyTimer = 0,
 			specialAnim = false,
 
+			clipRect = nil,
+			stencilInfo = nil,
+
+			flipX = optionsTable and optionsTable.flipX or false,
+
 			singDuration = optionsTable and optionsTable.singDuration or 4,
 			isCharacter = optionsTable and optionsTable.isCharacter or false,
 			danceSpeed = optionsTable and optionsTable.danceSpeed or 2,
+			danceIdle = optionsTable and optionsTable.danceIdle or false,
+			maxHoldTimer = optionsTable and optionsTable.maxHoldTimer or 0.1,
 
-			setSheet = function(self)
-				sheet = self.imageData
+			visible = true,
+
+			danced = false,
+
+			setSheet = function(self, imageData)
+				sheet = imageData
 				sheetWidth = sheet:getWidth()
 				sheetHeight = sheet:getHeight()
 			end,
@@ -221,6 +235,13 @@ return {
 				self.holdTimer = 0
 				if not self:isAnimName(animName) then
 					return
+				end
+				if self.flipX and self.isCharacter then 
+					if animName == "singLEFT" then 
+						animName = "singRIGHT"
+					elseif animName == "singRIGHT" then
+						animName = "singLEFT"
+					end
 				end
 				anim.name = animName
 				anim.start = anims[animName].start
@@ -283,48 +304,62 @@ return {
 						isAnimated = false
 					end
 				end
-				if not inDebug then
-					if self.specialAnim then 
-						self.heyTimer = self.heyTimer - dt 
-						if self.heyTimer <= 0 and not self:isAnimated() then 
-							self.heyTimer = 0 
-							self.specialAnim = false
-							self:animate("idle", false) 
-						end
-					end
 
-					if self.isCharacter then 
-						self.holdTimer = self.holdTimer + dt
-						if self.holdTimer >= beatHandler.getStepCrochet() * 0.005 * self.singDuration then
-							if util.startsWith(self:getAnimName(), "sing") then 
-								self.holdTimer = 0
-								self:animate("idle", false)
-							end
-						end
+				self.holdTimer = self.holdTimer + dt
+
+				if self.specialAnim then 
+					self.heyTimer = self.heyTimer - dt 
+					if self.heyTimer <= 0 and not self:isAnimated() and not (self:getAnimName() == "dies" or self:getAnimName() == "dead" or self:getAnimName() == "dead confirm" or self:getAnimName() == "danceLeft" or self:getAnimName() == "danceRight") then 
+						self.heyTimer = 0 
+						self.specialAnim = false
+						--self:animate("idle", false) 
 					end
 				end
+			end,
+
+			getFrameWidth = function(self)
+				local flooredFrame = math.floor(frame)
+				return frameData[flooredFrame].width
+			end,
+
+			getFrameHeight = function(self)
+				local flooredFrame = math.floor(frame)
+				return frameData[flooredFrame].height
 			end,
 
 			beat = function(self, beat)
 				if self.isCharacter then
 					if beatHandler.onBeat() then
-						if (not self:isAnimated() and util.startsWith(self:getAnimName(), "sing")) or (self:getAnimName() == "idle" or self:getAnimName() == "idle loop") then
-							if beat % self.danceSpeed == 0 then 
-								if self.lastHit > 0 then
-									if self.lastHit + beatHandler.getStepCrochet() * self.singDuration <= musicTime then
+						if not self.danceIdle then
+							if (not self:isAnimated() and util.startsWith(self:getAnimName(), "sing")) or (self:getAnimName() == "idle" or self:getAnimName() == "idle loop") then
+								if beat % self.danceSpeed == 0 then 
+									if self.lastHit > 0 then
+										if self.lastHit + beatHandler.getStepCrochet() * self.singDuration <= musicTime then
+											self:animate("idle", false, function()
+												if self:isAnimName("idle loop") then 
+													self:animate("idle loop", true)
+												end
+											end)
+											self.lastHit = 0
+										end
+									else
 										self:animate("idle", false, function()
 											if self:isAnimName("idle loop") then 
 												self:animate("idle loop", true)
 											end
 										end)
-										self.lastHit = 0
 									end
-								else
-									self:animate("idle", false, function()
-										if self:isAnimName("idle loop") then 
-											self:animate("idle loop", true)
-										end
-									end)
+								end
+							end
+						else
+							if beat % self.danceSpeed == 0 then 
+								if (not self:isAnimated() and util.startsWith(self:getAnimName(), "sing")) or (self:getAnimName() == "danceLeft" or self:getAnimName() == "danceRight" or (not self:isAnimated() and self:getAnimName() == "sad")) then
+									self.danced = not self.danced
+									if self.danced then
+										self:animate("danceLeft", false)
+									else
+										self:animate("danceRight", false)
+									end	
 								end
 							end
 						end
@@ -366,28 +401,45 @@ return {
 						end
 					end
 
-					love.graphics.draw(
-						sheet,
-						frames[flooredFrame],
-						x,
-						y,
-						self.orientation,
-						self.sizeX,
-						self.sizeY,
-						width + anim.offsetX + self.offsetX,
-						height + anim.offsetY + self.offsetY,
-						self.shearX,
-						self.shearY
-					)
+					if self.clipRect then 
+						self.stencilInfo = {
+							x = self.clipRect.x,	
+							y = self.clipRect.y,
+							width = self.clipRect.width,
+							height = self.clipRect.height
+						}
+						love.graphics.stencil(function()
+							love.graphics.push()
+							love.graphics.translate(self.stencilInfo.x, self.stencilInfo.y)
+							love.graphics.translate(-self.stencilInfo.width / 2, -self.stencilInfo.height / 2)
+							love.graphics.rotate(self.orientation)
+							love.graphics.rectangle("fill", 0, 0, self.stencilInfo.width, self.stencilInfo.height)
+							love.graphics.pop()
+						end, "replace", 1)
+						love.graphics.setStencilTest("greater", 0)
+					end
+
+					if self.visible then
+						love.graphics.draw(
+							sheet,
+							frames[flooredFrame],
+							x,
+							y,
+							self.orientation,
+							self.sizeX * (self.flipX and -1 or 1),
+							self.sizeY,
+							width + anim.offsetX + self.offsetX,
+							height + anim.offsetY + self.offsetY,
+							self.shearX,
+							self.shearY
+						)
+					end
+
+					if self.clipRect then 
+						self.stencilInfo = nil
+						love.graphics.setStencilTest()
+					end
 				end
-			end,
-
-			getFrameWidth = function(self)
-				return frameData[math.floor(frame)].width
-			end,
-
-			getFrameHeight = function(self)
-				return frameData[math.floor(frame)].height
 			end,
 
 			udraw = function(self, sx, sy)
@@ -426,19 +478,21 @@ return {
 						end
 					end
 
-					love.graphics.draw(
-						sheet,
-						frames[flooredFrame],
-						self.x,
-						self.y,
-						self.orientation,
-						sx,
-						sy,
-						width + anim.offsetX + self.offsetX,
-						height + anim.offsetY + self.offsetY,
-						self.shearX,
-						self.shearY
-					)
+					if self.visible then
+						love.graphics.draw(
+							sheet,
+							frames[flooredFrame],
+							self.x,
+							self.y,
+							self.orientation,
+							sx * (self.flipX and -1 or 1),
+							sy,
+							width + anim.offsetX + self.offsetX,
+							height + anim.offsetY + self.offsetY,
+							self.shearX,
+							self.shearY
+						)
+					end
 				end
 			end
 		}
@@ -464,6 +518,25 @@ return {
 		options = optionsTable
 
 		return object
+	end,
+
+	newGradient = function(...)
+		local colourLen, data = select("#", ...), {}
+
+		for i = 1, colourLen do
+			local colour = select(i, ...)
+			local y = (i - 1) / (colourLen - 1)
+
+			data[#data + 1] = {
+				1, y, 1, y, colour[1], colour[2], colour[3], colour[4] or 1
+			}
+			data[#data + 1] = {
+				0, y, 0, y, colour[1], colour[2], colour[3], colour[4] or 1
+			}
+
+		end
+
+		return love.graphics.newMesh(data, "strip", "static")
 	end,
 
 	setFade = function(value)
@@ -516,6 +589,60 @@ return {
 			end
 		)
 	end,
+	
+	fadeOutWipe = function(self, duration, func)
+		if fadeTimer then
+			Timer.cancel(fadeTimer)
+		end
+
+		fade.height = lovesize.getHeight() * 2
+		fade.mesh = self.newGradient({0,0,0}, {0,0,0}, {0,0,0,0})
+
+		isFading = true
+
+		fade.y = -fade.height
+		fadeTimer = Timer.tween(
+			duration,
+			fade,
+			{
+				y = 0
+			},
+			"linear",
+			function()
+				isFading = false
+
+				fade.mesh = nil
+				if func then func() end
+			end
+		)
+	end,
+	fadeInWipe = function(self, duration, func)
+		if fadeTimer then
+			Timer.cancel(fadeTimer)
+		end
+
+		fade.height = lovesize.getHeight() * 2
+		fade.mesh = self.newGradient({0,0,0,0}, {0,0,0}, {0,0,0})
+
+		isFading = false
+
+		fade.y = -fade.height/2
+		fadeTimer = Timer.tween(
+			duration*2,
+			fade,
+			{
+				y = fade.height
+			},
+			"linear",
+			function()
+				isFading = false
+
+				fade.mesh = nil
+				if func then func() end
+			end
+		)
+	end,
+
 	isFading = function()
 		return isFading
 	end,

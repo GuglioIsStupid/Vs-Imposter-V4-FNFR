@@ -18,23 +18,23 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
 
 return graphics.newSprite(
-	graphics.imagePath("pixel/characters/boyfriend"),
+	love.graphics.newImage(graphics.imagePath("pixel/boyfriend")),
 	-- Automatically generated from bfPixel.xml
 	{
-		{x = 166, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: BF DOWN MISS instance 10000
-		{x = 0, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: BF DOWN MISS instance 10001
-		{x = 0, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 3: BF DOWN MISS instance 10002
-		{x = 83, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 4: BF DOWN MISS instance 10003
-		{x = 83, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 5: BF DOWN MISS instance 10004
-		{x = 83, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 6: BF DOWN MISS instance 10005
-		{x = 83, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 7: BF DOWN MISS instance 10006
-		{x = 83, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 8: BF DOWN MISS instance 10007
-		{x = 83, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 9: BF DOWN MISS instance 10008
-		{x = 83, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 10: BF DOWN MISS instance 10009
-		{x = 83, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 11: BF DOWN MISS instance 10010
-		{x = 83, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 12: BF DOWN MISS instance 10011
-		{x = 83, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 13: BF DOWN MISS instance 10012
-		{x = 83, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 14: BF DOWN MISS instance 10013
+		{x = 166, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: BF DOWN instance MISS 10000
+		{x = 0, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: BF DOWN instance MISS 10001
+		{x = 0, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 3: BF DOWN instance MISS 10002
+		{x = 83, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 4: BF DOWN instance MISS 10003
+		{x = 83, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 5: BF DOWN instance MISS 10004
+		{x = 83, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 6: BF DOWN instance MISS 10005
+		{x = 83, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 7: BF DOWN instance MISS 10006
+		{x = 83, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 8: BF DOWN instance MISS 10007
+		{x = 83, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 9: BF DOWN instance MISS 10008
+		{x = 83, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 10: BF DOWN instance MISS 10009
+		{x = 83, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 11: BF DOWN instance MISS 10010
+		{x = 83, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 12: BF DOWN instance MISS 10011
+		{x = 83, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 13: BF DOWN instance MISS 10012
+		{x = 83, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 14: BF DOWN instance MISS 10013
 		{x = 166, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 15: BF DOWN NOTE instance 10000
 		{x = 166, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 16: BF DOWN NOTE instance 10001
 		{x = 249, y = 0, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 17: BF DOWN NOTE instance 10002
@@ -63,20 +63,20 @@ return graphics.newSprite(
 		{x = 166, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 40: BF IDLE instance 10011
 		{x = 166, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 41: BF IDLE instance 10012
 		{x = 166, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 42: BF IDLE instance 10013
-		{x = 415, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 43: BF LEFT MISS instance 10000
-		{x = 249, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 44: BF LEFT MISS instance 10001
-		{x = 249, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 45: BF LEFT MISS instance 10002
-		{x = 332, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 46: BF LEFT MISS instance 10003
-		{x = 332, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 47: BF LEFT MISS instance 10004
-		{x = 332, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 48: BF LEFT MISS instance 10005
-		{x = 332, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 49: BF LEFT MISS instance 10006
-		{x = 332, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 50: BF LEFT MISS instance 10007
-		{x = 332, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 51: BF LEFT MISS instance 10008
-		{x = 332, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 52: BF LEFT MISS instance 10009
-		{x = 332, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 53: BF LEFT MISS instance 10010
-		{x = 332, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 54: BF LEFT MISS instance 10011
-		{x = 332, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 55: BF LEFT MISS instance 10012
-		{x = 332, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 56: BF LEFT MISS instance 10013
+		{x = 415, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 43: BF LEFT instance MISS 10000
+		{x = 249, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 44: BF LEFT instance MISS 10001
+		{x = 249, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 45: BF LEFT instance MISS 10002
+		{x = 332, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 46: BF LEFT instance MISS 10003
+		{x = 332, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 47: BF LEFT instance MISS 10004
+		{x = 332, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 48: BF LEFT instance MISS 10005
+		{x = 332, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 49: BF LEFT instance MISS 10006
+		{x = 332, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 50: BF LEFT instance MISS 10007
+		{x = 332, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 51: BF LEFT instance MISS 10008
+		{x = 332, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 52: BF LEFT instance MISS 10009
+		{x = 332, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 53: BF LEFT instance MISS 10010
+		{x = 332, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 54: BF LEFT instance MISS 10011
+		{x = 332, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 55: BF LEFT instance MISS 10012
+		{x = 332, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 56: BF LEFT instance MISS 10013
 		{x = 415, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 57: BF LEFT NOTE instance 10000
 		{x = 415, y = 83, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 58: BF LEFT NOTE instance 10001
 		{x = 0, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 59: BF LEFT NOTE instance 10002
@@ -91,20 +91,20 @@ return graphics.newSprite(
 		{x = 0, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 68: BF LEFT NOTE instance 10011
 		{x = 0, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 69: BF LEFT NOTE instance 10012
 		{x = 0, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 70: BF LEFT NOTE instance 10013
-		{x = 249, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 71: BF RIGHT MISS instance 10000
-		{x = 83, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 72: BF RIGHT MISS instance 10001
-		{x = 83, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 73: BF RIGHT MISS instance 10002
-		{x = 166, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 74: BF RIGHT MISS instance 10003
-		{x = 166, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 75: BF RIGHT MISS instance 10004
-		{x = 166, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 76: BF RIGHT MISS instance 10005
-		{x = 166, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 77: BF RIGHT MISS instance 10006
-		{x = 166, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 78: BF RIGHT MISS instance 10007
-		{x = 166, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 79: BF RIGHT MISS instance 10008
-		{x = 166, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 80: BF RIGHT MISS instance 10009
-		{x = 166, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 81: BF RIGHT MISS instance 10010
-		{x = 166, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 82: BF RIGHT MISS instance 10011
-		{x = 166, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 83: BF RIGHT MISS instance 10012
-		{x = 166, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 84: BF RIGHT MISS instance 10013
+		{x = 249, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 71: BF RIGHT instance MISS 10000
+		{x = 83, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 72: BF RIGHT instance MISS 10001
+		{x = 83, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 73: BF RIGHT instance MISS 10002
+		{x = 166, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 74: BF RIGHT instance MISS 10003
+		{x = 166, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 75: BF RIGHT instance MISS 10004
+		{x = 166, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 76: BF RIGHT instance MISS 10005
+		{x = 166, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 77: BF RIGHT instance MISS 10006
+		{x = 166, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 78: BF RIGHT instance MISS 10007
+		{x = 166, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 79: BF RIGHT instance MISS 10008
+		{x = 166, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 80: BF RIGHT instance MISS 10009
+		{x = 166, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 81: BF RIGHT instance MISS 10010
+		{x = 166, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 82: BF RIGHT instance MISS 10011
+		{x = 166, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 83: BF RIGHT instance MISS 10012
+		{x = 166, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 84: BF RIGHT instance MISS 10013
 		{x = 249, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 85: BF RIGHT NOTE instance 10000
 		{x = 249, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 86: BF RIGHT NOTE instance 10001
 		{x = 332, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 87: BF RIGHT NOTE instance 10002
@@ -119,20 +119,20 @@ return graphics.newSprite(
 		{x = 332, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 96: BF RIGHT NOTE instance 10011
 		{x = 332, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 97: BF RIGHT NOTE instance 10012
 		{x = 332, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 98: BF RIGHT NOTE instance 10013
-		{x = 83, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 99: BF UP MISS instance 10000
-		{x = 415, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 100: BF UP MISS instance 10001
-		{x = 415, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 101: BF UP MISS instance 10002
-		{x = 0, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 102: BF UP MISS instance 10003
-		{x = 0, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 103: BF UP MISS instance 10004
-		{x = 0, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 104: BF UP MISS instance 10005
-		{x = 0, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 105: BF UP MISS instance 10006
-		{x = 0, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 106: BF UP MISS instance 10007
-		{x = 0, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 107: BF UP MISS instance 10008
-		{x = 0, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 108: BF UP MISS instance 10009
-		{x = 0, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 109: BF UP MISS instance 10010
-		{x = 0, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 110: BF UP MISS instance 10011
-		{x = 0, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 111: BF UP MISS instance 10012
-		{x = 0, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 112: BF UP MISS instance 10013
+		{x = 83, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 99: BF UP instance MISS 10000
+		{x = 415, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 100: BF UP instance MISS 10001
+		{x = 415, y = 166, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 101: BF UP instance MISS 10002
+		{x = 0, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 102: BF UP instance MISS 10003
+		{x = 0, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 103: BF UP instance MISS 10004
+		{x = 0, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 104: BF UP instance MISS 10005
+		{x = 0, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 105: BF UP instance MISS 10006
+		{x = 0, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 106: BF UP instance MISS 10007
+		{x = 0, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 107: BF UP instance MISS 10008
+		{x = 0, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 108: BF UP instance MISS 10009
+		{x = 0, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 109: BF UP instance MISS 10010
+		{x = 0, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 110: BF UP instance MISS 10011
+		{x = 0, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 111: BF UP instance MISS 10012
+		{x = 0, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 112: BF UP instance MISS 10013
 		{x = 83, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 113: BF UP NOTE instance 10000
 		{x = 83, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 114: BF UP NOTE instance 10001
 		{x = 166, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 115: BF UP NOTE instance 10002
@@ -149,14 +149,14 @@ return graphics.newSprite(
 		{x = 166, y = 249, width = 73, height = 73, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0} -- 126: BF UP NOTE instance 10013
 	},
 	{
-		["miss singDOWN"] = {start = 1, stop = 14, speed = 24, offsetX = 0, offsetY = 0},
+		["singDOWN miss"] = {start = 1, stop = 14, speed = 24, offsetX = 0, offsetY = 0},
 		["singDOWN"] = {start = 15, stop = 28, speed = 24, offsetX = 0, offsetY = 0},
 		["idle"] = {start = 29, stop = 42, speed = 24, offsetX = 0, offsetY = 0},
-		["miss singLEFT"] = {start = 43, stop = 56, speed = 24, offsetX = 0, offsetY = 0},
+		["singLEFT miss"] = {start = 43, stop = 56, speed = 24, offsetX = 0, offsetY = 0},
 		["singLEFT"] = {start = 57, stop = 70, speed = 24, offsetX = 0, offsetY = 0},
-		["miss singRIGHT"] = {start = 71, stop = 84, speed = 24, offsetX = 0, offsetY = 0},
+		["singRIGHT miss"] = {start = 71, stop = 84, speed = 24, offsetX = 0, offsetY = 0},
 		["singRIGHT"] = {start = 85, stop = 98, speed = 24, offsetX = 0, offsetY = 0},
-		["miss singUP"] = {start = 99, stop = 112, speed = 24, offsetX = 0, offsetY = 0},
+		["singUP miss"] = {start = 99, stop = 112, speed = 24, offsetX = 0, offsetY = 0},
 		["singUP"] = {start = 113, stop = 126, speed = 24, offsetX = 0, offsetY = 0}
 	},
 	"idle",

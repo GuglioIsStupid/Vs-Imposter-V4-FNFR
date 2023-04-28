@@ -42,14 +42,14 @@ function cutscene.video(path)
             return self.video:isPlaying()
         end,
 
-        draw = function(self, x, y, scale)
+        draw = function(self)
             love.graphics.draw(
                 self.video,
-                x or self.x,
-                y or self.y,
+                self.x,
+                self.y,
                 self.orientation,
-                scale or self.scale,
-                scale or self.scale,
+                self.scale,
+                self.scale,
                 self.offsetX,
                 self.offsetY,
                 self.shearX,

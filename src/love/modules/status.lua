@@ -38,13 +38,14 @@ return {
 
 	getDebugStr = function(type)
 		local debugStr
-
+		local stats = love.graphics.getStats()
 		if type == "detailed" then
 			debugStr = "FPS: " .. tostring(love.timer.getFPS()) ..
 			"\nLUA MEM USAGE (KB): " .. tostring(math.floor(collectgarbage("count"))) ..
-			"\nGRAPHICS MEM USAGE (MB): " .. tostring(math.floor(love.graphics.getStats().texturememory / 1048576)) ..
-			"\nDelta Time: " .. tostring(love.timer.getDelta()) ..
-			"\nMX, MY: " .. tostring(love.mouse.getX()) .. ", " .. tostring(love.mouse.getY()) ..
+			"\nGRAPHICS MEM USAGE (MB): " .. tostring(math.floor(stats.texturememory / 1048576)) ..
+			"\nLoaded Images: " .. tostring(stats.images) ..
+			"\nLoaded Fonts: " .. tostring(stats.fonts) ..
+			"\nDraw Calls: " .. tostring(stats.drawcalls) ..
 
 			"\n\nsettings.hardwareCompression: " .. tostring(settings.hardwareCompression) ..
 			"\ngraphics.getImageType(): " .. tostring(graphics.getImageType()) ..

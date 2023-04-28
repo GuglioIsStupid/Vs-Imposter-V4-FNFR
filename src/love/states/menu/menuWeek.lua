@@ -16,10 +16,6 @@ local difficultyStrs = {
 local selectSound = love.audio.newSource("sounds/menu/select.ogg", "static")
 local confirmSound = love.audio.newSource("sounds/menu/confirm.ogg", "static")
 
-local function switchMenu(menu)
-
-end
-
 return {
 	enter = function(self, previous)
 		songNum = 0
@@ -61,8 +57,7 @@ return {
 			)
 		end
 
-		camera.sizeX, camera.sizeY = 0.9, 0.9
-		defaultCamZoom = 0.9, 0.9
+		camera.zoom = 0.9
 
 		freeColour = {
 			255,255,255
@@ -78,7 +73,7 @@ return {
 			{231,139,8} -- Week 7
 		}
 		Timer.tween(
-			0.8,
+			0.1,
 			freeColour, 
 			{
 				[1] = freeplayColours[1][1],
@@ -141,10 +136,7 @@ return {
 		gfDanceLines:animate("girlfriend", true)
 		enemyDanceLines:animate("week1", true)
 
-		switchMenu(1)
-
-		graphics.setFade(0)
-		graphics.fadeIn(0.5)
+		graphics:fadeInWipe(0.6)
 
 		function confirmFunc()
 			music:stop()
@@ -152,8 +144,8 @@ return {
 
 			status.setLoading(true)
 
-			graphics.fadeOut(
-				0.5,
+			graphics:fadeOutWipe(
+				0.7,
 				function()
 					
 					songAppend = difficultyStrs[songDifficulty]
@@ -186,8 +178,6 @@ return {
 					theTracks = weekMeta[weekNum][2][trackLength]
 				end
 			end
-
-
 			enemyDanceLines:animate("week" .. weekNum, true)
 		end
 		
@@ -299,17 +289,15 @@ return {
 
 			love.graphics.push()
 
-				graphics.setColor(freeColour[1]/255, freeColour[2]/255, freeColour[3]/255)
-				love.graphics.scale(camera.sizeX, camera.sizeY)
+				love.graphics.setColor(freeColour[1]/255, freeColour[2]/255, freeColour[3]/255)
+				love.graphics.scale(camera.zoom, camera.zoom)
 				for i = 1, #weekDesc do
 					weekImages[i]:draw()
 				end
 
-				
-
 				titleBG:draw()
 
-				graphics.setColor(1, 1, 1)
+				love.graphics.setColor(1, 1, 1)
 
 				difficultyAnim:draw()
 				if weekNum ~= 1 then
@@ -319,15 +307,13 @@ return {
 				gfDanceLines:draw()
 
 				--weekImages[currentWeek + 1]:draw()
-				graphics.setColor(freeColour[1]/255, freeColour[2]/255, freeColour[3]/255)
+				love.graphics.setColor(freeColour[1]/255, freeColour[2]/255, freeColour[3]/255)
 
 				if weekImages[currentWeek+1]then weekImages[currentWeek+1]:draw() end
 
 				love.graphics.printf({{freeColour[1], freeColour[2], freeColour[3]}, weekDesc[weekNum]}, -639, -395, 853, "center", nil, 1.5, 1.5)
 
 				love.graphics.printf({{freeColour[1], freeColour[2], freeColour[3]}, theTracks}, -639, 350, 853, "center", nil, 1.5, 1.5)
-
-				love.graphics.setColor(0, 0, 0, 0.4)
 
 				love.graphics.setColor(1, 1, 1)
 				arrowUp:draw()

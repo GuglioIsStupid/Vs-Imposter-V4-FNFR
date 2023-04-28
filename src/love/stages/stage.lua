@@ -1,19 +1,19 @@
 return {
     enter = function()
         stageImages = {
-            ["Stage Back"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("week1/stage-back"))), -- stage-back
-		    ["Stage Front"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("week1/stage-front"))), -- stage-front
-		    ["Curtains"] = graphics.newImage(love.graphics.newImage(graphics.imagePath("week1/curtains"))) -- curtains
+            ["Stage Back"] = graphics.newImage(graphics.imagePath("week1/stage-back")), -- stage-back
+		    ["Stage Front"] = graphics.newImage(graphics.imagePath("week1/stage-front")), -- stage-front
+		    ["Curtains"] = graphics.newImage(graphics.imagePath("week1/curtains")) -- curtains
         }
 
         stageImages["Stage Front"].y = 400
         stageImages["Curtains"].y = -100
 
-        enemy = Character.daddydearest(0,0)
+        enemy = love.filesystem.load("sprites/week1/daddy-dearest.lua")()
 
-        girlfriend.x, girlfriend.y = -200, -445
-        enemy.x, enemy.y = -550, -500
-        boyfriend.x, boyfriend.y = 260, -125
+        girlfriend.x, girlfriend.y = 30, -90
+        enemy.x, enemy.y = -380, -110
+        boyfriend.x, boyfriend.y = 260, 100
     end,
 
     load = function()
@@ -21,12 +21,12 @@ return {
     end,
 
     update = function(self, dt)
-
     end,
 
     draw = function()
         love.graphics.push()
-			love.graphics.translate(cam.x * 0.9, cam.y * 0.9)
+			love.graphics.translate(camera.x * 0.9, camera.y * 0.9)
+            love.graphics.translate(camera.ex * 0.9, camera.ey * 0.9)
 
 			stageImages["Stage Back"]:draw()
 			stageImages["Stage Front"]:draw()
@@ -34,21 +34,26 @@ return {
 			girlfriend:draw()
 		love.graphics.pop()
 		love.graphics.push()
-			love.graphics.translate(cam.x, cam.y)
-
+			love.graphics.translate(camera.x, camera.y)
+            love.graphics.translate(camera.ex, camera.ey)
 			enemy:draw()
 			boyfriend:draw()
+            graphics.setColor(1,1,1)
+            
 		love.graphics.pop()
 		love.graphics.push()
-			love.graphics.translate(cam.x * 1.1, cam.y * 1.1)
+			love.graphics.translate(camera.x * 1.1, camera.y * 1.1)
+            love.graphics.translate(camera.ex * 1.1, camera.ey * 1.1)
 
 			stageImages["Curtains"]:draw()
 		love.graphics.pop()
     end,
 
     leave = function()
-        stageImages[1] = nil
-        stageImages[2] = nil
-        stageImages[3] = nil
+        for i, v in pairs(stageImages) do
+            v = nil
+		end
+
+        graphics.clearCache()
     end
 }

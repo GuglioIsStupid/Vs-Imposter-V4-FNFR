@@ -18,7 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
 
 return graphics.newSprite(
-	graphics.imagePath("pixel/ui/rating"),
+	love.graphics.newImage(graphics.imagePath("pixel/rating")),
 	{
 		{x = 0, y = 0, width = 51, height = 20, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: Sick
 		{x = 52, y = 0, width = 39, height = 16, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: Good

@@ -16,8 +16,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------]]
-if love.filesystem.isFused() then function print() end end -- print functions tend the make the game lag when in update functions, so we do this just in
-
+if love.filesystem.isFused() then function print() end end -- print functions tend the make the game lag when in update functions, so we do this to prevent that
+function love.math.randomFloat(min, max)
+	return min + love.math.random() * (max - min)
+end
 function uitextflarge(text,x,y,limit,align,hovered,r,sx,sy,ox,oy,kx,ky)
 	local x = x or 0
 	local y = y or 0
@@ -78,8 +80,23 @@ function uitext(text,x,y,r,sx,sy,ox,oy,kx,ky,alpha)
     love.graphics.print(text,x,y,r,sx,sy,a,ox,oy,kx,ky)
 end
 
-function whatNumberIsThis(value)
-	return value
+function borderedText(text,x,y,r,sx,sy,ox,oy,kx,ky,alpha)
+	local x = x or 0
+	local y = y or 0
+	local r = r or 0
+	local sx = sx or 1
+	local sy = sy or 1
+	local ox = ox or 0
+	local oy = oy or 0
+	local kx = kx or 0
+	local ky = ky or 0
+	graphics.setColor(0,0,0, alpha or 1)
+	love.graphics.print(text,x-1,y,r,sx,sy,a,ox,oy,kx,ky)
+	love.graphics.print(text,x+1,y,r,sx,sy,a,ox,oy,kx,ky)
+	love.graphics.print(text,x,y-1,r,sx,sy,a,ox,oy,kx,ky)
+	love.graphics.print(text,x,y+1,r,sx,sy,a,ox,oy,kx,ky)
+	graphics.setColor(1,1,1, alpha or 1)
+	love.graphics.print(text,x,y,r,sx,sy,a,ox,oy,kx,ky)
 end
 
 function saveSettings()
@@ -111,6 +128,7 @@ function saveSettings()
             hitsoundVol = settings.hitsoundVol,
             noteSkins = settings.noteSkins,
             flashinglights = settings.flashinglights,
+			colourByQuantization = settings.colourByQuantization,
             window = settings.window,
             customBindDown = customBindDown,
             customBindUp = customBindUp,
@@ -150,7 +168,7 @@ function saveSettings()
             hitsoundVol = settings.hitsoundVol,
             noteSkins = settings.noteSkins,
             flashinglights = settings.flashinglights,
-            multiplayer = settings.multiplayer,
+			colourByQuantization = settings.colourByQuantization,
 
             customBindDown = customBindDown,
             customBindUp = customBindUp,
@@ -160,8 +178,8 @@ function saveSettings()
         }
         serialized = lume.serialize(settingdata)
         love.filesystem.write("settings", serialized)
-        graphics.fadeOut(
-            0.3,
+        graphics:fadeOutWipe(
+            0.7,
             function()
                 Gamestate.switch(menuSelect)
                 status.setLoading(false)
@@ -169,39 +187,26 @@ function saveSettings()
         )
     end
 end
+--[[
 
-function saveBeans()
-	love.filesystem.write("beans", beans[1])
-end
+function love.load() -- Todo, add custom framerate support
 
-function getBeans()
-	if love.filesystem.getInfo("beans") then
-		beans = {love.filesystem.read("beans")}
-		beans[1] = tonumber(beans[1])
-	else
-		beans = {0}
-	end
-	print(beans[1])
 end
+]]
 
 function love.load()
 	paused = false
 	settings = {}
 	local curOS = love.system.getOS()
 
-	flash = {alpha = 0}
-
 	-- Load libraries
 	baton = require "lib.baton"
 	ini = require "lib.ini"
-	--lovesize = require "lib.lovesize"
-	push = require "lib.push"
+	lovesize = require "lib.lovesize"
 	Gamestate = require "lib.gamestate"
 	Timer = require "lib.timer"
 	json = require "lib.json"
 	lume = require "lib.lume"
-	moonshine = require "lib.moonshine"
-	Class = require "lib.class"
 
 	-- Load modules
 	status = require "modules.status"
@@ -211,8 +216,8 @@ function love.load()
 	beatHandler = require "modules.beatHandler"
 	util = require "modules.util"
 	cutscene = require "modules.cutscene"
+	dialogue = require "modules.dialogue"
 	settings = require "settings"
-	require("modules.classes")
 
 	playMenuMusic = true
 
@@ -233,6 +238,7 @@ function love.load()
 		settings.customScrollSpeed = settingdata.saveSettingsMoment.customScrollSpeed
 		settings.scrollUnderlayTrans = settingdata.saveSettingsMoment.scrollUnderlayTrans
 		settings.noteSkins = settingdata.saveSettingsMoment.noteSkins
+		settings.colourByQuantization = settingdata.saveSettingsMoment.colourByQuantization
 		customBindDown = settingdata.saveSettingsMoment.customBindDown
 		customBindUp = settingdata.saveSettingsMoment.customBindUp
 		customBindLeft = settingdata.saveSettingsMoment.customBindLeft
@@ -258,16 +264,17 @@ function love.load()
 			customBindUp = customBindUp,
 			customBindLeft = customBindLeft,
 			customBindRight = customBindRight,
+			colourByQuantization = settings.colourByQuantization,
 			settingsVer = settingsVer
 		}
 		serialized = lume.serialize(settingdata)
 		love.filesystem.write("settings", serialized)
 	end
-	if settingsVer ~= 7 then
+	if settingsVer ~= 8 then
 		love.window.showMessageBox("Uh Oh!", "Settings have been reset.", "warning")
 		love.filesystem.remove("settings")
 	end
-	if not love.filesystem.getInfo("settings") or settingsVer ~= 7 then
+	if not love.filesystem.getInfo("settings") or settingsVer ~= 8 then
 		settings.hardwareCompression = true
 		graphics.setImageType("dds")
 		settings.downscroll = false
@@ -281,6 +288,7 @@ function love.load()
 		settings.customScrollSpeed = 1
 		settings.keystrokes = false
 		settings.scrollUnderlayTrans = 0
+		settings.colourByQuantization = false
 		--settings.noteSkins = 1
 		customBindLeft = "a"
 		customBindRight = "d"
@@ -288,7 +296,7 @@ function love.load()
 		customBindDown = "s"
 	
 		settings.flashinglights = false
-		settingsVer = 7
+		settingsVer = 8
 		settingdata = {}
 		settingdata.saveSettingsMoment = {
 			hardwareCompression = settings.hardwareCompression,
@@ -304,6 +312,7 @@ function love.load()
 			customScrollSpeed = settings.customScrollSpeed,
 			keystrokes = settings.keystrokes,
 			scrollUnderlayTrans = settings.scrollUnderlayTrans,
+			colourByQuantization = settings.colourByQuantization,
 			customBindLeft = customBindLeft,
 			customBindRight = customBindRight,
 			customBindUp = customBindUp,
@@ -330,118 +339,44 @@ function love.load()
 	-- Load stages
 	stages = {
 		["stage"] = require "stages.stage",
-		["yellowAirship"] = require "stages.yellowAirship",
-		["blackChase"] = require "stages.blackChase",
-		["cargo"] = require "stages.cargo",
-		["henry"] = require "stages.henry",
-		["polus1"] = require "stages.polus1",
-		["miraCaf"] = require "stages.miraCaf",
-		["miraReactor"] = require "stages.miraReactor",
-		["miraFall"] = require "stages.miraFall",
-		["pinkMira"] = require "stages.pinkMira",
-		["finale"] = require "stages.finale",
-        ["greyMira"] = require "stages.greyMira",
-		["esculent"] = require "stages.esculent",
-		["jerma"] = require "stages.jerma",
-		["o2"] = require "stages.o2",
-		["crewicide"] = require "stages.crewicide",
-		["voting-lounge"] = require "stages.voting-lounge",
-		["nuzzus"] = require "stages.nuzzus",
-		["greyElec"] = require "stages.greyElec",
-		["turbulence"] = require "stages.turbulence",
-		["maroon1"] = require "stages.maroon1",
-		["victory"] = require "stages.victory",
-		["maroon2"] = require "stages.maroon2",
-		["who"] = require "stages.who",
-		["sauces"] = require "stages.sauces",
-		["roomcode"] = require "stages.roomcode",
-		["attack"] = require "stages.attack",
-		["drip"] = require "stages.drip",
-		["top"] = require "stages.top",
-		["idk"] = require "stages.idk",
-		["skeldPixel"] = require "stages.skeldPixel",
-		["skeld"] = require "stages.skeld",
-		["monotone"] = require "stages.monotone",
-		["chip"] = require "stages.chip",
-		["torture"] = require "stages.torture"
+		["hauntedHouse"] = require "stages.hauntedHouse",
+		["city"] = require "stages.city",
+		["sunset"] = require "stages.sunset",
+		["mall"] = require "stages.mall",
+		["school"] = require "stages.school",
+		["evilSchool"] = require "stages.evilSchool",
+		["tank"] = require "stages.tank"
 	}
 
 	-- Load Menus
 	clickStart = require "states.click-start"
 	menu = require "states.menu.menu"
 	menuWeek = require "states.menu.menuWeek"
-	menuSelect = require "states.menu.menuSelect"
 	menuFreeplay = require "states.menu.menuFreeplay"
 	menuSettings = require "states.menu.menuSettings"
 	menuCredits = require "states.menu.menuCredits"
-	impWeekMenu = require "states.menu.impWeekMenu"
+	menuSelect = require "states.menu.menuSelect"
 
-	beansCounter = require "states.misc.beansCounter"
-
-	chooseMissCount = require "states.misc.chooseMissCount"
-
-	shop = require "states.hi"
-	credits = require "states.hi"
+	firstStartup = true
 
 	-- Load weeks
-	weeks = require "states.weeks.weeks"
-	weeksHenry = require "states.weeks.weeksHenry"
-	weeksDefeat = require "states.weeks.weeksDefeat"
-	weeksOw = require "states.weeks.weeksOw"
-	weeksGreen = require "states.weeks.weeksGreen"
-	weeksPink = require "states.weeks.weeksPink"
-	weeksYellow = require "states.weeks.weeksYellow"
-	weeksJ = require "states.weeks.weeksJ"
-	weeksNuzzus = require "states.weeks.weeksNuzzus"
-	weeksGrey = require "states.weeks.weeksGrey"
-	weeksWho = require "states.weeks.weeksWho"
-	weeksDripping = require "states.weeks.weeksDripping"
-	weeksFinale = require "states.weeks.weeksFinale"
-	weeksChip = require "states.weeks.weeksChip"
-	require("states.weeks.weeksOld")
-	weeksTorture = require "states.weeks.weeksTorture"
-
-	countBeans = true
-
+	weeks = require "states.weeks"
 
 	-- Load substates
 	gameOver = require "substates.game-over"
-	gameOverPixel = require "substates.game-over-pixel"
+	settingsKeybinds = require "substates.settings-keybinds"
 
 	-- Load week data
 	weekData = {
-		require "weeks.defeat",
-		require "weeks.yellow",
-		require "weeks.henry",
-		require "weeks.green",
-		require "weeks.red",
-		require "weeks.orange",
-		require "weeks.pink",
-		require "weeks.finale",
-        require "weeks.ow",
-		require "weeks.esculent",
-		require "weeks.insaneStreamer",
-		require "weeks.j",
-		require "weeks.crewicide",
-		require "weeks.nuzzus",
-		require "weeks.grey",
-		require "weeks.maroon",
-		require "weeks.who",
-		require "weeks.sauces",
-		require "weeks.roomcode",
-		require "weeks.attack",
-		require "weeks.drip",
-		require "weeks.top",
-		require "weeks.idk",
-		require "weeks.tomongus",
-		require "weeks.tomongus",
-		require "weeks.tuesday",
-		require "weeks.identity",
-		require "weeks.chip",
-		require "weeks.torture",
+		require "weeks.tutorial",
+		require "weeks.week1",
+		require "weeks.week2",
+		require "weeks.week3",
+		require "weeks.week4",
+		require "weeks.week5",
+		require "weeks.week6",
+		require "weeks.week7"
 	}
-
-	boyfriendCount = 1
 
 	weekDesc = { -- Add your week description here
 		"LEARN TO FUNK",
@@ -466,317 +401,68 @@ function love.load()
 	}
 	weekMeta = { -- Add/remove weeks here
 		{
-			"Defeat",
+			"Tutorial",
 			{
-				"Defeat"
+				"Tutorial"
 			}
 		},
 		{
-			"Yellow",
-			{
-				"Mando",
-				"Dlow",
-				"Oversight",
-				"Danger",
-				"Double Kill"
-			}
-		},
-		{
-			"Henry",
-			{
-				"Titular",
-				"Greatest Plan",
-				"Reinforcements",
-				"Armed"
-			}
-		},
-		{
-			"Green",
-			{
-				"Sussus Toogus",
-				"Lights Down",
-				"Reactor",
-				"Ejected"
-			}
-		},
-		{
-			"Red",
-			{
-				"fuck1",
-				"fuck2",  -- i hate you guglio          the songs have names 
-				"fuck3" -- i dont fucking know them          learn them
-			}
-		},
-		{
-			"Orange",
+			"Week 1",
 			{
 				"Bopeebo",
+				"Fresh",
+				"Dadbattle"
 			}
 		},
 		{
-			"Pink",
+			"Week 2",
 			{
-				"Heartbeat",
-				"Pinkwave",
-				"Pretender"
+				"Spookeez",
+				"South",
+				"Monster"
+			}
+		},
+		{
+			"Week 3",
+			{
+				"Pico",
+				"Philly Nice",
+				"Blammed"
+			}
+		},
+		{
+			"Week 4",
+			{
+				"Satin Panties",
+				"High",
+				"M.I.L.F"
+			}
+		},
+		{
+			"Week 5",
+			{
+				"Cocoa",
+				"Eggnog",
+				"Winter Horrorland"
+			}
+		},
+		{
+			"Week 6",
+			{
+				"Senpai",
+				"Roses",
+				"Thorns"
 			},
 		},
 		{
-			"Finale",
+			"Week 7",
 			{
-				"COCK",
-				"COCKCOCK",    -- bruhhh ahnfjdnkhsjdklgiloskgnolsfihfkjgiupvjkliuefwsdojkpk;lvhoiujeksfudzjocpklhaguibfvhjcnj90 oisyhkfcdnuigfjkvfadhunkiugxjmn THEY HAVE NAMES
-				"COCKCOCKCOCK" -- I DONT KNOW THE NAMES                  THEN LEARN THEM FUCKER ITS NOT HARD
-			},
-		},
-		{
-			"Ow",
-			{
-				"Ow"
-			}
-		},
-		{
-			"Esculent",
-			{
-				"Esculent"
-			}
-		},
-		{
-			"Insane Streamer",
-			{
-				"Insane Streamer"
-			}
-		},
-		{
-			"Week J",
-			{
-				"O2",
-				"Voting Time",
-				"Turbulence",
-				"Victory"
-			},
-		},
-		{
-			"Crewicide",
-			{
-				"Crewicide"
-			}
-		},
-		{
-			"Nuzzus",
-			{
-				"Nuzzus"
-			}
-		},
-		{
-			"Gray",
-			{
-				"Delusion",
-				"Blackout",
-				"Neurotic"
-			}
-		},
-		{
-			"Maroon",
-			{
-				"Ashes",
-				"Magmatic",
-				"Boiling Point"
-			}
-		},
-		{
-			"Who",
-			{
-				"Who"
-			}
-		},
-		{
-			"Sauces Moogus",
-			{
-				"Sauces Moogus"
-			}
-		},
-		{
-			"Roomcode",
-			{
-				"Roomcode"
-			}
-		},
-		{
-			"Monotone Attack",
-			{
-				"Monotone Attack"
-			}
-		},
-		{
-			"Drippypop",
-			{
-				"Drippypop"
-			}
-		},
-		{
-			"Top 10",
-			{
-				"Top 10"
-			}
-		},
-		{
-			"idk",
-			{
-				"idk"
-			}
-		},
-		{
-			"Alpha Moogus",
-			{
-				"aaaa",
-				"bbbb"
-			}
-		},
-		{
-			"Tomongus",
-			{
-				"Sussy Bussy",
-				"Rivals",
-				"Chewmate"
-			}
-		},
-		{
-			"Tomongus Tuesday",
-			{
-				"Tomongus Tuesday"
-			}
-		},
-		{
-			"Identity Crisis",
-			{
-				"Identity Crisis"
-			}
-		},
-		{
-			"Chip",
-			{
-				"Chippin",
-				"Chipping"
-			}
-		},
-		{
-			"Torture",
-			{
-				"Torture"
+				"Ugh",
+				"Guns",
+				"Stress"
 			}
 		}
 	}
-
-	impWeekMeta = {
-		[""] = {"", {""}},
-		["WEEK 1"] = {"POLUS PROBLEMS", {"SUSSUS MOOGUS", "SABOTAGE", "MELTDOWN"}},
-		["WEEK 2"] = {"MIRA MANIA", {"SUSSUS TOOGUS", "LIGHTS DOWN", "REACTOR", "EJECTED"}},
-		["WEEK 3"] = {"AIRSHIP ATROCITIES", {"MANDO", "DLOW", "OVERSIGHT", "DANGER", "DOUBLE KILL"}},
-		["WEEK 5"] = {"MAGMATIC MONSTROSITY", {"ASHES", "MAGMATIC", "BOILING POINT"}},
-		["WEEK 6"] = {"DEADLY DELUSION", {"DELUSION", "BLACKOUT", "NEUROTIC"}},
-		["WEEK 7"] = {"HUMANE HEARTBEAT", {"HEARTBEAT", "PINKWAVE", "PRETENDER"}},
-		["WEEK J"] = {"JORSAWSEE'S JAMS", {"02", "VOITING TIME", "TURBULENCE", "VICTORY"}},
-		["BOO!"] = {"LOGGO'S HALLOWEEN", {"CHRISTMAS", "SPOOKPOSTOR"}},
-		["TOMONGUS"] = {"ROUSEY RIVAL", {"SUSSY BUSSY", "RIVALS", "CHEWMATE"}},
-		["HENRY"] = {"BATTLING THE BOYFRIEND", {"TITULAR", "GREATEST PLAN", "REINFORCEMENTS", "ARMED"}},
-		["..."] = {"DEFEAT", {""}}
-	}
-	impWeeks = {
-		[""] = require "weeks.orange",
-		["WEEK 1"] = require "weeks.red",
-		["WEEK 2"] = require "weeks.green",
-		["WEEK 3"] = require "weeks.yellow",
-		["WEEK 5"] = require "weeks.maroon",
-		["WEEK 6"] = require "weeks.grey",
-		["WEEK 7"] = require "weeks.pink",
-		["WEEK J"] = require "weeks.j",
-		["BOO!"] = require "weeks.orange",
-		["TOMONGUS"] = require "weeks.tomongus",
-		["HENRY"] = require "weeks.henry",
-		["..."] = chooseMissCount
-	}
-
-	require("weeks.alpha")
-
-	freeplayWeeks = {
-		[1] = { -- first page, has main weeks and shit
-			    -- format is {song, week, song number}
-			{"Sussus Moogus", require "weeks.red", 1}, 
-			{"Sabotage", require "weeks.red", 2},
-			{"Meltdown", require "weeks.red", 3},
-			{"Sussus Toogus", require "weeks.green", 1},
-			{"Lights Down", require "weeks.green", 2},
-			{"Reactor", require "weeks.green", 3},
-			{"Ejected", require "weeks.green", 4},
-			{"Mando", require "weeks.yellow", 1},
-			{"Dlow", require "weeks.yellow", 2},
-			{"Oversight", require "weeks.yellow", 3},
-			{"Danger", require "weeks.yellow", 4},
-			{"Double Kill", require "weeks.yellow", 5},
-			{"Defeat", chooseMissCount, 1},
-			{"Indentity Crisis", require "states.hi", 1}
-		},
-		[2] = { -- second page, ig still main weeks idfk
-			{"Ashes", require "weeks.maroon", 1},
-			{"Magmatic", require "weeks.maroon", 2},
-			{"Boiling Point", require "weeks.maroon", 3},
-			{"Delusion", require "weeks.grey", 1},
-			{"Blackout", require "weeks.grey", 2},
-			{"Neurotic", require "weeks.grey", 3},
-			{"Heartbeat", require "weeks.pink", 1},
-			{"Pinkwave", require "weeks.pink", 2},
-			{"Pretender", require "weeks.pink", 3},
-			{"Sauces Moogus", require "states.hi", 1},
-		},
-		[3] = {-- Week J and saxophone dude
-			{"02", require "weeks.j", 1},
-			{"Voting Time", require "weeks.j", 2},
-			{"Turbulence", require "weeks.j", 3},
-			{"Victory", require "weeks.j", 4},
-			{"Roomcode", require "states.hi", 1}
-		},
-		[4] = { -- idk this one, pixel shit
-			{"Sussy Bussy", require "states.hi", 1},
-			{"Rivals", require "states.hi", 2},
-			{"Chewmate", require "states.hi", 3},
-			{"Christmas", require "states.hi", 4},
-			{"Tomongus Tuesday", "states.hi", 1}
-		},
-		[5] = { -- Fella
-			{"Christmas", require "states.hi", 1},
-			{"Spookpostor", require "states.hi", 2},
-		},
-		[6] = { -- Henry
-			{"Titular", require "weeks.henry", 1},
-			{"Greatest Plan", require "weeks.henry", 2},
-			{"Reinforcements", require "weeks.henry", 3},
-			{"Armed", require "weeks.henry", 4},
-		},
-		[7] = { -- alpha moogus
-			{"Alpha Moogus", require "states.hi", 1},
-			{"Actin Sus", require "states.hi", 2}
-		},
-		[8] = { -- Other stuff (Idfk)
-			{"Ow", require "weeks.ow", 1},
-			{"Who", require "weeks.who", 1},
-			{"Insane Streamer", require "weeks.insaneStreamer", 1},
-			{"Sussus Nuzzus", require "weeks.nuzzus", 1},
-			{"Idk", require "weeks.idk", 1},
-			{"Esculent", require "weeks.esculent", 1},
-			{"Drippypop", require "states.hi", 1},
-			{"Crewicide", require "weeks.crewicide", 1},
-			{"Monotone Attack", require "states.hi", 1},
-			{"Top 10", require "states.hi", 1}
-		},
-		[9] = { --chip
-			{"Chippin", require "states.hi", 1},
-			{"Chipping", require "states.hi", 2},
-			{"Torture", require "states.hi", 3}
-		}
-	}
-
-	defeatWeekLololol = require "weeks.defeat"
 
 	-- LÖVE init
 	if curOS == "OS X" then
@@ -785,39 +471,24 @@ function love.load()
 		love.window.setIcon(love.image.newImageData("icons/default.png"))
 	end
 
-	--lovesize.set(1280, 720)
-	--push.setupScreen(1280, 720, {upscale = "normal"})
-	-- setup push with canvas
-	push.setupScreen(1280, 720, {upscale = "normal", canvas = true})
+	lovesize.set(1280, 720)
 
 	-- Variables
 	font = love.graphics.newFont("fonts/vcr.ttf", 24)
-	FUCKINGLARGEASSFONT = love.graphics.newFont("fonts/vcr.ttf", 96)
 	FNFFont = love.graphics.newFont("fonts/fnFont.ttf", 24)
-	credFont = love.graphics.newFont("fonts/fnFont.ttf", 32)   -- guglio is a bitch
+	credFont = love.graphics.newFont("fonts/fnFont.ttf", 32)   -- guglio is a bitch 
 	uiFont = love.graphics.newFont("fonts/Dosis-SemiBold.ttf", 32)
 	pauseFont = love.graphics.newFont("fonts/Dosis-SemiBold.ttf", 96)
 	weekFont = love.graphics.newFont("fonts/Dosis-SemiBold.ttf", 84)
 	weekFontSmall = love.graphics.newFont("fonts/Dosis-SemiBold.ttf", 54)
-	susFontSmall = love.graphics.newFont("fonts/AmaticSC-Regular.ttf", 32)
-	susFont = love.graphics.newFont("fonts/AmaticSC-Bold.ttf", 32)
 
 	weekNum = 1
 	songDifficulty = 2
 
-	spriteTimers = {
-		0, -- Girlfriend
-		0, -- Enemy
-		0 -- Boyfriend
-	}
-
 	storyMode = false
 	countingDown = false
 
-	cam = {x = 0, y = 0, sizeX = 0.9, sizeY = 0.9}
-	camScale = {x = 0.9, y = 0.9}
-	uiScale = {x = 1, y = 1, sizeX = 1, sizeY = 1, alphax = 0.7, alphay = 0.7}
-	camHUD = {x = 0, y = 0, angle = 0}
+	uiScale = {zoom = 1, x = 1, y = 1, sizeX = 1, sizeY = 1}
 
 	musicTime = 0
 	health = 0
@@ -825,32 +496,20 @@ function love.load()
 	music = love.audio.newSource("music/menu/menu.ogg", "stream")
 	music:setLooping(true)
 
+	fixVol = tonumber(string.format(
+		"%.1f  ",
+		(love.audio.getVolume())
+	))
+
 	if curOS == "Web" then
 		Gamestate.switch(clickStart)
 	else
 		Gamestate.switch(menu)
 	end
-
-	scissorScale = 1 -- SCISSOR DOESN'T WORK WITH SCALE SO WE HAVE TO SCALE IT OURSELVES
-
-	if curOS ~= "NX" then
-		love.mouse.setCursor(love.mouse.newCursor(graphics.imagePath("cursor"), 3, 0))
-	end
-
-	getBeans()
-
-	scissorScale = love.graphics.getHeight() / 720
-
-	defaultCamZoom = 1
 end
 
 function love.resize(width, height)
-	--lovesize.resize(width, height)
-	push.resize(width, height)
-	scissorScale = height / 720
-
-	print("scissorScale: " .. scissorScale)
-	if Gamestate.resize then Gamestate.resize(width, height) end
+	lovesize.resize(width, height)
 end
 
 function love.keypressed(key)
@@ -879,52 +538,34 @@ function love.keypressed(key)
 			love.audio.setVolume(love.audio.getVolume() + 0.1)
 		end
     else
-		if weekString ~= "alpha" then
-			Gamestate.keypressed(key)
-		else
-		end
+		Gamestate.keypressed(key)
 	end
 end
 
-function love.textinput(text)
-	if weekString ~= "alpha" then
-		Gamestate.textinput(text)
-	else
-	end
+function love.textinput(t)
+	Gamestate.textinput(t)
 end
 
 function love.mousepressed(x, y, button, istouch, presses)
-	if weekString ~= "alpha" then
-		Gamestate.mousepressed(x, y, button, istouch, presses)
-	else
-	end
+	Gamestate.mousepressed(x, y, button, istouch, presses)
 end
 
 function love.update(dt)
 	dt = math.min(dt, 1 / 30)
 
 	if volFade > 0 then
-		volFade = volFade - 0.4 * dt
+		volFade = volFade - 1 * dt
 	end
 
 	input:update()
 
 	if status.getNoResize() then
-		if weekString ~= "alpha" then
-			Gamestate.update(dt)
-		else
-			alphaMoogus.update(dt)
-		end
+		Gamestate.update(dt)
 	else
 		love.graphics.setFont(font)
-		--graphics.screenBase(lovesize.getWidth(), lovesize.getHeight())
-		graphics.screenBase(push.getWidth(), push.getHeight())
+		graphics.screenBase(lovesize.getWidth(), lovesize.getHeight())
 		graphics.setColor(1, 1, 1) -- Fade effect on
-		if weekString ~= "alpha" then
-			Gamestate.update(dt)
-		else
-			alphaMoogus.update(dt)
-		end
+		Gamestate.update(dt)
 		love.graphics.setColor(1, 1, 1) -- Fade effect off
 		graphics.screenBase(love.graphics.getWidth(), love.graphics.getHeight())
 		love.graphics.setFont(font)
@@ -935,24 +576,17 @@ end
 
 function love.draw()
 	love.graphics.setFont(font)
-	if not status.getNoResize() then
-		--graphics.screenBase(lovesize.getWidth(), lovesize.getHeight())
-		graphics.screenBase(push.getWidth(), push.getHeight())
+	graphics.screenBase(lovesize.getWidth(), lovesize.getHeight())
 
-		--lovesize.begin()
-		push.start()
-			graphics.setColor(1, 1, 1) -- Fade effect on
-			if weekString ~= "alpha" then
-				Gamestate.draw()
-			else
-				alphaMoogus.draw()
-			end
-			love.graphics.setColor(1, 1, 1) -- Fade effect off
-			love.graphics.setFont(font)
-			if status.getLoading() then
-				--love.graphics.print("Loading...", lovesize.getWidth() - 175, lovesize.getHeight() - 50)
-				love.graphics.print("Loading...", push.getWidth() - 175, push.getHeight() - 50)
-			end
+	lovesize.begin()
+		graphics.setColor(1, 1, 1) -- Fade effect on
+		Gamestate.draw()
+		love.graphics.setColor(1, 1, 1) -- Fade effect off
+		love.graphics.setFont(font)
+		if status.getLoading() then
+			love.graphics.print("Loading...", lovesize.getWidth() - 175, lovesize.getHeight() - 50)
+		end
+		if volFade > 0  then
 			love.graphics.setColor(1, 1, 1, volFade)
 			fixVol = tonumber(string.format(
 				"%.1f  ",
@@ -966,67 +600,28 @@ function love.draw()
 
 			if volTween then Timer.cancel(volTween) end
 			volTween = Timer.tween(
-				0.2,
-				volumeWidth,
+				0.2, 
+				volumeWidth, 
 				{width = fixVol * 160},
 				"out-quad"
 			)
 			love.graphics.rectangle("fill", 1113, 10, volumeWidth.width, 30)
 			graphics.setColor(1, 1, 1, 1)
-		push.finish()
-		--lovesize.finish()
-
-		graphics.screenBase(love.graphics.getWidth(), love.graphics.getHeight())
-
-		-- Debug output
-		if settings.showDebug then
-			love.graphics.print(status.getDebugStr(settings.showDebug), 5, 5, nil, 0.5, 0.5)
 		end
-	else
-		graphics.screenBase(love.graphics.getWidth(), love.graphics.getHeight())
-		graphics.setColor(1, 1, 1)
-		if weekString ~= "alpha" then
-			Gamestate.draw()
-		else
-			alphaMoogus.draw()
+		if fade.mesh then 
+			graphics.setColor(1,1,1)
+			love.graphics.draw(fade.mesh, 0, fade.y, 0, lovesize.getWidth(), fade.height)
 		end
-		love.graphics.setFont(font)
-		if status.getLoading() then
-			love.graphics.print("Loading...", love.graphics.getWidth() - 175, love.graphics.getHeight() - 50)
-		end
-		love.graphics.setColor(1, 1, 1, volFade)
-		fixVol = tonumber(string.format(
-			"%.1f  ",
-			(love.audio.getVolume())
-		))
-		love.graphics.setColor(0.5, 0.5, 0.5, volFade - 0.3)
+	lovesize.finish()
 
-		love.graphics.rectangle("fill", 1110, 0, 170, 50)
+	graphics.screenBase(love.graphics.getWidth(), love.graphics.getHeight())
 
-		love.graphics.setColor(1, 1, 1, volFade)
-
-		if volTween then Timer.cancel(volTween) end
-		volTween = Timer.tween(
-			0.2,
-			volumeWidth,
-			{width = fixVol * 160},
-			"out-quad"
-		)
-		love.graphics.rectangle("fill", 1113, 10, volumeWidth.width, 30)
-		love.graphics.setColor(1, 1, 1, 1)
-
-		-- Debug output
-		if settings.showDebug then
-			love.graphics.print(status.getDebugStr(settings.showDebug), 5, 5, nil, 0.5, 0.5)
-		end
+	-- Debug output
+	if settings.showDebug then
+		borderedText(status.getDebugStr(settings.showDebug), 5, 5, nil, 0.6, 0.6)
 	end
-
 end
 
 function love.focus(t)
 	Gamestate.focus(t)
-end
-
-function love.quit()
-	saveBeans()
 end

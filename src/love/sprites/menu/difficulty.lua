@@ -1,5 +1,5 @@
 return graphics.newSprite(
-	graphics.imagePath("menu/menuDifficulties"),
+	love.graphics.newImage(graphics.imagePath("menu/menuDifficulties")),
 	{
 		{x = 0, y = 0, width = 196, height = 65, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 1: EASY0000
 		{x = 206, y = 0, width = 211, height = 67, offsetX = 0, offsetY = 0, offsetWidth = 0, offsetHeight = 0}, -- 2: HARD0000
